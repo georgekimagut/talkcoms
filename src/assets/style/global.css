@@ -1,0 +1,523 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+body,
+.bg-body {
+  background-color: #f5f5f5;
+}
+a {
+  text-decoration: none;
+}
+.phone-navigation {
+  display: none;
+}
+/* dark button */
+.btn-dark,
+.btn-light {
+  transition: all 0.4s ease;
+}
+/* fill effect */
+.btn-dark::before,
+.btn-light::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #82bc00;
+  transition: width 0.4s ease;
+  z-index: -1;
+}
+.btn-light::before {
+  background-color: #131f6b;
+}
+.btn-dark:hover::before,
+.btn-light:hover::before {
+  width: 100%;
+}
+
+/* Icon appearance effect */
+.btn-dark .icon,
+.btn-light .icon {
+  position: absolute;
+  right: 15px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.btn-dark:hover .icon,
+.btn-light:hover .icon {
+  opacity: 1;
+  transform: translateX(0);
+  transform: translateY(-35%);
+}
+/* square button */
+.button-square-fill::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: var(--default); /* Or use a color like #141414 */
+  z-index: 0;
+  transition: width 0.4s ease;
+}
+
+.button-square-fill:hover::before {
+  width: 100%;
+}
+
+.button-square-fill > * {
+  position: relative;
+  z-index: 10;
+}
+/* spinner */
+.spinner {
+  animation: rotator 1.4s linear infinite;
+}
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+.path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+@keyframes colors {
+  0% {
+    stroke: #131f6b;
+  }
+  25% {
+    stroke: #007cba;
+  }
+  50% {
+    stroke: #82bc00;
+  }
+  75% {
+    stroke: #1b9a59;
+  }
+  100% {
+    stroke: #4c9462;
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
+/* end of spinner*/
+.bg-white {
+  background-color: #fefffe;
+}
+.custom-logo {
+  width: 50px;
+}
+.text-default {
+  color: #131f6b;
+}
+.bg-default {
+  background-color: #131f6b;
+}
+.custom-default-hover:hover {
+  color: #82bc00;
+}
+.text-secondary {
+  color: #82bc00;
+}
+.text-third {
+  color: #007cba;
+}
+.bg-third {
+  background-color: #007cba;
+}
+.bg-secondary {
+  background-color: #82bc00;
+}
+.text-muted {
+  color: #e3e3e3;
+}
+.nav-bar.nav-bar-innner a:hover {
+  color: #82bc00;
+}
+
+.custom-btn {
+  height: 35px;
+}
+.bounce-twice {
+  animation: bounce 1s ease-in-out 0s 1;
+}
+.custom-anime-random {
+  animation-name: movearound;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
+.custom-anime-movedown {
+  animation-name: movedown;
+  animation-duration: 1.5s;
+  animation-iteration-count: 1;
+}
+.custom-anime-movein {
+  animation-name: movein;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
+@keyframes movearound {
+  0% {
+    margin-top: -50px;
+  }
+  40% {
+    margin-top: -40px;
+    margin-left: -20px;
+  }
+  100% {
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+}
+@keyframes movedown {
+  0% {
+    margin-top: -50px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
+@keyframes movein {
+  0% {
+    margin-top: -70%;
+    margin-left: -100%;
+  }
+  100% {
+    margin-top: 0;
+    margin-left: 0;
+  }
+}
+.custom-link .fa-solid,
+.pointer-to-show,
+.industry-card.hover,
+.industry-card .fa-arrow-right.mr-6,
+.btn-hover,
+.transition-3 {
+  transition: 0.3s ease-in-out;
+}
+.custom-link:hover .fa-solid {
+  /* margin-left: 18px; */
+  rotate: 0deg;
+}
+.custom-portfolio-hover .c-background.opacity-0,
+.custom-portfolio-hover .c-layer.hidden,
+.custom-portfolio-hover .bg-body,
+.industry-card {
+  transition: 0.3s ease-in-out;
+}
+.custom-portfolio-hover:hover .c-background.opacity-0 {
+  opacity: 0.7;
+}
+.custom-portfolio-hover:hover .c-layer.hidden {
+  display: flex !important;
+}
+.custom-portfolio-hover:hover .bg-white,
+.custom-portfolio-hover:hover .bg-body {
+  display: none;
+}
+@keyframes scroll-carousel {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-80%);
+  }
+}
+
+.animate-scroll-carousel {
+  animation: scroll-carousel 120s linear infinite;
+}
+.animate-scroll-carousel:hover {
+  animation-play-state: paused;
+}
+.zoom-animate img,
+.custom-portfolio-hover img {
+  transition: transform 0.3s;
+}
+.zoom-animate {
+  box-shadow: 0 0 20px transparent;
+}
+.zoom-animate:hover {
+  box-shadow: 0 0 20px rgb(200, 200, 200);
+  margin-top: -5px;
+}
+.custom-portfolio-hover:hover img,
+.zoom-animate:hover img {
+  transform: scale(1.1);
+}
+.zoom-animate .pointer-to-show {
+  display: none;
+}
+.zoom-animate:hover .pointer-to-show {
+  display: flex;
+}
+.service-card .content,
+.zoom-animate {
+  transition: 0.3s ease-in-out;
+}
+.service-card:hover .content {
+  width: 100%;
+  margin-left: 0%;
+}
+.industry-card:hover .fa-arrow-right.mr-6 {
+  margin-right: 0px;
+  opacity: 1;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px; /* height of horizontal scrollbar ← You're missing this */
+  width: 6px; /* width of vertical scrollbar */
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #007cba;
+  border-radius: 3px;
+}
+.custom-card {
+  transition: 0.3s ease-in-out;
+}
+.resource-dropdown {
+  display: none;
+}
+.nav-bar .drop-resource:hover .resource-dropdown {
+  display: block;
+}
+/* This targets the popup content wrapper */
+.leaflet-popup-content-wrapper {
+  background-color: #82bc00 !important;
+  border-radius: 0px !important;
+  padding: 5px !important;
+}
+
+/* Optional: target popup arrow tip */
+.leaflet-popup-tip {
+  background: #82bc00 !important;
+}
+.btn-hover:hover {
+  background-color: #131f6b;
+  color: #ffffff;
+}
+.shift-hover {
+  border: 1px solid #e3e3e3;
+}
+.custom-linear-bg {
+  background: linear-gradient(to right, #131f6b, #007cba, #82bc00);
+}
+.scrollable::-webkit-scrollbar {
+  display: none;
+}
+.custom-link .arrow {
+  display: none;
+}
+.custom-link:hover .arrow {
+  display: block;
+}
+.hide-scrollbar {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+/* animations */
+.autoRotate {
+  animation: rotation_name both();
+  animation-timeline: view(); /* runs when it's in view */
+}
+@keyframes rotation_name {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* smooth scrol animation, fade and slide */
+.autoShow {
+  animation: text-appear both;
+  animation-timeline: view();
+  animation-range: entry 20% cover 100vh;
+}
+@keyframes text-appear {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* image reveal */
+.imageReveal {
+  animation: imageReveal both;
+  animation-timeline: view(50%, auto);
+}
+@keyframes imageReveal {
+  from {
+    filter: saturate(0) contrast(4) brightness(0.1) blur(5px);
+    opacity: 0;
+    scale: 0.95;
+    translate: 0 4rem;
+  }
+  to {
+    filter: none;
+    opacity: 1;
+    scale: 1;
+    translate: 0 0;
+  }
+}
+
+/* fade */
+.fadeUp {
+  animation: fadeUp both;
+  animation-timeline: view();
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale (0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* blur */
+.autoBlur {
+  animation: autoBlurAnimation linear both;
+  animation-timeline: view(50%, auto);
+}
+@keyframes autoBlurAnimation {
+  0% {
+    filter: blur(20px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
+
+/*horizontal scrolling animation*/
+.horizontail-scroll-wrapper {
+  overflow-x: auto;
+  scroll-snap-type: x-mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: green blue; /* color, track color */
+}
+
+/* end of animations */
+
+/* responsiveness */
+/* navigation bar */
+@media only screen and (max-width: 1305px) {
+  .nav-bar .w-16 {
+    width: fit-content;
+  }
+}
+@media only screen and (max-width: 1215px) {
+  .nav-bar {
+    /* display: none; */
+  }
+  .phone-navigation {
+    /* display: flex; */
+  }
+  .nav-bar.nav-bar-innner {
+    width: fit-content;
+  }
+  .btn-side {
+    /* width: 30%; */
+  }
+}
