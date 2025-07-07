@@ -10,7 +10,7 @@ import NotFound from "@/views/NotFound.vue";
 import Contact from "@/views/Contact.vue";
 import SolutionView from "@/views/dynamic/SolutionView.vue";
 // import CaseStudies from "../views/CaseStudies.vue";
-// import Testimonials from "../views/Testimonials.vue";
+import Testimonials from "@/views/Testimonials.vue";
 import Policies from "@/views/dynamic/Policies.vue";
 
 const routes = [
@@ -78,13 +78,13 @@ const routes = [
     meta: { title: "Resources" },
     props: true,
   },
-  // {
-  //   path: "/testimonials",
-  //   name: "Testimonials",
-  //   component: Testimonials,
-  //   meta: { title: "Testimonials" },
-  //   props: true,
-  // },
+  {
+    path: "/testimonials",
+    name: "Testimonials",
+    component: Testimonials,
+    meta: { title: "Testimonials" },
+    props: true,
+  },
   {
     path: "/legal/:id",
     name: "Privacy Policy",
