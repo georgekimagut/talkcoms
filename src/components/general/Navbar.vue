@@ -37,14 +37,14 @@
         >
           <router-link
             to="/"
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4c"
             active-class="text-secondary font-medium"
           >
             Home
           </router-link>
           <router-link
             to="#"
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
             @mouseenter="show_service_dropdown('product')"
             @mouseleave="hide_service_dropdown('product')"
           >
@@ -64,7 +64,7 @@
           </router-link>
           <router-link
             to="#"
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
             @mouseenter="show_service_dropdown('service')"
             @mouseleave="hide_service_dropdown('service')"
           >
@@ -86,7 +86,9 @@
             class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
             active-class="text-secondary font-medium"
           >
-            <div class="w-full h-full flex flex-row cursor-pointer">
+            <div
+              class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
+            >
               <div class="h-full flex flex-col justify-center">
                 Solutions By Industry
               </div>
@@ -136,7 +138,9 @@
             class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
             active-class="text-secondary font-medium"
           >
-            <div class="w-full h-full flex flex-row cursor-pointer">
+            <div
+              class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
+            >
               <div class="h-full flex flex-col justify-center">Resources</div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
                 <i class="fa-solid fa-angle-down"></i>
@@ -174,7 +178,7 @@
           </div>
           <router-link
             to="/about"
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
             active-class="text-secondary font-medium"
             >About us</router-link
           >

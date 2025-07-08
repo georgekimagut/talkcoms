@@ -19,12 +19,24 @@
             <span class="ml-6"> {{ blog_date }} </span>
           </div>
           <!-- if it's a blog -->
-          <div v-show="is_blog" class="w-full mt-10 flex">
-            <router-link :to="read_more_link"
-              ><Button variant="light"
-                >Read Full Blog
-                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            ></router-link>
+          <div v-show="is_blog" class="w-full mt-10 flex flex-wrap">
+            <div class="w-full">
+              <router-link :to="read_more_link"
+                ><Button variant="light"
+                  >Read Full Blog
+                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+              ></router-link>
+            </div>
+            <a href="#blogs" class="mt-5 inline-block relative group pb-[1px]"
+              ><div class="uppercase text-third text-sm">
+                Read More Blogs
+                <i class="fa-solid fa-arrow-down ml-2"></i>
+              </div>
+              <!-- Animated line -->
+              <div
+                class="absolute bottom-0 left-0 w-0 h-[2px] bg-third transition-all duration-300 ease-out group-hover:w-full"
+              ></div
+            ></a>
           </div>
           <!-- if it's a service -->
           <div v-show="is_service" class="w-full flex mt-10">
@@ -48,15 +60,27 @@
               class="ml-4"
             /> -->
           </div>
-          <div v-show="is_story" class="w-full mt-10 flex">
-            <router-link :to="read_more_link"
-              ><Button variant="light"
-                >Read Full Story
-                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            ></router-link>
+          <div v-show="is_story" class="w-full mt-10 flex flex-wrap">
+            <div class="w-full">
+              <router-link :to="read_more_link"
+                ><Button variant="light"
+                  >Read Full Story
+                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+              ></router-link>
+            </div>
+            <a href="#stories" class="mt-5 inline-block relative group pb-[1px]"
+              ><div class="uppercase text-third text-sm">
+                Read More Stories
+                <i class="fa-solid fa-arrow-down ml-2"></i>
+              </div>
+              <!-- Animated line -->
+              <div
+                class="absolute bottom-0 left-0 w-0 h-[2px] bg-third transition-all duration-300 ease-out group-hover:w-full"
+              ></div
+            ></a>
           </div>
           <!-- industry -->
-          <div v-show="is_industry" class="w-full mt-10 flex">
+          <div v-show="is_industry" class="w-full mt-10 flex flex-wrap">
             <!-- <RoundedButton
               :button_link="read_more_link"
               button_text="Read Full Blog"
@@ -69,11 +93,35 @@
               button_circle_background="#8dc63f"
               class="w-fit"
             /> -->
-            <router-link :to="read_more_link"
-              ><Button variant="dark"
-                >Read Full Blog
-                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            ></router-link>
+            <div class="w-full">
+              <router-link :to="read_more_link"
+                ><Button variant="dark"
+                  >Read Full Blog
+                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+              ></router-link>
+            </div>
+          </div>
+          <!-- testimonials -->
+          <div v-show="is_testimonial" class="w-full mt-6 flex flex-wrap">
+            <div class="w-full">
+              <router-link to="/contact-us"
+                ><Button variant="light"
+                  >Find Your Solution
+                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+              ></router-link>
+            </div>
+            <a
+              href="#testimonials"
+              class="mt-5 inline-block relative group pb-[1px]"
+              ><div class="uppercase text-third text-sm">
+                Read Testimonials
+                <i class="fa-solid fa-arrow-down ml-2"></i>
+              </div>
+              <!-- Animated line -->
+              <div
+                class="absolute bottom-0 left-0 w-0 h-[2px] bg-third transition-all duration-300 ease-out group-hover:w-full"
+              ></div
+            ></a>
           </div>
           <!-- contacts -->
           <div v-show="is_contact" class="w-full mt-6 flex flex-wrap">
@@ -229,6 +277,7 @@ export default {
     hero_small_image: String,
     is_contact: Boolean,
     button_text: String,
+    is_testimonial: Boolean,
     is_story: Boolean,
   },
   data() {

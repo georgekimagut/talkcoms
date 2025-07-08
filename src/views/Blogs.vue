@@ -19,6 +19,7 @@
     <!-- blog panel -->
     <div
       class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-10"
+      id="blogs"
     >
       <!-- panel -->
       <div class="w-[90%] flex flex-wrap justify-center">

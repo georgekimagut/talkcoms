@@ -423,11 +423,11 @@ a {
 }
 
 /* smooth scrol animation, fade and slide */
-.autoShow {
+/* .autoShow {
   animation: text-appear both;
   animation-timeline: view();
   animation-range: entry 20% cover 100vh;
-}
+} */
 @keyframes text-appear {
   from {
     opacity: 0;

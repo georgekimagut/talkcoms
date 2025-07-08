@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="p-2 bg-white overflow-hidden zoom-animate h-fit"
-    :class="card_class"
-  >
+  <div class="p-2 bg-white overflow-hidden zoom-animate" :class="card_class">
     <div class="w-full h-[30vh] flex justify-center overflow-hidden">
       <img
         :src="card_pic"

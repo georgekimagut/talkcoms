@@ -5,6 +5,7 @@
     <Navbar />
     <!-- contact us -->
     <div class="w-full flex mt-16 justify-center">
+      <HeroPattern />
       <div class="w-[90%] flex flex-wrap">
         <div class="w-1/2">
           <p class="text-secondary">CONTACT US</p>
@@ -153,21 +154,16 @@
 
 import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
-import HeroSection from "@/components/general/HeroSection.vue";
 import Footer from "@/components/general/Footer.vue";
 import BigTitle from "@/components/text/BigTitle.vue";
+import HeroPattern from "@/components/patterns/HeroPattern.vue";
 
 export default {
   name: "Contact us",
   components: {
     Navbar,
     Spinner,
-    HeroSection,
-    // DefaultInput,
-    // DefaultSelect,
-    // DefaultTextArea,
-    // SquareButton,
-    // Maps,
+    HeroPattern,
     Footer,
     BigTitle,
   },

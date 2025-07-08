@@ -3,8 +3,8 @@
     <div class="h-full flex flex-col justify-center">
       <svg
         class="spinner"
-        width="65px"
-        height="65px"
+        width="35px"
+        height="35px"
         viewBox="0 0 66 66"
         xmlns="http://www.w3.org/2000/svg"
       >

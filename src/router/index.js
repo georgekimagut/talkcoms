@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
 import About from "@/views/About.vue";
-// import Faqs from "../views/Faqs.vue";
+import Faqs from "@/views/Faqs.vue";
 import Blogs from "@/views/Blogs.vue";
 import ServiceView from "@/views/dynamic/ServiceView.vue";
 import SuccessStories from "@/views/SuccessStories.vue";
@@ -33,12 +33,12 @@ const routes = [
     component: Contact,
     meta: { title: "Contact us" },
   },
-  // {
-  //   path: "/faqs",
-  //   name: "Faqs",
-  //   component: Faqs,
-  //   meta: { title: "FAQs" },
-  // },
+  {
+    path: "/faqs",
+    name: "Faqs",
+    component: Faqs,
+    meta: { title: "FAQs" },
+  },
   {
     path: "/blogs",
     name: "Blogs",

@@ -7,59 +7,48 @@
     <HeroSection
       small_title="Testimonials"
       big_title="We have worked with thousands of amazing people"
-      hero_description="See how our happy partners are talking about us"
+      hero_description="We believe that the true measure of our success lies in the satisfaction and stories of the people we serve"
       hero_image="/static/pic-3.png"
       hero_small_image="/static/about-us.png"
+      is_testimonial
     />
     <!-- end of hero -->
-    <!-- story body -->
-    <div class="w-full flex justify-center flex-wrap mt-16">
-      <div class="w-[90%]">
-        <p class="text-secondary flex justify-center">STORIES</p>
-
-        <h1 class="text-4xl font-bold mt-4 p-2 flex justify-center">
-          Stories from our clients
-        </h1>
-      </div>
-      <div class="w-[90%] flex justify-center gap-4 mt-16">
-        <CustomCard
-          v-for="(story, index) in success_stories"
-          :key="index"
-          :card_pic="story.pic"
-          :card_title="story.client"
-          :card_description="story.title"
-          card_class="w-[31%] min-w-[28%] ml-[1.5%] mb-4"
-          link_text="READ MORE"
-          :link_to="`/resources/${success_story}/${story.title}`"
-          has_link
-        />
-      </div>
-    </div>
     <!-- testimonials -->
-    <div class="w-full flex justify-center flex-wrap mt-32 bg-white py-10">
-      <div class="w-[90%] flex justify-center flex-wrap mt-16 gap-2">
-        <div
+    <div class="w-full flex justify-center flex-wrap py-10" id="testimonials">
+      <div class="w-[90%] flex flex-wrap">
+        <Card
           v-for="(testimonial, index) in testimonials"
           :key="index"
-          class="w-[31%] mb-4 p-4 zoom-animate border-1"
+          class="w-[30%] mb-4 m-[1.5%] p-4 zoom-animate border-1 bg-white shadow-lg rounded-xl"
         >
-          <div class="w-full mt-4 flex">
-            <div class="">
-              <i class="fa-solid fa-user p-6 bg-third text-white text-lg"></i>
+          <CardHeader>
+            <CardTitle
+              ><i
+                class="fa-solid fa-quote-left p-4 rounded-full text-muted text-4xl"
+              ></i
+            ></CardTitle>
+          </CardHeader>
+          <CardContent>{{ testimonial.review }} </CardContent>
+          <CardFooter>
+            <div class="w-full flex border-t-2 pt-2">
+              <div
+                class="w-[50px] h-[50px] flex justify-center rounded-full border text-muted bg-body pt"
+              >
+                <div class="h-full flex flex-col justify-center">
+                  <i class="fa-solid fa-user text-muted text-white text-xl"></i>
+                </div>
+              </div>
+              <div class="ml-[10px]">
+                <h4 class="text-lg font-bold text-secondary">
+                  {{ testimonial.reviewer }}
+                </h4>
+                <h2>
+                  {{ testimonial.company }}
+                </h2>
+              </div>
             </div>
-            <div class="ml-[10px]">
-              <h4 class="text-lg font-bold">{{ testimonial.reviewer }}</h4>
-              <h2>
-                {{ testimonial.company }}
-              </h2>
-            </div>
-          </div>
-          <div class="w-full">
-            <p class="mt-4">
-              {{ testimonial.review }}
-            </p>
-          </div>
-        </div>
+          </CardFooter>
+        </Card>
       </div>
     </div>
     <!-- footer & cta-->

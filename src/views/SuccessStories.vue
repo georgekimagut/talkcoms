@@ -16,7 +16,7 @@
     />
     <!-- end of hero -->
     <!-- story body -->
-    <div class="w-full flex justify-center flex-wrap mt-16">
+    <div class="w-full flex justify-center flex-wrap mt-16" id="stories">
       <div class="w-[90%]">
         <p class="text-secondary flex justify-center">STORIES</p>
 
