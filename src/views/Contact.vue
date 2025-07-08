@@ -120,16 +120,63 @@
       </div>
     </div>
     <!-- contact details -->
-    <div class="w-full flex justify-center">
-      <div class="w-[905] flex">
-        <!-- <Card>
+    <div class="w-full flex justify-center mt-16">
+      <div class="w-[90%] flex bg-white shadow-sm rounded-xl overflow-hidden">
+        <Card
+          class="w-[33%] border-0 border-r-2 border-[##f5f5f5] shadow-none rounded-none"
+        >
+          <!-- phones -->
           <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
+            <CardDescription
+              ><i class="fa-solid fa-phone text-secondary"></i> Call us
+              on</CardDescription
+            >
+            <CardTitle
+              v-for="(phone, index) in phones"
+              :key="index"
+              class="mt-4"
+            >
+              <a :href="`tel:${phone.phone}`">{{ phone.phone }}</a></CardTitle
+            >
           </CardHeader>
-          <CardContent> Card Content </CardContent>
-          <CardFooter> Card Footer </CardFooter>
-        </Card> -->
+        </Card>
+        <!-- emails -->
+        <Card
+          class="w-[33%] border-0 border-r-2 border-[##f5f5f5] shadow-none rounded-none"
+        >
+          <CardHeader>
+            <CardDescription
+              ><i class="fa-regular fa-envelope text-secondary"></i> You can
+              email us</CardDescription
+            >
+            <CardTitle
+              v-for="(email, index) in emails"
+              :key="index"
+              class="mt-4"
+            >
+              <a :href="`mailto:${email.email}`">{{
+                email.email
+              }}</a></CardTitle
+            >
+          </CardHeader>
+        </Card>
+        <!-- location -->
+        <Card class="w-[33%] border-0 shadow-none rounded-none">
+          <CardHeader>
+            <CardDescription
+              ><i class="fa-solid fa-location-dot text-secondary"></i> Our
+              Offfices</CardDescription
+            >
+            <div
+              class="w-full mt-4"
+              v-for="(office, index) in offices"
+              :key="index"
+            >
+              <CardDescription>{{ office.name }}</CardDescription>
+              <CardTitle>{{ office.location }}</CardTitle>
+            </div>
+          </CardHeader>
+        </Card>
       </div>
     </div>
     <!-- maps -->
@@ -141,22 +188,12 @@
   </div>
 </template>
 <script>
-// import Navbar from "../components/Navbar.vue";
-// import Spinner from "../components/Spinner.vue";
-// import HeroSection from "../components/HeroSection.vue";
-// import DefaultInput from "../components/ui/input/DefaultInput.vue";
-// import DefaultSelect from "../components/inputs/DefaultSelect.vue";
-// import DefaultTextArea from "../components/inputs/DefaultTextArea.vue";
-// import Maps from "../components/Maps.vue";
-// import SquareButton from "../components/buttons/SquareButton.vue";
-// import Footer from "../components/Footer.vue";
-// import BigTitle from "@/components/text/BigTitle.vue";
-
 import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
 import Footer from "@/components/general/Footer.vue";
 import BigTitle from "@/components/text/BigTitle.vue";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
+import CardTitle from "@/components/ui/card/CardTitle.vue";
 
 export default {
   name: "Contact us",

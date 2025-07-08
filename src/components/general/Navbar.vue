@@ -97,7 +97,7 @@
               </div>
             </div>
             <div
-              class="w-[300px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border-1 border-[#e3e3e3] rounded-b-sm"
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-lg"
             >
               <li
                 v-for="(industry, index) in industries"
@@ -147,7 +147,7 @@
               </div>
             </div>
             <div
-              class="w-[200px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border-1 border-[#e3e3e3] rounded-b-sm"
+              class="w-[200px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-lg"
             >
               <li class="mb-2 list-none">
                 <router-link to="/blogs" class="custom-default-hover"
@@ -470,7 +470,7 @@
               </div>
             </div>
             <div
-              class="w-[200px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border-1 border-[#e3e3e3] rounded-b-sm"
+              class="w-[200px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm"
             >
               <li class="mb-2 list-none">
                 <router-link to="/blogs" class="custom-default-hover"
