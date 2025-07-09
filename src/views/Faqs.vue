@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-import Accordion from "@/components/ui/Accordion/Accordion.vue";
+import Accordion from "@/components/Accordion/Accordion.vue";
 import Cta from "@/components/general/Cta.vue";
 import Footer from "@/components/general/Footer.vue";
 import HeroSection from "@/components/general/HeroSection.vue";

@@ -38,14 +38,14 @@
                   {{ slide.description }}
                 </p>
                 <div class="w-full flex mt-16">
-                  <router-link to="/contact-us"
+                  <router-link to="/contact/contact-us"
                     ><Button variant="dark"
                       >Talk to Sales
                       <i
                         class="fa-solid fa-angle-right mt-[10%] icon"
                       ></i></Button
                   ></router-link>
-                  <router-link to="/contact-us"
+                  <router-link to="/contact/contact-us"
                     ><Button variant="light" class="ml-4"
                       >Learn More
                       <i
@@ -504,7 +504,7 @@ import Partners from "@/components/general/Partners.vue";
 import Spinner from "@/components/general/Spinner.vue";
 import ExternalLink from "@/components/text/ExternalLink.vue";
 import CustomCard from "@/components/ui/card/CustomCard.vue";
-import { apiEndpoint, baseUrl } from "@/lib/store.js";
+import { apiEndpoint, baseUrl, home_end_point } from "@/lib/store.js";
 import { supabase } from "@/lib/supabase.js";
 // import Button from "@/components/ui/button/Button.vue";
 
@@ -552,6 +552,7 @@ export default {
         this.get_portfolio_items(),
         this.get_solutions(),
         this.fetch_blogs(),
+        this.fetch_homepage(),
         this.get_stories(),
       ]);
     } catch (error) {
@@ -576,21 +577,68 @@ export default {
         this.current_slide = this.total_slides - 1; // Loop to last
       }
     },
-    //automatic slider
-    // autoSlide() {
-    //   setTimeout(() => {
-    //     if (this.current_service_slide < this.total_service_slides - 1) {
-    //       this.current_service_slide++;
-    //     } else {
-    //       this.current_service_slide = 0; // Loop back to first
-    //     }
-    //     this.autoSlide();
-    //   }, 7000);
-    // },
+    //fetch home
+    async fetch_homepage() {
+      const cacheKey = "homeCache";
+      let home_page = "";
+      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
 
+      const cachedData = localStorage.getItem(cacheKey);
+      const now = Date.now();
+
+      if (cachedData) {
+        const { data, timestamp } = JSON.parse(cachedData);
+        if (now - timestamp < cacheExpiry) {
+          //map data
+          home_page = data;
+          return;
+        }
+      }
+
+      try {
+        const response = await fetch(home_end_point);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.data) {
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+
+          home_page = dataArray;
+
+          localStorage.setItem(
+            cacheKey,
+            JSON.stringify({
+              data: dataArray,
+              timestamp: now,
+            })
+          );
+        } else {
+          console.error("Invalid response structure:", responseData);
+          if (cachedData) {
+            console.log("Falling back to stale cache");
+            const { data } = JSON.parse(cachedData);
+            home_page = data;
+          }
+        }
+
+        console.log("Home content", home_page);
+      } catch (error) {
+        console.error("Error fetching resources:", error);
+        if (cachedData) {
+          console.log("Using cached data after error");
+          const { data } = JSON.parse(cachedData);
+          this.blogs = data;
+        }
+      }
+    },
     //GET BLOGS
     async fetch_blogs() {
-      const cacheKey = "blogPostsCache";
+      const cacheKey = "blogsCache";
       const cacheExpiry = 10 * 60 * 1000; // 10 minutes
 
       const cachedData = localStorage.getItem(cacheKey);
@@ -643,6 +691,7 @@ export default {
         }
       }
     },
+    /* dae formate */
     format_date(date_to_change) {
       const date = new Date(date_to_change);
       const date_options = { month: "long", day: "numeric", year: "numeric" };

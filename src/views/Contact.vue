@@ -82,6 +82,36 @@
                     class="mt-2"
                   />
                 </div>
+                <div v-if="this.type != 'contact-us'" class="w-full p-2">
+                  <label class="text-sm">Subject</label>
+                  <Select v-model="selected">
+                    <SelectTrigger class="w-full mt-2">
+                      <SelectValue placeholder="Select a service" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Services</SelectLabel>
+                        <SelectItem
+                          v-for="(service, index) in services"
+                          :key="index"
+                          :value="service.name"
+                        >
+                          {{ service.name }}
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div
+                  v-if="this.type != 'contact-us' && this.type != 'get-started'"
+                  class="w-full p-2"
+                >
+                  <label class="text-sm">Preferred day & time</label>
+                  <input
+                    type="datetime-local"
+                    class="w-full border py-1 px-2 rounded-sm mt-2"
+                  />
+                </div>
                 <div class="w-full p-2">
                   <label class="text-sm">Message</label>
                   <Textarea class="mt-2" />
@@ -194,6 +224,9 @@ import Footer from "@/components/general/Footer.vue";
 import BigTitle from "@/components/text/BigTitle.vue";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
 import CardTitle from "@/components/ui/card/CardTitle.vue";
+import { contact_us_end_point } from "@/lib/store.js";
+import { supabase } from "@/lib/supabase";
+import Maps from "@/components/general/Maps.vue";
 
 export default {
   name: "Contact us",
@@ -203,10 +236,13 @@ export default {
     HeroPattern,
     Footer,
     BigTitle,
+    Maps,
   },
+  props: ["type"],
   data() {
     return {
       page_is_loading: true,
+      services: [],
       subjects: [
         { value: "1", content: "Option one" },
         { value: "2", content: "Option two" },
@@ -258,12 +294,90 @@ export default {
   },
   mounted() {
     this.load_page();
+    this.fetch_contact_us();
+    this.get_services();
   },
   methods: {
     load_page() {
       setTimeout(() => {
         this.page_is_loading = false;
-      }, 2000);
+      }, 1500);
+    },
+    /* fetch contacts */
+    async fetch_contact_us() {
+      const cacheKey = "contactCache";
+      let contact_us_page = "";
+      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
+
+      const cachedData = localStorage.getItem(cacheKey);
+      const now = Date.now();
+
+      if (cachedData) {
+        const { data, timestamp } = JSON.parse(cachedData);
+        if (now - timestamp < cacheExpiry) {
+          //map data
+          contact_us_page = data;
+          return;
+        }
+      }
+
+      try {
+        const response = await fetch(contact_us_end_point);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.data) {
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+
+          contact_us_page = dataArray;
+
+          localStorage.setItem(
+            cacheKey,
+            JSON.stringify({
+              data: dataArray,
+              timestamp: now,
+            })
+          );
+        } else {
+          console.error("Invalid response structure:", responseData);
+          if (cachedData) {
+            console.log("Falling back to stale cache");
+            const { data } = JSON.parse(cachedData);
+            contact_us_page = data;
+          }
+        }
+
+        console.log("Contact content", contact_us_page);
+      } catch (error) {
+        console.error("Error fetching resources:", error);
+        if (cachedData) {
+          console.log("Using cached data after error");
+          const { data } = JSON.parse(cachedData);
+          this.blogs = data;
+        }
+      }
+    },
+    //get services
+    async get_services() {
+      try {
+        const { data, error } = await supabase.from("services").select("name");
+
+        if (error) {
+          console.log(error);
+          return;
+        }
+
+        // Shuffle data randomly
+        this.services = data;
+        console.log(this.services);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

@@ -9,10 +9,11 @@
       :hero_description="service.product_subtitle"
       :read_more_link="`/demo/${this.id}`"
       :hero_image="service.imageUrl"
+      :demo_link="`/contact/${this.id}`"
       is_service
     />
     <!-- main features -->
-    <div class="w-full flex flex-wrap justify-center bg-white py-30">
+    <div class="w-full flex flex-wrap justify-center bg-white !py-28">
       <div
         class="w-[90%] flex justify-center overflow-x-hidden gap-4 hide-scrollbar relative"
       >
@@ -111,22 +112,24 @@
             </div>
             <!-- call to action -->
             <div class="w-full flex mt-8">
-              <router-link to="/contact-us"
+              <router-link :to="`contact/${this.id}`"
                 ><Button variant="dark"
                   >Request Free Demo
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
               ></router-link>
 
-              <router-link v-if="!service.material_link" to="/contact-us"
+              <router-link
+                v-if="!service.material_link"
+                to="/contact/contact-us"
                 ><Button variant="light" class="ml-4"
                   >Learn More
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
               ></router-link>
-              <router-link v-if="service.material_link" :to="material_link"
+              <a v-if="service.material_link" :to="material_link"
                 ><Button variant="light" class="ml-4"
                   >Learn More
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              ></a>
             </div>
           </div>
         </div>
@@ -135,7 +138,10 @@
 
     <!-- end of new scroll -->
     <!-- intergrations -->
-    <div v-if="intergrations != ''" class="w-full flex justify-center mt-32">
+    <div
+      v-if="intergrations != ''"
+      class="w-full flex justify-center mt-10 py-28"
+    >
       <div class="w-[90%] flex gap-4">
         <div class="w-[40%]">
           <div class="w-[90%] flex flex-wrap">
@@ -152,12 +158,12 @@
           </div>
 
           <div class="w-[90%] flex mt-20">
-            <router-link to="/contact-us"
+            <router-link to="/contact/get-started"
               ><Button variant="dark"
                 >Get Started
                 <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
             ></router-link>
-            <router-link to="/contact-us"
+            <router-link to="/contact/contact-us"
               ><Button variant="light" class="ml-4"
                 >Learn More
                 <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
@@ -236,7 +242,7 @@
             </div>
             <!-- call to action -->
             <div class="w-full flex mt-8">
-              <router-link to="/contact-us"
+              <router-link to="/contact/get-started"
                 ><Button variant="dark"
                   >Get Started
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
@@ -289,7 +295,7 @@
             and see how our solution can simplify your workflow and boost
             efficiency—live and personalized.
           </p>
-          <router-link to="/contact-us"
+          <router-link :to="`/contact/${this.id}`"
             ><Button variant="light" class="m-4"
               >{{
                 service.has_demo === 1
@@ -360,7 +366,7 @@
               <div v-html="pack.features"></div>
             </div>
             <router-link
-              to="/contact-us"
+              to="/contact/get-started"
               class="w-full flex justify-center p-2 rounded-sm mt-10"
               :class="
                 pack.is_popular
@@ -422,23 +428,6 @@
   </div>
 </template>
 <script>
-//new imports
-// import RoundedExternal from "../../components/buttons/RoundedExternal.vue";
-// import CustomCard from "../../components/cards/CustomCard.vue";
-// import Cta from "../../components/Cta.vue";
-// import Footer from "../../components/Footer.vue";
-// import HeroSection from "../../components/HeroSection.vue";
-// import Navbar from "../../components/Navbar.vue";
-// import ScrollDots from "../../components/patterns/ScrollPattern.vue";
-// import Spinner from "../../components/Spinner.vue";
-// import BigTitle from "../../components/text/BigTitle.vue";
-// import ExternalLink from "../../components/text/ExternalLink.vue";
-// import SmallTitle from "../../components/text/SmallTitle.vue";
-// import { text_colors } from "../../assets/js/store";
-// import { supabase } from "../../assets/js/supabase";
-// import DarkButton from "@/components/ui/button/DarkButton.vue";
-// import LightButton from "@/components/ui/button/LightButton.vue";
-
 import CustomCard from "@/components/ui/card/CustomCard.vue";
 import Cta from "@/components/general/Cta.vue";
 import Footer from "@/components/general/Footer.vue";
@@ -449,7 +438,7 @@ import Spinner from "@/components/general/Spinner.vue";
 import BigTitle from "../../components/text/BigTitle.vue";
 import ExternalLink from "../../components/text/ExternalLink.vue";
 import SmallTitle from "../../components/text/SmallTitle.vue";
-import { text_colors } from "@/lib/store";
+import { text_colors, services_end_point } from "@/lib/store";
 import { supabase } from "@/lib/supabase";
 
 export default {
@@ -504,6 +493,7 @@ export default {
       await this.get_main_service_features();
       await this.get_features();
       await this.get_packages();
+      await this.fetch_services();
 
       if (this.service_id != "") {
         this.get_story();
@@ -527,6 +517,7 @@ export default {
           await this.get_main_service_features();
           await this.get_features();
           await this.get_packages();
+          await this.fetch_services();
 
           if (this.service_id != "") {
             this.get_story();
@@ -540,6 +531,65 @@ export default {
     );
   },
   methods: {
+    /* fetch services */
+    async fetch_services() {
+      const cacheKey = "serviceCache";
+      let service_page = "";
+      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
+
+      const cachedData = localStorage.getItem(cacheKey);
+      const now = Date.now();
+
+      if (cachedData) {
+        const { data, timestamp } = JSON.parse(cachedData);
+        if (now - timestamp < cacheExpiry) {
+          //map data
+          service_page = data;
+          return;
+        }
+      }
+
+      try {
+        const response = await fetch(services_end_point);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.data) {
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+
+          service_page = dataArray;
+
+          localStorage.setItem(
+            cacheKey,
+            JSON.stringify({
+              data: dataArray,
+              timestamp: now,
+            })
+          );
+        } else {
+          console.error("Invalid response structure:", responseData);
+          if (cachedData) {
+            console.log("Falling back to stale cache");
+            const { data } = JSON.parse(cachedData);
+            service_page = data;
+          }
+        }
+
+        console.log("Service content", service_page);
+      } catch (error) {
+        console.error("Error fetching resources:", error);
+        if (cachedData) {
+          console.log("Using cached data after error");
+          const { data } = JSON.parse(cachedData);
+          this.blogs = data;
+        }
+      }
+    },
     async get_service() {
       try {
         const { data, error } = await supabase

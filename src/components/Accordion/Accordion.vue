@@ -1,5 +1,5 @@
 <template>
-  <div :class="accordion_class">
+  <div :class="accordion_class" class="pb-16">
     <div
       v-for="(faq, index) in faqs"
       :key="index"
@@ -41,15 +41,17 @@
     </div>
   </div>
   <!-- chat with us -->
-  <div v-if="has_chat" class="w-full mt-32 flex justify-center">
+  <div v-if="has_chat" class="w-full mt-32 flex justify-center pb-16">
     <div class="w-3/4">
       <h1 class="text-4xl font-bold mt-4 p-2 flex justify-center">
         Still got <span class="text-secondary mr-2 ml-2">questions</span>
       </h1>
-      <p class="flex justify-center">
-        Can't find what you are looking for?
-        <span class="underline cursor-pointer ml-2">Chat with us</span>
-      </p>
+      <router-link to="/contact/contact-us">
+        <p class="flex justify-center">
+          Can't find what you are looking for?
+          <span class="underline cursor-pointer ml-2">Talk to us</span>
+        </p>
+      </router-link>
     </div>
   </div>
 </template>

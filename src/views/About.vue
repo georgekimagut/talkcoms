@@ -166,7 +166,7 @@
           </div>
           <div class="w-1/2 flex justify-end">
             <div class="flex flex-col h-full justify-center">
-              <router-link to="/contact-us"
+              <router-link to="/contact/contact-us"
                 ><Button variant="square" class="!h-full w-[20%]"
                   >Get Started</Button
                 ></router-link
@@ -233,7 +233,7 @@
       <div class="w-[90%] flex justify-center">
         <div class="w-[60%] flex justify-center">
           <div class="h-[50vh] w-[90%] rounded-2xl overflow-hidden">
-            <!-- <Maps map_class="w-full h-full" /> -->
+            <Maps map_class="w-full h-full" />
           </div>
         </div>
         <div class="w-[40%]">
@@ -276,7 +276,7 @@
 import Cta from "@/components/general/Cta.vue";
 import Footer from "@/components/general/Footer.vue";
 import HeroSection from "@/components/general/HeroSection.vue";
-// import Maps from "../components/Maps.vue";
+import Maps from "@/components/general/Maps.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import Partners from "@/components/general/Partners.vue";
 import Spinner from "@/components/general/Spinner.vue";
@@ -290,6 +290,7 @@ export default {
     Cta,
     Footer,
     Partners,
+    Maps,
     // SquareButton,
     // RoundedButton,
     // Maps,

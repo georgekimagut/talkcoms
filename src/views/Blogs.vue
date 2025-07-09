@@ -128,7 +128,7 @@ export default {
   methods: {
     /* strapi methods */
     async fetch_blogs() {
-      const cacheKey = "blogPostsCache";
+      const cacheKey = "blogsCache";
       const cacheExpiry = 10 * 60 * 1000; // 10 minutes
       const now = Date.now();
 

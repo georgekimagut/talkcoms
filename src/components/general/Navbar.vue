@@ -185,7 +185,7 @@
         </div>
         <div class="w-1/6 flex justify-end p-4 btn-side">
           <!-- <Button button_link="/contact-us" button_text="Contact Us" /> -->
-          <router-link to="/contact-us"
+          <router-link to="/contact/contact-us"
             ><Button variant="dark"
               >Contact Us
               <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button

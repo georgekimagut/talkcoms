@@ -1,8 +1,40 @@
 <template>
   <div
-    class="w-full h-[60vh] pt-8 pb-8 flex justify-center bg-white overflow-hidden"
+    class="w-full h-[60vh] pt-8 pb-8 flex justify-center bg-white overflow-hidden relative"
     :class="cta_class"
   >
+    <!-- patterns -->
+    <div class="w-full flex h-[70vh] absolute">
+      <div class="w-1/2 flex flex-col justify-end">
+        <div
+          v-for="index in 6"
+          :key="index"
+          class="w-full h-[45px] flex flex-row gap-6"
+        >
+          <div
+            v-for="index in 6"
+            :key="index"
+            class="w-[5px] h-[5px] rounded-full bg-third"
+          ></div>
+        </div>
+      </div>
+      <div class="w-1/2 h-fulll flex justify-end">
+        <div class="h-full flex flex-col">
+          <div
+            v-for="index in 6"
+            :key="index"
+            class="w-full h-[45px] flex flex-row gap-6"
+          >
+            <div
+              v-for="index in 5"
+              :key="index"
+              class="w-[5px] h-[5px] rounded-full bg-secondary"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of patterns -->
     <div class="w-[55%] h-full flex justify-center">
       <div class="h-full flex flex-col justify-center">
         <div class="w-full">
@@ -18,12 +50,12 @@
           </p>
         </div>
         <div class="w-full flex justify-center mt-14">
-          <router-link to="/contact-us"
+          <router-link to="/contact/get-started"
             ><Button variant="dark"
               >Get Started
               <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
           ></router-link>
-          <router-link to="/contact-us"
+          <router-link to="/contact/contact-us"
             ><Button variant="light" class="ml-4"
               >Contact us
               <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button

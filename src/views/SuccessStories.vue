@@ -35,7 +35,7 @@
           {{ service.name }}
         </div>
       </div>
-      <div class="w-[90%] flex justify-center gap-4 mt-16">
+      <div class="w-[90%] flex mt-16">
         <CustomCard
           v-for="(story, index) in success_stories"
           :key="index"
@@ -62,6 +62,7 @@ import Spinner from "@/components/general/Spinner.vue";
 import BigTitle from "@/components/text/BigTitle.vue";
 import SmallTitle from "@/components/text/SmallTitle.vue";
 import { supabase } from "@/lib/supabase";
+import { success_stories_end_point } from "@/lib/store";
 
 export default {
   name: "SuccesStories",
@@ -123,6 +124,67 @@ export default {
         console.log(error);
       }
     },
+
+    /* fetch stories */
+    async fetch_stories() {
+      const cacheKey = "storiesCache";
+      let stories_page = "";
+      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
+
+      const cachedData = localStorage.getItem(cacheKey);
+      const now = Date.now();
+
+      if (cachedData) {
+        const { data, timestamp } = JSON.parse(cachedData);
+        if (now - timestamp < cacheExpiry) {
+          //map data
+          stories_page = data;
+          return;
+        }
+      }
+
+      try {
+        const response = await fetch(success_stories_end_point);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.data) {
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+
+          stories_page = dataArray;
+
+          localStorage.setItem(
+            cacheKey,
+            JSON.stringify({
+              data: dataArray,
+              timestamp: now,
+            })
+          );
+        } else {
+          console.error("Invalid response structure:", responseData);
+          if (cachedData) {
+            console.log("Falling back to stale cache");
+            const { data } = JSON.parse(cachedData);
+            stories_page = data;
+          }
+        }
+
+        console.log("Stories content", stories_page);
+      } catch (error) {
+        console.error("Error fetching resources:", error);
+        if (cachedData) {
+          console.log("Using cached data after error");
+          const { data } = JSON.parse(cachedData);
+          this.blogs = data;
+        }
+      }
+    },
+
     async get_services() {
       try {
         const { data, error } = await supabase
@@ -149,8 +211,14 @@ export default {
     this.page_is_loading = true;
 
     try {
-      await this.get_stories();
-      await this.get_services();
+      await Promise.all([
+        await this.get_stories(),
+        await this.get_services(),
+        await this.fetch_stories(),
+      ]);
+      // await this.get_stories();
+      // await this.get_services();
+      // await this.fetch_stories();
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {

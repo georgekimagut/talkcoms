@@ -162,7 +162,7 @@ export default {
       site_logo: "/logo.svg",
       footer_company_links: [
         { title: "About us", link: "/about" },
-        { title: "Contact us", link: "/contact-us" },
+        { title: "Contact us", link: "/contact/contact-us" },
         { title: "Blog", link: "/blogs" },
       ],
       footer_products: [

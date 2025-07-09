@@ -65,7 +65,11 @@
             <!-- image -->
             <div class="w-full h-[60vh] overflow-hidden mt-[-8vh]">
               <img
-                :src="`${resource_image_url}/${resource.hero_media.url}`"
+                :src="
+                  !resource.hero_media.url
+                    ? resource.pic
+                    : `${resource_image_url}/${resource.hero_media.url}`
+                "
                 class="w-full h-auto object-cover"
               />
             </div>
@@ -73,7 +77,11 @@
             <!-- contents of the resource -->
             <div
               ref="content_body"
-              v-html="sanitized_resource || sanitized_resource"
+              v-html="
+                sanitized_resource
+                  ? sanitized_resource || sanitized_resource
+                  : resource.content_body
+              "
               class="w-full mt-10 block"
             ></div>
             <div class="w-full mt-20 flex justify-center flex-wrap">
@@ -257,26 +265,12 @@ export default {
           }
           //map data
           this.resource = data[0];
+          console.log(this.resource);
         }
       } catch (error) {
         console.log(error);
       }
     },
-    //get blogs
-    // async get_blogs() {
-    //   try {
-    //     const { data, error } = await supabase.from("blogs").select("title");
-
-    //     if (error) {
-    //       console.log(error);
-    //       return;
-    //     }
-
-    //     this.blogs = data;
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
     //change date format
     format_date(date_to_change) {
       const date = new Date(date_to_change);

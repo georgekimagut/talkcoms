@@ -69,7 +69,7 @@
     <!-- call to action -->
     <div class="w-full flex justify-center bg-white pb-20">
       <div
-        class="w-[80%] flex rounded-2xl h-[50vh] border-1 border-[#82bc00] mt-32 overflow-hidden"
+        class="w-[80%] flex rounded-2xl h-[50vh] border border-[#82bc00] mt-32 overflow-hidden"
       >
         <div class="w-[64%] mr-[1%] h-full p-4 flex flex-col justify-center">
           <BigTitle text="Experience the Power—Live!" title_class="m-4" />
@@ -78,9 +78,9 @@
             boost efficiency—live and personalized.
           </p>
 
-          <router-link to="/contact-us"
+          <router-link to="/contact/contact-us"
             ><Button variant="light" class="ml-4"
-              >Read Full Story
+              >Book A Call
               <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
           ></router-link>
         </div>
@@ -115,7 +115,7 @@
           <div class="w-full h-[26px] flex flex-col justify-center mt-16">
             <p>
               Product/Service:
-              <span class="p-2 border-1 border-[#007cba] rounded-full ml-4">
+              <span class="p-2 border border-[#007cba] rounded-full ml-4">
                 {{ this.id }}
               </span>
             </p>

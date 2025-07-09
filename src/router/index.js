@@ -9,7 +9,7 @@ import ResourceView from "@/views/dynamic/ResourceView.vue";
 import NotFound from "@/views/NotFound.vue";
 import Contact from "@/views/Contact.vue";
 import SolutionView from "@/views/dynamic/SolutionView.vue";
-// import CaseStudies from "../views/CaseStudies.vue";
+import CaseStudies from "@/views/CaseStudies.vue";
 import Testimonials from "@/views/Testimonials.vue";
 import Policies from "@/views/dynamic/Policies.vue";
 
@@ -28,10 +28,11 @@ const routes = [
     meta: { title: "About Us" },
   },
   {
-    path: "/contact-us",
+    path: "/contact/:type",
     name: "Contact",
     component: Contact,
     meta: { title: "Contact us" },
+    props: true,
   },
   {
     path: "/faqs",
@@ -65,12 +66,12 @@ const routes = [
     component: SuccessStories,
     meta: { title: "Success Stories" },
   },
-  // {
-  //   path: "/case-studies",
-  //   name: "Case Studies",
-  //   component: CaseStudies,
-  //   meta: { title: "Case Studies" },
-  // },
+  {
+    path: "/case-studies",
+    name: "Case Studies",
+    component: CaseStudies,
+    meta: { title: "Case Studies" },
+  },
   {
     path: "/resources/:type/:id",
     name: "Resource",
