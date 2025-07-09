@@ -1,0 +1,156 @@
+<template>
+  <Spinner v-if="page_is_loading" />
+  <div
+    v-if="page_is_loading === false"
+    class="w-full flex justify-center bg-white"
+  >
+    <div class="p-8 w-[90%] max-w-x flex flex-wrap">
+      <h1
+        class="w-full text-2xl font-semibold mb-6 border-b-2 pb-4 text-default"
+      >
+        Sitemap
+      </h1>
+      <div class="w-[25%]">
+        <h2 class="text-xl">General</h2>
+        <ul class="space-y-4 text-lg mt-4">
+          <li>
+            <router-link to="/" class="text-third hover:underline"
+              >Home</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/about" class="text-third hover:underline"
+              >About Us</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              to="/contact/contact-us"
+              class="text-third hover:underline"
+              >Contact Us</router-link
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- end -->
+      <div class="w-[25%]">
+        <h2 class="text-xl">Resources</h2>
+        <ul class="space-y-4 text-lg mt-4">
+          <li>
+            <router-link to="/blogs" class="text-third hover:underline"
+              >Blogs</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              to="/success-stories"
+              class="text-third hover:underline"
+              >Success Stories</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/testimonials" class="text-third hover:underline"
+              >Testimonials</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/faqs" class="text-third hover:underline"
+              >FAQs</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/case-studies" class="text-third hover:underline"
+              >Case Studies</router-link
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- end -->
+      <div class="w-[25%]">
+        <h2 class="text-xl">Product & Services</h2>
+        <ul class="space-y-4 text-lg mt-4">
+          <li v-for="(service, index) in services" :key="index">
+            <router-link
+              :to="`/service/${service.name}`"
+              class="text-third hover:underline"
+              >{{ service.name }}</router-link
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- end -->
+      <div class="w-[25%]">
+        <h2 class="text-xl">Solutions By Industry</h2>
+        <ul class="space-y-4 text-lg mt-4">
+          <li v-for="(sol, index) in solutions" :key="index">
+            <router-link
+              :to="`/solution/${sol.name}`"
+              class="text-third hover:underline"
+              >{{ sol.name }}</router-link
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- end -->
+    </div>
+  </div>
+</template>
+<script>
+import Spinner from "@/components/general/Spinner.vue";
+import { supabase } from "@/lib/supabase";
+export default {
+  name: "Sitemap",
+  components: { Spinner },
+  data() {
+    return {
+      services: [],
+      solutions: [],
+      page_is_loading: true,
+    };
+  },
+  async created() {
+    this.page_is_loading = true;
+    try {
+      await Promise.all([this.get_services(), this.get_solutions()]);
+    } catch (error) {
+      console.error("Loading failed:", error);
+    } finally {
+      this.page_is_loading = false;
+    }
+  },
+  methods: {
+    async get_services() {
+      try {
+        const { data, error } = await supabase
+          .from("services")
+          .select("name")
+          .order("created_at", { ascending: false });
+        this.services = data;
+        if (error) {
+          console.log(error);
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    //get solutions
+    async get_solutions() {
+      try {
+        const { data, error } = await supabase
+          .from("solutions_by_industry")
+          .select("name")
+          .order("created_at", { ascending: false });
+
+        this.solutions = data;
+        if (error) {
+          console.log(error);
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+};
+</script>

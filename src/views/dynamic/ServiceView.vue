@@ -125,9 +125,12 @@
                   >Learn More
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
               ></router-link>
-              <a v-if="service.material_link" :to="material_link"
+              <a
+                v-if="service.material_link"
+                :href="service.material_link"
+                target="_blank"
                 ><Button variant="light" class="ml-4"
-                  >Learn More
+                  >Download Material
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
               ></a>
             </div>

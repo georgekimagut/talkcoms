@@ -12,6 +12,7 @@ import SolutionView from "@/views/dynamic/SolutionView.vue";
 import CaseStudies from "@/views/CaseStudies.vue";
 import Testimonials from "@/views/Testimonials.vue";
 import Policies from "@/views/dynamic/Policies.vue";
+import Sitemap from "@/views/Sitemap.vue";
 
 const routes = [
   { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
@@ -92,6 +93,12 @@ const routes = [
     component: Policies,
     meta: { title: "Legal" },
     props: true,
+  },
+  {
+    path: "/sitemap",
+    name: "Sitemap",
+    component: Sitemap,
+    meta: { title: "Sitemap" },
   },
 ];
 const router = createRouter({

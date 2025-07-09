@@ -156,39 +156,40 @@
     <div class="w-full bg-white mt-32 p-4 pb-32 flex justify-center">
       <div class="w-[90%] flex flex-wrap">
         <div class="w-full flex pb-12 border-b-1 border-[#e3e3e3]">
-          <div class="w-1/2">
-            <p class="text-secondary">SOLUTIONS</p>
-            <h1 class="text-4xl font-bold mt-8">What We Offer</h1>
-            <p class="mt-6 w-[60%]">
+          <div class="w-full flex justify-center flex-wrap">
+            <p class="text-secondary text-center w-full mt-6">SOLUTIONS</p>
+            <h1 class="text-4xl font-bold mt-4 text-center w-full">
+              What We Offer
+            </h1>
+            <p class="mt-4 w-[60%] text-center">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at
               aliquam tellus, nec congue urna.
             </p>
           </div>
-          <div class="w-1/2 flex justify-end">
+          <!-- <div class="w-1/2 flex justify-end">
             <div class="flex flex-col h-full justify-center">
-              <router-link to="/contact/contact-us"
-                ><Button variant="square" class="!h-full w-[20%]"
-                  >Get Started</Button
-                ></router-link
-              >
               <!-- <SquareButton
                 button_text="Get Started"
                 button_class="bg-secondary text-white rounded-lg p-3 h-fit w-[300px] cursor-pointer"
                 hover_color="bg-secondary"
-              /> -->
+              /> ->
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- the services -->
         <div class="w-full flex flex-wrap justify-center mt-12">
           <div
             v-for="(solution, index) in solutions"
             :key="index"
-            class="w-[23%] mr-[1%] bg-body p-4 pb-16 zoom-animate"
+            class="w-[23%] mr-[1%] mb-6 bg-body p-4 pb-16 zoom-animate"
           >
-            <i :class="solution.icon"></i>
-            <h1 class="text-lg font-semibold mt-8">{{ solution.title }}</h1>
-            <p class="mt-8">{{ solution.content }}</p>
+            <i :class="solution.icon" class="text-secondary text-5xl"></i>
+            <h1 class="text-lg font-semibold mt-8">
+              <router-link :to="`/service/${solution.name}`">{{
+                solution.name
+              }}</router-link>
+            </h1>
+            <p class="mt-8">{{ solution.title_description }}</p>
           </div>
         </div>
       </div>
@@ -280,6 +281,7 @@ import Maps from "@/components/general/Maps.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import Partners from "@/components/general/Partners.vue";
 import Spinner from "@/components/general/Spinner.vue";
+import { supabase } from "@/lib/supabase";
 
 export default {
   name: "About",
@@ -319,30 +321,30 @@ export default {
         },
       ],
       solutions: [
-        {
-          icon: "fa-solid fa-headset text-secondary text-5xl",
-          title: "Call Center Solutions",
-          content:
-            "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
-        },
-        {
-          icon: "fa-solid fa-phone text-secondary text-5xl",
-          title: "PBX Solutions",
-          content:
-            "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
-        },
-        {
-          icon: "fa-solid fa-code text-secondary text-5xl",
-          title: "Web/App Development",
-          content:
-            "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
-        },
-        {
-          icon: "fa-solid fa-microchip text-secondary text-5xl",
-          title: "iTaaS",
-          content:
-            "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
-        },
+        // {
+        //   icon: "fa-solid fa-headset text-secondary text-5xl",
+        //   title: "Call Center Solutions",
+        //   content:
+        //     "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
+        // },
+        // {
+        //   icon: "fa-solid fa-phone text-secondary text-5xl",
+        //   title: "PBX Solutions",
+        //   content:
+        //     "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
+        // },
+        // {
+        //   icon: "fa-solid fa-code text-secondary text-5xl",
+        //   title: "Web/App Development",
+        //   content:
+        //     "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
+        // },
+        // {
+        //   icon: "fa-solid fa-microchip text-secondary text-5xl",
+        //   title: "iTaaS",
+        //   content:
+        //     "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
+        // },
       ],
       members: [
         {
@@ -379,12 +381,29 @@ export default {
   },
   mounted() {
     this.load_page();
+    this.get_services();
   },
   methods: {
     load_page() {
       setTimeout(() => {
         this.page_is_loading = false;
       }, 2000);
+    },
+    //get services
+    async get_services() {
+      try {
+        const { data, error } = await supabase
+          .from("services")
+          .select("name, id, icon, title_description")
+          .order("created_at", { ascending: false });
+        this.solutions = data;
+        if (error) {
+          console.log(error);
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

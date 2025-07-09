@@ -179,7 +179,7 @@ export default {
         { title: "Cookie Policy", link: "/legal/cookie-policy" },
         { title: "Terms & Conditions", link: "/legal/Terms & Conditions" },
         { title: "Privacy Policy", link: "/legal/privacy-policy" },
-        { title: "Sitemap", link: "#" },
+        { title: "Sitemap", link: "/sitemap" },
       ],
       footer_contacts: [
         { title: " +254 746 433 163" },
