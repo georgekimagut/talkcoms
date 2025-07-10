@@ -210,13 +210,13 @@
             <Card
               v-for="(service, index) in home_services"
               :key="index"
-              class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none pb-8 rounded-xl border overflow-hidden"
+              class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate"
             >
               <CardHeader class="p-0">
-                <CardTitle
+                <CardTitle class="h-[35vh] overflow-hidden"
                   ><img
                     :src="service.imageUrl"
-                    class="h-[35vh] w-auto min-w-full max-w-none object-cover"
+                    class="h-full w-auto min-w-full max-w-none object-cover"
                   />
                 </CardTitle>
               </CardHeader>
@@ -233,7 +233,79 @@
         </div>
       </div>
     </div>
+    <!-- end -->
+    <!-- success stories  -->
     <div
+      class="w-full flex flex-wrap justify-center overflow-hidden autoShow py-16"
+    >
+      <div class="w-[90%] flex justify-center flex-wrap">
+        <div class="w-full">
+          <p class="text-secondary text-center text-lg">
+            <router-link to="/stories">STORIES</router-link>
+          </p>
+
+          <h1 class="text-4xl font-extrabold mt-4 p-2 text-center">
+            Success Stories From Our Clients
+          </h1>
+        </div>
+        <div class="w-full flex flex-nowrap mt-4">
+          <Card
+            v-if="port - 2"
+            v-for="(story, index) in success_stories.slice(0, 3)"
+            :key="index"
+            class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate"
+          >
+            <CardHeader class="p-0">
+              <CardTitle class="h-[35vh] overflow-hidden"
+                ><img
+                  :src="story.pic"
+                  class="h-full w-auto min-w-full max-w-none object-cover"
+                />
+              </CardTitle>
+            </CardHeader>
+            <CardTitle class="custom-default-hover mt-4 p-4 text-xl"
+              ><router-link
+                :to="`/resources/${success_story}/${story.title}`"
+                >{{ story.client }}</router-link
+              ></CardTitle
+            >
+            <CardDescription class="px-4">
+              {{ story.title }}
+            </CardDescription>
+          </Card>
+          <Card
+            v-for="(story, index) in success_stories.slice(0, 3)"
+            :key="index"
+            class="mb-4 m-[1.2%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate relative h-[45vh] story-card"
+            :class="index === 0 ? 'w-[60%]' : 'w-[32%]'"
+          >
+            <div class="w-full h-full absolute bg-default opacity-40 z-1"></div>
+            <div
+              class="w-full h-full absolute flex flex-col justify-end z-2 p-4"
+            >
+              <CardTitle class="text-white mt-4 p-4 text-4xl"
+                ><router-link
+                  :to="`/resources/${success_story}/${story.title}`"
+                  >{{ story.client }}</router-link
+                ></CardTitle
+              >
+              <CardDescription class="px-4 text-white text-xl">
+                {{ story.title }}
+              </CardDescription>
+            </div>
+            <div class="w-full h-full absolute overflow-hidden z-[-5]">
+              <img
+                :src="story.pic"
+                class="h-full w-auto min-w-full max-w-none object-cover"
+              />
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+    <!-- end -->
+    <div
+      v-if="pre_portfolio"
       class="w-full flex flex-nowrap overflow-hidden justify-center top-56 mt-36"
     >
       <div
@@ -334,13 +406,13 @@
       </div>
     </div>
     <!-- industry -->
-    <div class="w-full flex justify-center bg-white mt-32 pb-16 autoShow">
+    <div class="w-full flex justify-center bg-default mt-8 pb-16 autoShow">
       <div class="w-[90%]">
         <div class="w-full">
-          <h1
-            class="text-5xl font-extrabold mt-10 p-2 text-default text-center"
-          >
-            Select your industry. Discover our impact.
+          <h1 class="text-4xl font-extrabold mt-10 p-2 text-center">
+            Select your
+            <span class="text-white mx-2"> industry.</span> Discover our
+            <span class="text-white mx-2"> impact.</span>
           </h1>
         </div>
         <div class="w-full flex flex-wrap mt-16 w730">
@@ -352,10 +424,7 @@
             <router-link :to="`/solution/${industry.name}`" class="w-full flex"
               ><div class="w-[90%] flex flex-nowrap">
                 <div class="w-[20px]">
-                  <i
-                    :class="industry.icon"
-                    class="text-secondary ml-2 pt-2"
-                  ></i>
+                  <i :class="industry.icon" class="text-white ml-2 pt-2"></i>
                 </div>
 
                 <p class="ml-4 text-2xl">{{ industry.name }}</p>
@@ -373,7 +442,10 @@
     <!-- partners/companies -->
     <Partners class="autoShow" />
     <!-- stories -->
-    <div class="w-full pt-36 p-4 flex justify-center bg-white">
+    <div
+      v-if="prev_stories"
+      class="w-full pt-36 p-4 flex justify-center bg-white"
+    >
       <div class="w-[90%] flex justify-center flex-wrap">
         <div class="w-full">
           <p class="text-secondary text-center text-lg">
@@ -621,21 +693,7 @@ export default {
     },
     //fetch home
     async fetch_homepage() {
-      const cacheKey = "homeCache";
       let home_page = "";
-      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
-
-      const cachedData = localStorage.getItem(cacheKey);
-      const now = Date.now();
-
-      if (cachedData) {
-        const { data, timestamp } = JSON.parse(cachedData);
-        if (now - timestamp < cacheExpiry) {
-          //map data
-          home_page = data;
-          return;
-        }
-      }
 
       try {
         const response = await fetch(home_end_point);
@@ -651,21 +709,8 @@ export default {
             : [responseData.data];
 
           home_page = dataArray;
-
-          localStorage.setItem(
-            cacheKey,
-            JSON.stringify({
-              data: dataArray,
-              timestamp: now,
-            })
-          );
         } else {
           console.error("Invalid response structure:", responseData);
-          if (cachedData) {
-            console.log("Falling back to stale cache");
-            const { data } = JSON.parse(cachedData);
-            home_page = data;
-          }
         }
 
         console.log("Home content", home_page);
@@ -680,20 +725,6 @@ export default {
     },
     //GET BLOGS
     async fetch_blogs() {
-      const cacheKey = "blogsCache";
-      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
-
-      const cachedData = localStorage.getItem(cacheKey);
-      const now = Date.now();
-
-      if (cachedData) {
-        const { data, timestamp } = JSON.parse(cachedData);
-        if (now - timestamp < cacheExpiry) {
-          this.blogs = data;
-          return;
-        }
-      }
-
       try {
         const response = await fetch(apiEndpoint);
         if (!response.ok) {
@@ -708,21 +739,8 @@ export default {
             : [responseData.data];
 
           this.blogs = dataArray;
-
-          localStorage.setItem(
-            cacheKey,
-            JSON.stringify({
-              data: dataArray,
-              timestamp: now,
-            })
-          );
         } else {
           console.error("Invalid response structure:", responseData);
-          if (cachedData) {
-            console.log("Falling back to stale cache");
-            const { data } = JSON.parse(cachedData);
-            this.blogs = data;
-          }
         }
       } catch (error) {
         console.error("Error fetching resources:", error);
@@ -781,6 +799,7 @@ export default {
           return;
         }
         this.success_stories = data;
+        this.success_stories.push(this.success_stories[0]);
       } catch (error) {
         console.log(error);
       }

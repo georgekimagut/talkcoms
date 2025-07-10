@@ -127,11 +127,24 @@ a {
   left: 0;
   height: 100%;
   width: 0%;
-  background-color: var(--default); /* Or use a color like #141414 */
+  background-color: var(--default);
   z-index: 0;
   transition: width 0.4s ease;
 }
+.story-card p {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+}
 
+.story-card:hover p {
+  opacity: 1;
+  max-height: 20vh; /* Adjust depending on your content height */
+}
+.story-card:hover {
+  width: 60% !important;
+}
 .button-square-fill:hover::before {
   width: 100%;
 }
@@ -322,16 +335,13 @@ a {
 .custom-portfolio-hover img {
   transition: transform 0.3s;
 }
-.zoom-animate {
-  box-shadow: 0 0 20px transparent;
-}
-.zoom-animate:hover {
+/* .zoom-animate:hover {
   box-shadow: 0 0 20px rgb(200, 200, 200);
   margin-top: -5px;
-}
+} */
 .custom-portfolio-hover:hover img,
 .zoom-animate:hover img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 .zoom-animate .pointer-to-show {
   display: none;
