@@ -3,7 +3,7 @@
   <div v-if="page_is_loading === false" class="w-full">
     <Navbar />
     <!-- hero section -->
-    <div class="w-full h-[90vh]">
+    <div class="w-full h-[90vh] hero">
       <div class="h-full w-full absolute opacity-50">
         <img src="/icons/g26.svg" class="" />
       </div>
@@ -27,17 +27,17 @@
               :key="index"
               class="w-full flex-shrink-0 h-full flex"
             >
-              <div class="w-1/2 h-full block">
+              <div class="w-1/2 h-full block c-half">
                 <p class="text-secondary text-lg w-3/4 uppercase">
                   {{ slide.sub_title }}
                 </p>
                 <h1 class="text-4xl font-extrabold mt-10 w-3/4">
                   {{ slide.title }}
                 </h1>
-                <p class="w-3/4 mt-10">
+                <p class="w-3/4 mt-10 description">
                   {{ slide.description }}
                 </p>
-                <div class="w-full flex mt-16">
+                <div class="w-full flex mt-16 btn-holder">
                   <router-link to="/contact/contact-us"
                     ><Button variant="dark"
                       >Talk to Sales
@@ -52,29 +52,19 @@
                         class="fa-solid fa-angle-right mt-[10%] icon"
                       ></i></Button
                   ></router-link>
-                  <!-- <DarkButton
-                    button_link="/contact-Us"
-                    button_text="Learn More"
-                  />
-                  <LightButton
-                    button_link="#"
-                    button_text="Learn
-                  More"
-                    class="ml-4"
-                  /> -->
                 </div>
               </div>
-              <div class="w-1/2 h-full">
+              <div class="w-1/2 h-full c-half">
                 <div class="w-full h-full relative">
                   <div class="img-holder h-[55vh] overflow-hidden rounded-2xl">
                     <img
                       :src="slide.pic"
-                      class="rounded-2xl min-w-full object-cover"
+                      class="rounded-2xl min-w-full min-h-full max-h-none object-cover"
                     />
                   </div>
                   <!-- stats board -->
                   <div
-                    class="w-[65%] h-1/2 absolute z-10 bg-body top-[30vh] rounded-tr-2xl p-4 left-[-10%]"
+                    class="w-[65%] h-1/2 absolute z-10 bg-body top-[30vh] rounded-tr-2xl p-4 left-[-10%] stats-board"
                   >
                     <div
                       class="wrapper w-full bg-white rounded-tr-2xl rounded-bl-2xl"
@@ -115,7 +105,7 @@
                   </div>
                   <!-- reviews board -->
                   <div
-                    class="w-[40%] absolute z-10 top-[50vh] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl left-[55%] bg-white"
+                    class="w-[40%] absolute z-10 top-[50vh] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl left-[55%] bg-white stats-bard"
                   >
                     <p class="w-ful p-2">Verified by Google</p>
                     <div class="w-full flex p-2">
@@ -139,7 +129,7 @@
           </div>
 
           <!-- Navigation Arrows -->
-          <div class="w-full flex justify-end h-[10vh]">
+          <div class="w-full flex justify-end h-[10vh] pagination">
             <div class="h-full flex flex-col justify-center">
               <div class="flex flex-row flex-nowrap items-center gap-6">
                 <!-- Previous Button -->
@@ -175,29 +165,71 @@
     </div>
     <!-- services highlights -->
     <div
-      class="w-full flex flex-wrap justify-center overflow-hidden mt-16 autoShow"
+      class="w-full flex flex-wrap justify-center overflow-hidden mt-8 autoShow bg-white py-16"
     >
       <div class="w-[90%] flex justify-center flex-wrap">
-        <div class="w-full">
-          <p class="text-secondary text-center text-lg">OUR SERVICES</p>
-
-          <h1 class="text-4xl font-bold mt-4 p-2 text-center">
-            Services <span class="text-secondary mr-2 ml-2">Tailored</span>
-            To Meet Your Business Needs
-          </h1>
+        <div class="w-full flex">
+          <p v-if="old_services" class="text-secondary text-center text-lg">
+            OUR SERVICES
+          </p>
+          <div class="w-3/4">
+            <h1 class="text-4xl font-bold mt-4 p-2 ml-[1%]">
+              Services <span class="text-secondary mr-2 ml-2">Tailored</span>
+              To Meet Your Business Needs
+            </h1>
+          </div>
+          <div class="w-1/4 flex justify-end">
+            <Button @click="prevServiceSlide" variant="light" class="mt-4"
+              ><i class="fa-solid fa-angle-left"></i
+            ></Button>
+            <Button @click="nextServiceSlide" variant="light" class="mt-4 ml-4"
+              ><i class="fa-solid fa-angle-right"></i
+            ></Button>
+          </div>
         </div>
-        <div class="w-full flex justify-center mt-16 gap-4">
+        <div v-if="old_services" class="w-full flex mt-16 gap-4">
           <CustomCard
             v-for="(service, index) in home_services"
             :key="index"
             :card_pic="service.imageUrl"
             :card_title="service.name"
             :card_description="service.title_description"
-            card_class="w-[25%] "
+            card_class="w-[25%] m-[1%]"
             link_text="LEARN MORE"
             :link_to="`/service/${service.name}`"
             has_link
           />
+        </div>
+        <div class="w-full flex mt-4 overflow-hidden">
+          <div
+            class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full"
+            :style="{
+              transform: `translateX(-${current_service_slide * 100}%)`,
+            }"
+          >
+            <Card
+              v-for="(service, index) in home_services"
+              :key="index"
+              class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none pb-8 rounded-xl border overflow-hidden"
+            >
+              <CardHeader class="p-0">
+                <CardTitle
+                  ><img
+                    :src="service.imageUrl"
+                    class="h-[35vh] w-auto min-w-full max-w-none object-cover"
+                  />
+                </CardTitle>
+              </CardHeader>
+              <CardTitle class="custom-default-hover mt-4 p-4 text-xl"
+                ><router-link :to="`/service/${service.name}`">{{
+                  service.name
+                }}</router-link></CardTitle
+              >
+              <CardDescription class="px-4">
+                {{ service.title_description }}
+              </CardDescription>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
@@ -311,11 +343,11 @@
             Select your industry. Discover our impact.
           </h1>
         </div>
-        <div class="w-full flex flex-wrap mt-16">
+        <div class="w-full flex flex-wrap mt-16 w730">
           <div
             v-for="(industry, index) in industries"
             :key="index"
-            class="industry-card w-[49%] ml-[1%] flex flex-nowrap cursor-pointer pt-3 pb-3 ease-in-out border-b-1 border-[#dfdfdf] hover:border-b-2"
+            class="industry-card w-[49%] ml-[1%] flex flex-nowrap cursor-pointer pt-3 pb-3 ease-in-out border-b-1 border-[#dfdfdf] hover:border-b-2 c-half"
           >
             <router-link :to="`/solution/${industry.name}`" class="w-full flex"
               ><div class="w-[90%] flex flex-nowrap">
@@ -503,6 +535,8 @@ import Navbar from "@/components/general/Navbar.vue";
 import Partners from "@/components/general/Partners.vue";
 import Spinner from "@/components/general/Spinner.vue";
 import ExternalLink from "@/components/text/ExternalLink.vue";
+import CardDescription from "@/components/ui/card/CardDescription.vue";
+import CardTitle from "@/components/ui/card/CardTitle.vue";
 import CustomCard from "@/components/ui/card/CustomCard.vue";
 import { apiEndpoint, baseUrl, home_end_point } from "@/lib/store.js";
 import { supabase } from "@/lib/supabase.js";
@@ -526,12 +560,6 @@ export default {
       current_slide: 0,
       total_slides: "", // Number of slides
       //service carousel
-      current_service_slide: 0,
-      total_service_slides: 3,
-      //drag
-      isDragging: false,
-      startX: 0,
-      scrollLeft: 0,
       success_story: "story",
       is_blog: "blog",
       image_url: baseUrl,
@@ -541,6 +569,9 @@ export default {
       success_stories: [],
       blogs: [],
       industries: [],
+      /* services carousel */
+      current_service_slide: 0,
+      total_service_slides: 2,
     };
   },
   async created() {
@@ -573,8 +604,19 @@ export default {
     prevSlide() {
       if (this.current_slide > 0) {
         this.current_slide--;
+      }
+    },
+    /* services carousel */
+    nextServiceSlide() {
+      if (this.current_service_slide < this.total_service_slides - 1) {
+        this.current_service_slide++;
+      }
+    },
+    prevServiceSlide() {
+      if (this.current_service_slide > 0) {
+        this.current_service_slide--;
       } else {
-        this.current_slide = this.total_slides - 1; // Loop to last
+        this.current_service_slide = this.total_service_slides - 1;
       }
     },
     //fetch home
@@ -703,7 +745,7 @@ export default {
         const { data, error } = await supabase
           .from("services")
           .select("pic, title_description, name, icon")
-          .limit(4);
+          .limit(6);
 
         if (error) {
           console.log(error);

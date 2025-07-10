@@ -508,16 +508,91 @@ a {
   }
 }
 @media only screen and (max-width: 1215px) {
-  .nav-bar {
-    /* display: none; */
+  /* .card-holder .c-card {
+    width: 33%;
+    min-width: 31%;
+    margin-bottom: 20px;
+    transition: 0.3s ease-in;
   }
-  .phone-navigation {
-    /* display: flex; */
+  .card-holder .c-card:first-child {
+    animation: scrollLeft;
+    animation-iteration-count: 1;
+    animation-duration: 0.4s;
+    animation-delay: 5s;
   }
-  .nav-bar.nav-bar-innner {
-    width: fit-content;
+  @keyframes scrollLeft {
+    0% {
+      margin-left: 0;
+    }
+    100% {
+      margin-left: -33%;
+    }
+  } */
+}
+@media only screen and (max-width: 1300px) {
+  .hero {
+    /* height: 100vh; */
   }
-  .btn-side {
-    /* width: 30%; */
+
+  .carousel-holder .c-half:first-child .description {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .hero .carousel-holder .w-full {
+    flex-wrap: wrap;
+  }
+  .hero .carousel-holder .c-half {
+    width: 100%;
+    height: fit-content;
+  }
+  .hero .carousel-holder .c-half:first-child {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero .carousel-holder .c-half:first-child p.uppercase {
+    text-align: center;
+    height: fit-content;
+    width: 100%;
+  }
+  .hero .carousel-holder .c-half:first-child h1.font-extrabold {
+    margin-top: 20px;
+    text-align: center;
+    height: fit-content;
+    width: 100%;
+  }
+  .hero .carousel-holder .c-half:first-child .btn-holder {
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .hero .mt-16 {
+    margin-top: 20px;
+  }
+  .stats-board {
+    display: none;
+  }
+  .hero .carousel-holder .c-half:nth-child(2) {
+    margin-top: 20px;
+  }
+  .hero {
+    height: fit-content;
+  }
+  .hero .carousel-holder .c-half:nth-child(2) .img-holder {
+    height: auto;
+  }
+  /* partners */
+  .partners .w-full .animate-scroll-carousel .flex-shrink {
+    width: 20%;
+  }
+}
+@media only screen and (max-width: 730px) {
+  .w730 .industry-card {
+    width: 100%;
+    margin-left: 0%;
+  }
+  .w730 .industry-card .w-full p {
+    /* text-align: center; */
+    width: 100%;
   }
 }

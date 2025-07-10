@@ -114,7 +114,7 @@
                 </div>
                 <div class="w-full p-2">
                   <label class="text-sm">Message</label>
-                  <Textarea class="mt-2" />
+                  <Textarea class="mt-2" placeholder="Type your message" />
                 </div>
                 <div class="w-full p-2">
                   <input

@@ -11,7 +11,7 @@
 
     <!-- Scrolling Logos -->
     <div class="w-full flex flex-wrap justify-center mt-6">
-      <div class="w-[90%] flex flex-nowrap overflow-hidden">
+      <div class="w-[90%] flex flex-nowrap overflow-hidden partners">
         <div class="overflow-hidden w-full">
           <div class="flex animate-scroll-carousel w-[160%]">
             <div

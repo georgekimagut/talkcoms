@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex justify-center flex-wrap bg-white">
+  <!-- <div class="w-full flex justify-center flex-wrap bg-white">
     <div class="w-[90%] flex">
       <div class="w-full flex justify-end">
         <a
@@ -20,14 +20,14 @@
         </a>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- end -->
   <div
     class="nav-bar w-full flex justify-center flex-wrap sticky top-0 bg-white z-[1000] border-b-1 border-[#e3e3e3]"
   >
     <div class="w-[90%] h-[12vh] flex justify-center">
       <div class="w-full flex">
-        <div class="w-1/6 flex justify-start p-4 w-16">
+        <div class="w-1/6 flex justify-start p-4">
           <router-link to="/"
             ><img :src="site_logo" class="custom-logo min-w-[50px]"
           /></router-link>
@@ -97,7 +97,7 @@
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-lg"
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-xl"
             >
               <li
                 v-for="(industry, index) in industries"
@@ -147,7 +147,7 @@
               </div>
             </div>
             <div
-              class="w-[200px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-lg"
+              class="w-[200px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-xl"
             >
               <li class="mb-2 list-none">
                 <router-link to="/blogs" class="custom-default-hover"

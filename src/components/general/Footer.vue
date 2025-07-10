@@ -1,5 +1,5 @@
 <template>
-  <Chat />
+  <!-- <Chat /> -->
   <!-- back to top -->
   <button
     v-show="isVisible"
@@ -151,11 +151,14 @@
 <script>
 // import DefaultSquareButton from "./buttons/SquareButton.vue";
 // import DefaultInput from "./ui/input/DefaultInput.vue";
-import Chat from "./Chat.vue";
+// import Chat from "./Chat.vue";
 
 export default {
   name: "Footer",
-  components: { /*DefaultInput,*/ Chat },
+  components: {
+    /*DefaultInput,*/
+    /* Chat */
+  },
   data() {
     return {
       isVisible: false,

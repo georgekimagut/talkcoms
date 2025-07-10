@@ -214,7 +214,7 @@
 
     <div class="w-full flex justify-center py-20 bg-third">
       <div class="w-[90%] flex flex-wrap relative">
-        <ScrollPattern :bg_color="random_bg" />
+        <!-- <ScrollPattern :bg_color="random_bg" /> -->
         <!-- Scrollable content -->
         <div class="w-[50%] flex justify-end">
           <div
