@@ -45,7 +45,7 @@
                         class="fa-solid fa-angle-right mt-[10%] icon"
                       ></i></Button
                   ></router-link>
-                  <router-link to="/contact/contact-us"
+                  <router-link to="/about"
                     ><Button variant="light" class="ml-4"
                       >Learn More
                       <i
