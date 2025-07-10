@@ -41,7 +41,7 @@
     </div>
   </div>
   <!-- chat with us -->
-  <div v-if="has_chat" class="w-full mt-32 flex justify-center pb-16">
+  <div v-if="has_chat" class="w-full mt-6 flex justify-center pb-16">
     <div class="w-3/4">
       <h1 class="text-4xl font-bold mt-4 p-2 flex justify-center">
         Still got <span class="text-secondary mr-2 ml-2">questions</span>

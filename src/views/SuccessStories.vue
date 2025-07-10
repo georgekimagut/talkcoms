@@ -28,7 +28,7 @@
         <div
           v-for="(service, index) in services"
           :key="index"
-          class="mr-4 cursor-pointer font-semibold custom-default-hover"
+          class="mr-4 cursor-pointer rounded-full text-center py-1 flex flex-col justify-center px-4 border border-[#82bc00] text-sm"
           @click="change_category(index, service.id)"
           :class="service.active_category"
         >
@@ -91,7 +91,8 @@ export default {
       this.services = this.services.map((category, index) => {
         return {
           ...category,
-          active_category: index === item_index ? "text-secondary" : "",
+          active_category:
+            index === item_index ? "text-white bg-secondary" : "",
         };
       });
       // change categories

@@ -406,25 +406,28 @@
       </div>
     </div>
     <!-- industry -->
-    <div class="w-full flex justify-center bg-default mt-8 pb-16 autoShow">
+    <div class="w-full flex justify-center mt-8 pb-16 autoShow">
       <div class="w-[90%]">
         <div class="w-full">
           <h1 class="text-4xl font-extrabold mt-10 p-2 text-center">
             Select your
-            <span class="text-white mx-2"> industry.</span> Discover our
-            <span class="text-white mx-2"> impact.</span>
+            <span class="text-secondary mx-2"> industry.</span> Discover our
+            <span class="text-secondary mx-2"> impact.</span>
           </h1>
         </div>
         <div class="w-full flex flex-wrap mt-16 w730">
           <div
             v-for="(industry, index) in industries"
             :key="index"
-            class="industry-card w-[49%] ml-[1%] flex flex-nowrap cursor-pointer pt-3 pb-3 ease-in-out border-b-1 border-[#dfdfdf] hover:border-b-2 c-half"
+            class="industry-card w-[49%] ml-[1%] flex flex-nowrap cursor-pointer pt-3 pb-3 px-2 rounded-sm ease-in-out border-b border-[#dfdfdf] hover:shadow-2xl hover:bg-[#007cba] c-half"
           >
             <router-link :to="`/solution/${industry.name}`" class="w-full flex"
               ><div class="w-[90%] flex flex-nowrap">
                 <div class="w-[20px]">
-                  <i :class="industry.icon" class="text-white ml-2 pt-2"></i>
+                  <i
+                    :class="industry.icon"
+                    class="text-secondary ml-2 pt-2"
+                  ></i>
                 </div>
 
                 <p class="ml-4 text-2xl">{{ industry.name }}</p>
@@ -563,13 +566,15 @@
                     {{ blog.Title }}
                   </h3></router-link
                 >
-                <div class="w-full h-full flex flex-col justify-around pb-4">
+                <div class="w-full h-full flex flex-col pb-4">
                   <div class="w-full pt-2 pb-2 flex">
                     <span
                       class="bg-secondary h-fit text-sm text-white rounded-full pl-2 pr-2"
                       >{{ blog.category ? blog.category : blog.Type }}</span
                     >
-                    <div class="line w-[1px] bg-secondary ml-6 h-[23px]"></div>
+                    <div
+                      class="line mt-4 w-[1px] bg-secondary ml-6 h-[23px]"
+                    ></div>
                     <span class="ml-6 text-sm">{{
                       format_date(blog.createdAt)
                     }}</span>

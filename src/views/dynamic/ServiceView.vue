@@ -78,7 +78,7 @@
     <!-- css only scroll -->
     <div class="w-full flex justify-center py-20">
       <div class="w-[90%] flex flex-wrap relative">
-        <ScrollPattern :bg_color="random_bg" />
+        <!-- <ScrollPattern :bg_color="random_bg" /> -->
         <!-- Sticky sidebar -->
         <div class="w-[40%] sticky top-[15vh] self-start">
           <div class="w-full overflow-hidden rounded-xl h-[80vh]">

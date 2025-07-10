@@ -19,7 +19,7 @@
             id="search"
             type="text"
             placeholder="Search..."
-            class="pl-10 w-full border-[#82bc00]"
+            class="pl-10 py-6 w-full border-[#82bc00]"
           />
           <span
             class="absolute start-0 inset-y-0 flex items-center justify-center px-2"

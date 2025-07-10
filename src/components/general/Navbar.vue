@@ -43,6 +43,7 @@
             Home
           </router-link>
           <router-link
+            v-if="is_prev_product"
             to="#"
             class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
             @mouseenter="show_service_dropdown('product')"
@@ -62,7 +63,36 @@
               </div>
             </div>
           </router-link>
+          <div
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
+            active-class="text-secondary font-medium"
+          >
+            <div
+              class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
+            >
+              <div class="h-full flex flex-col justify-center">Products</div>
+              <div class="h-full flex flex-col justify-center ml-1 mt-1">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <div
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+            >
+              <li
+                v-for="(product, index) in products"
+                :key="index"
+                class="mb-2 list-none"
+              >
+                <router-link
+                  :to="`/service/${product.name}`"
+                  class="custom-default-hover"
+                  >{{ product.name }}</router-link
+                >
+              </li>
+            </div>
+          </div>
           <router-link
+            v-if="prev_service"
             to="#"
             class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
             @mouseenter="show_service_dropdown('service')"
@@ -89,6 +119,34 @@
             <div
               class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
             >
+              <div class="h-full flex flex-col justify-center">Services</div>
+              <div class="h-full flex flex-col justify-center ml-1 mt-1">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <div
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+            >
+              <li
+                v-for="(service, index) in services"
+                :key="index"
+                class="mb-2 list-none"
+              >
+                <router-link
+                  :to="`/service/${service.name}`"
+                  class="custom-default-hover"
+                  >{{ service.name }}</router-link
+                >
+              </li>
+            </div>
+          </div>
+          <div
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
+            active-class="text-secondary font-medium"
+          >
+            <div
+              class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
+            >
               <div class="h-full flex flex-col justify-center">
                 Solutions By Industry
               </div>
@@ -97,7 +155,7 @@
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-xl"
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
             >
               <li
                 v-for="(industry, index) in industries"
@@ -147,7 +205,7 @@
               </div>
             </div>
             <div
-              class="w-[200px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-xl"
+              class="w-[200px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
             >
               <li class="mb-2 list-none">
                 <router-link to="/blogs" class="custom-default-hover"
@@ -167,11 +225,6 @@
               <li class="mb-2 list-none">
                 <router-link to="/faqs" class="custom-default-hover"
                   >FAQs</router-link
-                >
-              </li>
-              <li class="mb-2 list-none">
-                <router-link to="/case-studies" class="custom-default-hover"
-                  >Case Studies</router-link
                 >
               </li>
             </div>

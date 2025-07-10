@@ -10,15 +10,19 @@
         <div class="w-1/2">
           <p class="text-secondary">CONTACT US</p>
           <div class="w-[90%]">
-            <BigTitle text="Get in" title_class="mt-4 text-5xl" />
-            <BigTitle text="touch with us" title_class="mt-4 text-5xl" />
-            <p class="mt-2">
+            <BigTitle text="Get in touch" title_class="mt-4 text-5xl" />
+            <BigTitle
+              v-if="prev_contact"
+              text="touch with us"
+              title_class="mt-4 text-5xl"
+            />
+            <p v-if="prev_contact" class="mt-2">
               We're here to help! Whether you have a question about our
               services, general assistance or want to give feedback, our team is
               ready to assist you. Drop us a message or contact us directly via
               our phone numbers below.
             </p>
-            <div class="w-full mt-6">
+            <div v-if="prev_contact" class="w-full mt-6">
               <p>Email:</p>
               <p v-for="(email, index) in emails.slice(0, 1)" :key="index">
                 <a
@@ -38,6 +42,10 @@
                   {{ phone.phone }}
                 </a>
               </p>
+            </div>
+            <!-- maps -->
+            <div class="w-full mt-6 h-[60vh]">
+              <Maps map_class="w-full h-full" />
             </div>
           </div>
         </div>
@@ -63,10 +71,10 @@
                   />
                 </div>
                 <div class="w-1/2 p-2">
-                  <label class="text-sm">Phone</label>
+                  <label class="text-sm">Position/Role</label>
                   <Input
-                    type="number"
-                    placeholder="Enter Your Phone"
+                    type="text"
+                    placeholder="Enter Your Role"
                     class="mt-2"
                   />
                 </div>
@@ -150,21 +158,21 @@
       </div>
     </div>
     <!-- contact details -->
-    <div class="w-full flex justify-center mt-16">
-      <div class="w-[90%] flex bg-white shadow-sm rounded-xl overflow-hidden">
+    <div class="w-full flex justify-center mt-16 border-b pb-8">
+      <div class="w-[90%] flex rounded-xl overflow-hidden">
         <Card
-          class="w-[33%] border-0 border-r-2 border-[##f5f5f5] shadow-none rounded-none"
+          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white"
         >
           <!-- phones -->
           <CardHeader>
-            <CardDescription
+            <CardDescription class="text-xl"
               ><i class="fa-solid fa-phone text-secondary"></i> Call us
               on</CardDescription
             >
             <CardTitle
               v-for="(phone, index) in phones"
               :key="index"
-              class="mt-4"
+              class="mt-2 text-normal"
             >
               <a :href="`tel:${phone.phone}`">{{ phone.phone }}</a></CardTitle
             >
@@ -172,10 +180,10 @@
         </Card>
         <!-- emails -->
         <Card
-          class="w-[33%] border-0 border-r-2 border-[##f5f5f5] shadow-none rounded-none"
+          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white"
         >
           <CardHeader>
-            <CardDescription
+            <CardDescription class="text-xl"
               ><i class="fa-regular fa-envelope text-secondary"></i> You can
               email us</CardDescription
             >
@@ -191,9 +199,11 @@
           </CardHeader>
         </Card>
         <!-- location -->
-        <Card class="w-[33%] border-0 shadow-none rounded-none">
+        <Card
+          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white"
+        >
           <CardHeader>
-            <CardDescription
+            <CardDescription class="text-xl"
               ><i class="fa-solid fa-location-dot text-secondary"></i> Our
               Offfices</CardDescription
             >
@@ -210,7 +220,7 @@
       </div>
     </div>
     <!-- maps -->
-    <div class="w-full mt-32 h-[80vh]">
+    <div v-if="prev_map" class="w-full mt-32 h-[80vh]">
       <Maps map_class="w-full h-full" />
     </div>
     <!-- footer -->

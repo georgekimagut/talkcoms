@@ -53,7 +53,7 @@
         <!-- other blogs -->
         <div class="w-full mt-10 flex flex-wrap">
           <CustomCard
-            v-for="(blog, index) in blogs"
+            v-for="(blog, index) in blogs.slice(1)"
             :key="index"
             :card_pic="`${image_url}/${blog.hero_media.url}`"
             :card_title="blog.Title"
@@ -128,61 +128,25 @@ export default {
   methods: {
     /* strapi methods */
     async fetch_blogs() {
-      const cacheKey = "blogsCache";
-      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
-      const now = Date.now();
-
-      if (typeof window !== "undefined") {
-        const cachedData = localStorage.getItem(cacheKey);
-        if (cachedData) {
-          const { data, timestamp } = JSON.parse(cachedData);
-          if (now - timestamp < cacheExpiry) {
-            this.blogs = data;
-            return;
-          }
+      try {
+        const response = await fetch(apiEndpoint);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        try {
-          const response = await fetch(apiEndpoint);
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+        const responseData = await response.json();
 
-          const responseData = await response.json();
+        if (responseData.data) {
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
 
-          if (responseData.data) {
-            const dataArray = Array.isArray(responseData.data)
-              ? responseData.data
-              : [responseData.data];
-
-            this.blogs = dataArray;
-
-            localStorage.setItem(
-              cacheKey,
-              JSON.stringify({
-                data: dataArray,
-                timestamp: now,
-              })
-            );
-          } else {
-            console.error("Invalid response structure:", responseData);
-            if (cachedData) {
-              console.log("Falling back to stale cache");
-              const { data } = JSON.parse(cachedData);
-              this.blogs = data;
-            }
-          }
-        } catch (error) {
-          console.error("Error fetching resources:", error);
-          const cachedData = localStorage.getItem(cacheKey);
-          if (cachedData) {
-            console.log("Using cached data after error");
-            const { data } = JSON.parse(cachedData);
-            this.blogs = data;
-          }
+          this.blogs = dataArray;
+        } else {
+          console.error("Invalid response structure:", responseData);
         }
-      } else {
-        console.warn("localStorage is not available in this environment.");
+      } catch (error) {
+        console.error("Error fetching resources:", error);
       }
     },
     async blog_filtering() {

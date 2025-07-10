@@ -13,7 +13,7 @@ export const text_colors = [
 ];
 
 export const apiEndpoint =
-  "https://cms.talkcoms.co.uk/api/blog-posts?populate=*&sort=createdAt:desc";
+  "https://cms.talkcoms.co.uk/api/blog-posts?populate=*&sort=createdAt:desc&pagination[limit]=10";
 export const home_end_point =
   "https://cms.talkcoms.co.uk/api/homepages/?populate=*&sort=createdAt:desc";
 export const services_end_point =
