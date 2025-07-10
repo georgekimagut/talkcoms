@@ -165,7 +165,7 @@
     </div>
     <!-- services highlights -->
     <div
-      class="w-full flex flex-wrap justify-center overflow-hidden mt-8 autoShow bg-white py-16"
+      class="w-full flex flex-wrap justify-center overflow-hidden mt-8 bg-white py-16"
     >
       <div class="w-[90%] flex justify-center flex-wrap">
         <div class="w-full flex">
@@ -235,9 +235,7 @@
     </div>
     <!-- end -->
     <!-- success stories  -->
-    <div
-      class="w-full flex flex-wrap justify-center overflow-hidden autoShow py-16"
-    >
+    <div class="w-full flex flex-wrap justify-center overflow-hidden py-16">
       <div class="w-[90%] flex justify-center flex-wrap">
         <div class="w-full">
           <p class="text-secondary text-center text-lg">
@@ -406,7 +404,7 @@
       </div>
     </div>
     <!-- industry -->
-    <div class="w-full flex justify-center mt-8 pb-16 autoShow">
+    <div class="w-full flex justify-center mt-8 pb-16">
       <div class="w-[90%]">
         <div class="w-full">
           <h1 class="text-4xl font-extrabold mt-10 p-2 text-center">
@@ -443,7 +441,7 @@
       </div>
     </div>
     <!-- partners/companies -->
-    <Partners class="autoShow" />
+    <Partners class="" />
     <!-- stories -->
     <div
       v-if="prev_stories"
