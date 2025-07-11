@@ -1,8 +1,9 @@
 <template>
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar />
+    <Navbar :services="services" />
     <!-- hero section -->
+    <!-- <div class="w-full">{{ services }}</div> -->
     <div class="w-full h-[90vh] hero">
       <div class="h-full w-full absolute opacity-50">
         <img src="/icons/g26.svg" class="" />
@@ -187,19 +188,6 @@
             ></Button>
           </div>
         </div>
-        <div v-if="old_services" class="w-full flex mt-16 gap-4">
-          <CustomCard
-            v-for="(service, index) in home_services"
-            :key="index"
-            :card_pic="service.imageUrl"
-            :card_title="service.name"
-            :card_description="service.title_description"
-            card_class="w-[25%] m-[1%]"
-            link_text="LEARN MORE"
-            :link_to="`/service/${service.name}`"
-            has_link
-          />
-        </div>
         <div class="w-full flex mt-4 overflow-hidden">
           <div
             class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full"
@@ -239,7 +227,7 @@
       <div class="w-[90%] flex justify-center flex-wrap">
         <div class="w-full">
           <p class="text-secondary text-center text-lg">
-            <router-link to="/stories">STORIES</router-link>
+            <router-link to="/success-stories">STORIES</router-link>
           </p>
 
           <h1 class="text-4xl font-extrabold mt-4 p-2 text-center">
@@ -417,7 +405,7 @@
           <div
             v-for="(industry, index) in industries"
             :key="index"
-            class="industry-card w-[49%] ml-[1%] flex flex-nowrap cursor-pointer pt-3 pb-3 px-2 rounded-sm ease-in-out border-b border-[#dfdfdf] hover:shadow-2xl hover:bg-[#007cba] c-half"
+            class="industry-card w-[49%] ml-[1%] flex flex-nowrap cursor-pointer pt-3 pb-3 px-2 ease-in-out border-b border-[#dfdfdf] hover:bg-white c-half"
           >
             <router-link :to="`/solution/${industry.name}`" class="w-full flex"
               ><div class="w-[90%] flex flex-nowrap">
@@ -599,7 +587,7 @@
     <!-- cta -->
     <Cta />
     <!-- footer -->
-    <Footer />
+    <Footer :services="services" />
     <!-- end of classes -->
   </div>
 </template>
@@ -613,9 +601,10 @@ import ExternalLink from "@/components/text/ExternalLink.vue";
 import CardDescription from "@/components/ui/card/CardDescription.vue";
 import CardTitle from "@/components/ui/card/CardTitle.vue";
 import CustomCard from "@/components/ui/card/CustomCard.vue";
-import { apiEndpoint, baseUrl, home_end_point } from "@/lib/store.js";
+import { apiEndpoint, baseUrl, home_end_point } from "@/store/store.js";
 import { supabase } from "@/lib/supabase.js";
-// import Button from "@/components/ui/button/Button.vue";
+/* global values */
+import { universal_content } from "@/store/contentStore";
 
 export default {
   name: "Home",
@@ -643,10 +632,13 @@ export default {
       portfolio_items: [],
       success_stories: [],
       blogs: [],
+      landing_page_content: [],
       industries: [],
+      services: [],
       /* services carousel */
       current_service_slide: 0,
       total_service_slides: 2,
+      store: null,
     };
   },
   async created() {
@@ -661,6 +653,7 @@ export default {
         this.fetch_homepage(),
         this.get_stories(),
       ]);
+      this.store = universal_content();
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {
@@ -696,8 +689,6 @@ export default {
     },
     //fetch home
     async fetch_homepage() {
-      let home_page = "";
-
       try {
         const response = await fetch(home_end_point);
         if (!response.ok) {
@@ -711,25 +702,28 @@ export default {
             ? responseData.data
             : [responseData.data];
 
-          home_page = dataArray;
+          this.landing_page_content = dataArray;
+          this.services = this.landing_page_content[0].services;
+          /* add content to pinia */
+          let service_names = [];
+          this.services.forEach((service) => {
+            service_names.push({ product_name: service.product_name });
+          });
+          console.log(service_names);
+          this.store.setServices(service_names);
         } else {
           console.error("Invalid response structure:", responseData);
         }
 
-        console.log("Home content", home_page);
+        console.log("Home content", this.landing_page_content);
       } catch (error) {
         console.error("Error fetching resources:", error);
-        if (cachedData) {
-          console.log("Using cached data after error");
-          const { data } = JSON.parse(cachedData);
-          this.blogs = data;
-        }
       }
     },
     //GET BLOGS
     async fetch_blogs() {
       try {
-        const response = await fetch(apiEndpoint);
+        const response = await fetch(apiEndpoint + "3");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -747,11 +741,6 @@ export default {
         }
       } catch (error) {
         console.error("Error fetching resources:", error);
-        if (cachedData) {
-          console.log("Using cached data after error");
-          const { data } = JSON.parse(cachedData);
-          this.blogs = data;
-        }
       }
     },
     /* dae formate */
@@ -849,8 +838,6 @@ export default {
         }
         this.carousel_data = data;
         this.total_slides = this.carousel_data.length;
-        // console.log(this.carousel_data);
-        // console.log(this.total_slides);
       } catch (error) {
         console.log(error);
       }

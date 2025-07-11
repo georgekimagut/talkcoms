@@ -118,13 +118,13 @@
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
               ></router-link>
 
-              <router-link
+              <!-- <router-link
                 v-if="!service.material_link"
                 to="/contact/contact-us"
                 ><Button variant="light" class="ml-4"
                   >Learn More
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              ></router-link> -->
               <a
                 v-if="service.material_link"
                 :href="service.material_link"
@@ -441,7 +441,7 @@ import Spinner from "@/components/general/Spinner.vue";
 import BigTitle from "../../components/text/BigTitle.vue";
 import ExternalLink from "../../components/text/ExternalLink.vue";
 import SmallTitle from "../../components/text/SmallTitle.vue";
-import { text_colors, services_end_point } from "@/lib/store";
+import { text_colors, services_end_point } from "@/store/store";
 import { supabase } from "@/lib/supabase";
 
 export default {

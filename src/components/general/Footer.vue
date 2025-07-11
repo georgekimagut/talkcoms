@@ -49,7 +49,7 @@
       </div>
     </div>
     <!-- footer content -->
-    <div class="w-full flex justify-center mt-18">
+    <div class="w-full flex justify-center mt-24">
       <div class="w-[90%] flex gap-4">
         <div class="w-[15%]">
           <div class="w-full flex justify-center">
@@ -90,13 +90,12 @@
         <div class="w-[15%] p-1">
           <p class="mt-2 font-semibold">Services</p>
           <div class="w-full mt-4">
-            <p
-              v-for="(service, index) in footer_services"
-              :key="index"
-              class="mb-2"
-            >
-              <router-link :to="service.link" class="hover:text-[#8dc63f]">
-                {{ service.title }}
+            <p v-for="(service, index) in services" :key="index" class="mb-2">
+              <router-link
+                :to="`/service/${service.product_name}`"
+                class="hover:text-[#8dc63f]"
+              >
+                {{ service.product_name }}
               </router-link>
             </p>
           </div>
@@ -155,6 +154,9 @@
 
 export default {
   name: "Footer",
+  props: {
+    services: Array,
+  },
   components: {
     /*DefaultInput,*/
     /* Chat */
@@ -172,11 +174,6 @@ export default {
         { title: "Contact Center Solution", link: "#" },
         { title: "Web/App Development", link: "#" },
         { title: "iTaaS", link: "#" },
-      ],
-      footer_services: [
-        { title: "Outsourced CC", link: "#" },
-        { title: "CRM", link: "#" },
-        { title: "PBX", link: "#" },
       ],
       footer_legal: [
         { title: "Cookie Policy", link: "/legal/cookie-policy" },

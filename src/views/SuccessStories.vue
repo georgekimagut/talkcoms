@@ -62,7 +62,7 @@ import Spinner from "@/components/general/Spinner.vue";
 import BigTitle from "@/components/text/BigTitle.vue";
 import SmallTitle from "@/components/text/SmallTitle.vue";
 import { supabase } from "@/lib/supabase";
-import { success_stories_end_point } from "@/lib/store";
+import { success_stories_end_point } from "@/store/store";
 
 export default {
   name: "SuccesStories",

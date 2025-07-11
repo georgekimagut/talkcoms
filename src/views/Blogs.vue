@@ -68,6 +68,7 @@
         </div>
       </div>
     </div>
+
     <!-- cta -->
     <Cta class="mt-32" />
     <Footer />
@@ -84,7 +85,7 @@ import BigTitle from "@/components/text/BigTitle.vue";
 import Link from "@/components/text/Link.vue";
 import { supabase } from "@/lib/supabase";
 import SmallTitle from "@/components/text/SmallTitle.vue";
-import { apiEndpoint, baseUrl } from "@/lib/store";
+import { apiEndpoint, baseUrl } from "@/store/store";
 
 export default {
   name: "Blogs",
@@ -129,7 +130,7 @@ export default {
     /* strapi methods */
     async fetch_blogs() {
       try {
-        const response = await fetch(apiEndpoint);
+        const response = await fetch(apiEndpoint + "10");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

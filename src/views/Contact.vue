@@ -7,52 +7,34 @@
     <div class="w-full flex mt-16 justify-center">
       <HeroPattern />
       <div class="w-[90%] flex flex-wrap">
-        <div class="w-1/2">
+        <div v-if="type == 'contact-us'" class="w-1/2">
           <p class="text-secondary">CONTACT US</p>
           <div class="w-[90%]">
             <BigTitle text="Get in touch" title_class="mt-4 text-5xl" />
-            <BigTitle
-              v-if="prev_contact"
-              text="touch with us"
-              title_class="mt-4 text-5xl"
-            />
-            <p v-if="prev_contact" class="mt-2">
-              We're here to help! Whether you have a question about our
-              services, general assistance or want to give feedback, our team is
-              ready to assist you. Drop us a message or contact us directly via
-              our phone numbers below.
-            </p>
-            <div v-if="prev_contact" class="w-full mt-6">
-              <p>Email:</p>
-              <p v-for="(email, index) in emails.slice(0, 1)" :key="index">
-                <a
-                  :href="`mailto:${email.email}`"
-                  class="text-2xl font-semibold mt-2"
-                >
-                  {{ email.email }}
-                </a>
-              </p>
-              <p class="mt-6">Phone:</p>
-              <p
-                v-for="(phone, index) in phones.slice(0, 1)"
-                :key="index"
-                class="text-2xl font-semibold mt-2"
-              >
-                <a :href="`tel:${phone.phone}`">
-                  {{ phone.phone }}
-                </a>
-              </p>
-            </div>
             <!-- maps -->
             <div class="w-full mt-6 h-[60vh]">
               <Maps map_class="w-full h-full" />
             </div>
           </div>
         </div>
-        <div class="w-1/2 flex h-full">
+        <div
+          class="flex h-full"
+          :class="type == 'contact-us' ? 'w-1/2' : 'w-full'"
+        >
           <!-- contact us form -->
-          <div class="w-full bg-white p-5 rounded-xl shadow-sm">
-            <form @submit.prevent="" class="w-full flex flex-wrap">
+          <div
+            class="w-full p-5 rounded-xl shadow-sm"
+            :class="
+              type == 'contact-us'
+                ? 'w-1/2 bg-white'
+                : 'w-full flex justify-center'
+            "
+          >
+            <form
+              @submit.prevent=""
+              class="flex flex-wrap"
+              :class="type == 'contact-us' ? 'w-full' : 'w-[60%] bg-white p-8'"
+            >
               <div class="w-full flex flex-wrap">
                 <div class="w-1/2 p-2">
                   <label class="text-sm">First Name</label>
@@ -234,7 +216,7 @@ import Footer from "@/components/general/Footer.vue";
 import BigTitle from "@/components/text/BigTitle.vue";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
 import CardTitle from "@/components/ui/card/CardTitle.vue";
-import { contact_us_end_point } from "@/lib/store.js";
+import { contact_us_end_point } from "@/store/store.js";
 import { supabase } from "@/lib/supabase";
 import Maps from "@/components/general/Maps.vue";
 

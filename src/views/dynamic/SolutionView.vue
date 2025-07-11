@@ -9,7 +9,7 @@
       :hero_description="solution.description"
       :read_more_link="`/demo/${this.id}`"
       :hero_image="solution.pic"
-      is_service
+      is_industry
     />
 
     <!-- advantages section -->

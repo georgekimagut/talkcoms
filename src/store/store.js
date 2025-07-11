@@ -13,7 +13,7 @@ export const text_colors = [
 ];
 
 export const apiEndpoint =
-  "https://cms.talkcoms.co.uk/api/blog-posts?populate=*&sort=createdAt:desc&pagination[limit]=10";
+  "https://cms.talkcoms.co.uk/api/blog-posts?populate=*&sort=createdAt:desc&pagination[limit]="; /* add a limit */
 export const home_end_point =
   "https://cms.talkcoms.co.uk/api/homepages/?populate=*&sort=createdAt:desc";
 export const services_end_point =
@@ -23,6 +23,9 @@ export const contact_us_end_point =
 
 export const success_stories_end_point =
   "https://cms.talkcoms.co.uk/api/success-stories?populate=*&sort=createdAt:desc";
+
+export const about_end_point =
+  "https://cms.talkcoms.co.uk/api/about-uses/?populate=*";
 
 export const baseUrl = "https://cms.talkcoms.co.uk"; // Base URL for Strapi
 export const is_blog = "blog";

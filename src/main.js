@@ -2,6 +2,9 @@ import { createApp } from "vue";
 import "@/assets/style/global.css";
 import App from "./App.vue";
 import router from "./router";
+/* pinia */
+import { createPinia } from "pinia";
+const pinia = createPinia();
 
 /* shadcn components */
 import Button from "./components/ui/button/Button.vue";
@@ -14,10 +17,6 @@ import {
   CardHeader,
   CardTitle,
 } from "./components/ui/card";
-// import CardContent from "./components/ui/card/CardContent.vue";
-// import CardDescription from "./components/ui/card/CardDescription.vue";
-// import CardHeader from "./components/ui/card/CardHeader.vue";
-// import CardTitle from "./components/ui/card/CardTitle.vue";
 import { Search } from "lucide-vue-next";
 import {
   Select,
@@ -30,6 +29,7 @@ import {
 } from "@/components/ui/select";
 
 createApp(App)
+  .use(pinia)
   .use(router)
   .component("Button", Button)
   .component("Input", Input)

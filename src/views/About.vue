@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar />
+    <Navbar :services="services" />
     <HeroSection
       small_title="ABOUT US"
       big_title="Creating Intelligent Digital Solutions For Ambitious Businesses That Want To Keep Moving Foward"
@@ -269,7 +269,7 @@
       </div>
     </div>
     <!-- CTA -->
-    <Cta />
+    <Cta class="mt-16" />
     <Footer />
   </div>
 </template>
@@ -282,6 +282,10 @@ import Navbar from "@/components/general/Navbar.vue";
 import Partners from "@/components/general/Partners.vue";
 import Spinner from "@/components/general/Spinner.vue";
 import { supabase } from "@/lib/supabase";
+import { about_end_point } from "@/store/store";
+import { universal_content } from "@/store/contentStore";
+
+// const store = universal_content();
 
 export default {
   name: "About",
@@ -293,13 +297,11 @@ export default {
     Footer,
     Partners,
     Maps,
-    // SquareButton,
-    // RoundedButton,
-    // Maps,
   },
   data() {
     return {
       page_is_loading: true,
+      about_page: [],
       values: [
         {
           icon: "fa-regular fa-circle-check",
@@ -320,32 +322,8 @@ export default {
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet varius est. Cras id tempus sapien. Vestibulum et libero scelerisque, tempor tortor in, finibus ante.",
         },
       ],
-      solutions: [
-        // {
-        //   icon: "fa-solid fa-headset text-secondary text-5xl",
-        //   title: "Call Center Solutions",
-        //   content:
-        //     "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
-        // },
-        // {
-        //   icon: "fa-solid fa-phone text-secondary text-5xl",
-        //   title: "PBX Solutions",
-        //   content:
-        //     "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
-        // },
-        // {
-        //   icon: "fa-solid fa-code text-secondary text-5xl",
-        //   title: "Web/App Development",
-        //   content:
-        //     "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
-        // },
-        // {
-        //   icon: "fa-solid fa-microchip text-secondary text-5xl",
-        //   title: "iTaaS",
-        //   content:
-        //     "Nullam eget mi et tellus vulputate tristique. In hac habitasse platea dictumst. ",
-        // },
-      ],
+      solutions: [],
+      services: [],
       members: [
         {
           name: "Jackson Kimwaga",
@@ -379,11 +357,39 @@ export default {
       ],
     };
   },
-  mounted() {
+  created() {
     this.load_page();
+    const store = universal_content();
+    this.services = store.services;
+    console.log("Universal Services: ", store.services);
     this.get_services();
+    this.fetch_about();
   },
   methods: {
+    /* fetch about us */
+    async fetch_about() {
+      try {
+        const response = await fetch(about_end_point);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.data) {
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+
+          this.about_page = dataArray;
+          console.log("About content", this.about_page);
+        } else {
+          console.error("Invalid response structure:", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching resources:", error);
+      }
+    },
     load_page() {
       setTimeout(() => {
         this.page_is_loading = false;

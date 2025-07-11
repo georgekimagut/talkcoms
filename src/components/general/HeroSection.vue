@@ -45,11 +45,11 @@
                 >Book A Free Demo
                 <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
             ></router-link>
-            <router-link to="/contact/get-started" class="ml-4"
+            <!-- <router-link to="/contact/get-started" class="ml-4"
               ><Button variant="light"
                 >Talk to sales
                 <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            ></router-link>
+            ></router-link> -->
             <!-- <DarkButton
               :button_link="demo_link"
               button_text="Book A Free Demo"
@@ -102,9 +102,9 @@
           <!-- industry -->
           <div v-show="is_industry" class="w-full mt-10 flex flex-wrap">
             <div class="w-full">
-              <router-link :to="read_more_link"
+              <router-link to="/contact/book-a-demo"
                 ><Button variant="dark"
-                  >Read Full Blog
+                  >Book A Free Call
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
               ></router-link>
             </div>

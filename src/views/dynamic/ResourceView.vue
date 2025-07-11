@@ -121,33 +121,89 @@
         </div>
       </div>
     </div>
+    <!-- related blogs -->
+    <div
+      class="w-full flex flex-wrap justify-center overflow-hidden mt-8 bg-white py-16"
+    >
+      <div class="w-[90%] flex justify-center flex-wrap">
+        <div class="w-full flex">
+          <div class="w-3/4">
+            <h1 class="text-4xl font-bold mt-4 p-2 ml-[1%]">Recent Posts</h1>
+          </div>
+          <div class="w-1/4 flex justify-end">
+            <Button @click="prevResourceSlide" variant="light" class="mt-4"
+              ><i class="fa-solid fa-angle-left"></i
+            ></Button>
+            <Button @click="nextResourceSlide" variant="light" class="mt-4 ml-4"
+              ><i class="fa-solid fa-angle-right"></i
+            ></Button>
+          </div>
+        </div>
+
+        <div class="w-full flex mt-16 overflow-hidden">
+          <div
+            class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full"
+            :style="{
+              transform: `translateX(-${current_resource_slide * 100}%)`,
+            }"
+          >
+            <Card
+              v-for="(blog, index) in blogs"
+              :key="index"
+              class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none rounded-xl border overflow-hidden zoom-animate"
+            >
+              <CardHeader class="p-0">
+                <CardTitle class="h-[35vh] overflow-hidden"
+                  ><img
+                    :src="`${image_url}/${blog.hero_media.url}`"
+                    class="h-full w-auto min-w-full max-w-none object-cover"
+                  />
+                </CardTitle>
+              </CardHeader>
+              <CardTitle class="custom-default-hover mt-4 p-4 text-xl"
+                ><router-link :to="`/resources/${is_blog}/${blog.slug}`">{{
+                  blog.Title
+                }}</router-link></CardTitle
+              >
+              <CardDescription class="px-4 text-black">
+                <div class="w-full flex pb-4 mt-4">
+                  <div
+                    class="w-[40px] h-[40px] bg-[#556080] rounded-full overflow-hidden flex justify-center"
+                  >
+                    <div class="h-full flex flex-col justify-center">
+                      <i class="fa-solid fa-user text-white"></i>
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-semibold">{{ blog.author }}</p>
+                    <p class="text-sm">{{ `${blog.read_time} mins` }}</p>
+                  </div>
+                </div>
+              </CardDescription>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end -->
     <!-- footer  -->
-    <Cta class="mt-40" />
+    <Cta class="mt-20" />
     <Footer />
   </div>
 </template>
 <script>
-//new imports
-// import RoundedButton from "../../components/buttons/RoundedButton.vue";
-// import Footer from "../../components/Footer.vue";
-// import Navbar from "../../components/Navbar.vue";
-// import Spinner from "../../components/Spinner.vue";
-// import { supabase } from "../../assets/js/supabase";
-// import BigTitle from "../../components/text/BigTitle.vue";
-// import SquareButton from "../../components/buttons/SquareButton.vue";
-// import { baseUrl } from "../../assets/js/store";
-
 import Footer from "@/components/general/Footer.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
 import { supabase } from "@/lib/supabase";
 import BigTitle from "../../components/text/BigTitle.vue";
-import { baseUrl } from "@/lib/store";
 import Cta from "@/components/general/Cta.vue";
+import { apiEndpoint, baseUrl } from "@/store/store";
 
 //markup content
 import DOMPurify from "dompurify";
 import { marked } from "marked";
+import CustomCard from "@/components/ui/card/CustomCard.vue";
 
 export default {
   name: "ResourceView",
@@ -155,7 +211,7 @@ export default {
   components: {
     Navbar,
     Spinner,
-    // RoundedButton,
+    CustomCard,
     Footer,
     BigTitle,
     // SquareButton,
@@ -170,8 +226,12 @@ export default {
       resource: "",
       sanitized_resource: "",
       resource_image_url: baseUrl,
-      // blogs: [],
+      blogs: [],
       table_of_contents: [],
+      image_url: baseUrl,
+      /* resource carousel */
+      current_resource_slide: 0,
+      total_resource_slides: 2,
     };
   },
   async created() {
@@ -203,6 +263,18 @@ export default {
         });
       });
       // console.log(this.table_of_contents);
+    },
+    nextResourceSlide() {
+      if (this.current_resource_slide < this.total_resource_slides - 1) {
+        this.current_resource_slide++;
+      }
+    },
+    prevResourceSlide() {
+      if (this.current_resource_slide > 0) {
+        this.current_resource_slide--;
+      } else {
+        this.current_resource_slide = this.total_resource_slides - 1;
+      }
     },
     async get_resource() {
       try {
@@ -246,12 +318,11 @@ export default {
 
             const html = marked.parse(markdown);
             this.sanitized_resource = DOMPurify.sanitize(html);
-            console.log(data);
+            //fetch other blogs
+            this.fetch_blogs();
           } else {
             throw new Error("No data found in response");
           }
-
-          // this.get_blogs();
         } else if (this.type === "case-study") {
           const { data, error } = await supabase
             .from("case_studies")
@@ -269,6 +340,30 @@ export default {
         }
       } catch (error) {
         console.log(error);
+      }
+    },
+    /* fetch blogs */
+    async fetch_blogs() {
+      try {
+        const response = await fetch(apiEndpoint + "6");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.data) {
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+
+          this.blogs = dataArray;
+          console.log(this.blogs);
+        } else {
+          console.error("Invalid response structure:", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching resources:", error);
       }
     },
     //change date format
