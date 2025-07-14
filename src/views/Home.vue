@@ -166,7 +166,7 @@
     </div>
     <!-- services highlights -->
     <div
-      class="w-full flex flex-wrap justify-center overflow-hidden mt-8 bg-white py-16"
+      class="w-full flex flex-wrap justify-center overflow-hidden mt-8 bg-white py-16 services"
     >
       <div class="w-[90%] flex justify-center flex-wrap">
         <div class="w-full flex">
@@ -190,7 +190,7 @@
         </div>
         <div class="w-full flex mt-4 overflow-hidden">
           <div
-            class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full"
+            class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full inner-service"
             :style="{
               transform: `translateX(-${current_service_slide * 100}%)`,
             }"
@@ -199,23 +199,22 @@
               v-for="(service, index) in home_services"
               :key="index"
               class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate"
-            >
-              <CardHeader class="p-0">
-                <CardTitle class="h-[35vh] overflow-hidden"
-                  ><img
-                    :src="service.imageUrl"
-                    class="h-full w-auto min-w-full max-w-none object-cover"
-                  />
-                </CardTitle>
-              </CardHeader>
-              <CardTitle class="custom-default-hover mt-4 p-4 text-xl"
-                ><router-link :to="`/service/${service.name}`">{{
+              ><router-link :to="`/service/${service.name}`">
+                <CardHeader class="p-0">
+                  <CardTitle class="h-[35vh] overflow-hidden"
+                    ><img
+                      :src="service.imageUrl"
+                      class="h-full w-auto min-w-full max-w-none object-cover"
+                    />
+                  </CardTitle>
+                </CardHeader>
+                <CardTitle class="custom-default-hover mt-4 p-4 text-xl">{{
                   service.name
-                }}</router-link></CardTitle
-              >
-              <CardDescription class="px-4">
-                {{ service.title_description }}
-              </CardDescription>
+                }}</CardTitle>
+                <CardDescription class="px-4">
+                  {{ service.title_description }}
+                </CardDescription>
+              </router-link>
             </Card>
           </div>
         </div>
@@ -236,55 +235,32 @@
         </div>
         <div class="w-full flex flex-nowrap mt-4">
           <Card
-            v-if="port - 2"
-            v-for="(story, index) in success_stories.slice(0, 3)"
-            :key="index"
-            class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate"
-          >
-            <CardHeader class="p-0">
-              <CardTitle class="h-[35vh] overflow-hidden"
-                ><img
-                  :src="story.pic"
-                  class="h-full w-auto min-w-full max-w-none object-cover"
-                />
-              </CardTitle>
-            </CardHeader>
-            <CardTitle class="custom-default-hover mt-4 p-4 text-xl"
-              ><router-link
-                :to="`/resources/${success_story}/${story.title}`"
-                >{{ story.client }}</router-link
-              ></CardTitle
-            >
-            <CardDescription class="px-4">
-              {{ story.title }}
-            </CardDescription>
-          </Card>
-          <Card
             v-for="(story, index) in success_stories.slice(0, 3)"
             :key="index"
             class="mb-4 m-[1.2%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate relative h-[45vh] story-card"
             :class="index === 0 ? 'w-[60%]' : 'w-[32%]'"
           >
-            <div class="w-full h-full absolute bg-default opacity-40 z-1"></div>
-            <div
-              class="w-full h-full absolute flex flex-col justify-end z-2 p-4"
-            >
-              <CardTitle class="text-white mt-4 p-4 text-4xl"
-                ><router-link
-                  :to="`/resources/${success_story}/${story.title}`"
-                  >{{ story.client }}</router-link
-                ></CardTitle
+            <router-link :to="`/resources/${success_story}/${story.title}`">
+              <div
+                class="w-full h-full absolute bg-default opacity-40 z-1"
+              ></div>
+              <div
+                class="w-full h-full absolute flex flex-col justify-end z-2 p-4"
               >
-              <CardDescription class="px-4 text-white text-xl">
-                {{ story.title }}
-              </CardDescription>
-            </div>
-            <div class="w-full h-full absolute overflow-hidden z-[-5]">
-              <img
-                :src="story.pic"
-                class="h-full w-auto min-w-full max-w-none object-cover"
-              />
-            </div>
+                <CardTitle class="text-white mt-4 p-4 text-4xl">{{
+                  story.client
+                }}</CardTitle>
+                <CardDescription class="px-4 text-white text-xl">
+                  {{ story.title }}
+                </CardDescription>
+              </div>
+              <div class="w-full h-full absolute overflow-hidden z-[-5]">
+                <img
+                  :src="story.pic"
+                  class="h-full w-auto min-w-full max-w-none object-cover"
+                />
+              </div>
+            </router-link>
           </Card>
         </div>
       </div>
@@ -462,123 +438,130 @@
     </div>
     <!-- blogs -->
     <!-- blogs -->
-    <div class="w-full flex justify-center flex-wrap mt-36 p-4 pb-20">
+    <div class="w-full flex justify-center flex-wrap mt-36 p-4 pb-20 blogs">
       <div class="w-[90%]">
         <p class="text-secondary w-full flex justify-center">
           <router-link to="/blogs" class="text-lg">BLOG</router-link>
         </p>
         <h1 class="text-3xl font-extrabold mt-3 w-full flex justify-center">
-          Tech <span class="text-secondary">Tips</span> &
-          <span class="text-secondary">Trends</span>
+          Tech <span class="text-secondary mx-1">Tips</span> &
+          <span class="text-secondary mx-1">Trends</span>
         </h1>
       </div>
       <div class="w-full flex justify-center gap-4 mt-16">
-        <div class="w-[80%] flex">
-          <div class="w-[40%] m-1 flex justify-center">
+        <div class="w-[80%] flex blog-inner">
+          <div class="w-[40%] m-1 flex justify-center col-1">
             <div
               v-for="(blog, index) in blogs.slice(0, 1)"
               :key="index"
-              class="w-[90%] m-2 bg-white overflow-hidden zoom-animate p-2"
+              class="w-[90%] card mx-2 bg-white overflow-hidden zoom-animate p-2"
             >
-              <div class="w-full h-[40vh] overflow-hidden relative">
-                <div
-                  class="absolute pointer-to-show z-20 top-[30vh] h-[50px] w-[50px] left-[80%] rounded-full bg-secondary cursor-pointer text-white flex justify-center"
-                  style="rotate: -45deg"
-                >
-                  <div class="h-full flex flex-col justify-center">
-                    <router-link :to="`/resources/${is_blog}/${blog.slug}`"
-                      ><i class="fa-solid fa-angle-right text-2xl"></i
-                    ></router-link>
-                  </div>
-                </div>
-                <img
-                  :src="`${image_url}/${blog.hero_media.url}`"
-                  class="min-h-full h-full min-w-full w-auto max-w-none"
-                />
-              </div>
-              <div class="p-4">
-                <div class="w-full pt-2 pb-2 flex">
-                  <span
-                    class="bg-secondary text-sm text-white rounded-full pl-2 pr-2"
-                    >{{ blog.category ? blog.category : blog.Type }}</span
+              <!-- router -->
+              <router-link :to="`/resources/${is_blog}/${blog.slug}`">
+                <div class="w-full h-[40vh] overflow-hidden relative">
+                  <div
+                    class="absolute pointer-to-show z-20 top-[30vh] h-[50px] w-[50px] left-[80%] rounded-full bg-secondary cursor-pointer text-white flex justify-center"
+                    style="rotate: -45deg"
                   >
-                  <div class="line w-[1px] bg-secondary ml-6 h-[23px]"></div>
-                  <span class="ml-6 text-sm">{{
-                    format_date(blog.createdAt)
-                  }}</span>
-                </div>
-                <router-link :to="`/resources/${is_blog}/${blog.slug}`"
-                  ><h3 class="font-semibold text-xl custom-default-hover">
-                    {{ blog.Title }}
-                  </h3></router-link
-                >
-                <div class="w-full mt-10 flex">
-                  <div class="w-[50px] h-[50px]">
-                    <img src="/icons/profile.png" />
+                    <div class="h-full flex flex-col justify-center">
+                      <i class="fa-solid fa-angle-right text-2xl"></i>
+                    </div>
                   </div>
-                  <div class="pl-4 pr-4" style="width: calc(100% - 50px)">
-                    <p class="text-sm">{{ blog.author }}</p>
-                    <p class="text-sm">{{ blog.read_time }} mins</p>
-                  </div>
+                  <img
+                    :src="`${image_url}/${blog.hero_media.url}`"
+                    class="min-h-full h-full min-w-full w-auto max-w-none"
+                  />
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="w-[60%] m-1 flex flex-col">
-            <div
-              v-for="(blog, index) in blogs.slice(1, 3)"
-              :key="index"
-              class="w-full mb-2 flex bg-white h-[40vh] zoom-animate"
-            >
-              <div class="w-[40%] h-full overflow-hidden relative">
-                <img
-                  :src="`${image_url}/${blog.hero_media.url}`"
-                  class="min-h-full h-full min-w-full w-auto max-w-none"
-                />
-                <div
-                  class="absolute pointer-to-show z-20 top-[30vh] h-[50px] w-[50px] left-[80%] rounded-full bg-secondary cursor-pointer text-white flex justify-center"
-                  style="rotate: -45deg"
-                >
-                  <div class="h-full flex flex-col justify-center">
-                    <router-link :to="`/resources/${is_blog}/${blog.slug}`"
-                      ><i class="fa-solid fa-angle-right text-2xl"></i
-                    ></router-link>
-                  </div>
-                </div>
-              </div>
-              <div class="w-[60%] overflow-hidden p-4">
-                <router-link :to="`/resources/${is_blog}/${blog.slug}`"
-                  ><h3 class="font-semibold text-xl custom-default-hover">
-                    {{ blog.Title }}
-                  </h3></router-link
-                >
-                <div class="w-full h-full flex flex-col pb-4">
+                <div class="p-4">
                   <div class="w-full pt-2 pb-2 flex">
                     <span
-                      class="bg-secondary h-fit text-sm text-white rounded-full pl-2 pr-2"
+                      class="bg-secondary text-sm text-white rounded-full pl-2 pr-2"
                       >{{ blog.category ? blog.category : blog.Type }}</span
                     >
-                    <div
-                      class="line mt-4 w-[1px] bg-secondary ml-6 h-[23px]"
-                    ></div>
+                    <div class="line w-[1px] bg-secondary ml-6 h-[23px]"></div>
                     <span class="ml-6 text-sm">{{
                       format_date(blog.createdAt)
                     }}</span>
                   </div>
+                  <router-link :to="`/resources/${is_blog}/${blog.slug}`"
+                    ><h3 class="font-semibold text-xl custom-default-hover">
+                      {{ blog.Title }}
+                    </h3></router-link
+                  >
                   <div class="w-full mt-10 flex">
                     <div class="w-[50px] h-[50px]">
                       <img src="/icons/profile.png" />
                     </div>
-                    <div
-                      class="pl-4 pr-4 pb-4"
-                      style="width: calc(100% - 50px)"
-                    >
+                    <div class="pl-4 pr-4" style="width: calc(100% - 50px)">
                       <p class="text-sm">{{ blog.author }}</p>
                       <p class="text-sm">{{ blog.read_time }} mins</p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </router-link>
+              <!-- router here -->
+            </div>
+          </div>
+          <div class="w-[60%] m-1 flex flex-col col-2">
+            <div
+              v-for="(blog, index) in blogs.slice(1, 3)"
+              :key="index"
+              class="w-full card mb-3 flex bg-white h-[40vh] zoom-animate p-2"
+            >
+              <!-- router link -->
+              <router-link
+                class="w-full flex"
+                :to="`/resources/${is_blog}/${blog.slug}`"
+              >
+                <div class="w-[40%] h-full overflow-hidden relative img-holder">
+                  <img
+                    :src="`${image_url}/${blog.hero_media.url}`"
+                    class="min-h-full h-full min-w-full w-auto max-w-none"
+                  />
+                  <div
+                    class="absolute pointer-to-show z-20 top-[30vh] h-[50px] w-[50px] left-[80%] rounded-full bg-secondary cursor-pointer text-white flex justify-center"
+                    style="rotate: -45deg"
+                  >
+                    <div class="h-full flex flex-col justify-center">
+                      <i class="fa-solid fa-angle-right text-2xl"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-[60%] overflow-hidden p-4 card-body">
+                  <router-link :to="`/resources/${is_blog}/${blog.slug}`"
+                    ><h3 class="font-semibold text-xl custom-default-hover">
+                      {{ blog.Title }}
+                    </h3></router-link
+                  >
+                  <div class="w-full h-full flex flex-col pb-4">
+                    <div class="w-full pt-2 pb-2 flex">
+                      <span
+                        class="bg-secondary h-fit text-sm text-white rounded-full pl-2 pr-2"
+                        >{{ blog.category ? blog.category : blog.Type }}</span
+                      >
+                      <div
+                        class="line w-[1px] bg-secondary ml-6 h-[23px]"
+                      ></div>
+                      <span class="ml-6 text-sm">{{
+                        format_date(blog.createdAt)
+                      }}</span>
+                    </div>
+                    <div class="w-full mt-10 flex">
+                      <div class="w-[50px] h-[50px]">
+                        <img src="/icons/profile.png" />
+                      </div>
+                      <div
+                        class="pl-4 pr-4 pb-4"
+                        style="width: calc(100% - 50px)"
+                      >
+                        <p class="text-sm">{{ blog.author }}</p>
+                        <p class="text-sm">{{ blog.read_time }} mins</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </router-link>
+              <!-- router link -->
             </div>
           </div>
         </div>
@@ -638,7 +621,6 @@ export default {
       /* services carousel */
       current_service_slide: 0,
       total_service_slides: 2,
-      store: null,
     };
   },
   async created() {
@@ -653,7 +635,6 @@ export default {
         this.fetch_homepage(),
         this.get_stories(),
       ]);
-      this.store = universal_content();
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {
@@ -705,12 +686,12 @@ export default {
           this.landing_page_content = dataArray;
           this.services = this.landing_page_content[0].services;
           /* add content to pinia */
-          let service_names = [];
-          this.services.forEach((service) => {
-            service_names.push({ product_name: service.product_name });
-          });
-          console.log(service_names);
-          this.store.setServices(service_names);
+          const service_names = this.services.map((service) => ({
+            product_name: service.product_name,
+          }));
+          // console.log(service_names);
+          const contentStore = universal_content();
+          contentStore.setServices(service_names);
         } else {
           console.error("Invalid response structure:", responseData);
         }

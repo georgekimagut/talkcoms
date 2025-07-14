@@ -270,7 +270,7 @@
     </div>
     <!-- CTA -->
     <Cta class="mt-16" />
-    <Footer />
+    <Footer :services="services" />
   </div>
 </template>
 <script>
@@ -361,7 +361,6 @@ export default {
     this.load_page();
     const store = universal_content();
     this.services = store.services;
-    console.log("Universal Services: ", store.services);
     this.get_services();
     this.fetch_about();
   },

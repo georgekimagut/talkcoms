@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar />
+    <Navbar :services="services" />
     <HeroSection
       :small_title="this.id"
       :big_title="service.title_description"
@@ -94,7 +94,9 @@
           <div
             class="w-[80%] overflow-hidden transition-all duration-500 relative"
           >
-            <h1 class="text-5xl font-extrabold text-default sticky top-0 py-4">
+            <h1
+              class="text-5xl font-extrabold text-default sticky top-0 self-start py-4"
+            >
               {{ this.id }}
               <span class="text-secondary static">Features</span>
             </h1>
@@ -136,6 +138,7 @@
             </div>
           </div>
         </div>
+        <!-- end of sticky -->
       </div>
     </div>
 
@@ -427,7 +430,7 @@
     <!-- Cta -->
     <Cta cta_class="pt-32" />
     <!-- footer -->
-    <Footer />
+    <Footer :services="services" />
   </div>
 </template>
 <script>
@@ -443,6 +446,7 @@ import ExternalLink from "../../components/text/ExternalLink.vue";
 import SmallTitle from "../../components/text/SmallTitle.vue";
 import { text_colors, services_end_point } from "@/store/store";
 import { supabase } from "@/lib/supabase";
+import { universal_content } from "@/store/contentStore";
 
 export default {
   name: "SingleService",
@@ -484,6 +488,7 @@ export default {
       related_story: [],
       success_story: "story",
       random_bg: "",
+      services: [],
     };
   },
   async created() {
@@ -497,7 +502,8 @@ export default {
       await this.get_features();
       await this.get_packages();
       await this.fetch_services();
-
+      const store = universal_content();
+      this.services = store.services;
       if (this.service_id != "") {
         this.get_story();
       }
