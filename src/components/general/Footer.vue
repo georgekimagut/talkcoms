@@ -49,14 +49,15 @@
       </div>
     </div>
     <!-- footer content -->
-    <div class="w-full flex justify-center mt-24">
-      <div class="w-[90%] flex gap-4">
-        <div class="w-[15%]">
+    <div class="w-full flex justify-center mt-24 footer">
+      <div class="w-[90%] flex flex-wrap gap-2">
+        <div class="w-[15%] footer-logo p-1">
           <div class="w-full flex justify-center">
             <router-link to="/"
               ><img :src="site_logo" class="w-[80px] mt-4"
             /></router-link>
           </div>
+
           <div class="w-full mt-2 flex justify-center">Stay Connected</div>
         </div>
         <div class="w-[15%] p-1">
@@ -111,25 +112,27 @@
           </div>
         </div>
         <div class="w-[15%] p-1 border-l-1 border-[#e3e3e3]">
-          <p class="mt-2 ml-4 font-semibold">Phone</p>
+          <p class="mt-2 font-semibold">Phone</p>
           <div class="w-full mt-4">
             <p
               v-for="(contact, index) in footer_contacts"
               :key="index"
-              class="ml-4 mb-2"
+              class="mb-2"
             >
-              <a :href="`tel:${contact.title}`">
+              <a :href="`tel:${contact.title}`" class="hover:text-[#8dc63f]">
                 {{ contact.title }}
               </a>
             </p>
-            <p class="mt-8 font-semibold ml-4">Email</p>
+            <p class="mt-8 font-semibold">Email</p>
             <div class="w-full mt-4">
               <p
                 v-for="(email, index) in footer_emails"
                 :key="index"
-                class="ml-4 mb-2"
+                class="mb-2"
               >
-                <a :href="`mailto:${email.title}`">{{ email.title }} </a>
+                <a :href="`mailto:${email.title}`" class="hover:text-[#8dc63f]">
+                  {{ email.title }}
+                </a>
               </p>
             </div>
           </div>
@@ -139,7 +142,7 @@
     <!-- footer bottom -->
     <div class="w-full flex justify-center mt-10">
       <div class="w-3/4 flex p-4 justify-center border-t border-[#e3e3e3]">
-        <p class="text-sm">
+        <p class="text-sm text-center">
           <span class="text-secondary mr-2">&copy;</span>Talkcoms 2025. All
           Rights Reserved
         </p>
@@ -182,8 +185,8 @@ export default {
         { title: "Sitemap", link: "/sitemap" },
       ],
       footer_contacts: [
-        { title: " +254 746 433 163" },
-        { title: "+447 746 433 163" },
+        { title: " +254746433163" },
+        { title: "+447746433163" },
       ],
       footer_emails: [
         { title: "support@talkcoms.co.uk" },

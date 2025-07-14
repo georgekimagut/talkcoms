@@ -19,27 +19,6 @@
           >
             Home
           </router-link>
-          <router-link
-            v-if="is_prev_product"
-            to="#"
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
-            @mouseenter="show_service_dropdown('product')"
-            @mouseleave="hide_service_dropdown('product')"
-          >
-            <div class="w-full h-full flex flex-row">
-              <div class="h-full flex flex-col justify-center">Products</div>
-              <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i
-                  class="fa-solid fa-angle-down transition-all duration-300 ease-in-out"
-                  :style="{
-                    transform: product_dropdown
-                      ? 'rotate(180deg) translateY(2px)'
-                      : 'rotate(0deg) translateY(0)',
-                  }"
-                ></i>
-              </div>
-            </div>
-          </router-link>
           <div
             class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
             active-class="text-secondary font-medium"
@@ -68,27 +47,7 @@
               </li>
             </div>
           </div>
-          <router-link
-            v-if="prev_service"
-            to="#"
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
-            @mouseenter="show_service_dropdown('service')"
-            @mouseleave="hide_service_dropdown('service')"
-          >
-            <div class="w-full h-full flex flex-row">
-              <div class="h-full flex flex-col justify-center">Services</div>
-              <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i
-                  class="fa-solid fa-angle-down transition-all duration-300 ease-in-out"
-                  :style="{
-                    transform: service_dropdown
-                      ? 'rotate(180deg) translateY(2px)'
-                      : 'rotate(0deg) translateY(0)',
-                  }"
-                ></i>
-              </div>
-            </div>
-          </router-link>
+
           <div
             class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
             active-class="text-secondary font-medium"
@@ -117,6 +76,7 @@
               </li>
             </div>
           </div>
+
           <div
             class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
             active-class="text-secondary font-medium"
@@ -225,6 +185,203 @@
               >Contact Us
               <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
           ></router-link>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- phone navigation -->
+  <div
+    class="nav-bar-phone w-full flex justify-center flex-wrap sticky top-0 bg-white z-[1000] border-b-1 border-[#e3e3e3]"
+  >
+    <div class="w-[90%] h-fit flex py-2">
+      <div class="w-1/2">
+        <div class="h-full flex flex-col justify-center">
+          <router-link to="/"
+            ><img
+              :src="site_logo"
+              class="w-[40px] h-[40px] min-w-[50px] ml-[10%]"
+          /></router-link>
+        </div>
+      </div>
+      <div class="w-1/2 flex justify-end">
+        <div class="h-full flex flex-col justify-center">
+          <i
+            @click="phone_navigation = true"
+            class="fa-solid fa-bars text-xl cursor-pointer text-white bg-third px-2 py-1 rounded-sm"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <!-- navigation body -->
+  </div>
+  <div
+    v-if="phone_navigation"
+    class="w-full absolute h-[100vh] z-[1500] top-0 o"
+  >
+    <div class="w-full h-full sticky top-0">
+      <div class="w-full h-full relative">
+        <div
+          @click="phone_navigation = false"
+          class="w-full h-full bg-default opacity-50 absolute z-[-1y]"
+        ></div>
+        <div class="w-[70%] h-full bg-white py-4 absolute z-2000">
+          <div class="w-full mb-4">
+            <router-link
+              to="/"
+              class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4c"
+              active-class="text-secondary font-medium"
+            >
+              Home
+            </router-link>
+          </div>
+          <div
+            class="pl-4 mb-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out relative drop-resource"
+            active-class="text-secondary font-medium"
+          >
+            <div
+              class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
+            >
+              <div class="h-full flex flex-col justify-center">Products</div>
+              <div class="h-full flex flex-col justify-center ml-1 mt-1">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <div
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+            >
+              <li
+                v-for="(product, index) in products"
+                :key="index"
+                class="mb-2 list-none"
+              >
+                <router-link
+                  :to="`/service/${product.name}`"
+                  class="custom-default-hover"
+                  >{{ product.name }}</router-link
+                >
+              </li>
+            </div>
+          </div>
+
+          <div
+            class="pl-4 mb-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out relative drop-resource"
+            active-class="text-secondary font-medium"
+          >
+            <div
+              class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
+            >
+              <div class="h-full flex flex-col justify-center">Services</div>
+              <div class="h-full flex flex-col justify-center ml-1 mt-1">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <div
+              class="w-[250px] absolute bg-white p-4 pt-2 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+            >
+              <li
+                v-for="(service, index) in services"
+                :key="index"
+                class="my-2 list-none"
+              >
+                <router-link
+                  :to="`/service/${service.product_name}`"
+                  class="custom-default-hover"
+                  >{{ service.product_name }}</router-link
+                >
+              </li>
+            </div>
+          </div>
+          <!-- item -->
+          <div
+            class="pl-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out mb-4 relative drop-resource"
+            active-class="text-secondary font-medium"
+          >
+            <div
+              class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
+            >
+              <div class="h-full flex flex-col justify-center">
+                Solutions By Industry
+              </div>
+              <div class="h-full flex flex-col justify-center ml-1 mt-1">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <div
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+            >
+              <li
+                v-for="(industry, index) in industries"
+                :key="index"
+                class="mb-2 list-none"
+              >
+                <router-link
+                  :to="`/solution/${industry.name}`"
+                  class="custom-default-hover"
+                  >{{ industry.name }}</router-link
+                >
+              </li>
+            </div>
+          </div>
+          <!-- item -->
+          <div
+            class="pl-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out mb-4 relative drop-resource"
+            active-class="text-secondary font-medium"
+          >
+            <div
+              class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
+            >
+              <div class="h-full flex flex-col justify-center">Resources</div>
+              <div class="h-full flex flex-col justify-center ml-1 mt-1">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <div
+              class="w-[200px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+            >
+              <li class="my-2 list-none">
+                <router-link to="/blogs" class="custom-default-hover"
+                  >Blogs</router-link
+                >
+              </li>
+              <li class="my-2 list-none">
+                <router-link to="/success-stories" class="custom-default-hover"
+                  >Success stories</router-link
+                >
+              </li>
+              <li class="my-2 list-none">
+                <router-link to="/testimonials" class="custom-default-hover"
+                  >Testimonials</router-link
+                >
+              </li>
+              <li class="my-2 list-none">
+                <router-link to="/faqs" class="custom-default-hover"
+                  >FAQs</router-link
+                >
+              </li>
+            </div>
+          </div>
+          <!-- item -->
+          <div class="w-full mb-4">
+            <router-link
+              to="/about"
+              class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
+              active-class="text-secondary font-medium"
+              >About us</router-link
+            >
+          </div>
+          <!-- item -->
+          <div class="w-full pl-4 pr-4">
+            <router-link to="/contact/book-a-demo"
+              ><Button variant="light"
+                >Book A Demo
+                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+            ></router-link>
+            <router-link to="/contact/contact-us" class="ml-4"
+              ><Button variant="dark"
+                >Contact Us
+                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+            ></router-link>
+          </div>
         </div>
       </div>
     </div>

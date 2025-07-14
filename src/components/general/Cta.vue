@@ -1,10 +1,10 @@
 <template>
   <div
-    class="w-full h-[60vh] pt-8 pb-8 flex justify-center bg-white overflow-hidden relative"
+    class="w-full h-[60vh] pt-8 pb-8 flex justify-center bg-white overflow-hidden relative cta"
     :class="cta_class"
   >
     <!-- patterns -->
-    <div class="w-full flex h-[70vh] absolute">
+    <div class="w-full flex h-[70vh] absolute patterns">
       <div class="w-1/2 flex flex-col justify-end">
         <div
           v-for="index in 6"
@@ -35,7 +35,7 @@
       </div>
     </div>
     <!-- end of patterns -->
-    <div class="w-[55%] h-full flex justify-center">
+    <div class="w-[55%] h-full flex justify-center cta-inner">
       <div class="h-full flex flex-col justify-center">
         <div class="w-full">
           <h1 class="text-5xl font-extrabold mt-4 p-2 text-center">
