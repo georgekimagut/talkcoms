@@ -43,7 +43,7 @@
               v-for="(category, index) in blog_categories"
               :key="index"
               class="mr-4 cursor-pointer font-semibold custom-default-hover"
-              @click="change_category(index, category.name, 'Category')"
+              @click="change_category(index, category.name, 'category')"
               :class="category.active_category"
             >
               {{ category.name }}
@@ -53,7 +53,7 @@
         <!-- other blogs -->
         <div class="w-full mt-10 flex flex-wrap">
           <CustomCard
-            v-for="(blog, index) in blogs.slice(1)"
+            v-for="(blog, index) in blogs"
             :key="index"
             :card_pic="`${image_url}/${blog.hero_media.url}`"
             :card_title="blog.Title"
@@ -158,17 +158,31 @@ export default {
       const retrieved_types = [
         { name: "All", category_class: "text-secondary" },
       ];
+      /* blgo categories */
+      const retrieved_blog_categories = [
+        { name: "All", active_category: "text-secondary" },
+      ];
       this.blogs.forEach((blog) => {
         //push types to types arrays
         retrieved_types.push({
           name: blog.Type,
           category_class: "text-secondary",
         });
+        retrieved_blog_categories.push({
+          name: blog.category,
+          active_category: "",
+        });
       });
       this.categories = Object.values(
         retrieved_types.reduce((blog_type, item) => {
           blog_type[item.name] = item;
           return blog_type;
+        }, {})
+      );
+      this.blog_categories = Object.values(
+        retrieved_blog_categories.reduce((blog_category, item) => {
+          blog_category[item.name] = item;
+          return blog_category;
         }, {})
       );
     },
@@ -195,9 +209,10 @@ export default {
         );
         // set blogs to filtered
         this.blogs = this.filtered_blogs;
+        console.log("Blog types :", this.blogs);
 
         // actions for categories
-      } else if (action_type == "Category") {
+      } else if (action_type == "category") {
         this.blog_categories = this.blog_categories.map((category, index) => {
           return {
             ...category,

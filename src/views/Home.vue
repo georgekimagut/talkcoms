@@ -9,150 +9,142 @@
         <img src="/icons/g26.svg" class="" />
       </div>
       <div class="w-full h-full flex justify-center overflow-hidden">
-        <div
-          class="w-[90%] flex flex-wrap mt-16 relative overflow-x-scroll overflow-y-hidden hide-scrollbar"
-        >
-          <!-- animation classes -->
-          <!-- <div
-            class="w-[100px] h-[100px] border-8 bg-body rounded-full absolute top-[40vh] border-[#8dc63f] opacity-15 custom-anime-random"
-          ></div>
+        <div class="w-[90%] flex flex-wrap mt-16 relative overflow-hidden">
           <div
-            class="w-[70px] h-[70px] left-[150px] border-8 bg-default rounded-full absolute top-[40vh] border-white opacity-15 custom-anime-movedown"
-          ></div> -->
-          <!-- Carousel Holder -->
-          <div
-            class="carousel-holder flex flex-nowrap transition-transform duration-500 ease-in-out w-full h-[60vh]"
-            :style="{ transform: `translateX(-${current_slide * 100}%)` }"
-            @touchstart="onTouchStart()"
-            @touchend="onTouchEnd()"
-            @mouseenter="pauseAutoSlide()"
-            @mouseleave="resumeAutoSlide()"
+            class="h-full w-full flex overflow-y-hidden hide-scrollbar overflow-x-scroll snap-x snap-mandatory"
           >
-            <!-- Slide -->
             <div
               v-for="(slide, index) in carousel_data"
               :key="index"
-              class="w-full flex-shrink-0 h-full flex"
+              @mouseenter="pauseAutoSlide()"
+              @mouseleave="resumeAutoSlide()"
+              class="w-full flex-shrink-0 h-full transition-transform duration-500 ease-in-out snap-center"
+              :style="{ transform: `translateX(-${current_slide * 100}%)` }"
             >
-              <div class="w-1/2 h-full block c-half">
-                <p class="text-secondary text-lg w-3/4 uppercase">
-                  {{ slide.sub_title }}
-                </p>
-                <h1 class="text-4xl font-extrabold mt-10 w-3/4">
-                  {{ slide.title }}
-                </h1>
-                <p class="w-3/4 mt-10 description">
-                  {{ slide.description }}
-                </p>
-                <div class="w-full flex mt-16 btn-holder">
-                  <router-link to="/contact/contact-us"
-                    ><Button variant="dark"
-                      >Talk to Sales
-                      <i
-                        class="fa-solid fa-angle-right mt-[10%] icon"
-                      ></i></Button
-                  ></router-link>
-                  <router-link to="/about"
-                    ><Button variant="light" class="ml-4"
-                      >Learn More
-                      <i
-                        class="fa-solid fa-angle-right mt-[10%] icon"
-                      ></i></Button
-                  ></router-link>
-                </div>
-              </div>
-              <div class="w-1/2 h-full c-half">
-                <div class="w-full h-full relative">
-                  <div class="img-holder h-[55vh] overflow-hidden rounded-2xl">
-                    <img
-                      :src="slide.pic"
-                      class="rounded-2xl min-w-full min-h-full max-h-none object-cover"
-                    />
-                  </div>
-                  <!-- stats board -->
-                  <div
-                    class="w-[65%] h-1/2 absolute z-10 bg-body top-[30vh] rounded-tr-2xl p-4 left-[-10%] stats-board"
-                  >
-                    <div
-                      class="wrapper w-full bg-white rounded-tr-2xl rounded-bl-2xl"
-                    >
-                      <div class="w-full flex">
-                        <div class="w-one flex flex-col justify-center">
-                          <h1
-                            class="w-full p-2 text-5xl font-bold ml-[8%] pt-4"
-                          >
-                            10+
-                          </h1>
-                        </div>
-                        <div class="w-two">
-                          <p class="w-full p-2 text-sm text-secondary pt-4">
-                            Years
-                          </p>
-                          <p class="w-full text-sm pl-2">Experience</p>
-                        </div>
-                      </div>
-                      <!-- end of stat -->
-                      <div class="w-full flex">
-                        <div class="w-one flex flex-col justify-center">
-                          <h1
-                            class="w-full p-2 text-5xl font-bold ml-[8%] pt-4"
-                          >
-                            50+
-                          </h1>
-                        </div>
-                        <div class="w-two">
-                          <p class="w-full p-2 text-sm text-secondary pt-4">
-                            Complete
-                          </p>
-                          <p class="w-full pl-2 text-sm">Projects</p>
-                        </div>
-                      </div>
-                      <!-- end of stat -->
+              <div class="carousel-holder flex flex-nowrap w-full h-[60vh]">
+                <div class="w-full flex-shrink-0 h-full flex">
+                  <div class="w-1/2 h-full block c-half">
+                    <p class="text-secondary text-lg w-3/4 uppercase">
+                      {{ slide.sub_title }}
+                    </p>
+                    <h1 class="text-4xl font-extrabold mt-10 w-3/4">
+                      {{ slide.title }}
+                    </h1>
+                    <p class="w-3/4 mt-10 description">
+                      {{ slide.description }}
+                    </p>
+                    <div class="w-full flex mt-16 btn-holder">
+                      <router-link to="/contact/contact-us"
+                        ><Button variant="dark"
+                          >Talk to Sales
+                          <i
+                            class="fa-solid fa-angle-right mt-[10%] icon"
+                          ></i></Button
+                      ></router-link>
+                      <router-link to="/about"
+                        ><Button variant="light" class="ml-4"
+                          >Learn More
+                          <i
+                            class="fa-solid fa-angle-right mt-[10%] icon"
+                          ></i></Button
+                      ></router-link>
                     </div>
                   </div>
-                  <!-- reviews board -->
-                  <div
-                    class="w-[40%] absolute z-10 top-[50vh] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl left-[55%] bg-white stats-bard"
-                  >
-                    <p class="w-ful p-2">Verified by Google</p>
-                    <div class="w-full flex p-2">
-                      <div class="w-one">
-                        <img src="/icons/google.svg" class="w-[80px]" />
-                      </div>
-                      <div class="w-two flex justify-center">
+                  <div class="w-1/2 h-full c-half">
+                    <div class="w-full h-full relative">
+                      <div
+                        class="img-holder h-[55vh] overflow-hidden rounded-2xl"
+                      >
                         <img
-                          v-for="index in 5"
-                          :key="index"
-                          src="/icons/Star.svg"
-                          class="w-[18px]"
+                          :src="slide.pic"
+                          class="rounded-2xl min-w-full min-h-full max-h-none object-cover"
                         />
+                      </div>
+                      <!-- stats board -->
+                      <div
+                        class="w-[65%] h-1/2 absolute z-10 bg-body top-[30vh] rounded-tr-2xl p-4 left-[-10%] stats-board"
+                      >
+                        <div
+                          class="wrapper w-full bg-white rounded-tr-2xl rounded-bl-2xl"
+                        >
+                          <div class="w-full flex">
+                            <div class="w-one flex flex-col justify-center">
+                              <h1
+                                class="w-full p-2 text-5xl font-bold ml-[8%] pt-4"
+                              >
+                                10+
+                              </h1>
+                            </div>
+                            <div class="w-two">
+                              <p class="w-full p-2 text-sm text-secondary pt-4">
+                                Years
+                              </p>
+                              <p class="w-full text-sm pl-2">Experience</p>
+                            </div>
+                          </div>
+                          <!-- end of stat -->
+                          <div class="w-full flex">
+                            <div class="w-one flex flex-col justify-center">
+                              <h1
+                                class="w-full p-2 text-5xl font-bold ml-[8%] pt-4"
+                              >
+                                50+
+                              </h1>
+                            </div>
+                            <div class="w-two">
+                              <p class="w-full p-2 text-sm text-secondary pt-4">
+                                Complete
+                              </p>
+                              <p class="w-full pl-2 text-sm">Projects</p>
+                            </div>
+                          </div>
+                          <!-- end of stat -->
+                        </div>
+                      </div>
+                      <!-- reviews board -->
+                      <div
+                        class="w-[40%] absolute z-10 top-[50vh] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl left-[55%] bg-white stats-bard"
+                      >
+                        <p class="w-ful p-2">Verified by Google</p>
+                        <div class="w-full flex p-2">
+                          <div class="w-one">
+                            <img src="/icons/google.svg" class="w-[80px]" />
+                          </div>
+                          <div class="w-two flex justify-center">
+                            <img
+                              v-for="index in 5"
+                              :key="index"
+                              src="/icons/Star.svg"
+                              class="w-[18px]"
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- end of slide -->
           </div>
 
           <!-- Navigation Arrows -->
-          <div class="w-full flex justify-end h-[10vh] pagination">
+          <!-- <div class="w-full flex justify-end h-[10vh] pagination">
             <div class="h-full flex flex-col justify-center">
               <div class="flex flex-row flex-nowrap items-center gap-6">
-                <!-- Previous Button -->
-                <div
-                  @click="prevSlide"
-                  class="flex items-center border rounded-sm border-[#8dc63f] px-4 py-2 text-secondary text-2xl cursor-pointer overflow-hidden group transition-all duration-300 hover:bg-[#82bc00] hover:text-white"
-                >
-                  <i class="fa-solid fa-angle-left"></i>
-                  <span
-                    class="ml-2 text-sm whitespace-nowrap max-w-0 overflow-hidden group-hover:max-w-[80px] group-hover:ml-2 transition-all duration-300"
-                  >
-                    Previous
-                  </span>
-                </div>
+                <!-- Previous Button ->
+          <div
+            @click="prevSlide"
+            class="flex items-center border rounded-sm border-[#8dc63f] px-4 py-2 text-secondary text-2xl cursor-pointer overflow-hidden group transition-all duration-300 hover:bg-[#82bc00] hover:text-white"
+          >
+            <i class="fa-solid fa-angle-left"></i>
+            <span
+              class="ml-2 text-sm whitespace-nowrap max-w-0 overflow-hidden group-hover:max-w-[80px] group-hover:ml-2 transition-all duration-300"
+            >
+              Previous
+            </span>
+          </div>
 
-                <!-- Next Button -->
+          <!-- Next Button ->
                 <div
                   @click="nextSlide"
                   class="flex items-center border rounded-sm border-[#8dc63f] px-4 py-2 text-secondary text-2xl cursor-pointer overflow-hidden group transition-all duration-300 hover:bg-[#82bc00] hover:text-white"
@@ -166,10 +158,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
+
     <!-- services highlights -->
     <div
       class="w-full flex flex-wrap justify-center overflow-hidden mt-8 bg-white py-16 services"
@@ -183,7 +176,7 @@
               To Meet Your Business Needs
             </h1>
           </div>
-          <div class="w-1/4 flex justify-end to-hide">
+          <div v-if="prev_service" class="w-1/4 flex justify-end to-hide">
             <Button @click="prevServiceSlide" variant="light" class="mt-4"
               ><i class="fa-solid fa-angle-left"></i
             ></Button>
@@ -192,21 +185,50 @@
             ></Button>
           </div>
         </div>
-        <div class="w-full flex mt-4 overflow-scroll hide-scrollbar">
+
+        <!-- new services -->
+        <div
+          class="w-full flex overflow-x-scroll hide-scrollbar snap-x snap-mandatory inner-service"
+        >
+          <Card
+            v-for="(service, index) in home_services"
+            :key="index"
+            class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate snap-center"
+            ><router-link :to="`/service/${service.name}`">
+              <CardHeader class="p-0">
+                <CardTitle class="h-[35vh] overflow-hidden"
+                  ><img
+                    :src="service.imageUrl"
+                    class="h-full w-auto min-w-full max-w-none object-cover"
+                  />
+                </CardTitle>
+              </CardHeader>
+              <CardTitle class="custom-default-hover mt-4 p-4 text-xl">{{
+                service.name
+              }}</CardTitle>
+              <CardDescription class="px-4">
+                {{ service.title_description }}
+              </CardDescription>
+            </router-link>
+          </Card>
+        </div>
+
+        <div
+          v-if="prev_service"
+          class="w-full flex mt-4 overflow-scroll hide-scrollbar"
+        >
           <div
-            class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full inner-service"
+            class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full inner-service snap-x snap-mandatory"
             :style="{
               transform: `translateX(-${current_service_slide * 100}%)`,
             }"
-            @touchstart="onTouchStart()"
-            @touchend="onTouchEnd()"
             @mouseenter="pauseAutoSlide()"
             @mouseleave="resumeAutoSlide()"
           >
             <Card
               v-for="(service, index) in home_services"
               :key="index"
-              class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate"
+              class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate snap-center"
               ><router-link :to="`/service/${service.name}`">
                 <CardHeader class="p-0">
                   <CardTitle class="h-[35vh] overflow-hidden"

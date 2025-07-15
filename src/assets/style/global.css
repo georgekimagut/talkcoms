@@ -517,14 +517,14 @@ a {
     width: fit-content;
   }
 }
-@media only screen and (max-width: 1215px) {
+@media only screen and (max-width: 908px) {
   .services .inner-service .zoom-animate {
     width: 48%;
     margin: 1%;
     min-width: 48%;
   }
 }
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 600px) {
   .services .inner-service .zoom-animate {
     width: 98%;
     min-width: 98%;
