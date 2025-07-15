@@ -21,6 +21,10 @@
           <div
             class="carousel-holder flex flex-nowrap transition-transform duration-500 ease-in-out w-full h-[60vh]"
             :style="{ transform: `translateX(-${current_slide * 100}%)` }"
+            @touchstart="onTouchStart()"
+            @touchend="onTouchEnd()"
+            @mouseenter="pauseAutoSlide()"
+            @mouseleave="resumeAutoSlide()"
           >
             <!-- Slide -->
             <div
@@ -194,6 +198,10 @@
             :style="{
               transform: `translateX(-${current_service_slide * 100}%)`,
             }"
+            @touchstart="onTouchStart()"
+            @touchend="onTouchEnd()"
+            @mouseenter="pauseAutoSlide()"
+            @mouseleave="resumeAutoSlide()"
           >
             <Card
               v-for="(service, index) in home_services"
@@ -460,12 +468,10 @@
               <router-link :to="`/resources/${is_blog}/${blog.slug}`">
                 <div class="w-full h-[40vh] overflow-hidden relative">
                   <div
-                    class="absolute pointer-to-show z-20 top-[30vh] h-[50px] w-[50px] left-[80%] rounded-full bg-secondary cursor-pointer text-white flex justify-center"
-                    style="rotate: -45deg"
+                    class="absolute pointer-to-show z-20 top-[33vh] h-fit text-white w-fit px-2 cursor-pointer bg-secondary"
                   >
-                    <div class="h-full flex flex-col justify-center">
-                      <i class="fa-solid fa-angle-right text-2xl"></i>
-                    </div>
+                    <!-- <i class="fa-solid fa-angle-right text-2xl"></i> -->
+                    Read More
                   </div>
                   <img
                     :src="`${image_url}/${blog.hero_media.url}`"
@@ -519,12 +525,10 @@
                     class="min-h-full h-full min-w-full w-auto max-w-none"
                   />
                   <div
-                    class="absolute pointer-to-show z-20 top-[30vh] h-[50px] w-[50px] left-[80%] rounded-full bg-secondary cursor-pointer text-white flex justify-center"
-                    style="rotate: -45deg"
+                    class="absolute pointer-to-show z-20 top-[33vh] h-fit text-white w-fit px-2 cursor-pointer bg-secondary"
                   >
-                    <div class="h-full flex flex-col justify-center">
-                      <i class="fa-solid fa-angle-right text-2xl"></i>
-                    </div>
+                    <!-- <i class="fa-solid fa-angle-right text-2xl"></i> -->
+                    Read More
                   </div>
                 </div>
                 <div class="w-[60%] overflow-hidden p-4 card-body">
@@ -606,6 +610,12 @@ export default {
       page_is_loading: true,
       current_slide: 0,
       total_slides: "", // Number of slides
+      /* handle swap */
+      startX: 0,
+      endX: 0,
+      /* pause on hover */
+      interval: null,
+      isPaused: false,
       //service carousel
       success_story: "story",
       is_blog: "blog",
@@ -639,9 +649,45 @@ export default {
       console.error("Loading failed:", error);
     } finally {
       this.page_is_loading = false;
+      this.startAutoSlide();
     }
   },
   methods: {
+    startAutoSlide() {
+      this.interval = setInterval(() => {
+        if (!this.isPaused) {
+          this.nextSlide();
+          this.nextServiceSlide();
+        }
+      }, 5000); // 30 seconds
+    },
+    pauseAutoSlide() {
+      this.isPaused = true;
+    },
+    resumeAutoSlide() {
+      this.isPaused = false;
+    },
+    /* handle swap */
+    onTouchStart(e) {
+      this.startX = e.touches[0].clientX;
+    },
+    onTouchEnd(e) {
+      this.endX = e.changedTouches[0].clientX;
+      this.handleSwipe();
+    },
+    handleSwipe() {
+      const threshold = 50; // Minimum swipe distance
+      const diff = this.endX - this.startX;
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          this.prevSlide(); // Swiped right
+          this.nextServiceSlide();
+        } else {
+          this.nextSlide(); // Swiped left
+          this.nextServiceSlide();
+        }
+      }
+    },
     nextSlide() {
       if (this.current_slide < this.total_slides - 1) {
         this.current_slide++;
@@ -649,13 +695,11 @@ export default {
         this.current_slide = 0; // Loop back to first
       }
     },
-
     prevSlide() {
       if (this.current_slide > 0) {
         this.current_slide--;
       }
     },
-    /* services carousel */
     nextServiceSlide() {
       if (this.current_service_slide < this.total_service_slides - 1) {
         this.current_service_slide++;

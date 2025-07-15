@@ -2,7 +2,7 @@
   <div class="w-full mt-36 p-4 bg-white">
     <!-- Header -->
     <div class="w-full p-10">
-      <p class="text-secondary w-full flex justify-center text-lg">CLIENTS</p>
+      <!-- <p class="text-secondary w-full flex justify-center text-lg">CLIENTS</p> -->
       <h1 class="text-5xl font-extrabold mt-4 p-2 flex justify-center">
         Trusted by <span class="mr-2 ml-2 text-secondary">10+</span> Companies
         since 2016

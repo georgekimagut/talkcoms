@@ -3,9 +3,10 @@
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
     <Navbar :services="services" />
+
     <HeroSection
       small_title="ABOUT US"
-      big_title="Creating Intelligent Digital Solutions For Ambitious Businesses That Want To Keep Moving Foward"
+      :big_title="about_page[0].title"
       hero_description="Talkcoms is a Leading IT Solutions Provider Incorporated in the UK in 2016."
       hero_image="/static/pic-3.png"
       hero_small_image="/static/about-us.png"
@@ -22,15 +23,7 @@
           </h1>
           <div class="w-full mt-6">
             <p class="mt-2">
-              Talkcoms Limited was founded to provide organizations of all kinds
-              a full-service canter where they can have all of their needs met.
-              With strategic locations and qualified and trained employees, we
-              strive to create a partnership with our clients built on expertise
-              and trust. Since opening our doors in 2016, we have maintained a
-              steady growth throughout the years and hope to continue increasing
-              productivity, meeting our obligations, tripling the amount of
-              current formal jobs and generating stable employment for our team
-              members.
+              {{ about_page[0].aboutstatement[0].children[0].text }}
             </p>
             <!-- mission -->
             <div class="flex w-full mt-8">
@@ -51,9 +44,7 @@
               <div class="w-[70%]">
                 <h1 class="text-xl font-semibold">Mission</h1>
                 <p class="mt-2">
-                  To offer innovative products (software and hardware) as well
-                  as IT consulting services. delivered by exceptionally
-                  committed people to enhance our client's satisfaction.
+                  {{ about_page[0].mission[0].children[0].text }}
                 </p>
               </div>
             </div>
@@ -76,8 +67,7 @@
               <div class="w-[70%]">
                 <h1 class="text-xl font-semibold">Vision</h1>
                 <p class="mt-2">
-                  To be the preferred business technology partner for;
-                  Individuals, Start-ups and Enterprises.
+                  {{ about_page[0].vision[0].children[0].text }}
                 </p>
               </div>
             </div>
