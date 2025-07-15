@@ -16,16 +16,16 @@
   </button>
   <!-- end of back to top -->
   <div class="w-full flex flex-wrap mt-32 p-4">
-    <div class="w-full flex justify-center">
-      <div class="w-[90%] flex">
-        <div class="w-1/2">
+    <div class="w-full flex justify-center newsletter">
+      <div class="w-[90%] flex flex-wrap">
+        <div class="w-1/2 to-full">
           <p class="text-secondary text-lg">NEWSLETTER</p>
           <h1 class="text-4xl font-extrabold mt-4 w-3/4">
             Join Our Community To Receive
             <span class="ml-1 text-secondary">Updates</span>
           </h1>
         </div>
-        <div class="w-1/2 h-full flex flex-col justify-end">
+        <div class="w-1/2 h-full flex flex-col justify-end to-full">
           <div class="w-full flex justify-end">
             <form
               class="h-[55px] w-full min-w-[350px] max-w-[500px] bg-white flex flex-nowrap"

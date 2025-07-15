@@ -9,7 +9,9 @@
         <img src="/icons/g26.svg" class="" />
       </div>
       <div class="w-full h-full flex justify-center overflow-hidden">
-        <div class="w-[90%] flex flex-wrap mt-16 relative overflow-hidden">
+        <div
+          class="w-[90%] flex flex-wrap mt-16 relative overflow-x-scroll overflow-y-hidden hide-scrollbar"
+        >
           <!-- animation classes -->
           <!-- <div
             class="w-[100px] h-[100px] border-8 bg-body rounded-full absolute top-[40vh] border-[#8dc63f] opacity-15 custom-anime-random"
@@ -174,16 +176,14 @@
     >
       <div class="w-[90%] flex justify-center flex-wrap">
         <div class="w-full flex">
-          <p v-if="old_services" class="text-secondary text-center text-lg">
-            OUR SERVICES
-          </p>
-          <div class="w-3/4">
+          <div class="w-3/4 to-full">
             <h1 class="text-4xl font-bold mt-4 p-2 ml-[1%]">
-              Services <span class="text-secondary mr-2 ml-2">Tailored</span>
+              Services
+              <span class="text-secondary w-fit">Tailored</span>
               To Meet Your Business Needs
             </h1>
           </div>
-          <div class="w-1/4 flex justify-end">
+          <div class="w-1/4 flex justify-end to-hide">
             <Button @click="prevServiceSlide" variant="light" class="mt-4"
               ><i class="fa-solid fa-angle-left"></i
             ></Button>
@@ -192,7 +192,7 @@
             ></Button>
           </div>
         </div>
-        <div class="w-full flex mt-4 overflow-hidden">
+        <div class="w-full flex mt-4 overflow-scroll hide-scrollbar">
           <div
             class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full inner-service"
             :style="{
@@ -241,11 +241,13 @@
             Success Stories From Our Clients
           </h1>
         </div>
-        <div class="w-full flex flex-nowrap mt-4">
+        <div
+          class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories"
+        >
           <Card
             v-for="(story, index) in success_stories.slice(0, 3)"
             :key="index"
-            class="mb-4 m-[1.2%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate relative h-[45vh] story-card"
+            class="mb-4 m-[1.2%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden card zoom-animate relative h-[45vh] story-card"
             :class="index === 0 ? 'w-[60%]' : 'w-[32%]'"
           >
             <router-link :to="`/resources/${success_story}/${story.title}`">
@@ -379,10 +381,10 @@
     <div class="w-full flex justify-center mt-8 pb-16">
       <div class="w-[90%]">
         <div class="w-full">
-          <h1 class="text-4xl font-extrabold mt-10 p-2 text-center">
+          <h1 class="text-4xl font-extrabold mt-10 text-center">
             Select your
-            <span class="text-secondary mx-2"> industry.</span> Discover our
-            <span class="text-secondary mx-2"> impact.</span>
+            <span class="text-secondary"> industry. </span> Discover our
+            <span class="text-secondary"> impact. </span>
           </h1>
         </div>
         <div class="w-full flex flex-wrap mt-16 w730">
@@ -508,11 +510,11 @@
               <!-- router here -->
             </div>
           </div>
-          <div class="w-[60%] m-1 flex flex-col col-2">
+          <div class="w-[60%] m-1 flex flex-col col-2 hide-scrollbar">
             <div
               v-for="(blog, index) in blogs.slice(1, 3)"
               :key="index"
-              class="w-full card mb-3 flex bg-white h-[40vh] zoom-animate p-2"
+              class="w-full card flex bg-white h-[40vh] zoom-animate p-2"
             >
               <!-- router link -->
               <router-link

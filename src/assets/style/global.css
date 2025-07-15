@@ -529,6 +529,12 @@ a {
     width: 98%;
     min-width: 98%;
   }
+  .services .to-full {
+    width: 100%;
+  }
+  .services .to-hide {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 1300px) {
@@ -576,7 +582,22 @@ a {
     display: none;
   }
 }
-
+@media only screen and (max-width: 920px) {
+  .newsletter .to-full {
+    width: 100%;
+  }
+  .newsletter .to-full:last-child {
+    /* justify-content: left; */
+    @apply flex-row;
+    @apply mt-8;
+  }
+  .newsletter .to-full:last-child .justify-end {
+    justify-content: left;
+  }
+  .newsletter .to-full form {
+    @apply w-full min-w-full;
+  }
+}
 @media only screen and (max-width: 880px) {
   .blogs .blog-inner .col-1 {
     display: none;
@@ -595,10 +616,33 @@ a {
   .footer-logo .w-full {
     justify-content: left;
   }
+  .stories .card:nth-child(2) {
+    width: 62%;
+    min-width: 62%;
+  }
 }
 @media only screen and (max-width: 590px) {
   .footer .p-1 {
     width: 48%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .stories .card:first-child {
+    width: 100%;
+  }
+  .stories .card {
+    width: 100%;
+    min-width: 100%;
+  }
+  .newsletter form {
+    @apply flex-wrap;
+  }
+  .newsletter form input {
+    @apply w-full;
+  }
+  .newsletter form button {
+    @apply mt-4;
+    @apply rounded-md;
   }
 }
 @media only screen and (max-width: 680px) {
@@ -609,7 +653,7 @@ a {
     height: fit-content;
   }
   .blogs .blog-inner .col-2 {
-    overflow: hidden;
+    overflow: scroll;
   }
 }
 @media only screen and (max-width: 440px) {

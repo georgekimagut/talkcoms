@@ -197,27 +197,23 @@
       <div class="w-1/2">
         <div class="h-full flex flex-col justify-center">
           <router-link to="/"
-            ><img
-              :src="site_logo"
-              class="w-[40px] h-[40px] min-w-[50px] ml-[10%]"
+            ><img :src="site_logo" class="w-[40px] h-[40px] min-w-[50px]"
           /></router-link>
         </div>
       </div>
       <div class="w-1/2 flex justify-end">
         <div class="h-full flex flex-col justify-center">
           <i
-            @click="phone_navigation = true"
-            class="fa-solid fa-bars text-xl cursor-pointer text-white bg-third px-2 py-1 rounded-sm"
+            @click="phone_navigation = !phone_navigation"
+            class="fa-solid text-xl cursor-pointer text-secondary border border-[#82bc00] px-3 py-2 rounded-sm"
+            :class="phone_navigation ? 'fa-close' : 'fa-bars'"
           ></i>
         </div>
       </div>
     </div>
     <!-- navigation body -->
   </div>
-  <div
-    v-if="phone_navigation"
-    class="w-full absolute h-[100vh] z-[1500] top-0 o"
-  >
+  <div v-if="phone_navigation" class="w-full sticky top-0 h-[100vh] z-[1500]">
     <div class="w-full h-full sticky top-0">
       <div class="w-full h-full relative">
         <div
