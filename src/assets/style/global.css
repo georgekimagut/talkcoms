@@ -620,6 +620,10 @@ a {
     width: 62%;
     min-width: 62%;
   }
+  /* service main features */
+  .main-features .card {
+    @apply !w-[50%];
+  }
 }
 @media only screen and (max-width: 590px) {
   .footer .p-1 {
@@ -644,6 +648,9 @@ a {
     @apply mt-4;
     @apply rounded-md;
   }
+  .main-features .card {
+    @apply !w-[100%];
+  }
 }
 @media only screen and (max-width: 680px) {
   .blogs .blog-inner .col-2 .card {
@@ -661,7 +668,7 @@ a {
     width: 100%;
   }
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1020px) {
   .hero .carousel-holder .w-full {
     flex-wrap: wrap;
   }
@@ -716,10 +723,61 @@ a {
   .cta {
     height: fit-content;
   }
+  /* other pages hero section */
+  .hero-component .to-full {
+    @apply w-full;
+  }
+  .hero-component .hero-holder {
+    @apply flex-wrap;
+  }
+  .hero-component .hero-holder .to-full:first-child p,
+  .hero-component .hero-holder .to-full:first-child h2,
+  .hero-component .hero-holder .to-full:first-child h1 {
+    @apply w-full text-center;
+  }
+  .hero-component .hero-holder .full-hero {
+    @apply justify-center flex flex-wrap mb-4;
+  }
+  /* service main features */
+  .main-features .card {
+    @apply w-[32%];
+  }
+  /* static service class */
+  .hero-component .hero-holder .self-start.to-full {
+    position: initial;
+    @apply h-[40vh];
+  }
+  .hero-component .hero-holder .self-start.to-full .to-h-fit {
+    @apply h-[40vh];
+  }
+  .hero-component .hero-holder .to-full .to-full {
+    @apply w-full;
+  }
+  .hero-component .hero-holder .to-full .to-cards {
+    @apply flex overflow-x-scroll hide-scrollbar snap-x snap-mandatory;
+  }
+  .hero-component .hero-holder .to-full .to-cards .card {
+    @apply flex flex-wrap flex-shrink-0 snap-center mx-[5%] border p-2 rounded-md;
+  }
+  .hero-component .hero-holder .to-full .to-cards .card h1,
+  .hero-component .hero-holder .to-full .to-cards .card p {
+    @apply text-left;
+  }
 }
 @media only screen and (max-width: 680px) {
   .cta .patterns {
     display: none;
+  }
+}
+@media only screen and (max-width: 760px) {
+  .has_demo .rounded-2xl {
+    @apply w-[90%] h-fit;
+  }
+  .has_demo .img-holder {
+    display: none;
+  }
+  .has_demo .to-full {
+    width: 100%;
   }
 }
 @media only screen and (max-width: 730px) {

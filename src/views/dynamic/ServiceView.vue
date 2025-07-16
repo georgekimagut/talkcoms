@@ -1,9 +1,33 @@
 <template>
+  <div class="w-full flex justify-center">
+    <div class="w-[90%]">
+      {{ single_service }}
+    </div>
+  </div>
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="services" />
+    <Navbar :services="universal_services" />
     <HeroSection
+      v-if="!prev_service"
+      :small_title="this.id"
+      :big_title="
+        single_service.main_title
+          ? single_service.main_title
+          : service.title_description
+      "
+      :hero_description="
+        single_service.main_title
+          ? single_service.secondary_title
+          : service.product_subtitle
+      "
+      :read_more_link="`/demo/${this.id}`"
+      :hero_image="service.imageUrl"
+      :demo_link="`/contact/${this.id}`"
+      is_service
+    />
+    <HeroSection
+      v-if="prev_service"
       :small_title="this.id"
       :big_title="service.title_description"
       :hero_description="service.product_subtitle"
@@ -13,14 +37,16 @@
       is_service
     />
     <!-- main features -->
-    <div class="w-full flex flex-wrap justify-center bg-white !py-28">
+    <div
+      class="w-full flex flex-wrap justify-center bg-white !py-20 main-features"
+    >
       <div
-        class="w-[90%] flex justify-center overflow-x-hidden gap-4 hide-scrollbar relative"
+        class="w-[90%] flex overflow-x-scroll hide-scrollbar relative snap-x snap-mandatory"
       >
         <div
           v-for="(channel, index) in channels"
           :key="index"
-          class="shift-hover w-[25%] p-4 rounded-xl"
+          class="shift-hover w-[18%] m-1 p-4 rounded-xl flex-shrink-0 flex-grow-1 min-w-[250px] snap-center card"
         >
           <div
             class="w-[50px] h-[50px] min-w-[50px] min-h-[50px] flex justify-center rounded-sm mt-6 relative overflow-hidden"
@@ -76,23 +102,26 @@
     </div>
     <!-- description -->
     <!-- css only scroll -->
-    <div class="w-full flex justify-center py-20">
-      <div class="w-[90%] flex flex-wrap relative">
+    <div
+      v-if="!prev_service"
+      class="w-full flex justify-center py-20 hero-component"
+    >
+      <div class="w-[90%] flex flex-wrap relative hero-holder">
         <!-- <ScrollPattern :bg_color="random_bg" /> -->
         <!-- Sticky sidebar -->
-        <div class="w-[40%] sticky top-[15vh] self-start">
-          <div class="w-full overflow-hidden rounded-xl h-[80vh]">
+        <div class="w-[40%] sticky top-[15vh] self-start to-full">
+          <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit">
             <img
-              :src="service.feature_pic"
-              class="w-full h-full object-cover rounded-xl imageReveal"
+              :src="single_service.feature_section_image"
+              class="w-full h-full object-cover rounded-xl service-pic"
             />
           </div>
         </div>
 
         <!-- Scrollable content -->
-        <div class="w-[60%] flex justify-end autoShow">
+        <div class="w-[60%] flex justify-end autoShow to-full">
           <div
-            class="w-[80%] overflow-hidden transition-all duration-500 relative"
+            class="w-[80%] overflow-hidden transition-all duration-500 relative to-full"
           >
             <h1
               class="text-5xl font-extrabold text-default sticky top-0 self-start py-4"
@@ -100,20 +129,22 @@
               {{ this.id }}
               <span class="text-secondary static">Features</span>
             </h1>
-            <div
-              v-for="(feature, index) in features"
-              :key="index"
-              class="w-[90%] py-4 border-b border-[#e3e3e3]"
-            >
-              <h1 class="text-xl font-semibold mt-4">
-                {{ feature.feature_name }}
-              </h1>
-              <p class="mt-4 text-[#828282]">
-                {{ feature.feature_description }}
-              </p>
+            <div class="w-full to-cards">
+              <div
+                v-for="(feature, index) in features"
+                :key="index"
+                class="w-[90%] py-4 border-b border-[#e3e3e3] card"
+              >
+                <h1 class="text-xl font-semibold mt-4">
+                  {{ feature.feature_name }}
+                </h1>
+                <p class="mt-4 text-[#828282]">
+                  {{ feature.feature_description }}
+                </p>
+              </div>
             </div>
             <!-- call to action -->
-            <div class="w-full flex mt-8">
+            <div class="w-full flex mt-8 full-hero">
               <router-link :to="`contact/${this.id}`"
                 ><Button variant="dark"
                   >Request Free Demo
@@ -127,6 +158,68 @@
                   >Learn More
                   <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
               ></router-link> -->
+              <a
+                v-if="service.material_link"
+                :href="service.material_link"
+                target="_blank"
+                ><Button variant="light" class="ml-4"
+                  >Download Material
+                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+              ></a>
+            </div>
+          </div>
+        </div>
+        <!-- end of sticky -->
+      </div>
+    </div>
+    <div
+      v-if="prev_service"
+      class="w-full flex justify-center py-20 hero-component"
+    >
+      <div class="w-[90%] flex flex-wrap relative hero-holder">
+        <!-- <ScrollPattern :bg_color="random_bg" /> -->
+        <!-- Sticky sidebar -->
+        <div class="w-[40%] sticky top-[15vh] self-start to-full">
+          <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit">
+            <img
+              :src="service.feature_pic"
+              class="w-full h-full object-cover rounded-xl service-pic"
+            />
+          </div>
+        </div>
+
+        <!-- Scrollable content -->
+        <div class="w-[60%] flex justify-end autoShow to-full">
+          <div
+            class="w-[80%] overflow-hidden transition-all duration-500 relative to-full"
+          >
+            <h1
+              class="text-5xl font-extrabold text-default sticky top-0 self-start py-4"
+            >
+              {{ this.id }}
+              <span class="text-secondary static">Features</span>
+            </h1>
+            <div class="w-full to-cards">
+              <div
+                v-for="(feature, index) in features"
+                :key="index"
+                class="w-[90%] py-4 border-b border-[#e3e3e3] card"
+              >
+                <h1 class="text-xl font-semibold mt-4">
+                  {{ feature.feature_name }}
+                </h1>
+                <p class="mt-4 text-[#828282]">
+                  {{ feature.feature_description }}
+                </p>
+              </div>
+            </div>
+            <!-- call to action -->
+            <div class="w-full flex mt-8 full-hero">
+              <router-link :to="`contact/${this.id}`"
+                ><Button variant="dark"
+                  >Request Free Demo
+                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+              ></router-link>
               <a
                 v-if="service.material_link"
                 :href="service.material_link"
@@ -215,7 +308,7 @@
     <!-- PBX -->
     <!-- benefits -->
 
-    <div class="w-full flex justify-center py-20 bg-third">
+    <div v-if="!prev_service" class="w-full flex justify-center py-20 bg-third">
       <div class="w-[90%] flex flex-wrap relative">
         <!-- <ScrollPattern :bg_color="random_bg" /> -->
         <!-- Scrollable content -->
@@ -228,7 +321,7 @@
               <span class="text-white">{{ this.id }}</span>
             </h1>
             <div
-              v-for="(benefit, index) in benefits"
+              v-for="(benefit, index) in single_service.Features"
               :key="index"
               class="w-[90%] py-4 border-b border-[#e3e3e3] flex gap-4"
             >
@@ -239,10 +332,10 @@
               </div>
               <div class="">
                 <h1 class="text-xl font-semibold text-default mt-4">
-                  {{ benefit.feature_name }}
+                  {{ benefit.title }}
                 </h1>
                 <p class="mt-4">
-                  {{ benefit.feature_description }}
+                  {{ benefit.short_description }}
                 </p>
               </div>
             </div>
@@ -274,8 +367,80 @@
 
             <div class="h-full w-full p-8 absolute z-20">
               <img
-                :src="service.benefit_pic"
+                :src="single_service.benefits_section_image"
                 class="w-full h-full object-cover rounded-xl imageReveal"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      v-if="prev_service"
+      class="w-full flex justify-center py-20 bg-third hero-component"
+    >
+      <div class="w-[90%] flex flex-wrap relative hero-holder">
+        <!-- <ScrollPattern :bg_color="random_bg" /> -->
+        <!-- Scrollable content -->
+        <div class="w-[50%] flex justify-end to-full">
+          <div
+            class="w-[90%] overflow-hidden transition-all duration-500 relative autoShow to-full"
+          >
+            <h1 class="text-5xl font-extrabold text-white sticky top-0 py-4">
+              Here’s Why You’ll Love Talkcoms'
+              <span class="text-white">{{ this.id }}</span>
+            </h1>
+            <div class="w-full to-cards">
+              <div
+                v-for="(benefit, index) in benefits"
+                :key="index"
+                class="w-[90%] py-4 border-b border-[#e3e3e3] flex gap-4 card"
+              >
+                <div class="">
+                  <i
+                    class="fa-regular fa-circle-check mt-6 text-2xl text-white"
+                  ></i>
+                </div>
+                <div class="">
+                  <h1 class="text-xl font-semibold text-default mt-4">
+                    {{ benefit.feature_name }}
+                  </h1>
+                  <p class="mt-4">
+                    {{ benefit.feature_description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- call to action -->
+            <div class="w-full flex mt-8 full-hero">
+              <router-link to="/contact/get-started"
+                ><Button variant="dark"
+                  >Get Started
+                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+              ></router-link>
+            </div>
+          </div>
+        </div>
+        <!-- Sticky sidebar -->
+        <div class="w-[50%] sticky top-[15vh] self-start to-full">
+          <div class="w-full overflow-hidden rounded-xl h-[80vh]">
+            <div class="w-full absolute">
+              <div
+                class="w-[300px] h-[300px] rounded-xl custom-linear-bg p-5 -z-10"
+              ></div>
+            </div>
+            <div class="w-full h-full flex justify-end absolute">
+              <div class="h-full flex flex-col justify-end">
+                <div
+                  class="w-[300px] h-[300px] rounded-xl custom-linear-bg p-5 -z-10"
+                ></div>
+              </div>
+            </div>
+
+            <div class="h-full w-full p-8 absolute z-20 to-h-fit">
+              <img
+                :src="service.benefit_pic"
+                class="w-full h-full object-cover rounded-xl imageReveal service-pic"
               />
             </div>
           </div>
@@ -286,12 +451,14 @@
     <!-- if has free demo -->
     <div
       v-if="service.has_demo"
-      class="w-full flex justify-center bg-white pb-20"
+      class="w-full flex justify-center bg-white pb-20 has_demo"
     >
       <div
         class="w-[80%] flex rounded-2xl h-[50vh] border border-[#82bc00] mt-32 overflow-hidden"
       >
-        <div class="w-[64%] mr-[1%] h-full p-4 flex flex-col justify-center">
+        <div
+          class="w-[64%] mr-[1%] h-full p-4 flex flex-col justify-center to-full"
+        >
           <BigTitle text="Experience the Power—Live!" title_class="m-4" />
           <p class="text-xl m-4">
             Book a free
@@ -313,7 +480,7 @@
               <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
           ></router-link>
         </div>
-        <div class="w-[35%] flex justify-center overflow-hidden">
+        <div class="w-[35%] flex justify-center overflow-hidden img-holder">
           <img :src="service.imageUrl" class="w-full h-full object-cover" />
         </div>
       </div>
@@ -388,9 +555,9 @@
     <!-- related story -->
     <div
       v-if="related_story"
-      class="w-full flex flex-wrap mt-16 bg-white py-16"
+      class="w-full flex flex-wrap mt-16 bg-white py-16 hero-component"
     >
-      <div class="w-1/2 flex h-full justify-center">
+      <div class="w-1/2 flex h-full justify-center to-full">
         <div class="w-[90%] flex flex-wrap justify-center">
           <div class="w-[80%] rounded-2xl flex justify-center overflow-hidden">
             <img
@@ -400,7 +567,7 @@
           </div>
         </div>
       </div>
-      <div class="w-1/2">
+      <div class="w-1/2 to-full">
         <div class="w-[90%] mt-6">
           <h1 class="text-5xl font-bold mt-4 text-default">
             {{ related_story.title }}
@@ -430,7 +597,7 @@
     <!-- Cta -->
     <Cta cta_class="pt-32" />
     <!-- footer -->
-    <Footer :services="services" />
+    <Footer :services="universal_services" />
   </div>
 </template>
 <script>
@@ -444,7 +611,7 @@ import Spinner from "@/components/general/Spinner.vue";
 import BigTitle from "../../components/text/BigTitle.vue";
 import ExternalLink from "../../components/text/ExternalLink.vue";
 import SmallTitle from "../../components/text/SmallTitle.vue";
-import { text_colors, services_end_point } from "@/store/store";
+import { text_colors, baseUrl } from "@/store/store";
 import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 
@@ -471,6 +638,7 @@ export default {
     return {
       page_is_loading: true,
       is_side_hero: true,
+      prev_service: true,
       //service details
       service: "",
       service_title: "",
@@ -488,21 +656,25 @@ export default {
       related_story: [],
       success_story: "story",
       random_bg: "",
-      services: [],
+      universal_services: [],
+      single_service: [],
+      image_url: baseUrl,
     };
   },
   async created() {
     this.page_is_loading = true;
     this.randomize_color();
+    const store = universal_content();
+    this.universal_services = store.services;
 
     try {
+      await this.fetch_services();
       await this.get_service();
       await this.get_portfolio_items();
       await this.get_main_service_features();
       await this.get_features();
       await this.get_packages();
-      await this.fetch_services();
-      const store = universal_content();
+
       this.services = store.services;
       if (this.service_id != "") {
         this.get_story();
@@ -519,14 +691,16 @@ export default {
       async () => {
         this.page_is_loading = true;
         this.randomize_color();
+        const store = universal_content();
+        this.universal_services = store.services;
 
         try {
+          await this.fetch_services();
           await this.get_service();
           await this.get_portfolio_items();
           await this.get_main_service_features();
           await this.get_features();
           await this.get_packages();
-          await this.fetch_services();
 
           if (this.service_id != "") {
             this.get_story();
@@ -542,61 +716,24 @@ export default {
   methods: {
     /* fetch services */
     async fetch_services() {
-      const cacheKey = "serviceCache";
-      let service_page = "";
-      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
+      const response = await fetch(
+        `${baseUrl}/api/service-pages?filters[product_name][$eq]=${this.id}&populate=*`
+      );
 
-      const cachedData = localStorage.getItem(cacheKey);
-      const now = Date.now();
-
-      if (cachedData) {
-        const { data, timestamp } = JSON.parse(cachedData);
-        if (now - timestamp < cacheExpiry) {
-          //map data
-          service_page = data;
-          return;
-        }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      try {
-        const response = await fetch(services_end_point);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+      const response_data = await response.json();
 
-        const responseData = await response.json();
+      if (response_data.data) {
+        const data = Array.isArray(response_data.data)
+          ? response_data.data[0]
+          : response_data.data;
 
-        if (responseData.data) {
-          const dataArray = Array.isArray(responseData.data)
-            ? responseData.data
-            : [responseData.data];
-
-          service_page = dataArray;
-
-          localStorage.setItem(
-            cacheKey,
-            JSON.stringify({
-              data: dataArray,
-              timestamp: now,
-            })
-          );
-        } else {
-          console.error("Invalid response structure:", responseData);
-          if (cachedData) {
-            console.log("Falling back to stale cache");
-            const { data } = JSON.parse(cachedData);
-            service_page = data;
-          }
-        }
-
-        console.log("Service content", service_page);
-      } catch (error) {
-        console.error("Error fetching resources:", error);
-        if (cachedData) {
-          console.log("Using cached data after error");
-          const { data } = JSON.parse(cachedData);
-          this.blogs = data;
-        }
+        this.single_service = data;
+      } else {
+        throw new Error("No data found in response");
       }
     },
     async get_service() {

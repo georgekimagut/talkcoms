@@ -264,12 +264,12 @@
           </h1>
         </div>
         <div
-          class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories"
+          class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories snap-x snap-mandatory"
         >
           <Card
             v-for="(story, index) in success_stories.slice(0, 3)"
             :key="index"
-            class="mb-4 m-[1.2%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden card zoom-animate relative h-[45vh] story-card"
+            class="mb-4 m-[1.2%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden card zoom-animate relative h-[45vh] story-card snap-center"
             :class="index === 0 ? 'w-[60%]' : 'w-[32%]'"
           >
             <router-link :to="`/resources/${success_story}/${story.title}`">
@@ -438,36 +438,6 @@
     </div>
     <!-- partners/companies -->
     <Partners class="" />
-    <!-- stories -->
-    <div
-      v-if="prev_stories"
-      class="w-full pt-36 p-4 flex justify-center bg-white"
-    >
-      <div class="w-[90%] flex justify-center flex-wrap">
-        <div class="w-full">
-          <p class="text-secondary text-center text-lg">
-            <router-link to="/stories">STORIES</router-link>
-          </p>
-
-          <h1 class="text-4xl font-extrabold mt-4 p-2 text-center">
-            Success Stories From Our Clients
-          </h1>
-        </div>
-        <div class="w-full flex justify-center mt-16 gap-4">
-          <CustomCard
-            v-for="(story, index) in success_stories"
-            :key="index"
-            :card_pic="story.pic"
-            :card_title="story.client"
-            :card_description="story.title"
-            card_class="w-[25%] border-1 border-[#e3e3e3]"
-            link_text="READ MORE"
-            :link_to="`/resources/${success_story}/${story.title}`"
-            has_link
-          />
-        </div>
-      </div>
-    </div>
     <!-- blogs -->
     <!-- blogs -->
     <div class="w-full flex justify-center flex-wrap mt-36 p-4 pb-20 blogs">
@@ -532,11 +502,13 @@
               <!-- router here -->
             </div>
           </div>
-          <div class="w-[60%] m-1 flex flex-col col-2 hide-scrollbar">
+          <div
+            class="w-[60%] m-1 flex flex-col col-2 hide-scrollbar snap-x snap-mandatory"
+          >
             <div
               v-for="(blog, index) in blogs.slice(1, 3)"
               :key="index"
-              class="w-full card flex bg-white h-[40vh] zoom-animate p-2"
+              class="w-full card flex bg-white h-[40vh] zoom-animate p-2 snap-center"
             >
               <!-- router link -->
               <router-link
