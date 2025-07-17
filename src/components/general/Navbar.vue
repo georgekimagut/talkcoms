@@ -220,7 +220,9 @@
           @click="phone_navigation = false"
           class="w-full h-full bg-default opacity-50 absolute z-[-1y]"
         ></div>
-        <div class="w-[70%] h-full bg-white py-4 absolute z-2000">
+        <div
+          class="w-[70%] h-full bg-white py-4 absolute z-2000 overflow-y-scroll hide-scrollbar"
+        >
           <div class="w-full mb-4">
             <router-link
               to="/"
@@ -235,6 +237,7 @@
             active-class="text-secondary font-medium"
           >
             <div
+              @click="product_is_visible = !product_is_visible"
               class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
             >
               <div class="h-full flex flex-col justify-center">Products</div>
@@ -243,7 +246,8 @@
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              v-if="product_is_visible"
+              class="w-fit bg-white pt-2 border-y mt-4 rounded-b-sm"
             >
               <li
                 v-for="(product, index) in products"
@@ -264,6 +268,7 @@
             active-class="text-secondary font-medium"
           >
             <div
+              @click="service_is_visible = !service_is_visible"
               class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
             >
               <div class="h-full flex flex-col justify-center">Services</div>
@@ -272,7 +277,8 @@
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-2 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              v-if="service_is_visible"
+              class="w-fit bg-white pt-2 border-y mt-4 rounded-b-sm"
             >
               <li
                 v-for="(service, index) in services"
@@ -293,6 +299,7 @@
             active-class="text-secondary font-medium"
           >
             <div
+              @click="industry_is_visible = !industry_is_visible"
               class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
             >
               <div class="h-full flex flex-col justify-center">
@@ -303,7 +310,8 @@
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              v-if="industry_is_visible"
+              class="w-fit bg-white pt-2 border-y mt-4 rounded-b-sm"
             >
               <li
                 v-for="(industry, index) in industries"
@@ -324,6 +332,7 @@
             active-class="text-secondary font-medium"
           >
             <div
+              @click="resource_is_visible = !resource_is_visible"
               class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
             >
               <div class="h-full flex flex-col justify-center">Resources</div>
@@ -332,7 +341,8 @@
               </div>
             </div>
             <div
-              class="w-[200px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              v-if="resource_is_visible"
+              class="w-fit bg-white pt-2 border-y mt-4 rounded-b-sm"
             >
               <li class="my-2 list-none">
                 <router-link to="/blogs" class="custom-default-hover"
@@ -402,6 +412,10 @@ export default {
       product_dropdown: false,
       solutions_dropdown: false,
       phone_navigation: false,
+      resource_is_visible: false,
+      product_is_visible: false,
+      service_is_visible: false,
+      industry_is_visible: false,
       site_logo: "/logo.svg",
       products: [],
       socials: [
@@ -450,24 +464,24 @@ export default {
     this.get_solutions();
   },
   methods: {
-    show_service_dropdown(key) {
-      if (key === "service") {
-        this.service_dropdown = true;
-      } else if (key === "product") {
-        this.product_dropdown = true;
-      } else if (key === "solution") {
-        this.solutions_dropdown = true;
-      }
-    },
-    hide_service_dropdown(key) {
-      if (key === "service") {
-        this.service_dropdown = false;
-      } else if (key === "product") {
-        this.product_dropdown = false;
-      } else if (key === "solution") {
-        this.solutions_dropdown = false;
-      }
-    },
+    // show_service_dropdown(key) {
+    //   if (key === "service") {
+    //     this.service_dropdown = true;
+    //   } else if (key === "product") {
+    //     this.product_dropdown = true;
+    //   } else if (key === "solution") {
+    //     this.solutions_dropdown = true;
+    //   }
+    // },
+    // hide_service_dropdown(key) {
+    //   if (key === "service") {
+    //     this.service_dropdown = false;
+    //   } else if (key === "product") {
+    //     this.product_dropdown = false;
+    //   } else if (key === "solution") {
+    //     this.solutions_dropdown = false;
+    //   }
+    // },
     async get_services() {
       try {
         const { data, error } = await supabase

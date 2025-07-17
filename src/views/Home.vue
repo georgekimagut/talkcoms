@@ -4,7 +4,7 @@
     <Navbar :services="services" />
     <!-- hero section -->
     <!-- <div class="w-full">{{ services }}</div> -->
-    <div class="w-full h-[90vh] hero">
+    <div class="w-full h-[80vh] hero">
       <div class="h-full w-full absolute opacity-50">
         <img src="/icons/g26.svg" class="" />
       </div>
@@ -629,6 +629,7 @@ export default {
       landing_page_content: [],
       industries: [],
       services: [],
+      products: [],
       /* services carousel */
       current_service_slide: 0,
       total_service_slides: 2,
