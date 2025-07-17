@@ -69,7 +69,7 @@
 }
 body,
 .bg-body {
-  background-color: #f5f5f5;
+  @apply bg-[#f5f5f5];
 }
 a {
   text-decoration: none;
@@ -221,10 +221,13 @@ a {
   color: #82bc00;
 }
 .text-third {
-  color: #007cba;
+  @apply text-[#007cba];
 }
 .bg-third {
-  background-color: #007cba;
+  @apply bg-[#007cba];
+}
+.bg-fourth {
+  @apply bg-[#f0f7fb];
 }
 .bg-secondary {
   background-color: #82bc00;

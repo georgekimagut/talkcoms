@@ -400,13 +400,13 @@
       </div>
     </div>
     <!-- industry -->
-    <div class="w-full flex justify-center mt-8 pb-16">
+    <div
+      class="w-full flex justify-center mt-8 pt-10 pb-32 bg-fourth border border-[#9ecce4] rounded-lg"
+    >
       <div class="w-[90%]">
         <div class="w-full">
-          <h1 class="text-4xl font-extrabold mt-10 text-center">
-            Select your
-            <span class="text-secondary"> industry. </span> Discover our
-            <span class="text-secondary"> impact. </span>
+          <h1 class="text-5xl font-extrabold mt-10 text-center text-default">
+            Select yourindustry. Discover our impact.
           </h1>
         </div>
         <div class="w-full flex flex-wrap mt-16 w730">
@@ -437,7 +437,7 @@
       </div>
     </div>
     <!-- partners/companies -->
-    <Partners class="" />
+    <Partners class="mt-0" />
     <!-- blogs -->
     <!-- blogs -->
     <div class="w-full flex justify-center flex-wrap mt-36 p-4 pb-20 blogs">
