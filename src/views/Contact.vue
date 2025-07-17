@@ -31,18 +31,30 @@
             "
           >
             <form
-              @submit.prevent=""
+              @submit.prevent="enquire"
               class="flex flex-wrap"
               :class="type == 'contact-us' ? 'w-full' : 'w-[60%] bg-white p-8'"
             >
               <div class="w-full flex flex-wrap">
                 <div class="w-1/2 p-2">
                   <label class="text-sm">First Name</label>
-                  <Input type="text" placeholder="First Name" class="mt-2" />
+                  <Input
+                    type="text"
+                    placeholder="First Name"
+                    class="mt-2"
+                    required
+                    v-model="f_name"
+                  />
                 </div>
                 <div class="w-1/2 p-2">
                   <label class="text-sm">Last Name</label>
-                  <Input type="text" placeholder="Last Name" class="mt-2" />
+                  <Input
+                    type="text"
+                    placeholder="Last Name"
+                    class="mt-2"
+                    required
+                    v-model="l_name"
+                  />
                 </div>
                 <div class="w-1/2 p-2">
                   <label class="text-sm">Email</label>
@@ -50,6 +62,8 @@
                     type="email"
                     placeholder="Enter Your Email"
                     class="mt-2"
+                    required
+                    v-model="email"
                   />
                 </div>
                 <div class="w-1/2 p-2">
@@ -58,11 +72,19 @@
                     type="text"
                     placeholder="Enter Your Role"
                     class="mt-2"
+                    required
+                    v-model="role"
                   />
                 </div>
                 <div class="w-1/2 p-2">
                   <label class="text-sm">Company</label>
-                  <Input type="text" placeholder="Company Name" class="mt-2" />
+                  <Input
+                    type="text"
+                    placeholder="Company Name"
+                    class="mt-2"
+                    required
+                    v-model="company_name"
+                  />
                 </div>
                 <div class="w-1/2 p-2">
                   <label class="text-sm">Company Phone</label>
@@ -70,6 +92,8 @@
                     type="number"
                     placeholder="Company Phone"
                     class="mt-2"
+                    required
+                    v-model="phone"
                   />
                 </div>
                 <div v-if="this.type != 'contact-us'" class="w-full p-2">
@@ -100,18 +124,20 @@
                   <input
                     type="datetime-local"
                     class="w-full border py-1 px-2 rounded-sm mt-2"
+                    v-model="date_time"
                   />
                 </div>
                 <div class="w-full p-2">
                   <label class="text-sm">Message</label>
-                  <Textarea class="mt-2" placeholder="Type your message" />
+                  <Textarea
+                    class="mt-2"
+                    placeholder="Type your message"
+                    required
+                    v-model="message"
+                  />
                 </div>
                 <div class="w-full p-2">
-                  <input
-                    type="checkbox"
-                    placeholder="Company Phone"
-                    class="w-fit"
-                  />
+                  <input type="checkbox" class="w-fit" required />
                   <label class="text-sm ml-2"
                     >Agree to
                     <span class="underline"
@@ -125,12 +151,20 @@
                   <Button
                     class="relative overflow-hidden p-5 px-8 bg-secondary text-white cursor-pointer group"
                   >
-                    <span class="relative z-10"
-                      >Send <i class="fa-regular fa-paper-plane ml-3"></i
+                    <span v-if="!is_submitting" class="relative z-10"
+                      >{{ button_message }}
+                      <i class="fa-regular fa-paper-plane ml-3"></i
                     ></span>
                     <span
                       class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
                     ></span>
+                    <!-- submission -->
+                    <span v-if="is_submitting" class="relative z-10"
+                      >Sending</span
+                    >
+                    <span v-if="is_submitting" class="relative z-10 mt-2"
+                      ><Spinner
+                    /></span>
                   </Button>
                 </div>
               </div>
@@ -216,9 +250,9 @@ import Footer from "@/components/general/Footer.vue";
 import BigTitle from "@/components/text/BigTitle.vue";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
 import CardTitle from "@/components/ui/card/CardTitle.vue";
-import { contact_us_end_point } from "@/store/store.js";
-import { supabase } from "@/lib/supabase";
 import Maps from "@/components/general/Maps.vue";
+import { contact_us_end_point, enquiry_url } from "@/store/store.js";
+import { supabase } from "@/lib/supabase";
 
 export default {
   name: "Contact us",
@@ -234,6 +268,18 @@ export default {
   data() {
     return {
       page_is_loading: true,
+      /* form submission */
+      f_name: "",
+      l_name: "",
+      email: "",
+      role: "",
+      company_name: "",
+      phone: "",
+      selected: "",
+      date_time: "",
+      message: "",
+      button_message: "Send",
+      is_submitting: false,
       services: [],
       subjects: [
         { value: "1", content: "Option one" },
@@ -294,6 +340,48 @@ export default {
       setTimeout(() => {
         this.page_is_loading = false;
       }, 1500);
+    },
+    /* get in touch */
+    async enquire() {
+      if (
+        this.button_message == "Sent. Thank you!" ||
+        this.is_submitting === true
+      ) {
+        return;
+      }
+      this.is_submitting = true;
+
+      const enquiry_form = {
+        first_name: this.f_name,
+        last_name: this.l_name,
+        email: this.email,
+        position: this.role,
+        company: this.company_name,
+        phone: this.phone,
+        message: this.message,
+      };
+
+      try {
+        const res = await fetch(enquiry_url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(enquiry_form),
+        });
+
+        const data = await res.json();
+        console.log("sent:", data);
+        this.button_message = "Sent. Thank you!";
+        setTimeout(() => {
+          this.button_message = "Send";
+        }, 4000);
+      } catch (err) {
+        console.error("Error:", err);
+        /* submission failed */
+      } finally {
+        this.is_submitting = false;
+      }
     },
     /* fetch contacts */
     async fetch_contact_us() {
