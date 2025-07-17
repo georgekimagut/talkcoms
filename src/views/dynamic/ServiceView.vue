@@ -1,13 +1,13 @@
 <template>
-  <div class="w-full flex justify-center">
-    <div class="w-[90%]">
-      {{ single_service }}
-    </div>
-  </div>
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
     <Navbar :services="universal_services" />
+    <div class="w-full flex justify-center">
+      <div class="w-[90%]">
+        {{ single_service }}
+      </div>
+    </div>
     <HeroSection
       v-if="!prev_service"
       :small_title="this.id"
@@ -46,7 +46,7 @@
         <div
           v-for="(channel, index) in channels"
           :key="index"
-          class="shift-hover w-[18%] m-1 p-4 rounded-xl flex-shrink-0 flex-grow-1 min-w-[250px] snap-center card"
+          class="shift-hover w-[18%] m-1 p-4 rounded-xl flex-shrink-0 flex-grow min-w-[250px] snap-center card"
         >
           <div
             class="w-[50px] h-[50px] min-w-[50px] min-h-[50px] flex justify-center rounded-sm mt-6 relative overflow-hidden"
@@ -239,10 +239,10 @@
     <!-- intergrations -->
     <div
       v-if="intergrations != ''"
-      class="w-full flex justify-center mt-10 py-28"
+      class="w-full flex justify-center mt-10 py-28 hero-component"
     >
-      <div class="w-[90%] flex gap-4">
-        <div class="w-[40%]">
+      <div class="w-[90%] flex gap-4 hero-holder">
+        <div class="w-[40%] to-full">
           <div class="w-[90%] flex flex-wrap">
             <SmallTitle text="INTERGRATIONS" />
             <BigTitle
@@ -256,7 +256,7 @@
             </p>
           </div>
 
-          <div class="w-[90%] flex mt-20">
+          <div class="w-[90%] flex mt-20 full-hero">
             <router-link to="/contact/get-started"
               ><Button variant="dark"
                 >Get Started
@@ -269,12 +269,12 @@
             ></router-link>
           </div>
         </div>
-        <div class="w-[60%]">
-          <div class="w-full flex flex-wrap">
+        <div class="w-[60%] to-full">
+          <div class="w-full flex flex-wrap to-cards">
             <div
               v-for="(intergration, index) in intergrations"
               :key="index"
-              class="shift-hover w-[48%] mr-[2%] p-4 rounded-xl mb-4"
+              class="shift-hover w-[48%] mr-[2%] p-4 rounded-xl mb-4 card"
             >
               <div
                 class="w-[50px] h-[50px] min-w-[50px] min-h-[50px] flex justify-center rounded-sm mt-6 relative overflow-hidden"
@@ -308,7 +308,10 @@
     <!-- PBX -->
     <!-- benefits -->
 
-    <div v-if="!prev_service" class="w-full flex justify-center py-20 bg-third">
+    <div
+      v-if="!prev_service"
+      class="w-full flex justify-center py-20 bg-fourth border border-[#007cba] rounded-xl orverflow-hidden"
+    >
       <div class="w-[90%] flex flex-wrap relative">
         <!-- <ScrollPattern :bg_color="random_bg" /> -->
         <!-- Scrollable content -->
@@ -377,7 +380,7 @@
     </div>
     <div
       v-if="prev_service"
-      class="w-full flex justify-center py-20 bg-third hero-component"
+      class="w-full flex justify-center py-20 bg-fourth border border-[#007cba] rounded-xl orverflow-hidden hero-component"
     >
       <div class="w-[90%] flex flex-wrap relative hero-holder">
         <!-- <ScrollPattern :bg_color="random_bg" /> -->
@@ -386,9 +389,9 @@
           <div
             class="w-[90%] overflow-hidden transition-all duration-500 relative autoShow to-full"
           >
-            <h1 class="text-5xl font-extrabold text-white sticky top-0 py-4">
+            <h1 class="text-5xl font-extrabold text-default sticky top-0 py-4">
               Here’s Why You’ll Love Talkcoms'
-              <span class="text-white">{{ this.id }}</span>
+              <span class="text-default">{{ this.id }}</span>
             </h1>
             <div class="w-full to-cards">
               <div
@@ -398,7 +401,7 @@
               >
                 <div class="">
                   <i
-                    class="fa-regular fa-circle-check mt-6 text-2xl text-white"
+                    class="fa-regular fa-circle-check mt-6 text-2xl text-secondary"
                   ></i>
                 </div>
                 <div class="">
@@ -429,7 +432,9 @@
                 class="w-[300px] h-[300px] rounded-xl custom-linear-bg p-5 -z-10"
               ></div>
             </div>
-            <div class="w-full h-full flex justify-end absolute">
+            <div
+              class="w-full h-full flex justify-end absolute pattern-to-hide"
+            >
               <div class="h-full flex flex-col justify-end">
                 <div
                   class="w-[300px] h-[300px] rounded-xl custom-linear-bg p-5 -z-10"
@@ -488,26 +493,26 @@
     <!-- packages -->
     <div
       v-if="packages != ''"
-      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 pb-20"
+      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 pb-20 packages"
     >
-      <div class="w-3/4">
+      <div class="w-3/4 flex flex-wrap justify-center">
         <p class="text-secondary flex justify-center text-2xl">
           <SmallTitle text="PACKAGES" />
         </p>
 
-        <h1 class="text-4xl font-extrabold mt-4 p-2 flex justify-center">
+        <h1 class="text-4xl font-extrabold mt-4 p-2 text-center w-full">
           Our Pricing Plans
         </h1>
-        <p class="flex justify-center mt-2">
+        <p class="flex text-center mt-2">
           Aenean vitae felis commodo, ultricies augue in, lacinia ante. Maecenas
         </p>
       </div>
       <!-- the packages -->
-      <div class="w-[90%] flex flex-wrap justify-center mt-16">
+      <div class="w-[90%] flex flex-wrap justify-center mt-16 inner-package">
         <div
           v-for="(pack, index) in packages"
           :key="index"
-          class="w-[22%] ml-[1.5%] relative flex flex-wrap justify-center h-fit"
+          class="w-[22%] ml-[1.5%] relative flex flex-wrap justify-center h-fit card"
         >
           <div
             v-if="pack.is_popular === true"

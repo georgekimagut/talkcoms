@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-[70vh] absolute z-[-10]">
+  <div class="w-full h-[70vh] absolute z-[-10] overflow-hidden">
     <div class="absolute w-fit h-full flex flex-col justify-end ml-[47%]">
       <div
         v-for="index in 6"

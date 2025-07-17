@@ -129,7 +129,7 @@
         <div class="w-full h-full flex rounded-xl overflow-hidden">
           <div
             v-if="hero_small_image"
-            class="h-full w-[30%] overflow-hidden rounded-xl"
+            class="h-full w-[30%] overflow-hidden rounded-xl small-img"
           >
             <img
               :src="hero_small_image"
@@ -138,7 +138,7 @@
             />
           </div>
           <div
-            class="h-full overflow-hidden rounded-xl"
+            class="h-full overflow-hidden rounded-xl big-img"
             :class="hero_small_image ? 'w-[67%] ml-[3%]' : 'w-full ml-0'"
           >
             <img

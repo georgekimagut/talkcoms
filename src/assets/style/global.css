@@ -539,7 +539,14 @@ a {
     display: none;
   }
 }
-
+@media only screen and (max-width: 1130px) {
+  .packages .inner-package {
+    @apply overflow-x-scroll snap-x snap-mandatory flex-nowrap hide-scrollbar justify-start;
+  }
+  .packages .inner-package .card {
+    @apply w-[31%] m-[1.3%] flex-shrink-0 snap-center shadow-md rounded-xl;
+  }
+}
 @media only screen and (max-width: 1300px) {
   /* navigation bar */
   .nav-bar-phone {
@@ -602,6 +609,10 @@ a {
   }
 }
 @media only screen and (max-width: 880px) {
+  /* packages */
+  .packages .inner-package .card {
+    @apply w-[47%] m-[1.3%] flex-shrink-0 snap-center;
+  }
   .blogs .blog-inner .col-1 {
     display: none;
   }
@@ -629,6 +640,10 @@ a {
   }
 }
 @media only screen and (max-width: 590px) {
+  /* packages */
+  .packages .inner-package .card {
+    @apply w-[98%] m-[1%] flex-shrink-0 snap-center;
+  }
   .footer .p-1 {
     width: 48%;
   }
@@ -653,6 +668,9 @@ a {
   }
   .main-features .card {
     @apply !w-[100%];
+  }
+  .hero-component .hero-holder .to-full .to-cards .card {
+    @apply !w-[98%] mx-[1%];
   }
 }
 @media only screen and (max-width: 680px) {
@@ -743,7 +761,7 @@ a {
   }
   /* service main features */
   .main-features .card {
-    @apply w-[32%];
+    @apply w-[32%] shadow-md;
   }
   /* static service class */
   .hero-component .hero-holder .self-start.to-full {
@@ -757,19 +775,36 @@ a {
     @apply w-full;
   }
   .hero-component .hero-holder .to-full .to-cards {
-    @apply flex overflow-x-scroll hide-scrollbar snap-x snap-mandatory;
+    @apply flex overflow-x-scroll flex-nowrap hide-scrollbar snap-x snap-mandatory;
   }
   .hero-component .hero-holder .to-full .to-cards .card {
-    @apply flex flex-wrap flex-shrink-0 snap-center mx-[5%] border p-2 rounded-md;
+    @apply flex flex-wrap w-[32%] !mx-[1%] my-[20px] flex-shrink-0 snap-center border p-2 rounded-md shadow-md h-fit;
+  }
+  .hero-component .hero-holder .to-full .to-cards .card .fa-regular {
+    @apply text-5xl;
   }
   .hero-component .hero-holder .to-full .to-cards .card h1,
   .hero-component .hero-holder .to-full .to-cards .card p {
     @apply text-left;
   }
+  .pattern-to-hide {
+    @apply hidden;
+  }
+  .hero-component .hero-holder .small-img {
+    @apply hidden;
+  }
+  .hero-component .hero-holder .big-img {
+    @apply w-full ml-0;
+  }
 }
 @media only screen and (max-width: 680px) {
   .cta .patterns {
-    display: none;
+    @apply hidden;
+  }
+}
+@media only screen and (max-width: 780px) {
+  .hero-component .hero-holder .to-full .to-cards .card {
+    @apply w-[48%] !mx-[1%];
   }
 }
 @media only screen and (max-width: 760px) {

@@ -12,9 +12,9 @@
       hero_small_image="/static/about-us.png"
     />
     <!-- main about us -->
-    <div class="w-full flex justify-center mt-32">
-      <div class="w-[90%] flex justify-center">
-        <div class="w-1/2">
+    <div class="w-full flex justify-center mt-32 hero-component">
+      <div class="w-[90%] flex justify-center hero-holder">
+        <div class="w-1/2 to-full">
           <p class="text-secondary">OUR STORY</p>
           <h1 class="text-4xl font-bold mt-4 p-2">
             Leading IT
@@ -73,9 +73,9 @@
             </div>
           </div>
         </div>
-        <div class="w-1/2 flex justify-center">
+        <div class="w-1/2 flex justify-center to-full">
           <div
-            class="w-[60%] flex justify-center overflow-hidden h-full rounded-2xl"
+            class="w-[80%] flex justify-center overflow-hidden h-full rounded-2xl"
           >
             <img
               src="/static/why.png"
@@ -88,9 +88,9 @@
     <Partners has_numbers />
     <!-- values -->
     <div
-      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36"
+      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 hero-component"
     >
-      <div class="w-3/4">
+      <div class="w-3/4 hero-holder">
         <p class="text-secondary flex justify-center">
           <router-link to="#">OUR VALUES</router-link>
         </p>
@@ -101,8 +101,8 @@
           guiding our agency
         </h1>
       </div>
-      <div class="w-[90%] flex justify-center mt-16">
-        <div class="w-1/2 flex justify-center">
+      <div class="w-[90%] flex justify-center mt-16 hero-holder">
+        <div class="w-1/2 flex justify-center to-full">
           <div
             class="w-[60%] flex justify-center overflow-hidden h-full rounded-2xl"
           >
@@ -112,7 +112,7 @@
             />
           </div>
         </div>
-        <div class="w-1/2">
+        <div class="w-1/2 to-full">
           <div
             v-for="(value, index) in values"
             :key="index"
