@@ -221,7 +221,7 @@
           class="w-full h-full bg-default opacity-50 absolute z-[-1y]"
         ></div>
         <div
-          class="w-[70%] h-full bg-white py-4 absolute z-2000 overflow-y-scroll hide-scrollbar"
+          class="w-[70%] max-w-[400px] h-full bg-white py-4 absolute z-2000 overflow-y-scroll hide-scrollbar"
         >
           <div class="w-full mb-4">
             <router-link

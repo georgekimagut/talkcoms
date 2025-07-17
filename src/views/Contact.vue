@@ -89,7 +89,7 @@
                 <div class="w-1/2 p-2">
                   <label class="text-sm">Company Phone</label>
                   <Input
-                    type="number"
+                    type="text"
                     placeholder="Company Phone"
                     class="mt-2"
                     required
