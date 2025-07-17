@@ -8,6 +8,11 @@
       <div class="h-full w-full absolute opacity-50">
         <img src="/icons/g26.svg" class="" />
       </div>
+      <!-- <div
+        class="absolute z-[20] w-full h-full flex justify-end overflow-hidden"
+      >
+        <img src="/public/static/tribal.png" class="!h-full w-auto" />
+      </div> -->
       <div class="w-full h-full flex justify-center overflow-hidden">
         <div class="w-[90%] flex flex-wrap mt-16 relative overflow-hidden">
           <div
@@ -27,13 +32,13 @@
                     <p class="text-secondary text-lg w-3/4 uppercase">
                       {{ slide.sub_title }}
                     </p>
-                    <h1 class="text-4xl font-extrabold mt-10 w-3/4">
+                    <h1 class="text-4xl font-extrabold mt-6 w-3/4">
                       {{ slide.title }}
                     </h1>
-                    <p class="w-3/4 mt-10 description">
+                    <p class="w-3/4 mt-6 description">
                       {{ slide.description }}
                     </p>
-                    <div class="w-full flex mt-16 btn-holder">
+                    <div class="w-full flex mt-10 btn-holder">
                       <router-link to="/contact/contact-us"
                         ><Button variant="dark"
                           >Talk to Sales
@@ -406,7 +411,7 @@
       <div class="w-[90%]">
         <div class="w-full">
           <h1 class="text-5xl font-extrabold mt-10 text-center text-default">
-            Select yourindustry. Discover our impact.
+            Select your industry. Discover our impact.
           </h1>
         </div>
         <div class="w-full flex flex-wrap mt-16 w730">
