@@ -145,27 +145,34 @@
             </div>
             <!-- call to action -->
             <div class="w-full flex mt-8 full-hero">
-              <router-link :to="`contact/${this.id}`"
-                ><Button variant="dark"
-                  >Request Free Demo
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              <router-link :to="`contact/${this.id}`">
+                <Button
+                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+                >
+                  <span class="relative z-10">Request Free Demo</span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </router-link>
 
-              <!-- <router-link
-                v-if="!service.material_link"
-                to="/contact/contact-us"
-                ><Button variant="light" class="ml-4"
-                  >Learn More
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link> -->
               <a
                 v-if="service.material_link"
                 :href="service.material_link"
                 target="_blank"
-                ><Button variant="light" class="ml-4"
-                  >Download Material
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></a>
+              >
+                <Button
+                  variant="ghost"
+                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                >
+                  <span class="relative z-10 hover:text-[#131f6b]"
+                    >Download Material
+                  </span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -215,19 +222,34 @@
             </div>
             <!-- call to action -->
             <div class="w-full flex mt-8 full-hero">
-              <router-link :to="`contact/${this.id}`"
-                ><Button variant="dark"
-                  >Request Free Demo
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              <router-link :to="`contact/${this.id}`">
+                <Button
+                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+                >
+                  <span class="relative z-10">Request Free Demo</span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </router-link>
+
               <a
                 v-if="service.material_link"
                 :href="service.material_link"
                 target="_blank"
-                ><Button variant="light" class="ml-4"
-                  >Download Material
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></a>
+              >
+                <Button
+                  variant="ghost"
+                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                >
+                  <span class="relative z-10 hover:text-[#131f6b]"
+                    >Download Material
+                  </span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -257,16 +279,29 @@
           </div>
 
           <div class="w-[90%] flex mt-20 full-hero">
-            <router-link to="/contact/get-started"
-              ><Button variant="dark"
-                >Get Started
-                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            ></router-link>
-            <router-link to="/contact/contact-us"
-              ><Button variant="light" class="ml-4"
-                >Learn More
-                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            ></router-link>
+            <router-link to="/contact/get-started">
+              <Button
+                class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+              >
+                <span class="relative z-10">Get Started </span>
+                <span
+                  class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                ></span>
+              </Button>
+            </router-link>
+            <router-link to="/contact/contact-us" class="ml-4">
+              <Button
+                variant="ghost"
+                class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+              >
+                <span class="relative z-10 hover:text-[#131f6b]"
+                  >Learn More
+                </span>
+                <span
+                  class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                ></span>
+              </Button>
+            </router-link>
           </div>
         </div>
         <div class="w-[60%] to-full">
@@ -344,11 +379,16 @@
             </div>
             <!-- call to action -->
             <div class="w-full flex mt-8">
-              <router-link to="/contact/get-started"
-                ><Button variant="dark"
-                  >Get Started
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              <router-link to="/contact/get-started">
+                <Button
+                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+                >
+                  <span class="relative z-10">Get Started </span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -416,11 +456,16 @@
             </div>
             <!-- call to action -->
             <div class="w-full flex mt-8 full-hero">
-              <router-link to="/contact/get-started"
-                ><Button variant="dark"
-                  >Get Started
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              <router-link to="/contact/get-started">
+                <Button
+                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+                >
+                  <span class="relative z-10">Get Started </span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -473,17 +518,25 @@
             and see how our solution can simplify your workflow and boost
             efficiency—live and personalized.
           </p>
-          <router-link :to="`/contact/${this.id}`"
-            ><Button variant="light" class="m-4"
-              >{{
-                service.has_demo === 1
-                  ? "BOOK A FREE DEMO"
-                  : service.has_demo === 2
-                  ? "BOOK A SITE VISIT"
-                  : "BOOK A FREE CALL"
-              }}
-              <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-          ></router-link>
+          <router-link :to="`/contact/${this.id}`">
+            <Button
+              variant="ghost"
+              class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00] m-4"
+            >
+              <span class="relative z-10 hover:text-[#131f6b]"
+                >{{
+                  service.has_demo === 1
+                    ? "BOOK A FREE DEMO"
+                    : service.has_demo === 2
+                    ? "BOOK A SITE VISIT"
+                    : "BOOK A FREE CALL"
+                }}
+              </span>
+              <span
+                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span>
+            </Button>
+          </router-link>
         </div>
         <div class="w-[35%] flex justify-center overflow-hidden img-holder">
           <img :src="service.imageUrl" class="w-full h-full object-cover" />
@@ -592,9 +645,16 @@
         <div class="w-full mt-10 flex">
           <router-link
             :to="`/resources/${success_story}/${related_story.title}`"
-            ><Button variant="dark"
-              >Read Full Story
-              <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+            ><Button
+              variant="ghost"
+              class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+            >
+              <span class="relative z-10 hover:text-[#131f6b]"
+                >Read Full Story
+              </span>
+              <span
+                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span> </Button
           ></router-link>
         </div>
       </div>

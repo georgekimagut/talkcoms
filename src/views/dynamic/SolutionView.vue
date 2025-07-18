@@ -79,9 +79,16 @@
           </p>
 
           <router-link to="/contact/contact-us"
-            ><Button variant="light" class="ml-4"
-              >Book A Call
-              <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+            ><Button
+              variant="ghost"
+              class="ml-4 relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+            >
+              <span class="relative z-10 hover:text-[#131f6b]"
+                >Book A Call
+              </span>
+              <span
+                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span> </Button
           ></router-link>
         </div>
         <div class="w-[35%] flex justify-center overflow-hidden">
@@ -124,9 +131,16 @@
         <div class="w-full mt-10 flex">
           <router-link
             :to="`/resources/${success_story}/${related_story.title}`"
-            ><Button variant="light" class="ml-4"
-              >Read Full Story
-              <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+            ><Button
+              variant="ghost"
+              class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+            >
+              <span class="relative z-10 hover:text-[#131f6b]"
+                >Read Full Story
+              </span>
+              <span
+                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span> </Button
           ></router-link>
         </div>
       </div>
