@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar />
+    <Navbar :services="services" />
 
     <HeroSection
       small_title="FAQs"
@@ -47,7 +47,7 @@
     <!-- CTA -->
     <Cta />
     <!-- footer -->
-    <Footer />
+    <Footer :services="services" />
   </div>
 </template>
 <script>
@@ -59,6 +59,7 @@ import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
 // import DefaultInput from "../components/ui/input/DefaultInput.vue";
 import { supabase } from "@/lib/supabase";
+import { universal_content } from "@/store/contentStore";
 
 export default {
   name: "Faqs",
@@ -85,10 +86,12 @@ export default {
         { name: "CRM", solution_class: "text-secondary" },
       ],
       faqs: [],
+      services: [],
     };
   },
   async mounted() {
     this.page_is_loading = true;
+    this.services = universal_content().services;
 
     try {
       await this.get_faqs();

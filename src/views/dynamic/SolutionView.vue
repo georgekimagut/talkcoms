@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar />
+    <Navbar :services="services" />
     <HeroSection
       :small_title="this.id"
       :big_title="solution.title"
@@ -147,7 +147,7 @@
     </div>
     <!-- footer and cta -->
     <Cta />
-    <Footer />
+    <Footer :services="services" />
   </div>
 </template>
 <script>
@@ -161,6 +161,7 @@ import Footer from "@/components/general/Footer.vue";
 import Cta from "@/components/general/Cta.vue";
 import IconCard from "@/components/ui/card/IconCard.vue";
 import HeroSection from "@/components/general/HeroSection.vue";
+import { universal_content } from "@/store/contentStore";
 
 export default {
   name: "SolutionView",
@@ -185,10 +186,13 @@ export default {
       product_ids: [],
       related_story: "",
       success_story: "case-study",
+      services: [],
     };
   },
   async created() {
     this.page_is_loading = true;
+    this.services = universal_content().services;
+
     try {
       await this.get_solution();
       await this.get_products();

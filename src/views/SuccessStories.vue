@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar />
+    <Navbar :services="universal_services" />
     <!-- new hero -->
     <HeroSection
       v-for="(story, index) in all_stories_tracker.slice(0, 1)"
@@ -50,7 +50,7 @@
       </div>
     </div>
     <!-- footer -->
-    <Footer />
+    <Footer :services="universal_services" />
   </div>
 </template>
 <script>
@@ -63,6 +63,7 @@ import BigTitle from "@/components/text/BigTitle.vue";
 import SmallTitle from "@/components/text/SmallTitle.vue";
 import { supabase } from "@/lib/supabase";
 import { success_stories_end_point } from "@/store/store";
+import { universal_content } from "@/store/contentStore";
 
 export default {
   name: "SuccesStories",
@@ -83,6 +84,7 @@ export default {
       filtered_stories: [],
       success_story: "story",
       services: [{ id: "0", name: "All", active_category: "" }],
+      universal_services: [],
     };
   },
   methods: {
@@ -210,6 +212,7 @@ export default {
   },
   async mounted() {
     this.page_is_loading = true;
+    this.universal_services = universal_content().services;
 
     try {
       await Promise.all([

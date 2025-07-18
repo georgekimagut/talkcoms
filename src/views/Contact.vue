@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar />
+    <Navbar :services="services" />
     <!-- contact us -->
     <div class="w-full flex mt-16 justify-center">
       <HeroPattern />
@@ -240,7 +240,7 @@
       <Maps map_class="w-full h-full" />
     </div>
     <!-- footer -->
-    <Footer />
+    <Footer :services="services" />
   </div>
 </template>
 <script>
@@ -253,6 +253,7 @@ import CardTitle from "@/components/ui/card/CardTitle.vue";
 import Maps from "@/components/general/Maps.vue";
 import { contact_us_end_point, enquiry_url } from "@/store/store.js";
 import { supabase } from "@/lib/supabase";
+import { universal_content } from "@/store/contentStore";
 
 export default {
   name: "Contact us",
@@ -332,8 +333,9 @@ export default {
   },
   mounted() {
     this.load_page();
+    this.services = universal_content().services;
     this.fetch_contact_us();
-    this.get_services();
+    // this.get_services();
   },
   methods: {
     load_page() {
@@ -375,6 +377,15 @@ export default {
         this.button_message = "Sent. Thank you!";
         setTimeout(() => {
           this.button_message = "Send";
+          this.f_name = "";
+          this.l_name = "";
+          this.email = "";
+          this.role = "";
+          this.company_name = "";
+          this.phone = "";
+          this.selected = "";
+          this.date_time = "";
+          this.message = "";
         }, 4000);
       } catch (err) {
         console.error("Error:", err);

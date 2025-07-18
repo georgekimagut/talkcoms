@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full bg-white">
-    <Navbar />
+    <Navbar :services="services" />
     <div class="w-full flex justify-center flex-wrap">
       <div class="w-[90%] flex flex-wrap">
         <!-- Sticky sidebar -->
@@ -188,7 +188,7 @@
     <!-- end -->
     <!-- footer  -->
     <Cta class="mt-20" />
-    <Footer />
+    <Footer :services="services" />
   </div>
 </template>
 <script>
@@ -199,6 +199,7 @@ import { supabase } from "@/lib/supabase";
 import BigTitle from "../../components/text/BigTitle.vue";
 import Cta from "@/components/general/Cta.vue";
 import { apiEndpoint, baseUrl } from "@/store/store";
+import { universal_content } from "@/store/contentStore";
 
 //markup content
 import DOMPurify from "dompurify";
@@ -232,10 +233,12 @@ export default {
       /* resource carousel */
       current_resource_slide: 0,
       total_resource_slides: 2,
+      services: [],
     };
   },
   async created() {
     this.page_is_loading = true;
+    this.services = universal_content().services;
 
     try {
       await this.get_resource();

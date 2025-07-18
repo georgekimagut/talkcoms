@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar />
+    <Navbar :services="services" />
     <!-- new hero -->
     <HeroSection
       small_title="Testimonials"
@@ -53,7 +53,7 @@
     </div>
     <!-- footer & cta-->
     <Cta />
-    <Footer />
+    <Footer :services="services" />
   </div>
 </template>
 <script>
@@ -66,6 +66,7 @@ import Spinner from "@/components/general/Spinner.vue";
 import BigTitle from "@/components/text/BigTitle.vue";
 import SmallTitle from "@/components/text/SmallTitle.vue";
 import { supabase } from "@/lib/supabase";
+import { universal_content } from "@/store/contentStore";
 
 export default {
   name: "Testimonials",
@@ -85,6 +86,7 @@ export default {
       success_stories: [],
       testimonials: [],
       success_story: "story",
+      services: [],
     };
   },
   methods: {
@@ -121,6 +123,7 @@ export default {
   },
   async created() {
     this.page_is_loading = true;
+    this.services = universal_content().services;
 
     try {
       await this.get_stories();

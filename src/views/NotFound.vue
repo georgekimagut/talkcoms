@@ -57,12 +57,21 @@
     </div>
   </div>
   <!-- footer -->
-  <Footer />
+  <Footer :services="services" />
 </template>
 <script>
 import Footer from "@/components/general/Footer.vue";
+import { universal_content } from "@/store/contentStore";
 export default {
   name: "NotFound",
   components: { Footer },
+  data() {
+    return {
+      services: [],
+    };
+  },
+  mounted() {
+    this.services = universal_content().services;
+  },
 };
 </script>

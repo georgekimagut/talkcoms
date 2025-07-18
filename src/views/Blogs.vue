@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar />
+    <Navbar :services="services" />
     <HeroSection
       v-for="(blog, index) in all_blog_tracker.slice(0, 1)"
       :key="index"
@@ -71,7 +71,7 @@
 
     <!-- cta -->
     <Cta class="mt-32" />
-    <Footer />
+    <Footer :services="services" />
   </div>
 </template>
 <script>
@@ -86,6 +86,7 @@ import Link from "@/components/text/Link.vue";
 import { supabase } from "@/lib/supabase";
 import SmallTitle from "@/components/text/SmallTitle.vue";
 import { apiEndpoint, baseUrl } from "@/store/store";
+import { universal_content } from "@/store/contentStore";
 
 export default {
   name: "Blogs",
@@ -111,10 +112,12 @@ export default {
       posts: [],
       is_blog: "blog",
       image_url: baseUrl,
+      services: [],
     };
   },
   async created() {
     this.page_is_loading = true;
+    this.services = universal_content().services;
 
     try {
       // await this.get_blogs();
