@@ -50,7 +50,7 @@
           </p>
         </div>
         <div class="w-full flex justify-center mt-14">
-          <router-link to="/contact/get-started"
+          <!-- <router-link to="/contact/get-started"
             ><Button variant="dark"
               >Get Started
               <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
@@ -59,7 +59,30 @@
             ><Button variant="light" class="ml-4"
               >Contact us
               <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-          ></router-link>
+          ></router-link> -->
+          <router-link to="/contact/get-started">
+            <Button
+              class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+            >
+              <span class="relative z-10">Get Started </span>
+              <span
+                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span>
+            </Button>
+          </router-link>
+          <router-link to="/contact/contact-us" class="ml-4">
+            <Button
+              variant="ghost"
+              class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+            >
+              <span class="relative z-10 hover:text-[#131f6b]"
+                >Contact us
+              </span>
+              <span
+                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span>
+            </Button>
+          </router-link>
         </div>
       </div>
     </div>

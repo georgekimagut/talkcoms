@@ -14,7 +14,7 @@
         >
           <router-link
             to="/"
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4c"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 text-lg"
             active-class="text-secondary font-medium"
           >
             Home
@@ -26,7 +26,9 @@
             <div
               class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
             >
-              <div class="h-full flex flex-col justify-center">Products</div>
+              <div class="h-full flex flex-col justify-center text-lg">
+                Products
+              </div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
                 <i class="fa-solid fa-angle-down"></i>
               </div>
@@ -55,7 +57,9 @@
             <div
               class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
             >
-              <div class="h-full flex flex-col justify-center">Services</div>
+              <div class="h-full flex flex-col justify-center text-lg">
+                Services
+              </div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
                 <i class="fa-solid fa-angle-down"></i>
               </div>
@@ -84,7 +88,7 @@
             <div
               class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
             >
-              <div class="h-full flex flex-col justify-center">
+              <div class="h-full flex flex-col justify-center text-lg">
                 Solutions By Industry
               </div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
@@ -136,7 +140,9 @@
             <div
               class="w-full h-full flex flex-row cursor-pointer custom-default-hover"
             >
-              <div class="h-full flex flex-col justify-center">Resources</div>
+              <div class="h-full flex flex-col justify-center text-lg">
+                Resources
+              </div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
                 <i class="fa-solid fa-angle-down"></i>
               </div>
@@ -168,23 +174,44 @@
           </div>
           <router-link
             to="/about"
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover text-lg"
             active-class="text-secondary font-medium"
             >About us</router-link
           >
         </div>
         <div class="w-1/6 flex justify-end p-4 btn-side">
           <!-- <Button button_link="/contact-us" button_text="Contact Us" /> -->
-          <router-link to="/contact/book-a-demo"
-            ><Button variant="light"
-              >Book A Demo
-              <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-          ></router-link>
-          <router-link to="/contact/contact-us" class="ml-4"
-            ><Button variant="dark"
-              >Contact Us
-              <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-          ></router-link>
+          <router-link to="/contact/book-a-demo">
+            <Button
+              class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+            >
+              <span class="relative z-10">Book A Demo </span>
+              <span
+                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span>
+            </Button>
+            <!-- <Button v-if="pre_buttons" variant="light"
+                >Book A Demo
+                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+            > -->
+          </router-link>
+          <router-link to="/contact/contact-us" class="ml-4">
+            <Button
+              variant="ghost"
+              class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+            >
+              <span class="relative z-10 hover:text-[#131f6b]"
+                >Contact Us
+              </span>
+              <span
+                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span>
+            </Button>
+            <!-- <Button variant="dark"
+                >Contact Us
+                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+            > -->
+          </router-link>
         </div>
       </div>
     </div>
@@ -377,16 +404,26 @@
           </div>
           <!-- item -->
           <div class="w-full pl-4 pr-4">
-            <router-link to="/contact/book-a-demo"
-              ><Button variant="light"
+            <router-link to="/contact/book-a-demo">
+              <Button
+                class="relative overflow-hidden p-5 px-8 bg-secondary text-white cursor-pointer group"
+              >
+                <span class="relative z-10">Book A Demo </span>
+                <span
+                  class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                ></span>
+              </Button>
+              <!-- <Button v-if="pre_buttons" variant="light"
                 >Book A Demo
                 <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            ></router-link>
-            <router-link to="/contact/contact-us" class="ml-4"
-              ><Button variant="dark"
+            > -->
+            </router-link>
+            <router-link to="/contact/contact-us" class="ml-4">
+              <!-- <Button variant="dark"
                 >Contact Us
                 <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            ></router-link>
+            > -->
+            </router-link>
           </div>
         </div>
       </div>

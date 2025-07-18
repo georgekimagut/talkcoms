@@ -4,9 +4,12 @@
     <Navbar :services="services" />
     <!-- hero section -->
     <!-- <div class="w-full">{{ services }}</div> -->
-    <div class="w-full h-[80vh] hero">
+    <div class="w-full h-[80vh] hero bg-fourth">
       <div class="h-full w-full absolute opacity-50">
         <img src="/icons/g26.svg" class="" />
+      </div>
+      <div class="h-[80vh] w-full absolute flex justify-end">
+        <img src="/public/static/tribal.png" class="h-full w-auto max-w-none" />
       </div>
       <!-- <div
         class="absolute z-[20] w-full h-full flex justify-end overflow-hidden"
@@ -39,7 +42,30 @@
                       {{ slide.description }}
                     </p>
                     <div class="w-full flex mt-10 btn-holder">
-                      <router-link to="/contact/contact-us"
+                      <router-link to="/contact/contact-us">
+                        <Button
+                          class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+                        >
+                          <span class="relative z-10">Talk to Sales</span>
+                          <span
+                            class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                          ></span>
+                        </Button>
+                      </router-link>
+                      <router-link to="/about" class="ml-4">
+                        <Button
+                          variant="ghost"
+                          class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                        >
+                          <span class="relative z-10 hover:text-[#131f6b]"
+                            >Learn More
+                          </span>
+                          <span
+                            class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                          ></span>
+                        </Button>
+                      </router-link>
+                      <!-- <router-link to="/contact/contact-us"
                         ><Button variant="dark"
                           >Talk to Sales
                           <i
@@ -52,13 +78,13 @@
                           <i
                             class="fa-solid fa-angle-right mt-[10%] icon"
                           ></i></Button
-                      ></router-link>
+                      ></router-link> -->
                     </div>
                   </div>
                   <div class="w-1/2 h-full c-half">
                     <div class="w-full h-full relative">
                       <div
-                        class="img-holder h-[55vh] overflow-hidden rounded-2xl"
+                        class="img-holder h-[60vh] overflow-hidden rounded-2xl"
                       >
                         <img
                           :src="slide.pic"
@@ -66,7 +92,7 @@
                         />
                       </div>
                       <!-- stats board -->
-                      <div
+                      <!-- <div
                         class="w-[65%] h-1/2 absolute z-10 bg-body top-[30vh] rounded-tr-2xl p-4 left-[-10%] stats-board"
                       >
                         <div
@@ -87,7 +113,7 @@
                               <p class="w-full text-sm pl-2">Experience</p>
                             </div>
                           </div>
-                          <!-- end of stat -->
+                          <!-- end of stat ->
                           <div class="w-full flex">
                             <div class="w-one flex flex-col justify-center">
                               <h1
@@ -103,11 +129,11 @@
                               <p class="w-full pl-2 text-sm">Projects</p>
                             </div>
                           </div>
-                          <!-- end of stat -->
+                          <!-- end of stat ->
                         </div>
-                      </div>
+                      </div> -->
                       <!-- reviews board -->
-                      <div
+                      <!-- <div
                         class="w-[40%] absolute z-10 top-[50vh] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl left-[55%] bg-white stats-bard"
                       >
                         <p class="w-ful p-2">Verified by Google</p>
@@ -124,7 +150,7 @@
                             />
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -170,7 +196,7 @@
 
     <!-- services highlights -->
     <div
-      class="w-full flex flex-wrap justify-center overflow-hidden mt-8 bg-white py-16 services"
+      class="w-full flex flex-wrap justify-center overflow-hidden bg-white py-16 services"
     >
       <div class="w-[90%] flex justify-center flex-wrap">
         <div class="w-full flex">
@@ -661,7 +687,7 @@ export default {
           this.nextSlide();
           this.nextServiceSlide();
         }
-      }, 5000); // 30 seconds
+      }, 15000); // 30 seconds
     },
     pauseAutoSlide() {
       this.isPaused = true;

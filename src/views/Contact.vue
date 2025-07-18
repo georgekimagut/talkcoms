@@ -149,7 +149,7 @@
                 </div>
                 <div class="w-full p-2 flex justify-end">
                   <Button
-                    class="relative overflow-hidden p-5 px-8 bg-secondary text-white cursor-pointer group"
+                    class="relative overflow-hidden p-6 px-8 bg-secondary text-white cursor-pointer group"
                   >
                     <span v-if="!is_submitting" class="relative z-10"
                       >{{ button_message }}
