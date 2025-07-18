@@ -1,6 +1,8 @@
 <template>
   <HeroPattern />
-  <div class="w-full flex justify-center flex-wrap pb-10 hero-component">
+  <div
+    class="w-full flex justify-center flex-wrap pb-10 hero-component bg-fourth"
+  >
     <div class="w-[90%] flex h-full gap-4 overflow-hidden mt-16 hero-holder">
       <div class="w-1/2 to-full">
         <SmallTitle :text="small_title" />
@@ -21,11 +23,19 @@
           <!-- if it's a blog -->
           <div v-show="is_blog" class="w-full mt-10 flex flex-wrap full-hero">
             <div class="w-full">
-              <router-link :to="read_more_link"
-                ><Button variant="light"
-                  >Read Full Blog
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              <router-link :to="read_more_link">
+                <Button
+                  variant="ghost"
+                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                >
+                  <span class="relative z-10 hover:text-[#131f6b]"
+                    >Read Full Blog
+                  </span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </router-link>
             </div>
             <a href="#blogs" class="mt-5 inline-block relative group pb-[1px]"
               ><div class="uppercase text-third text-sm">
@@ -40,19 +50,32 @@
           </div>
           <!-- if it's a service -->
           <div v-show="is_service" class="w-full flex mt-10 full-hero">
-            <router-link :to="demo_link"
-              ><Button variant="dark"
-                >Book A Free Demo
-                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            ></router-link>
+            <router-link :to="demo_link">
+              <Button
+                class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+              >
+                <span class="relative z-10">Book A Demo </span>
+                <span
+                  class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                ></span>
+              </Button>
+            </router-link>
           </div>
           <div v-show="is_story" class="w-full mt-10 flex flex-wrap full-hero">
             <div class="w-full">
-              <router-link :to="read_more_link"
-                ><Button variant="light"
-                  >Read Full Story
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              <router-link :to="read_more_link">
+                <Button
+                  variant="ghost"
+                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                >
+                  <span class="relative z-10 hover:text-[#131f6b]"
+                    >Read Full Story
+                  </span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </router-link>
             </div>
             <a href="#stories" class="mt-5 inline-block relative group pb-[1px]"
               ><div class="uppercase text-third text-sm">
@@ -91,11 +114,16 @@
             class="w-full mt-10 flex flex-wrap full-hero"
           >
             <div class="w-full">
-              <router-link to="/contact/book-a-demo"
-                ><Button variant="dark"
-                  >Book A Free Call
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              <router-link to="/contact/book-a-demo">
+                <Button
+                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+                >
+                  <span class="relative z-10">Book A Free Call </span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </router-link>
             </div>
           </div>
           <!-- testimonials -->
@@ -104,11 +132,19 @@
             class="w-full mt-6 flex flex-wrap full-hero"
           >
             <div class="w-full">
-              <router-link to="/contact/contact-us"
-                ><Button variant="light"
-                  >Find Your Solution
-                  <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-              ></router-link>
+              <router-link to="/contact/contact-us">
+                <Button
+                  variant="ghost"
+                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                >
+                  <span class="relative z-10 hover:text-[#131f6b]"
+                    >Find Your Solution
+                  </span>
+                  <span
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  ></span>
+                </Button>
+              </router-link>
             </div>
             <a
               href="#testimonials"

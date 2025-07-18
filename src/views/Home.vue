@@ -4,12 +4,12 @@
     <Navbar :services="services" />
     <!-- hero section -->
     <!-- <div class="w-full">{{ services }}</div> -->
-    <div class="w-full h-[80vh] hero bg-fourth">
-      <div class="h-full w-full absolute opacity-50">
+    <div class="w-full h-[80vh] hero bg-fourth overflow-hidden">
+      <div class="h-[80vh] w-full absolute opacity-50">
         <img src="/icons/g26.svg" class="" />
       </div>
       <div class="h-[80vh] w-full absolute flex justify-end">
-        <img src="/public/static/tribal.png" class="h-full w-auto max-w-none" />
+        <img src="/static/tribal.png" class="h-full w-auto max-w-none" />
       </div>
       <!-- <div
         class="absolute z-[20] w-full h-full flex justify-end overflow-hidden"
@@ -199,6 +199,90 @@
       class="w-full flex flex-wrap justify-center overflow-hidden bg-white py-16 services"
     >
       <div class="w-[90%] flex justify-center flex-wrap">
+        <div class="w-full flex justify-center gap-1">
+          <button
+            v-for="(service, index) in home_services"
+            :key="index"
+            class="p-2 text-sm rounded-t-md cursor-pointer border"
+            :class="
+              service_in_view === index
+                ? 'bg-third text-white border-[#007cba]'
+                : 'text-default'
+            "
+            @click="toggle_service(index)"
+          >
+            <i :class="service.icon"></i>
+            {{ service.name }}
+          </button>
+        </div>
+        <div class="w-full flex overflow-hidden mt-8">
+          <div
+            v-if="home_services[service_in_view]"
+            class="w-full flex flex-shrink-0 flex-grow rounded-md overflow-hidden"
+          >
+            <div class="w-1/2 flex justify-end">
+              <div class="w-[90%] flex">
+                <div class="w-[70%] flex flex-wrap">
+                  <div class="w-full flex flex-col justify-center">
+                    <h1 class="text-4xl font-extrabold text-default">
+                      <i
+                        class="text-secondary"
+                        :class="home_services[service_in_view].icon"
+                      ></i>
+                      {{ home_services[service_in_view].name }}
+                    </h1>
+                    <p class="mt-8">
+                      {{ home_services[service_in_view].title_description }}
+                    </p>
+                    <div class="w-full flex flex-row mt-8">
+                      <router-link to="/contact/contact-us">
+                        <Button
+                          class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+                        >
+                          <span class="relative z-10">Book A Demo</span>
+                          <span
+                            class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                          ></span>
+                        </Button>
+                      </router-link>
+                      <router-link to="/contact/get-started" class="ml-4">
+                        <Button
+                          variant="ghost"
+                          class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                        >
+                          <span class="relative z-10 hover:text-[#131f6b]"
+                            >Get Started
+                          </span>
+                          <span
+                            class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                          ></span>
+                        </Button>
+                      </router-link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-1/2">
+              <div
+                class="w-[90%] flex justify-center rounded-xl overflow-hidden"
+              >
+                <img
+                  :src="home_services[service_in_view].imageUrl"
+                  class="w-full h-auto max-h-none object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- prev service -->
+    <div
+      v-if="prev_service"
+      class="w-full flex flex-wrap justify-center overflow-hidden bg-white py-16 services"
+    >
+      <div class="w-[90%] flex justify-center flex-wrap">
         <div class="w-full flex">
           <div class="w-3/4 to-full">
             <h1 class="text-4xl font-bold mt-4 p-2 ml-[1%]">
@@ -242,42 +326,6 @@
               </CardDescription>
             </router-link>
           </Card>
-        </div>
-
-        <div
-          v-if="prev_service"
-          class="w-full flex mt-4 overflow-scroll hide-scrollbar"
-        >
-          <div
-            class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full inner-service snap-x snap-mandatory"
-            :style="{
-              transform: `translateX(-${current_service_slide * 100}%)`,
-            }"
-            @mouseenter="pauseAutoSlide()"
-            @mouseleave="resumeAutoSlide()"
-          >
-            <Card
-              v-for="(service, index) in home_services"
-              :key="index"
-              class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate snap-center"
-              ><router-link :to="`/service/${service.name}`">
-                <CardHeader class="p-0">
-                  <CardTitle class="h-[35vh] overflow-hidden"
-                    ><img
-                      :src="service.imageUrl"
-                      class="h-full w-auto min-w-full max-w-none object-cover"
-                    />
-                  </CardTitle>
-                </CardHeader>
-                <CardTitle class="custom-default-hover mt-4 p-4 text-xl">{{
-                  service.name
-                }}</CardTitle>
-                <CardDescription class="px-4">
-                  {{ service.title_description }}
-                </CardDescription>
-              </router-link>
-            </Card>
-          </div>
         </div>
       </div>
     </div>
@@ -659,6 +707,7 @@ export default {
       /* services carousel */
       current_service_slide: 0,
       total_service_slides: 2,
+      service_in_view: 0,
     };
   },
   async created() {
@@ -681,6 +730,10 @@ export default {
     }
   },
   methods: {
+    /* toggle service */
+    toggle_service(index) {
+      this.service_in_view = index;
+    },
     startAutoSlide() {
       this.interval = setInterval(() => {
         if (!this.isPaused) {
@@ -816,9 +869,9 @@ export default {
         }
 
         // Shuffle data randomly
-        const shuffled = data.sort(() => 0.5 - Math.random());
 
-        this.home_services = shuffled.map((service) => {
+        // this.home_services = data;
+        this.home_services = data.map((service) => {
           const { data: imageData } = supabase.storage
             .from("talkcoms")
             .getPublicUrl(`services/${service.pic}`);
