@@ -1,5 +1,18 @@
 <template>
-  <div id="map" :class="map_class" ref="mapContainer"></div>
+  <!-- <div id="map" :class="map_class" ref="mapContainer"></div> -->
+  <div
+    class="border border-[#9ecce4] overflow-hidden rounded-lg"
+    :class="map_class"
+  >
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7261347364497!2d36.754291975215125!3d-1.3406616986466275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1acba9c4f595%3A0x81a153bc5aaf831a!2sLangata%20Rd%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1742544986235!5m2!1sen!2ske"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      class="w-full h-full"
+    ></iframe>
+  </div>
 </template>
 
 <script setup>

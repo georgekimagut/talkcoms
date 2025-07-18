@@ -1,7 +1,7 @@
 <template>
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
-  <div v-if="page_is_loading === false" class="w-full">
+  <div v-if="page_is_loading === false" class="w-full bg-fourth">
     <Navbar :services="services" />
     <!-- contact us -->
     <div class="w-full flex mt-16 justify-center">
@@ -251,7 +251,11 @@ import BigTitle from "@/components/text/BigTitle.vue";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
 import CardTitle from "@/components/ui/card/CardTitle.vue";
 import Maps from "@/components/general/Maps.vue";
-import { contact_us_end_point, enquiry_url } from "@/store/store.js";
+import {
+  contact_us_end_point,
+  enquiry_url,
+  contact_us_url,
+} from "@/store/store.js";
 import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 
@@ -364,7 +368,7 @@ export default {
       };
 
       try {
-        const res = await fetch(enquiry_url, {
+        const res = await fetch(contact_us_url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

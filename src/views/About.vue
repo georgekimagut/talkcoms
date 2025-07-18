@@ -220,7 +220,7 @@
       </div>
     </div> -->
     <!-- location -->
-    <div class="w-full flex justify-center mt-32">
+    <div class="w-full flex justify-center py-20 bg-fourth">
       <div class="w-[90%] flex justify-center">
         <div class="w-[60%] flex justify-center">
           <div class="h-[50vh] w-[90%] rounded-2xl overflow-hidden">
@@ -259,7 +259,7 @@
       </div>
     </div>
     <!-- CTA -->
-    <Cta class="mt-16" />
+    <Cta />
     <Footer :services="services" />
   </div>
 </template>

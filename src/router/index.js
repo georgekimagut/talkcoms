@@ -32,7 +32,7 @@ const routes = [
     path: "/contact/:type",
     name: "Contact",
     component: Contact,
-    meta: { title: "Contact us" },
+    meta: { title: "Get in touch" },
     props: true,
   },
   {
