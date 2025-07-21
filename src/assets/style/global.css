@@ -699,6 +699,9 @@ a {
   .hide-img {
     @apply hidden;
   }
+  .contact-form {
+    @apply mt-6;
+  }
   .hero .carousel-holder .w-full {
     flex-wrap: wrap;
   }

@@ -5,7 +5,7 @@
       :key="index"
       class="accordion-item w-full flex justify-center flex-wrap p-2 pt-4 pb-4 rounded-lg border border-[#bebebe] mt-4"
     >
-      <div class="accordion-header w-full flex flex-nowrap">
+      <div class="accordion-header w-full flex flex-nowrap gap-1">
         <div class="w-[15%] flex justify-center">
           <div class="h-full flex-col justify-center">
             <i

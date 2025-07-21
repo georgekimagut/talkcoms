@@ -6,19 +6,19 @@
     <!-- contact us -->
     <div class="w-full flex justify-center bg-fourth py-16">
       <HeroPattern />
-      <div class="w-[90%] flex flex-wrap">
-        <div v-if="type == 'contact-us'" class="w-1/2">
+      <div class="w-[90%] flex flex-wrap hero-component to-full">
+        <div v-if="type == 'contact-us'" class="w-1/2 to-full">
           <p class="text-secondary">CONTACT US</p>
-          <div class="w-[90%]">
+          <div class="w-[90%] to-full">
             <BigTitle text="Get in touch" title_class="mt-4 text-5xl" />
             <!-- maps -->
-            <div class="w-full mt-6 h-[60vh]">
+            <div class="w-full mt-6 h-[60vh] hide-img">
               <Maps map_class="w-full h-full" />
             </div>
           </div>
         </div>
         <div
-          class="flex h-full"
+          class="flex h-full to-full contact-form"
           :class="type == 'contact-us' ? 'w-1/2' : 'w-full'"
         >
           <!-- contact us form -->
@@ -174,7 +174,10 @@
       </div>
     </div>
     <!-- contact details -->
-    <div class="w-full flex justify-center mt-16 border-b pb-8">
+    <div class="w-full flex justify-center mt-16 border-b pb-8 relative">
+      <div class="h-[50vh] w-full absolute flex justify-end z-[-10]">
+        <img src="/static/tribal.png" class="h-full w-auto max-w-none" />
+      </div>
       <div class="w-[90%] flex rounded-xl overflow-hidden">
         <Card
           class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white"
@@ -236,8 +239,10 @@
       </div>
     </div>
     <!-- maps -->
-    <div v-if="prev_map" class="w-full mt-32 h-[80vh]">
-      <Maps map_class="w-full h-full" />
+    <div class="w-full mt-32 h-[40vh] flex justify-center hidden">
+      <div class="w-[90%] h-full">
+        <Maps map_class="w-full h-full" />
+      </div>
     </div>
     <!-- footer -->
     <Footer :services="universal_services" />

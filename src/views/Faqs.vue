@@ -28,11 +28,13 @@
           </span>
         </div>
       </div>
-      <div class="mt-16 w-[80%] flex justify-center">
+      <div
+        class="mt-16 w-[80%] flex justify-center overflow-x-scroll hide-scrollbar"
+      >
         <div
           v-for="(solution, index) in solutions_list"
           :key="index"
-          class="p-2 pr-4 pl-4 mr-2 rounded-full border border-[#82bc00] flex justify-center cursor-pointer"
+          class="p-2 pr-4 pl-4 mr-2 rounded-full border border-[#82bc00] flex justify-center cursor-pointer flex-shrink-0"
           :class="solution.solution_class"
           @click="change_solution(index)"
         >
@@ -41,7 +43,7 @@
       </div>
       <!-- FAQs -->
       <div class="w-full mt-16 flex justify-center flex-wrap">
-        <Accordion has_chat :faqs="faqs" />
+        <Accordion :faqs="faqs" />
       </div>
     </div>
     <!-- CTA -->

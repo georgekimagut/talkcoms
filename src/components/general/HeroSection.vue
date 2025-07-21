@@ -22,7 +22,7 @@
           </div>
           <!-- if it's a blog -->
           <div v-show="is_blog" class="w-full mt-10 flex flex-wrap full-hero">
-            <div class="w-full">
+            <div class="w-full flex full-hero">
               <router-link :to="read_more_link">
                 <Button
                   variant="ghost"
@@ -62,7 +62,7 @@
             </router-link>
           </div>
           <div v-show="is_story" class="w-full mt-10 flex flex-wrap full-hero">
-            <div class="w-full">
+            <div class="w-full full-hero">
               <router-link :to="read_more_link">
                 <Button
                   variant="ghost"
@@ -131,7 +131,7 @@
             v-show="is_testimonial"
             class="w-full mt-6 flex flex-wrap full-hero"
           >
-            <div class="w-full">
+            <div class="w-full full-hero">
               <router-link to="/contact/contact-us">
                 <Button
                   variant="ghost"

@@ -20,33 +20,35 @@
       <div class="w-[90%]">
         <p class="text-secondary flex justify-center">STORIES</p>
 
-        <h1 class="text-4xl font-bold mt-4 p-2 flex justify-center">
+        <h1 class="text-4xl font-bold mt-4 p-2 flex text-center">
           Stories from our clients
         </h1>
       </div>
-      <div class="w-[90%] mt-8 flex justify-end">
+      <div class="w-[90%] mt-8 flex overflow-x-scroll hide-scrollbar">
         <div
           v-for="(service, index) in services"
           :key="index"
-          class="mr-4 cursor-pointer rounded-full text-center py-1 flex flex-col justify-center px-4 border border-[#82bc00] text-sm"
+          class="mr-4 cursor-pointer rounded-full text-center py-1 flex flex-col justify-center px-4 border border-[#82bc00] text-sm flex-shrink-0"
           @click="change_category(index, service.id)"
           :class="service.active_category"
         >
           {{ service.name }}
         </div>
       </div>
-      <div class="w-[90%] flex mt-16">
-        <CustomCard
-          v-for="(story, index) in success_stories"
-          :key="index"
-          :card_pic="story.pic"
-          :card_title="story.client"
-          :card_description="story.title"
-          card_class="w-[31%] min-w-[28%] ml-[1.5%] mb-4"
-          link_text="READ MORE"
-          :link_to="`/resources/${success_story}/${story.title}`"
-          has_link
-        />
+      <div class="w-[90%] flex mt-16 hero-component">
+        <div class="w-full flex flex-wrap hero-cards">
+          <CustomCard
+            v-for="(story, index) in success_stories"
+            :key="index"
+            :card_pic="story.pic"
+            :card_title="story.client"
+            :card_description="story.title"
+            card_class="w-[31%] min-w-[28%] ml-[1.5%] mb-4 flex-shrink-0 to-full hover:shadow-md"
+            link_text="READ MORE"
+            :link_to="`/resources/${success_story}/${story.title}`"
+            has_link
+          />
+        </div>
       </div>
     </div>
     <!-- footer -->

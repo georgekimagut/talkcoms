@@ -18,7 +18,7 @@
     />
     <!-- blog panel -->
     <div
-      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-10"
+      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-10 overflow-x-scroll hide-scrollbar"
       id="blogs"
     >
       <!-- panel -->
@@ -27,18 +27,18 @@
           <div
             v-for="(category, index) in categories"
             :key="index"
-            class="p-2 pr-4 pl-4 mr-2 rounded-full border border-[#82bc00] flex justify-center cursor-pointer"
+            class="p-2 pr-4 pl-4 mr-2 rounded-full border border-[#82bc00] flex justify-center cursor-pointer flex-shrink-0"
             :class="category.category_class"
             @click="change_category(index, category.name, 'Type')"
           >
             {{ category.name }}
           </div>
         </div>
-        <div class="w-full flex mt-10">
-          <div class="w-1/2">
+        <div class="w-full flex mt-10 hero-component">
+          <div class="w-1/2 to-full">
             <h1 class="text-2xl font-bold p-2 ml-[1%]">Talkcoms Blog</h1>
           </div>
-          <div class="w-1/2 flex justify-end">
+          <div class="w-1/2 flex justify-end to-full">
             <div
               v-for="(category, index) in blog_categories"
               :key="index"
@@ -51,20 +51,22 @@
           </div>
         </div>
         <!-- other blogs -->
-        <div class="w-full mt-10 flex flex-wrap">
-          <CustomCard
-            v-for="(blog, index) in blogs"
-            :key="index"
-            :card_pic="`${image_url}/${blog.hero_media.url}`"
-            :card_title="blog.Title"
-            :blog_category="blog.category ? blog.category : blog.Type"
-            :blog_date="`${format_date(blog.createdAt)}`"
-            card_class="w-[31%] min-w-[28%] m-[1%] mb-4"
-            :link_to="`/resources/${is_blog}/${blog.slug}`"
-            :writer="blog.author"
-            :read_time="`${blog.read_time} mins`"
-            is_blog
-          />
+        <div class="w-full mt-10 flex flex-wrap hero-component">
+          <div class="w-full flex flex-wrap hero-cards">
+            <CustomCard
+              v-for="(blog, index) in blogs"
+              :key="index"
+              :card_pic="`${image_url}/${blog.hero_media.url}`"
+              :card_title="blog.Title"
+              :blog_category="blog.category ? blog.category : blog.Type"
+              :blog_date="`${format_date(blog.createdAt)}`"
+              card_class="w-[31%] min-w-[28%] m-[1%] mb-4 flex-shrink-0 to-full hover:shadow-md"
+              :link_to="`/resources/${is_blog}/${blog.slug}`"
+              :writer="blog.author"
+              :read_time="`${blog.read_time} mins`"
+              is_blog
+            />
+          </div>
         </div>
       </div>
     </div>
