@@ -406,11 +406,11 @@
           <div class="w-full pl-4 pr-4 flex flex-col gap-1">
             <router-link to="/contact/book-a-demo">
               <Button
-                class="relative overflow-hidden p-5 px-8 bg-secondary text-white cursor-pointer group"
+                class="relative overflow-hidden p-5 px-8 bg-default text-white cursor-pointer group"
               >
                 <span class="relative z-10">Book A Demo </span>
                 <span
-                  class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
                 ></span>
               </Button>
               <!-- <Button v-if="pre_buttons" variant="light"

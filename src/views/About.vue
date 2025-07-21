@@ -12,8 +12,8 @@
       hero_small_image="/static/about-us.png"
     />
     <!-- main about us -->
-    <div class="w-full flex justify-center mt-32 hero-component">
-      <div class="w-[90%] flex justify-center hero-holder">
+    <div class="w-full flex justify-center mt-32">
+      <div class="w-[90%] flex justify-center about-page">
         <div class="w-1/2 to-full">
           <p class="text-secondary">OUR STORY</p>
           <h1 class="text-4xl font-bold mt-4 p-2">
@@ -26,7 +26,7 @@
               {{ about_page[0].aboutstatement[0].children[0].text }}
             </p>
             <!-- mission -->
-            <div class="flex w-full mt-8">
+            <div class="flex w-full mt-8 about-card">
               <div class="w-[80px] min-w-[80px]">
                 <div class="w-[60px] h-[60px] relative">
                   <div
@@ -41,7 +41,7 @@
                   </div>
                 </div>
               </div>
-              <div class="w-[70%]">
+              <div class="w-[70%] to-full">
                 <h1 class="text-xl font-semibold">Mission</h1>
                 <p class="mt-2">
                   {{ about_page[0].mission[0].children[0].text }}
@@ -49,7 +49,7 @@
               </div>
             </div>
             <!-- vision -->
-            <div class="flex w-full mt-8">
+            <div class="flex w-full mt-8 about-card">
               <div class="w-[80px] min-w-[80px]">
                 <div class="w-[60px] h-[60px] relative">
                   <div
@@ -64,7 +64,7 @@
                   </div>
                 </div>
               </div>
-              <div class="w-[70%]">
+              <div class="w-[70%] to-full">
                 <h1 class="text-xl font-semibold">Vision</h1>
                 <p class="mt-2">
                   {{ about_page[0].vision[0].children[0].text }}
@@ -75,7 +75,7 @@
         </div>
         <div class="w-1/2 flex justify-center to-full">
           <div
-            class="w-[80%] flex justify-center overflow-hidden h-full rounded-2xl"
+            class="w-[80%] to-full flex justify-center overflow-hidden h-full rounded-2xl"
           >
             <img
               src="/static/why.png"
@@ -87,56 +87,54 @@
     </div>
     <Partners has_numbers />
     <!-- values -->
-    <div
-      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 hero-component"
-    >
-      <div class="w-3/4 hero-holder">
-        <p class="text-secondary flex justify-center">
-          <router-link to="#">OUR VALUES</router-link>
-        </p>
+    <div class="w-full flex flex-wrap justify-center overflow-hidden mt-36">
+      <div class="w-[90%] flex justify-center flex-wrap about-page">
+        <div class="w-full">
+          <p class="w-full text-secondary text-center">
+            <router-link to="#">OUR VALUES</router-link>
+          </p>
 
-        <h1 class="text-4xl font-bold mt-4 p-2 flex justify-center">
-          The
-          <span class="text-secondary mr-2 ml-2">fundamental</span> principles
-          guiding our agency
-        </h1>
-      </div>
-      <div class="w-[90%] flex justify-center mt-16 hero-holder">
-        <div class="w-1/2 flex justify-center to-full">
-          <div
-            class="w-[60%] flex justify-center overflow-hidden h-full rounded-2xl"
-          >
-            <img
-              src="/static/values.png"
-              class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
-            />
-          </div>
+          <h1 class="text-4xl font-bold mt-4 text-center">
+            The fundamental principles guiding our agency
+          </h1>
         </div>
-        <div class="w-1/2 to-full">
-          <div
-            v-for="(value, index) in values"
-            :key="index"
-            class="flex w-full mt-8"
-          >
-            <div class="w-[80px] min-w-[80px]">
-              <div class="w-[60px] h-[60px] relative">
-                <div
-                  class="h-full w-full absolute bg-secondary rounded-full opacity-50"
-                ></div>
-                <div class="absolute z-10 h-full w-full flex justify-center">
-                  <div class="h-full flex flex-col justify-center">
-                    <span class="font-bold text-2xl text-secondary">
-                      <i :class="value.icon"></i>
-                    </span>
+        <div class="w-full flex justify-center mt-16 about-page">
+          <div class="w-1/2 flex justify-center to-full">
+            <div
+              class="w-[60%] flex justify-center overflow-hidden h-full rounded-2xl to-full"
+            >
+              <img
+                src="/static/values.png"
+                class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
+              />
+            </div>
+          </div>
+          <div class="w-1/2 to-full">
+            <div
+              v-for="(value, index) in values"
+              :key="index"
+              class="flex w-full mt-8 about-card"
+            >
+              <div class="w-[80px] min-w-[80px]">
+                <div class="w-[60px] h-[60px] relative">
+                  <div
+                    class="h-full w-full absolute bg-secondary rounded-full opacity-50"
+                  ></div>
+                  <div class="absolute z-10 h-full w-full flex justify-center">
+                    <div class="h-full flex flex-col justify-center">
+                      <span class="font-bold text-2xl text-secondary">
+                        <i :class="value.icon"></i>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="w-[70%]">
-              <h1 class="text-xl font-semibold">{{ value.title }}</h1>
-              <p class="mt-2">
-                {{ value.content }}
-              </p>
+              <div class="w-[70%] to-full">
+                <h1 class="text-xl font-semibold">{{ value.title }}</h1>
+                <p class="mt-2">
+                  {{ value.content }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -167,19 +165,23 @@
           </div> -->
         </div>
         <!-- the services -->
-        <div class="w-full flex flex-wrap justify-center mt-12">
-          <div
-            v-for="(solution, index) in solutions"
-            :key="index"
-            class="w-[23%] mr-[1%] mb-6 bg-body p-4 pb-16 zoom-animate"
-          >
-            <i :class="solution.icon" class="text-secondary text-5xl"></i>
-            <h1 class="text-lg font-semibold mt-8">
-              <router-link :to="`/service/${solution.name}`">{{
-                solution.name
-              }}</router-link>
-            </h1>
-            <p class="mt-8">{{ solution.title_description }}</p>
+        <div
+          class="w-full flex justify-center mt-32 bg-white py-16 hero-component"
+        >
+          <div class="w-[90%] flex flex-wrap gap-2 hero-cards to-full">
+            <div
+              v-for="(solution, index) in solutions"
+              :key="index"
+              class="w-[24%] bg-body p-4 pb-16 flex-shrink-0 to-full hover:shadow-md to-full"
+            >
+              <i :class="solution.icon" class="text-secondary text-5xl"></i>
+              <h1 class="text-lg font-semibold mt-8">
+                <router-link :to="`/service/${solution.name}`">{{
+                  solution.name
+                }}</router-link>
+              </h1>
+              <p class="mt-8">{{ solution.title_description }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -220,7 +222,7 @@
       </div>
     </div> -->
     <!-- location -->
-    <div class="w-full flex justify-center py-20 bg-fourth">
+    <div class="w-full flex justify-center py-20 bg-fourth hide-img">
       <div class="w-[90%] flex justify-center">
         <div class="w-[60%] flex justify-center">
           <div class="h-[50vh] w-[90%] rounded-2xl overflow-hidden">

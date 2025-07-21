@@ -32,11 +32,11 @@
           >
             <form
               @submit.prevent="enquire"
-              class="flex flex-wrap"
+              class="flex flex-wrap inner-contact-form"
               :class="type == 'contact-us' ? 'w-full' : 'w-[60%] bg-white p-8'"
             >
               <div class="w-full flex flex-wrap">
-                <div class="w-1/2 p-2">
+                <div class="w-1/2 p-2 to-full-form">
                   <label class="text-sm">First Name</label>
                   <Input
                     type="text"
@@ -46,7 +46,7 @@
                     v-model="f_name"
                   />
                 </div>
-                <div class="w-1/2 p-2">
+                <div class="w-1/2 p-2 to-full-form">
                   <label class="text-sm">Last Name</label>
                   <Input
                     type="text"
@@ -56,7 +56,7 @@
                     v-model="l_name"
                   />
                 </div>
-                <div class="w-1/2 p-2">
+                <div class="w-1/2 p-2 to-full-form">
                   <label class="text-sm">Email</label>
                   <Input
                     type="email"
@@ -66,7 +66,7 @@
                     v-model="email"
                   />
                 </div>
-                <div class="w-1/2 p-2">
+                <div class="w-1/2 p-2 to-full-form">
                   <label class="text-sm">Position/Role</label>
                   <Input
                     type="text"
@@ -76,7 +76,7 @@
                     v-model="role"
                   />
                 </div>
-                <div class="w-1/2 p-2">
+                <div class="w-1/2 p-2 to-full-form">
                   <label class="text-sm">Company</label>
                   <Input
                     type="text"
@@ -86,7 +86,7 @@
                     v-model="company_name"
                   />
                 </div>
-                <div class="w-1/2 p-2">
+                <div class="w-1/2 p-2 to-full-form">
                   <label class="text-sm">Company Phone</label>
                   <Input
                     type="text"
@@ -178,9 +178,9 @@
       <div class="h-[50vh] w-full absolute flex justify-end z-[-10]">
         <img src="/static/tribal.png" class="h-full w-auto max-w-none" />
       </div>
-      <div class="w-[90%] flex rounded-xl overflow-hidden">
+      <div class="w-[90%] flex rounded-xl overflow-hidden contact-panel">
         <Card
-          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white"
+          class="w-[32%] m-[1.5%] card rounded-xl border border-[##f5f5f5] shadow-none bg-white"
         >
           <!-- phones -->
           <CardHeader>
@@ -199,7 +199,7 @@
         </Card>
         <!-- emails -->
         <Card
-          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white"
+          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white card"
         >
           <CardHeader>
             <CardDescription class="text-xl"
@@ -219,7 +219,7 @@
         </Card>
         <!-- location -->
         <Card
-          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white"
+          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white card"
         >
           <CardHeader>
             <CardDescription class="text-xl"

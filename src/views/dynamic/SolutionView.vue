@@ -56,7 +56,7 @@
     </div>
     <!-- solutions -->
     <div class="w-full flex justify-center mt-32 bg-white py-16 hero-component">
-      <div class="w-[90%] flex flex-wrap gap-2 hero-cards">
+      <div class="w-[90%] flex flex-wrap gap-2 hero-cards to-full">
         <IconCard
           v-if="related_solutions.length >= 1"
           v-for="(related_solution, index) in related_solutions"

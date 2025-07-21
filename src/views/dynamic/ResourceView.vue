@@ -3,18 +3,30 @@
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full bg-white">
     <Navbar :services="services" />
-    <div class="w-full flex justify-center flex-wrap">
-      <div class="w-[90%] flex flex-wrap">
+    <div class="w-full flex justify-center flex-wrap hero-component">
+      <div class="w-[90%] flex flex-wrap hero-holder">
         <!-- Sticky sidebar -->
-        <div class="w-[30%] sticky top-[15vh] self-start">
+        <div class="w-[30%] sticky top-[15vh] self-start to-full tbc !h-fit">
           <div class="w-full pt-4 pb-4">
             <div
               class="w-full overflow-y-scroll hide-scrollbar bg-white p-4 border-1 border-[#e3e3e3]"
             >
               <div class="w-full pb-4 border-b border-[#82bc00]">
-                <p class="font-semibold">Table of Contents</p>
+                <p
+                  class="font-semibold cursor-pointer"
+                  @click="toggle_tbc = !toggle_tbc"
+                >
+                  Table of Contents
+                  <i
+                    class="fa-solid"
+                    :class="toggle_tbc ? 'fa-angle-up' : 'fa-angle-down'"
+                  ></i>
+                </p>
               </div>
-              <ul class="content-body px-4 mt-4">
+              <ul
+                v-if="toggle_tbc"
+                class="content-body px-4 mt-4 border-b pb-10"
+              >
                 <li
                   v-for="(item, index) in table_of_contents"
                   :key="index"
@@ -34,8 +46,8 @@
         </div>
 
         <!-- Scrollable content -->
-        <div class="w-[70%] pl-8">
-          <div class="w-[95%] ml-[5%] mt-10 space-y-20">
+        <div class="w-[70%] pl-8 to-full resource">
+          <div class="w-[95%] ml-[5%] mt-10 space-y-20 w-no-w">
             <!-- resource details -->
             <div class="w-full">
               <BigTitle :text="resource.Title" title_class="mt-4 text-2xl" />
@@ -86,101 +98,28 @@
             ></div>
             <div class="w-full mt-20 flex justify-center flex-wrap">
               <p class="text-lg">Was this helpful?</p>
-              <div class="w-full flex justify-center flex-nowrap mt-8">
+              <div class="w-full flex justify-center gap-4 mt-8">
                 <Button
-                  class="relative overflow-hidden p-5 px-8 bg-secondary text-white cursor-pointer group"
+                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
                 >
-                  <span class="relative z-10"
-                    >Yes, Thank You!
-                    <i class="fa-regular fa-paper-plane ml-3"></i
-                  ></span>
+                  <span class="relative z-10">Yes. Thank you. </span>
                   <span
-                    class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
                   ></span>
                 </Button>
                 <Button
-                  class="bg-secondary ml-4 text-white rounded-lg p-3 h-fit w-fit cursor-pointer group"
+                  variant="ghost"
+                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
                 >
-                  <span class="relative z-10"
-                    >No, not really
-                    <i class="fa-regular fa-paper-plane ml-3"></i
-                  ></span>
+                  <span class="relative z-10 hover:text-[#131f6b]"
+                    >Not Really
+                  </span>
                   <span
-                    class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
                   ></span>
                 </Button>
-
-                <!-- <SquareButton
-                  button_text="No, not really"
-                  button_class="bg-secondary ml-4 text-white rounded-lg p-3 h-fit w-fit cursor-pointer"
-                  hover_color="bg-default"
-                /> -->
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- related blogs -->
-    <div
-      class="w-full flex flex-wrap justify-center overflow-hidden mt-8 bg-white py-16"
-    >
-      <div class="w-[90%] flex justify-center flex-wrap">
-        <div class="w-full flex">
-          <div class="w-3/4">
-            <h1 class="text-4xl font-bold mt-4 p-2 ml-[1%]">Recent Posts</h1>
-          </div>
-          <div class="w-1/4 flex justify-end">
-            <Button @click="prevResourceSlide" variant="light" class="mt-4"
-              ><i class="fa-solid fa-angle-left"></i
-            ></Button>
-            <Button @click="nextResourceSlide" variant="light" class="mt-4 ml-4"
-              ><i class="fa-solid fa-angle-right"></i
-            ></Button>
-          </div>
-        </div>
-
-        <div class="w-full flex mt-16 overflow-hidden">
-          <div
-            class="flex flex-nowrap transition-transform duration-500 ease-in-out w-full"
-            :style="{
-              transform: `translateX(-${current_resource_slide * 100}%)`,
-            }"
-          >
-            <Card
-              v-for="(blog, index) in blogs"
-              :key="index"
-              class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none rounded-xl border overflow-hidden zoom-animate"
-            >
-              <CardHeader class="p-0">
-                <CardTitle class="h-[35vh] overflow-hidden"
-                  ><img
-                    :src="`${image_url}/${blog.hero_media.url}`"
-                    class="h-full w-auto min-w-full max-w-none object-cover"
-                  />
-                </CardTitle>
-              </CardHeader>
-              <CardTitle class="custom-default-hover mt-4 p-4 text-xl"
-                ><router-link :to="`/resources/${is_blog}/${blog.slug}`">{{
-                  blog.Title
-                }}</router-link></CardTitle
-              >
-              <CardDescription class="px-4 text-black">
-                <div class="w-full flex pb-4 mt-4">
-                  <div
-                    class="w-[40px] h-[40px] bg-[#556080] rounded-full overflow-hidden flex justify-center"
-                  >
-                    <div class="h-full flex flex-col justify-center">
-                      <i class="fa-solid fa-user text-white"></i>
-                    </div>
-                  </div>
-                  <div class="ml-4">
-                    <p class="font-semibold">{{ blog.author }}</p>
-                    <p class="text-sm">{{ `${blog.read_time} mins` }}</p>
-                  </div>
-                </div>
-              </CardDescription>
-            </Card>
           </div>
         </div>
       </div>
@@ -223,6 +162,7 @@ export default {
     return {
       page_is_loading: true,
       has_no_hero: false,
+      toggle_tbc: false,
       is_blog: "blog",
       resource: "",
       sanitized_resource: "",

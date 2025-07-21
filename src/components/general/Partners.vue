@@ -33,11 +33,11 @@
         ref="statsSection"
         class="w-[86%] flex justify-center mt-6"
       >
-        <div class="w-full p-4 flex justify-center">
+        <div class="w-full p-4 flex justify-center stats-panel gap-2">
           <div
             v-for="(stat, index) in animatedStats"
             :key="index"
-            class="w-[25%] flex p-2 m-4 rounded-xl overflow-hidden border border-[#007cba]"
+            class="w-[25%] flex p-2 rounded-xl overflow-hidden border border-[#007cba] stat-card"
           >
             <div class="h-full w-[25%] p-4">
               <div class="h-full w-full flex justify-center">

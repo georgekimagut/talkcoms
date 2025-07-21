@@ -520,11 +520,21 @@ a {
     width: fit-content;
   }
 }
-@media only screen and (max-width: 908px) {
+@media only screen and (max-width: 910px) {
   .services .inner-service .zoom-animate {
     width: 48%;
     margin: 1%;
     min-width: 48%;
+  }
+
+  .about-page {
+    @apply flex-wrap;
+  }
+  .about-page .to-full {
+    @apply w-full;
+  }
+  .about-card .to-full img {
+    @apply mt-4;
   }
 }
 @media only screen and (max-width: 600px) {
@@ -537,6 +547,9 @@ a {
   }
   .services .to-hide {
     display: none;
+  }
+  .inner-contact-form .to-full-form {
+    @apply w-full;
   }
 }
 @media only screen and (max-width: 1130px) {
@@ -696,6 +709,25 @@ a {
   }
 }
 @media only screen and (max-width: 1020px) {
+  .hero-component .hero-holder .resource .w-no-w {
+    @apply mt-0;
+  }
+  .w-no-w {
+    @apply ml-0;
+  }
+  .stats-panel .stat-card {
+    @apply w-[48%];
+  }
+  .about-card {
+    @apply flex flex-wrap justify-start;
+  }
+  .contact-panel,
+  .stats-panel {
+    @apply flex-wrap;
+  }
+  .contact-panel .card {
+    @apply w-[50%] flex-grow;
+  }
   .hide-img {
     @apply hidden;
   }
@@ -782,6 +814,9 @@ a {
     position: initial;
     @apply h-[40vh];
   }
+  .hero-component .hero-holder .self-start.to-full.tbc {
+    @apply !sticky !top-[5vh];
+  }
   .hero-component .hero-holder .self-start.to-full .to-h-fit {
     @apply h-[40vh];
   }
@@ -814,6 +849,9 @@ a {
 @media only screen and (max-width: 680px) {
   .cta .patterns {
     @apply hidden;
+  }
+  .stats-panel .stat-card {
+    @apply w-full;
   }
 }
 @media only screen and (max-width: 780px) {
