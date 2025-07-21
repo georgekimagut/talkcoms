@@ -67,6 +67,16 @@
               is_blog
             />
           </div>
+          <div class="w-full mt-10 flex justify-center">
+            <Button
+              class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+            >
+              <span class="relative z-10">Loard More</span>
+              <span
+                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span>
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -135,7 +145,7 @@ export default {
     /* strapi methods */
     async fetch_blogs() {
       try {
-        const response = await fetch(apiEndpoint + "10");
+        const response = await fetch(apiEndpoint + "9");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

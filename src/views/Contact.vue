@@ -96,6 +96,29 @@
                     v-model="phone"
                   />
                 </div>
+                <div
+                  v-if="this.type != 'contact-us' && this.type != 'get-started'"
+                  class="w-full p-2 flex"
+                >
+                  <div class="w-1/2 p-2 to-full-form">
+                    <label class="text-sm">Company Size</label>
+                    <Input
+                      type="text"
+                      placeholder="Company Phone"
+                      class="mt-2"
+                      required
+                      v-model="company_size"
+                    />
+                  </div>
+                  <div class="w/12 p-2 to-full-form">
+                    <label class="text-sm">Preferred day & time</label>
+                    <input
+                      type="datetime-local"
+                      class="w-full border py-1 px-2 rounded-sm mt-2"
+                      v-model="date_time"
+                    />
+                  </div>
+                </div>
                 <div v-if="this.type != 'contact-us'" class="w-full p-2">
                   <label class="text-sm">Subject</label>
                   <Select v-model="selected">
@@ -116,17 +139,7 @@
                     </SelectContent>
                   </Select>
                 </div>
-                <div
-                  v-if="this.type != 'contact-us' && this.type != 'get-started'"
-                  class="w-full p-2"
-                >
-                  <label class="text-sm">Preferred day & time</label>
-                  <input
-                    type="datetime-local"
-                    class="w-full border py-1 px-2 rounded-sm mt-2"
-                    v-model="date_time"
-                  />
-                </div>
+
                 <div class="w-full p-2">
                   <label class="text-sm">Message</label>
                   <Textarea
@@ -289,8 +302,11 @@ export default {
       date_time: "",
       message: "",
       button_message: "Send",
+      company_size: "",
       is_submitting: false,
+      sending_endpoint: "",
       services: [],
+      enquiry_form: {},
       universal_services: [],
       subjects: [
         { value: "1", content: "Option one" },
@@ -362,24 +378,41 @@ export default {
         return;
       }
       this.is_submitting = true;
-      alert(this.f_name);
-      const enquiry_form = {
-        first_name: this.f_name,
-        last_name: this.l_name,
-        email: this.email,
-        position: this.role,
-        company: this.company_name,
-        phone: this.phone,
-        message: this.message,
-      };
+      if (this.selected == "") {
+        this.enquiry_form = {
+          first_name: this.f_name,
+          last_name: this.l_name,
+          email: this.email,
+          position: this.role,
+          company: this.company_name,
+          phone: this.phone,
+          message: this.message,
+        };
+        this.sending_endpoint = contact_us_url;
+      } else {
+        this.enquiry_form = {
+          name1: this.f_name,
+          last_name: this.l_name,
+          phone_number: this.phone,
+          email: this.email,
+          message: this.message,
+          company: this.company_name,
+          company_size: this.company_size,
+          service: this.selected,
+          positionincompany: this.role,
+          appoitment_date: this.date_time,
+        };
+
+        this.sending_endpoint = enquiry_url;
+      }
 
       try {
-        const res = await fetch(contact_us_url, {
+        const res = await fetch(this.sending_endpoint, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(enquiry_form),
+          body: JSON.stringify(this.enquiry_form),
         });
 
         const data = await res.json();

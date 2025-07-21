@@ -50,7 +50,7 @@ const mapContainer = ref(null);
 // Define markers locally
 const markers = [
   {
-    position: [1.3407, 36.7568],
+    position: [-1.3406616986466275, 36.754291975215125],
     popupText: "<span class='text-white'>The Well Mall, Nairobi</span>",
   },
   {

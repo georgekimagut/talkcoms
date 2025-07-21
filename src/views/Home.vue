@@ -65,20 +65,6 @@
                           ></span>
                         </Button>
                       </router-link>
-                      <!-- <router-link to="/contact/contact-us"
-                        ><Button variant="dark"
-                          >Talk to Sales
-                          <i
-                            class="fa-solid fa-angle-right mt-[10%] icon"
-                          ></i></Button
-                      ></router-link>
-                      <router-link to="/about"
-                        ><Button variant="light" class="ml-4"
-                          >Learn More
-                          <i
-                            class="fa-solid fa-angle-right mt-[10%] icon"
-                          ></i></Button
-                      ></router-link> -->
                     </div>
                   </div>
                   <div class="w-1/2 h-full c-half">
@@ -91,66 +77,6 @@
                           class="rounded-2xl min-w-full min-h-full max-h-none object-cover"
                         />
                       </div>
-                      <!-- stats board -->
-                      <!-- <div
-                        class="w-[65%] h-1/2 absolute z-10 bg-body top-[30vh] rounded-tr-2xl p-4 left-[-10%] stats-board"
-                      >
-                        <div
-                          class="wrapper w-full bg-white rounded-tr-2xl rounded-bl-2xl"
-                        >
-                          <div class="w-full flex">
-                            <div class="w-one flex flex-col justify-center">
-                              <h1
-                                class="w-full p-2 text-5xl font-bold ml-[8%] pt-4"
-                              >
-                                10+
-                              </h1>
-                            </div>
-                            <div class="w-two">
-                              <p class="w-full p-2 text-sm text-secondary pt-4">
-                                Years
-                              </p>
-                              <p class="w-full text-sm pl-2">Experience</p>
-                            </div>
-                          </div>
-                          <!-- end of stat ->
-                          <div class="w-full flex">
-                            <div class="w-one flex flex-col justify-center">
-                              <h1
-                                class="w-full p-2 text-5xl font-bold ml-[8%] pt-4"
-                              >
-                                50+
-                              </h1>
-                            </div>
-                            <div class="w-two">
-                              <p class="w-full p-2 text-sm text-secondary pt-4">
-                                Complete
-                              </p>
-                              <p class="w-full pl-2 text-sm">Projects</p>
-                            </div>
-                          </div>
-                          <!-- end of stat ->
-                        </div>
-                      </div> -->
-                      <!-- reviews board -->
-                      <!-- <div
-                        class="w-[40%] absolute z-10 top-[50vh] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl left-[55%] bg-white stats-bard"
-                      >
-                        <p class="w-ful p-2">Verified by Google</p>
-                        <div class="w-full flex p-2">
-                          <div class="w-one">
-                            <img src="/icons/google.svg" class="w-[80px]" />
-                          </div>
-                          <div class="w-two flex justify-center">
-                            <img
-                              v-for="index in 5"
-                              :key="index"
-                              src="/icons/Star.svg"
-                              class="w-[18px]"
-                            />
-                          </div>
-                        </div>
-                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -203,7 +129,7 @@
           <button
             v-for="(service, index) in home_services"
             :key="index"
-            class="p-2 text-sm rounded-t-md cursor-pointer border flex-shrink-0 flex-grow min-w-[32%]"
+            class="p-2 text-sm rounded-t-md cursor-pointer border flex-shrink-0"
             :class="
               service_in_view === index
                 ? 'bg-default text-white border-[#131f6b]'
