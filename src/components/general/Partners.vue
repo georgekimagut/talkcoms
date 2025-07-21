@@ -12,7 +12,7 @@
     <!-- Scrolling Logos -->
     <div class="w-full flex flex-wrap justify-center mt-6">
       <div class="w-[90%] flex flex-nowrap overflow-hidden partners">
-        <div class="overflow-hidden w-full">
+        <div class="overflow-x-scroll hide-scrollbar w-full">
           <div class="flex animate-scroll-carousel w-[160%]">
             <div
               v-for="(card, index) in client_images.concat(client_images)"

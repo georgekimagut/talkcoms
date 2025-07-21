@@ -1,6 +1,11 @@
 <template>
-  <!-- <div id="map" :class="map_class" ref="mapContainer"></div> -->
   <div
+    id="map"
+    class="border border-[#9ecce4] overflow-hidden rounded-lg"
+    :class="map_class"
+    ref="mapContainer"
+  ></div>
+  <!-- <div
     class="border border-[#9ecce4] overflow-hidden rounded-lg"
     :class="map_class"
   >
@@ -12,10 +17,11 @@
       referrerpolicy="no-referrer-when-downgrade"
       class="w-full h-full"
     ></iframe>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
+/* google maps */
 import { onMounted, ref } from "vue";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";

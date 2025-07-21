@@ -4,11 +4,11 @@
     <Navbar :services="services" />
     <!-- hero section -->
     <!-- <div class="w-full">{{ services }}</div> -->
-    <div class="w-full h-[80vh] hero bg-fourth overflow-hidden">
-      <div class="h-[80vh] w-full absolute opacity-50">
+    <div class="w-full h-[80vh] hero bg-fourth overflow-show">
+      <div class="h-[80vh] w-full absolute opacity-50 hide-img">
         <img src="/icons/g26.svg" class="" />
       </div>
-      <div class="h-[80vh] w-full absolute flex justify-end">
+      <div class="h-[80vh] w-full absolute flex justify-end hide-img">
         <img src="/static/tribal.png" class="h-full w-auto max-w-none" />
       </div>
       <!-- <div
@@ -199,14 +199,14 @@
       class="w-full flex flex-wrap justify-center overflow-hidden bg-white py-16 services"
     >
       <div class="w-[90%] flex justify-center flex-wrap">
-        <div class="w-full flex justify-center gap-1">
+        <div class="w-[80%] flex gap-1 overflow-x-scroll hide-scrollbar py-4">
           <button
             v-for="(service, index) in home_services"
             :key="index"
-            class="p-2 text-sm rounded-t-md cursor-pointer border"
+            class="p-2 text-sm rounded-t-md cursor-pointer border flex-shrink-0 flex-grow min-w-[32%]"
             :class="
               service_in_view === index
-                ? 'bg-third text-white border-[#007cba]'
+                ? 'bg-default text-white border-[#131f6b]'
                 : 'text-default'
             "
             @click="toggle_service(index)"
@@ -215,14 +215,14 @@
             {{ service.name }}
           </button>
         </div>
-        <div class="w-full flex overflow-hidden mt-8">
+        <div class="w-full flex overflow-hidden mt-8 hero-component">
           <div
             v-if="home_services[service_in_view]"
-            class="w-full flex flex-shrink-0 flex-grow rounded-md overflow-hidden"
+            class="w-full flex flex-shrink-0 flex-grow rounded-md overflow-hidden hero-holder"
           >
-            <div class="w-1/2 flex justify-end">
-              <div class="w-[90%] flex">
-                <div class="w-[70%] flex flex-wrap">
+            <div class="w-1/2 flex justify-end to-full">
+              <div class="w-[90%] flex to-full">
+                <div class="w-[70%] flex flex-wrap to-full">
                   <div class="w-full flex flex-col justify-center">
                     <h1 class="text-4xl font-extrabold text-default">
                       <i
@@ -234,7 +234,7 @@
                     <p class="mt-8">
                       {{ home_services[service_in_view].title_description }}
                     </p>
-                    <div class="w-full flex flex-row mt-8">
+                    <div class="w-full flex flex-row mt-8 full-hero gap-2">
                       <router-link to="/contact/contact-us">
                         <Button
                           class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
@@ -245,7 +245,7 @@
                           ></span>
                         </Button>
                       </router-link>
-                      <router-link to="/contact/get-started" class="ml-4">
+                      <router-link to="/contact/get-started">
                         <Button
                           variant="ghost"
                           class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
@@ -263,9 +263,9 @@
                 </div>
               </div>
             </div>
-            <div class="w-1/2">
+            <div class="w-1/2 to-full">
               <div
-                class="w-[90%] flex justify-center rounded-xl overflow-hidden"
+                class="w-[90%] flex justify-center rounded-xl overflow-hidden to-full"
               >
                 <img
                   :src="home_services[service_in_view].imageUrl"

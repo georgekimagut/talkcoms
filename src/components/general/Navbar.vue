@@ -403,7 +403,7 @@
             >
           </div>
           <!-- item -->
-          <div class="w-full pl-4 pr-4">
+          <div class="w-full pl-4 pr-4 flex flex-col gap-1">
             <router-link to="/contact/book-a-demo">
               <Button
                 class="relative overflow-hidden p-5 px-8 bg-secondary text-white cursor-pointer group"
@@ -418,7 +418,18 @@
                 <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
             > -->
             </router-link>
-            <router-link to="/contact/contact-us" class="ml-4">
+            <router-link to="/contact/contact-us">
+              <Button
+                variant="ghost"
+                class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+              >
+                <span class="relative z-10 hover:text-[#131f6b]"
+                  >Contact Us
+                </span>
+                <span
+                  class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                ></span>
+              </Button>
               <!-- <Button variant="dark"
                 >Contact Us
                 <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button

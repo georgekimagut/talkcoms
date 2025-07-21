@@ -1,10 +1,10 @@
 <template>
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
-  <div v-if="page_is_loading === false" class="w-full bg-fourth">
-    <Navbar :services="services" />
+  <div v-if="page_is_loading === false" class="w-full">
+    <Navbar :services="universal_services" />
     <!-- contact us -->
-    <div class="w-full flex mt-16 justify-center">
+    <div class="w-full flex justify-center bg-fourth py-16">
       <HeroPattern />
       <div class="w-[90%] flex flex-wrap">
         <div v-if="type == 'contact-us'" class="w-1/2">
@@ -240,7 +240,7 @@
       <Maps map_class="w-full h-full" />
     </div>
     <!-- footer -->
-    <Footer :services="services" />
+    <Footer :services="universal_services" />
   </div>
 </template>
 <script>
@@ -286,6 +286,7 @@ export default {
       button_message: "Send",
       is_submitting: false,
       services: [],
+      universal_services: [],
       subjects: [
         { value: "1", content: "Option one" },
         { value: "2", content: "Option two" },
@@ -337,9 +338,9 @@ export default {
   },
   mounted() {
     this.load_page();
-    this.services = universal_content().services;
+    this.universal_services = universal_content().services;
     this.fetch_contact_us();
-    // this.get_services();
+    this.get_services();
   },
   methods: {
     load_page() {
@@ -356,7 +357,7 @@ export default {
         return;
       }
       this.is_submitting = true;
-
+      alert(this.f_name);
       const enquiry_form = {
         first_name: this.f_name,
         last_name: this.l_name,

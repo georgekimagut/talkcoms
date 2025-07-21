@@ -110,7 +110,7 @@
         <!-- <ScrollPattern :bg_color="random_bg" /> -->
         <!-- Sticky sidebar -->
         <div class="w-[40%] sticky top-[15vh] self-start to-full">
-          <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit">
+          <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit g">
             <img
               :src="single_service.feature_section_image"
               class="w-full h-full object-cover rounded-xl service-pic"
@@ -278,7 +278,7 @@
             </p>
           </div>
 
-          <div class="w-[90%] flex mt-20 full-hero">
+          <div class="w-[90%] flex mt-20 full-hero gap-2">
             <router-link to="/contact/get-started">
               <Button
                 class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
@@ -289,7 +289,7 @@
                 ></span>
               </Button>
             </router-link>
-            <router-link to="/contact/contact-us" class="ml-4">
+            <router-link to="/contact/contact-us">
               <Button
                 variant="ghost"
                 class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
@@ -613,49 +613,55 @@
     <!-- related story -->
     <div
       v-if="related_story"
-      class="w-full flex flex-wrap mt-16 bg-white py-16 hero-component"
+      class="w-full flex justify-center mt-16 bg-white py-16 hero-component"
     >
-      <div class="w-1/2 flex h-full justify-center to-full">
-        <div class="w-[90%] flex flex-wrap justify-center">
-          <div class="w-[80%] rounded-2xl flex justify-center overflow-hidden">
-            <img
-              :src="related_story.pic"
-              class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="w-1/2 to-full">
-        <div class="w-[90%] mt-6">
-          <h1 class="text-5xl font-bold mt-4 text-default">
-            {{ related_story.title }}
-          </h1>
-          <p class="mt-6">{{ related_story.short_description }}</p>
-          <p class="mt-6">{{ related_story.client }}</p>
-
-          <div class="w-full h-[26px] flex flex-col justify-center mt-16">
-            <p>
-              Product/Service:
-              <span class="p-2 border border-[#007cba] rounded-full ml-4">
-                {{ this.id }}
-              </span>
-            </p>
-          </div>
-        </div>
-        <div class="w-full mt-10 flex">
-          <router-link
-            :to="`/resources/${success_story}/${related_story.title}`"
-            ><Button
-              variant="ghost"
-              class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+      <div class="w-[90%] h-fit flex hero-holder">
+        <div class="w-1/2 flex h-full justify-center to-full">
+          <div class="w-[90%] flex flex-wrap justify-center">
+            <div
+              class="w-[80%] max-h-[50vh] rounded-2xl flex justify-center overflow-hidden to-full"
             >
-              <span class="relative z-10 hover:text-[#131f6b]"
-                >Read Full Story
-              </span>
-              <span
-                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-              ></span> </Button
-          ></router-link>
+              <img
+                :src="related_story.pic"
+                class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="w-1/2 to-full">
+          <div class="w-[90%] mt-6">
+            <h1 class="text-5xl font-bold mt-4 text-default">
+              {{ related_story.title }}
+            </h1>
+            <p class="mt-6">{{ related_story.short_description }}</p>
+            <p class="mt-6">{{ related_story.client }}</p>
+
+            <div
+              class="w-full h-[26px] flex flex-col justify-center mt-16 to-next-line"
+            >
+              <p>Product/Service:</p>
+              <p class="mt-4">
+                <span class="p-2 border border-[#007cba] rounded-full">
+                  {{ this.id }}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="w-full mt-10 flex">
+            <router-link
+              :to="`/resources/${success_story}/${related_story.title}`"
+              ><Button
+                variant="ghost"
+                class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+              >
+                <span class="relative z-10 hover:text-[#131f6b]"
+                  >Read Full Story
+                </span>
+                <span
+                  class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                ></span> </Button
+            ></router-link>
+          </div>
         </div>
       </div>
     </div>

@@ -113,7 +113,7 @@
             v-show="is_industry"
             class="w-full mt-10 flex flex-wrap full-hero"
           >
-            <div class="w-full">
+            <div class="w-full full-hero">
               <router-link to="/contact/book-a-demo">
                 <Button
                   class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
