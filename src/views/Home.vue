@@ -83,7 +83,9 @@
             >
               <div class="carousel-holder flex flex-nowrap w-full h-[60vh]">
                 <div class="w-full flex-shrink-0 h-full flex">
-                  <div class="w-1/2 h-full block c-half">
+                  <div
+                    class="w-1/2 h-full flex flex-col justify-center block c-half"
+                  >
                     <p class="text-secondary text-lg w-3/4 uppercase">
                       {{ slide.sub_title }}
                     </p>
@@ -566,6 +568,7 @@
           <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
             blog.Title
           }}</CardTitle>
+          <div class="w-full p-2"></div>
           <div class="w-full p-2 flex">
             <div class="w-1/2">
               <p class="font-bold text-sm text-gray-500">
@@ -577,6 +580,7 @@
               {{ format_date(blog.createdAt) }}
             </div>
           </div>
+
           <CardFooter>
             <div
               class="flex flex-nowrap relative gap-2 text-secondary p-2 h-[40px] flex-col justify-center read-more-hover"
@@ -930,6 +934,7 @@ export default {
             : [responseData.data];
 
           this.blogs = dataArray;
+          console.log("Blog: ", this.blogs);
         } else {
           console.error("Invalid response structure:", responseData);
         }
