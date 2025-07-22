@@ -350,7 +350,7 @@
                 : 'bg-default'
             "
           >
-            <CardHeader class="h-[25vh] p-0 overflow-hidden">
+            <CardHeader class="h-[30vh] p-0 overflow-hidden">
               <img :src="item.pic" class="w-full h-auto max-h-none" />
             </CardHeader>
             <div class="w-full flex flex-wrap justify-center mt-6">
