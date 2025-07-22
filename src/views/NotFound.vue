@@ -44,9 +44,14 @@
   <!-- other body -->
   <div class="mt-20 w-full">
     <div class="w-full flex justify-center">
-      <router-link to="/"
-        ><Button variant="dark"
-          >Go Home <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
+      <router-link to="/">
+        <Button
+          class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+        >
+          <span class="relative z-10">Go Home</span>
+          <span
+            class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+          ></span> </Button
       ></router-link>
     </div>
     <div class="mt-8 w-full flex justify-center">

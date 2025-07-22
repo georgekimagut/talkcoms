@@ -1,8 +1,27 @@
 <template>
   <!-- load spinner before -->
-  <Spinner v-if="page_is_loading" />
-  <div v-if="page_is_loading === false" class="w-full">
+  <Spinner v-if="page_is_loading && !unaivailable_service" />
+  <div v-if="unaivailable_service" class="w-full">
     <Navbar :services="universal_services" />
+    <div class="w-full h-[40vh] flex justify-center">
+      <div class="h-full flex flex-col justify-center">
+        <h1 class="text-default font-bold text-5xl">Service Not Found!</h1>
+        <router-link to="/" class="mt-10 flex justify-center"
+          ><Button
+            class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+          >
+            <span class="relative z-10">Go Home</span>
+            <span
+              class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+            ></span> </Button
+        ></router-link>
+      </div>
+    </div>
+    <Footer :services="universal_services" />
+  </div>
+  <div v-if="!page_is_loading && !unaivailable_service" class="w-full">
+    <Navbar :services="universal_services" />
+
     <div class="w-full flex justify-center">
       <div class="w-[90%]">
         {{ single_service }}
@@ -710,6 +729,7 @@ export default {
       page_is_loading: true,
       is_side_hero: true,
       prev_service: true,
+      unaivailable_service: false,
       //service details
       service: "",
       service_title: "",
@@ -819,7 +839,10 @@ export default {
           console.log(error);
           return;
         }
-
+        if (data.length < 1) {
+          this.unaivailable_service = true;
+          this.page_is_loading = false;
+        }
         this.services = data.map((service) => {
           const { data: imageData } = supabase.storage
             .from("talkcoms")

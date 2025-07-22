@@ -162,7 +162,7 @@ export default {
     return {
       page_is_loading: true,
       has_no_hero: false,
-      toggle_tbc: false,
+      toggle_tbc: true,
       is_blog: "blog",
       resource: "",
       sanitized_resource: "",
