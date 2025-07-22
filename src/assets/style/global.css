@@ -239,7 +239,15 @@ a {
 .nav-bar.nav-bar-innner a:hover {
   color: #82bc00;
 }
-
+.custom-card-hover:hover {
+  box-shadow: 0px 0px 20px rgb(156, 156, 156);
+}
+.read-more-hover:hover > .to-cover {
+  @apply w-[130px] justify-start;
+}
+.read-more-hover:hover > .to-cover .fa-solid {
+  @apply ml-[10px];
+}
 .custom-btn {
   height: 35px;
 }

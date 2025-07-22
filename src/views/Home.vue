@@ -169,11 +169,16 @@
             </div>
           </div> -->
         </div>
-        <div class="w-full flex justify-center gap-1">
+        <div
+          class="w-full flex justify-center gap-1"
+          @mouseenter="pauseAutoSlide()"
+          @mouseleave="resumeAutoSlide()"
+        >
           <div
             v-for="(item, index) in carousel_data"
             :key="index"
-            class="w-[18px] h-[18px] rounded-full"
+            @click="current_slide = index"
+            class="w-[18px] h-[18px] rounded-full cursor-pointer"
             :class="current_slide === index ? 'bg-default' : 'bg-gray-400'"
           ></div>
         </div>
@@ -318,62 +323,50 @@
     <!-- end -->
     <!-- success stories  -->
     <div class="w-full flex flex-wrap justify-center overflow-hidden py-16">
-      <div class="w-[90%] flex justify-center flex-wrap">
+      <div class="w-[90%] flex justify-center flex-wrap gap-1">
         <div class="w-full">
           <p class="text-secondary text-center text-lg">
             <router-link to="/success-stories">STORIES</router-link>
           </p>
 
-          <h1 class="text-5xl font-bold mt-4 p-2 text-center text-default">
+          <h1 class="text-4xl font-bold mt-4 p-2 text-center text-default">
             Success Stories From Our Clients
           </h1>
         </div>
         <div
-          class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories snap-x snap-mandatory"
+          class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories snap-x snap-mandatory gap-4"
         >
           <Card
-            v-for="(story, index) in success_stories.slice(0, 3)"
+            v-for="(item, index) in portfolio"
             :key="index"
-            class="w-[32%] mb-4 border-0 shadow-none bg-body rounded-xl flex-shrink-0 to-full cursor-pointer"
+            class="w-[32%] mb-4 border-0 shadow-none rounded-none bg-body overflow-hidden flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover"
+            :class="
+              index === 0
+                ? 'bg-secondary'
+                : index === 1
+                ? 'bg-third'
+                : 'bg-default'
+            "
           >
-            <CardHeader class="h-[40vh] p-0">
+            <CardHeader class="h-[30vh] p-0">
               <img
-                :src="`${image_url}/${blog.hero_media.url}`"
-                class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
+                :src="item.pic"
+                class="min-h-full h-full min-w-full w-auto max-w-none"
               />
             </CardHeader>
-            <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
-              blog.Title
-            }}</CardTitle>
-            <div class="w-full p-2 flex">
-              <div class="w-1/2">
-                <p class="font-bold text-sm text-gray-500">
-                  Author: {{ blog.author }}
+            <div class="w-full flex flex-wrap justify-center mt-6">
+              <div class="w-[60%] flex justify-center">
+                <img :src="item.icon" class="h-[50px] w-auto max-w-none" />
+              </div>
+              <div class="w-[90%] text-white mt-4 pb-4">
+                <p class="text-center w-full">
+                  {{ item.description }}
                 </p>
               </div>
-              <div
-                class="w-1/2 flex justify-end font-bold text-sm text-gray-500"
-              >
-                {{ blog.category ? blog.category : blog.Type }}/
-                {{ format_date(blog.createdAt) }}
-              </div>
             </div>
-            <CardFooter class="p-2">
-              <div class="flex flex-nowrap gap-2 text-secondary">
-                <div
-                  class="h-[30px] w-[30px] flex justify-center bg-transparent border-2 rounded-full border-[#82bc00]"
-                >
-                  <div class="h-full flex-col justify-center">
-                    <i class="fa-solid fa-arrow-right text-secondary"></i>
-                  </div>
-                </div>
-
-                <span class="font-semibold">Read More</span>
-              </div>
-            </CardFooter>
           </Card>
 
-          <Card
+          <!-- <Card
             v-if="prev_story"
             v-for="(story, index) in success_stories.slice(0, 3)"
             :key="index"
@@ -401,7 +394,7 @@
                 />
               </div>
             </router-link>
-          </Card>
+          </Card> -->
         </div>
       </div>
     </div>
@@ -558,11 +551,11 @@
           <span class="text-secondary mx-1">Trends</span>
         </h1>
       </div>
-      <div class="w-full flex gap-2 mt-8">
+      <div class="w-full flex gap-4 mt-8">
         <Card
           v-for="(blog, index) in blogs"
           :key="index"
-          class="w-[32%] mb-4 border-0 shadow-none bg-body rounded-xl flex-shrink-0 to-full cursor-pointer"
+          class="w-[32%] border-0 shadow-none bg-body rounded-md flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover"
         >
           <CardHeader class="h-[40vh] p-0">
             <img
@@ -584,17 +577,21 @@
               {{ format_date(blog.createdAt) }}
             </div>
           </div>
-          <CardFooter class="p-2">
-            <div class="flex flex-nowrap gap-2 text-secondary">
+          <CardFooter>
+            <div
+              class="flex flex-nowrap relative gap-2 text-secondary p-2 h-[40px] flex-col justify-center read-more-hover"
+            >
               <div
-                class="h-[30px] w-[30px] flex justify-center bg-transparent border-2 rounded-full border-[#82bc00]"
+                class="h-[30px] w-[30px] absolute flex bg-transparent border-2 rounded-full border-[#82bc00] duration-300 ease-in-out to-cover"
               >
                 <div class="h-full flex-col justify-center">
-                  <i class="fa-solid fa-arrow-right text-secondary"></i>
+                  <i
+                    class="fa-solid fa-arrow-right ml-[6px] text-secondary duration-300 ease-in-out"
+                  ></i>
                 </div>
               </div>
 
-              <span class="font-semibold">Read More</span>
+              <span class="font-semibold ml-[35px]">Read More</span>
             </div>
           </CardFooter>
         </Card>
@@ -778,6 +775,27 @@ export default {
       current_service_slide: 0,
       total_service_slides: 2,
       service_in_view: 0,
+      portfolio: [
+        {
+          name: "Kipkenda ",
+          pic: "/static/kipkenda.webp",
+          description: "Top tier, full service kenyan law firm",
+          icon: "/icons/partners/9.png",
+        },
+        {
+          name: "Chunic LTD ",
+          pic: "/static/chunic.jpg",
+          description:
+            "Logistics company specializing in international Relocation, Sourcing & Procurement and Shipping",
+          icon: "/icons/partners/2.png",
+        },
+        {
+          name: "TKDM",
+          pic: "/static/tkdm.jpg",
+          description: "News & Media Company",
+          icon: "/icons/partners/8.png",
+        },
+      ],
     };
   },
   async created() {
