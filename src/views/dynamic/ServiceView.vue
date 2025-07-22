@@ -780,6 +780,7 @@ export default {
     this.$watch(
       () => this.$route.params,
       async () => {
+        this.unaivailable_service = false;
         this.page_is_loading = true;
         this.randomize_color();
         const store = universal_content();
