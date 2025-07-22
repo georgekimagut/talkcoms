@@ -350,15 +350,15 @@
                 : 'bg-default'
             "
           >
-            <CardHeader class="h-[30vh] p-0">
-              <img
-                :src="item.pic"
-                class="min-h-full h-full min-w-full w-auto max-w-none"
-              />
+            <CardHeader class="h-[25vh] p-0 overflow-hidden">
+              <img :src="item.pic" class="w-full h-auto max-h-none" />
             </CardHeader>
             <div class="w-full flex flex-wrap justify-center mt-6">
               <div class="w-[60%] flex justify-center">
-                <img :src="item.icon" class="h-[50px] w-auto max-w-none" />
+                <img
+                  :src="item.icon"
+                  class="h-[70px] w-auto max-w-none object-cover"
+                />
               </div>
               <div class="w-[90%] text-white mt-4 pb-4">
                 <p class="text-center w-full">
@@ -798,13 +798,13 @@ export default {
           pic: "/static/chunic.jpg",
           description:
             "Logistics company specializing in international Relocation, Sourcing & Procurement and Shipping",
-          icon: "/icons/partners/2.png",
+          icon: "/icons/partners/chunic-white.png",
         },
         {
           name: "TKDM",
-          pic: "/static/tkdm.jpg",
+          pic: "/static/tkdm.webp",
           description: "News & Media Company",
-          icon: "/icons/partners/8.png",
+          icon: "/icons/partners/tkdm-white.png",
         },
       ],
     };
