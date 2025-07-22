@@ -106,7 +106,7 @@
                           ></span>
                         </Button>
                       </router-link>
-                      <router-link to="/about" class="ml-4">
+                      <router-link :to="`/service/${slide.title}`" class="ml-4">
                         <Button
                           variant="ghost"
                           class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
@@ -137,39 +137,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Navigation Arrows -->
-          <!-- <div class="w-full flex justify-end h-[10vh] pagination">
-            <div class="h-full flex flex-col justify-center">
-              <div class="flex flex-row flex-nowrap items-center gap-6">
-                <!-- Previous Button ->
-          <div
-            @click="prevSlide"
-            class="flex items-center border rounded-sm border-[#8dc63f] px-4 py-2 text-secondary text-2xl cursor-pointer overflow-hidden group transition-all duration-300 hover:bg-[#82bc00] hover:text-white"
-          >
-            <i class="fa-solid fa-angle-left"></i>
-            <span
-              class="ml-2 text-sm whitespace-nowrap max-w-0 overflow-hidden group-hover:max-w-[80px] group-hover:ml-2 transition-all duration-300"
-            >
-              Previous
-            </span>
-          </div>
-
-          <!-- Next Button ->
-                <div
-                  @click="nextSlide"
-                  class="flex items-center border rounded-sm border-[#8dc63f] px-4 py-2 text-secondary text-2xl cursor-pointer overflow-hidden group transition-all duration-300 hover:bg-[#82bc00] hover:text-white"
-                >
-                  <span
-                    class="mr-2 text-sm whitespace-nowrap max-w-0 overflow-hidden group-hover:max-w-[50px] group-hover:mr-2 transition-all duration-300"
-                  >
-                    Next
-                  </span>
-                  <i class="fa-solid fa-angle-right"></i>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
         <div
           class="w-full flex justify-center gap-1"

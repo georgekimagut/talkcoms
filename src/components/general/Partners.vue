@@ -76,7 +76,7 @@ export default {
         { client_pic: "/icons/partners/5.png" },
         { client_pic: "/icons/partners/6.png" },
         { client_pic: "/icons/partners/7.png" },
-        { client_pic: "/icons/partners/8.png" },
+        { client_pic: "/icons/partners/8.svg" },
       ],
       stats: [
         {
