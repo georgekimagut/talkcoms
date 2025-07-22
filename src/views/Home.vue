@@ -559,45 +559,52 @@
           :key="index"
           class="w-[32%] border-0 shadow-none bg-body rounded-md flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover"
         >
-          <CardHeader class="h-[40vh] p-0">
-            <img
-              :src="`${image_url}/${blog.hero_media.url}`"
-              class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
-            />
-          </CardHeader>
-          <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
-            blog.Title
-          }}</CardTitle>
-          <div class="w-full p-2"></div>
-          <div class="w-full p-2 flex">
-            <div class="w-1/2">
-              <p class="font-bold text-sm text-gray-500">
-                Author: {{ blog.author }}
-              </p>
-            </div>
-            <div class="w-1/2 flex justify-end font-bold text-sm text-gray-500">
-              {{ blog.category ? blog.category : blog.Type }}/
-              {{ format_date(blog.createdAt) }}
-            </div>
-          </div>
-
-          <CardFooter>
-            <div
-              class="flex flex-nowrap relative gap-2 text-secondary p-2 h-[40px] flex-col justify-center read-more-hover"
-            >
-              <div
-                class="h-[30px] w-[30px] absolute flex bg-transparent border-2 rounded-full border-[#82bc00] duration-300 ease-in-out to-cover"
-              >
-                <div class="h-full flex-col justify-center">
-                  <i
-                    class="fa-solid fa-arrow-right ml-[6px] text-secondary duration-300 ease-in-out"
-                  ></i>
-                </div>
+          <router-link
+            :to="`/resources/${is_blog}/${blog.slug}`"
+            class="w-full flex-flex-wrap"
+          >
+            <CardHeader class="h-[40vh] p-0">
+              <img
+                :src="`${image_url}/${blog.hero_media.url}`"
+                class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
+              />
+            </CardHeader>
+            <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
+              blog.Title
+            }}</CardTitle>
+            <div class="w-full p-2"></div>
+            <div class="w-full p-2 flex">
+              <div class="w-1/2">
+                <p class="font-bold text-sm text-gray-500">
+                  Author: {{ blog.author }}
+                </p>
               </div>
-
-              <span class="font-semibold ml-[35px]">Read More</span>
+              <div
+                class="w-1/2 flex justify-end font-bold text-sm text-gray-500"
+              >
+                {{ blog.category ? blog.category : blog.Type }}/
+                {{ format_date(blog.createdAt) }}
+              </div>
             </div>
-          </CardFooter>
+
+            <CardFooter>
+              <div
+                class="flex flex-nowrap relative gap-2 text-secondary p-2 h-[40px] flex-col justify-center read-more-hover"
+              >
+                <div
+                  class="h-[30px] w-[30px] absolute flex bg-transparent border-2 rounded-full border-[#82bc00] duration-300 ease-in-out to-cover"
+                >
+                  <div class="h-full flex-col justify-center">
+                    <i
+                      class="fa-solid fa-arrow-right ml-[6px] text-secondary duration-300 ease-in-out"
+                    ></i>
+                  </div>
+                </div>
+
+                <span class="font-semibold ml-[35px]">Read More</span>
+              </div>
+            </CardFooter>
+          </router-link>
         </Card>
       </div>
       <div v-if="prev_blog" class="w-full flex justify-center gap-4 mt-16">
