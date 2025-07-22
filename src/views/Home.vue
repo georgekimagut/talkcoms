@@ -26,7 +26,7 @@
           </h2>
           <router-link to="/about" class="mt-4">
             <Button
-              class="relative bg-third overflow-hidden p-4 px-8 text-white cursor-pointer group"
+              class="relative bg-third overflow-hidden p-6 px-10 text-white cursor-pointer group"
             >
               <span class="relative z-10">Go to about </span>
               <span
