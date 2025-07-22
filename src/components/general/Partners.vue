@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full py-32 p-4 bg-white">
+  <div class="w-full py-10 p-4 bg-white">
     <!-- Header -->
     <div class="w-full flex justify-center">
       <!-- <p class="text-secondary w-full flex justify-center text-lg">CLIENTS</p> -->

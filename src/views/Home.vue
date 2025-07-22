@@ -2,24 +2,76 @@
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
     <Navbar :services="services" />
+    <!-- new hero section -->
+    <div class="w-full h-[80vh] flex relative">
+      <div class="w-3/4 h-full absolute bg-linear-secondary z-[10] opacity-50">
+        <!-- background -->
+      </div>
+      <div class="w-full h-full absolute overflow-hidden">
+        <img
+          src="/static/hero-pic.png"
+          class="w-full h-auto max-h-none object-cover"
+        />
+      </div>
+      <!-- front panel -->
+      <div class="w-full h-full absolute z-[20] flex">
+        <div class="w-[35%] ml-[5%] flex flex-col py-4 justify-center">
+          <h1 class="text-4xl font-extrabold text-white">
+            Powering Digital Transformation Across Finance, Healthcare, Legal
+            Sectors & Other Industries
+          </h1>
+          <h2 class="font-semibold text-secondary mt-8 text-xl">
+            Talkcoms is a Leading IT Solutions Provider Incorporated in the UK
+            in 2016.
+          </h2>
+          <router-link to="/about" class="mt-4">
+            <Button
+              class="relative bg-third overflow-hidden p-4 px-8 text-white cursor-pointer group"
+            >
+              <span class="relative z-10">Go to about </span>
+              <span
+                class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+              ></span>
+            </Button>
+          </router-link>
+        </div>
+      </div>
+      <!-- center pattern -->
+      <div class="w-full h-[60vh] absolute z-[15] overflow-hidden">
+        <div class="absolute w-fit h-full flex flex-col justify-end ml-[47%]">
+          <div
+            v-for="index in 6"
+            :key="index"
+            class="w-full h-[45px] flex flex-row gap-6"
+          >
+            <div
+              v-for="index in 6"
+              :key="index"
+              class="w-[5px] h-[5px] rounded-full bg-third"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- hero section -->
     <!-- <div class="w-full">{{ services }}</div> -->
     <div class="w-full h-[80vh] hero bg-fourth overflow-show">
-      <div class="h-[80vh] w-full absolute opacity-50 hide-img">
+      <!-- navigation bar -->
+      <!-- <div class="h-[80vh] w-full absolute opacity-50 hide-img">
         <img src="/icons/g26.svg" class="" />
-      </div>
-      <div class="h-[80vh] w-full absolute flex justify-end hide-img">
+      </div> -->
+      <!-- <div class="h-[80vh] w-full absolute flex justify-end hide-img">
         <img src="/static/tribal.png" class="h-full w-auto max-w-none" />
-      </div>
+      </div> -->
       <!-- <div
         class="absolute z-[20] w-full h-full flex justify-end overflow-hidden"
       >
         <img src="/public/static/tribal.png" class="!h-full w-auto" />
       </div> -->
-      <div class="w-full h-full flex justify-center overflow-hidden">
-        <div class="w-[90%] flex flex-wrap mt-16 relative overflow-hidden">
+      <div class="w-full h-full flex flex-wrap justify-center overflow-hidden">
+        <div class="w-[90%] flex flex-wrap mt-8 relative overflow-hidden">
           <div
-            class="h-full w-full flex overflow-y-hidden hide-scrollbar overflow-x-scroll snap-x snap-mandatory"
+            class="h-[70vh] w-full flex overflow-y-hidden hide-scrollbar overflow-x-scroll snap-x snap-mandatory"
           >
             <div
               v-for="(slide, index) in carousel_data"
@@ -117,11 +169,19 @@
             </div>
           </div> -->
         </div>
+        <div class="w-full flex justify-center gap-1">
+          <div
+            v-for="(item, index) in carousel_data"
+            :key="index"
+            class="w-[18px] h-[18px] rounded-full"
+            :class="current_slide === index ? 'bg-default' : 'bg-gray-400'"
+          ></div>
+        </div>
       </div>
     </div>
 
     <!-- services highlights -->
-    <div
+    <!-- <div
       class="w-full flex flex-wrap justify-center overflow-hidden bg-white py-16 services"
     >
       <div class="w-[90%] flex justify-center flex-wrap">
@@ -202,7 +262,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- prev service -->
     <div
       v-if="prev_service"
@@ -264,7 +324,7 @@
             <router-link to="/success-stories">STORIES</router-link>
           </p>
 
-          <h1 class="text-4xl font-extrabold mt-4 p-2 text-center">
+          <h1 class="text-5xl font-bold mt-4 p-2 text-center text-default">
             Success Stories From Our Clients
           </h1>
         </div>
@@ -272,6 +332,49 @@
           class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories snap-x snap-mandatory"
         >
           <Card
+            v-for="(story, index) in success_stories.slice(0, 3)"
+            :key="index"
+            class="w-[32%] mb-4 border-0 shadow-none bg-body rounded-xl flex-shrink-0 to-full cursor-pointer"
+          >
+            <CardHeader class="h-[40vh] p-0">
+              <img
+                :src="`${image_url}/${blog.hero_media.url}`"
+                class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
+              />
+            </CardHeader>
+            <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
+              blog.Title
+            }}</CardTitle>
+            <div class="w-full p-2 flex">
+              <div class="w-1/2">
+                <p class="font-bold text-sm text-gray-500">
+                  Author: {{ blog.author }}
+                </p>
+              </div>
+              <div
+                class="w-1/2 flex justify-end font-bold text-sm text-gray-500"
+              >
+                {{ blog.category ? blog.category : blog.Type }}/
+                {{ format_date(blog.createdAt) }}
+              </div>
+            </div>
+            <CardFooter class="p-2">
+              <div class="flex flex-nowrap gap-2 text-secondary">
+                <div
+                  class="h-[30px] w-[30px] flex justify-center bg-transparent border-2 rounded-full border-[#82bc00]"
+                >
+                  <div class="h-full flex-col justify-center">
+                    <i class="fa-solid fa-arrow-right text-secondary"></i>
+                  </div>
+                </div>
+
+                <span class="font-semibold">Read More</span>
+              </div>
+            </CardFooter>
+          </Card>
+
+          <Card
+            v-if="prev_story"
             v-for="(story, index) in success_stories.slice(0, 3)"
             :key="index"
             class="mb-4 m-[1.2%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden card zoom-animate relative h-[45vh] story-card snap-center"
@@ -445,7 +548,7 @@
     <Partners class="mt-0" />
     <!-- blogs -->
     <!-- blogs -->
-    <div class="w-full flex justify-center flex-wrap mt-36 p-4 pb-20 blogs">
+    <div class="w-full flex justify-center flex-wrap mt-10 p-4 pb-20 blogs">
       <div class="w-[90%]">
         <p class="text-secondary w-full flex justify-center">
           <router-link to="/blogs" class="text-lg">BLOG</router-link>
@@ -455,7 +558,48 @@
           <span class="text-secondary mx-1">Trends</span>
         </h1>
       </div>
-      <div class="w-full flex justify-center gap-4 mt-16">
+      <div class="w-full flex gap-2 mt-8">
+        <Card
+          v-for="(blog, index) in blogs"
+          :key="index"
+          class="w-[32%] mb-4 border-0 shadow-none bg-body rounded-xl flex-shrink-0 to-full cursor-pointer"
+        >
+          <CardHeader class="h-[40vh] p-0">
+            <img
+              :src="`${image_url}/${blog.hero_media.url}`"
+              class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
+            />
+          </CardHeader>
+          <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
+            blog.Title
+          }}</CardTitle>
+          <div class="w-full p-2 flex">
+            <div class="w-1/2">
+              <p class="font-bold text-sm text-gray-500">
+                Author: {{ blog.author }}
+              </p>
+            </div>
+            <div class="w-1/2 flex justify-end font-bold text-sm text-gray-500">
+              {{ blog.category ? blog.category : blog.Type }}/
+              {{ format_date(blog.createdAt) }}
+            </div>
+          </div>
+          <CardFooter class="p-2">
+            <div class="flex flex-nowrap gap-2 text-secondary">
+              <div
+                class="h-[30px] w-[30px] flex justify-center bg-transparent border-2 rounded-full border-[#82bc00]"
+              >
+                <div class="h-full flex-col justify-center">
+                  <i class="fa-solid fa-arrow-right text-secondary"></i>
+                </div>
+              </div>
+
+              <span class="font-semibold">Read More</span>
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+      <div v-if="prev_blog" class="w-full flex justify-center gap-4 mt-16">
         <div class="w-[80%] flex blog-inner">
           <div class="w-[40%] m-1 flex justify-center col-1">
             <div

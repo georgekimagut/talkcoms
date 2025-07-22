@@ -190,27 +190,16 @@
                 class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
               ></span>
             </Button>
-            <!-- <Button v-if="pre_buttons" variant="light"
-                >Book A Demo
-                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            > -->
           </router-link>
           <router-link to="/contact/contact-us" class="ml-4">
             <Button
-              variant="ghost"
-              class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+              class="relative bg-secondary overflow-hidden p-6 px-8 text-white cursor-pointer group"
             >
-              <span class="relative z-10 hover:text-[#131f6b]"
-                >Contact Us
-              </span>
+              <span class="relative z-10">Contact Us </span>
               <span
-                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
               ></span>
             </Button>
-            <!-- <Button variant="dark"
-                >Contact Us
-                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            > -->
           </router-link>
         </div>
       </div>
@@ -420,20 +409,15 @@
             </router-link>
             <router-link to="/contact/contact-us">
               <Button
-                variant="ghost"
-                class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                class="relative bg-secondary overflow-hidden p-6 px-8 text-secondary cursor-pointer group"
               >
                 <span class="relative z-10 hover:text-[#131f6b]"
                   >Contact Us
                 </span>
                 <span
-                  class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                  class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
                 ></span>
               </Button>
-              <!-- <Button variant="dark"
-                >Contact Us
-                <i class="fa-solid fa-angle-right mt-[10%] icon"></i></Button
-            > -->
             </router-link>
           </div>
         </div>

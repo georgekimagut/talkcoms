@@ -33,7 +33,9 @@
             <form
               @submit.prevent="enquire"
               class="flex flex-wrap inner-contact-form"
-              :class="type == 'contact-us' ? 'w-full' : 'w-[60%] bg-white p-8'"
+              :class="
+                type == 'contact-us' ? 'w-full' : 'w-[60%] bg-white p-8 to-full'
+              "
             >
               <div class="w-full flex flex-wrap">
                 <div class="w-1/2 p-2 to-full-form">
@@ -98,13 +100,13 @@
                 </div>
                 <div
                   v-if="this.type != 'contact-us' && this.type != 'get-started'"
-                  class="w-full p-2 flex"
+                  class="w-full p-2 flex flex-wrap"
                 >
                   <div class="w-1/2 p-2 to-full-form">
                     <label class="text-sm">Company Size</label>
                     <Input
                       type="text"
-                      placeholder="Company Phone"
+                      placeholder="Company Size"
                       class="mt-2"
                       required
                       v-model="company_size"
@@ -252,7 +254,7 @@
       </div>
     </div>
     <!-- maps -->
-    <div class="w-full mt-32 h-[40vh] flex justify-center hidden">
+    <div class="w-full mt-10 h-[40vh] flex justify-center hidden hidden-map">
       <div class="w-[90%] h-full">
         <Maps map_class="w-full h-full" />
       </div>
