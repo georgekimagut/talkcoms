@@ -27,7 +27,7 @@
           <div
             v-for="(category, index) in categories"
             :key="index"
-            class="p-2 pr-4 pl-4 mr-2 rounded-full border border-[#82bc00] flex justify-center cursor-pointer flex-shrink-0"
+            class="p-2 px-4 mr-2 rounded-full border border-[#82bc00] flex justify-center cursor-pointer flex-shrink-0"
             :class="category.category_class"
             @click="change_category(index, category.name, 'Type')"
           >

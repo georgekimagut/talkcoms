@@ -1,10 +1,12 @@
 <template>
-  <HeroPattern />
   <div
-    class="w-full flex justify-center flex-wrap pb-10 hero-component bg-fourth"
-    :class="has_pattern ? 'h-[70vh] overflow-y-visible hide-scrollbar' : ''"
+    class="w-full flex justify-center flex-wrap pb-10 hero-component bg-fourth relative h-[80vh]"
+    :class="has_pattern ? 'overflow-y-visible hide-scrollbar' : ''"
   >
-    <div class="w-[90%] flex h-full gap-4 overflow-hidden mt-16 hero-holder">
+    <HeroPattern />
+    <div
+      class="w-[90%] flex gap-4 overflow-hidden mt-16 hero-holder absolute z-[10]"
+    >
       <div class="w-1/2 to-full">
         <SmallTitle :text="small_title" />
         <BigTitle :text="big_title" title_class="mt-4 w-[88%]" />
@@ -183,7 +185,7 @@
         <div class="w-full h-full flex rounded-xl overflow-hidden">
           <div
             v-if="hero_small_image"
-            class="h-full w-[30%] overflow-hidden rounded-xl small-img"
+            class="h-full w-[30%] overflow-hidden rounded-xl small-img flex justify-center"
           >
             <img
               :src="hero_small_image"

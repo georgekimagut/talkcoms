@@ -28,7 +28,7 @@
         <div
           v-for="(service, index) in services"
           :key="index"
-          class="mr-4 cursor-pointer rounded-full text-center py-1 flex flex-col justify-center px-4 border border-[#82bc00] text-sm flex-shrink-0"
+          class="mr-4 cursor-pointer rounded-full text-center py-2 flex flex-col justify-center px-4 border border-[#82bc00] text-sm flex-shrink-0"
           @click="change_category(index, service.id)"
           :class="service.active_category"
         >

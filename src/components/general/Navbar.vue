@@ -403,11 +403,9 @@
             </router-link>
             <router-link to="/contact/contact-us">
               <Button
-                class="relative bg-secondary overflow-hidden p-6 px-8 text-secondary cursor-pointer group"
+                class="relative bg-secondary overflow-hidden p-6 px-8 text-white cursor-pointer group"
               >
-                <span class="relative z-10 hover:text-[#131f6b]"
-                  >Contact Us
-                </span>
+                <span class="relative z-10">Contact Us </span>
                 <span
                   class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
                 ></span>

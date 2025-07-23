@@ -8,8 +8,8 @@
       small_title="Testimonials"
       big_title="We have worked with thousands of amazing people"
       hero_description="We believe that the true measure of our success lies in the satisfaction and stories of the people we serve"
-      hero_image="/static/pic-3.png"
-      hero_small_image="/static/about-us.png"
+      hero_image="/static/testimonials.jpg"
+      hero_small_image="/static/testimonial-small-2.jpg"
       is_testimonial
     />
     <!-- end of hero -->
@@ -24,7 +24,7 @@
           <Card
             v-for="(testimonial, index) in testimonials"
             :key="index"
-            class="w-[32%] mb-4 p-4 zoom-animate border-1 bg-white shadow-lg rounded-xl flex-shrink-0 to-full hover:shadow-md"
+            class="w-[32%] mb-4 p-4 zoom-animate border-1 bg-white shadow-none rounded-xl flex-shrink-0 to-full custom-card-hover"
           >
             <CardHeader>
               <CardTitle
