@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="w-[90%] flex mt-16 hero-component">
-        <div class="w-full flex flex-wrap hero-cards">
+        <div class="w-full flex flex-wrap hero-cards gap-4">
           <Card
             v-for="(story, index) in success_stories"
             :key="index"
