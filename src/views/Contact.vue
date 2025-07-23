@@ -5,7 +5,6 @@
     <Navbar :services="universal_services" />
     <!-- contact us -->
     <div class="w-full flex justify-center bg-fourth py-16">
-      <HeroPattern />
       <div class="w-[90%] flex flex-wrap hero-component to-full">
         <div v-if="type == 'contact-us'" class="w-1/2 to-full">
           <p class="text-secondary">CONTACT US</p>
