@@ -173,26 +173,24 @@
       </div>
     </div>
     <!-- location -->
-    <div class="w-full flex justify-center py-20 bg-fourth hide-img">
-      <div class="w-[90%]">
-        <div class="w-full flex">
-          <div class="w-full flex justify-center flex-wrap">
-            <p class="text-secondary text-center w-full">OFFICES</p>
-            <h1
-              class="text-4xl font-extrabold text-default mt-4 text-center w-full"
-            >
-              Where to Find Us
-            </h1>
-          </div>
+    <div class="w-full flex justify-center py-20 bg-fourth">
+      <div class="w-[90%] flex flex-wrap about-page">
+        <div class="w-full">
+          <p class="text-secondary text-center w-full">OFFICES</p>
+          <h1
+            class="text-4xl font-extrabold text-default mt-4 text-center w-full"
+          >
+            Where to Find Us
+          </h1>
         </div>
         <div class="mt-10 w-full h-[50vh]">
           <Maps map_class="w-full h-full" />
         </div>
-        <div class="w-full flex flex-nowrap mt-10 gap-6">
+        <div class="w-full flex flex-nowrap mt-10 gap-6 about-page">
           <div
             v-for="(office, index) in offices"
             :key="index"
-            class="w-[33%] p-4"
+            class="w-[33%] p-4 to-full"
           >
             <h1 class="text-2xl font-bold text-secondary">{{ office.name }}</h1>
             <p class="mt-8 text-xl">{{ office.location }}</p>

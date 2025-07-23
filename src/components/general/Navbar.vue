@@ -32,7 +32,7 @@
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
             >
               <li
                 v-for="(product, index) in products"
@@ -61,7 +61,7 @@
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-2 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              class="w-[250px] absolute bg-white p-4 pt-2 top-[12vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
             >
               <li
                 v-for="(service, index) in services"
@@ -92,7 +92,7 @@
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
             >
               <li
                 v-for="(industry, index) in industries"
@@ -142,7 +142,7 @@
               </div>
             </div>
             <div
-              class="w-[200px] absolute bg-white p-4 pt-0 top-[11vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              class="w-[200px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
             >
               <li class="my-2 list-none">
                 <router-link to="/blogs" class="custom-default-hover"
