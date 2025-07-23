@@ -37,17 +37,44 @@
       </div>
       <div class="w-[90%] flex mt-16 hero-component">
         <div class="w-full flex flex-wrap hero-cards">
-          <CustomCard
+          <Card
             v-for="(story, index) in success_stories"
             :key="index"
-            :card_pic="story.pic"
-            :card_title="story.client"
-            :card_description="story.title"
-            card_class="w-[31%] min-w-[28%] ml-[1.5%] mb-4 flex-shrink-0 to-full hover:shadow-md"
-            link_text="READ MORE"
-            :link_to="`/resources/${success_story}/${story.title}`"
-            has_link
-          />
+            class="w-[32%] border-0 shadow-none bg-body rounded-md flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover"
+          >
+            <router-link
+              :to="`/resources/${success_story}/${story.title}`"
+              class="w-full flex-flex-wrap"
+            >
+              <CardHeader class="h-[40vh] p-0">
+                <img
+                  :src="story.pic"
+                  class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
+                />
+              </CardHeader>
+              <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
+                story.client
+              }}</CardTitle>
+              <CardDescription class="p-2">{{ story.title }}</CardDescription>
+              <CardFooter>
+                <div
+                  class="flex flex-nowrap relative gap-2 text-secondary p-2 pb-4 h-[40px] flex-col justify-center read-more-hover"
+                >
+                  <div
+                    class="h-[30px] w-[30px] absolute flex bg-transparent border-2 rounded-full border-[#82bc00] duration-300 ease-in-out to-cover"
+                  >
+                    <div class="h-full flex-col justify-center">
+                      <i
+                        class="fa-solid fa-arrow-right ml-[6px] text-secondary duration-300 ease-in-out"
+                      ></i>
+                    </div>
+                  </div>
+
+                  <span class="font-semibold ml-[35px]">Read More</span>
+                </div>
+              </CardFooter>
+            </router-link>
+          </Card>
         </div>
       </div>
     </div>
@@ -66,6 +93,7 @@ import SmallTitle from "@/components/text/SmallTitle.vue";
 import { supabase } from "@/lib/supabase";
 import { success_stories_end_point } from "@/store/store";
 import { universal_content } from "@/store/contentStore";
+import { CardDescription } from "@/components/ui/card";
 
 export default {
   name: "SuccesStories",
