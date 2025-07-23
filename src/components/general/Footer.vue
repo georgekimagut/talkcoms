@@ -4,7 +4,7 @@
   <button
     v-show="isVisible"
     @click="scrollToTop"
-    class="fixed z-1000 bottom-2 right-[4%] w-[50px] h-[50px] flex justify-center rounded-sm overflow-hidden cursor-pointer transition-all duration-300"
+    class="fixed z-[1000] bottom-2 right-[4%] w-[50px] h-[50px] flex justify-center rounded-sm overflow-hidden cursor-pointer transition-all duration-300"
     aria-label="Back to top"
   >
     <div class="w-full h-full bg-default"></div>
@@ -33,12 +33,12 @@
               <Input
                 type="email"
                 placeholder="Email"
-                class="h-full ml-2 focus:outline-0 w-[80%] border-0"
+                class="h-full ml-2 w-[80%] border-0"
               />
               <Button
                 class="relative overflow-hidden h-full p-5 px-8 bg-secondary text-white cursor-pointer group rounded-l-none"
               >
-                <span class="relative z-10">Subscribe</span>
+                <span class="relative z-0">Subscribe</span>
                 <span
                   class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
                 ></span>

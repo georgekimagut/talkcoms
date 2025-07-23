@@ -2,16 +2,37 @@
   <HeroPattern />
   <div
     class="w-full flex justify-center flex-wrap pb-10 hero-component bg-fourth"
+    :class="has_pattern ? 'h-[70vh] overflow-y-visible hide-scrollbar' : ''"
   >
     <div class="w-[90%] flex h-full gap-4 overflow-hidden mt-16 hero-holder">
       <div class="w-1/2 to-full">
         <SmallTitle :text="small_title" />
-        <BigTitle :text="big_title" title_class="mt-4 w-[90%]" />
-        <p class="w-3/4 mt-4">
+        <BigTitle :text="big_title" title_class="mt-4 w-[88%]" />
+        <p class="w-3/4 mt-6" :class="has_pattern ? 'text-secondary' : ''">
           {{ hero_description }}
         </p>
         <div class="w-full flex flex-wrap mt-4 btn-holder">
-          <div v-show="is_blog" class="w-full flex full-hero">
+          <!-- about us & faq -->
+          <div v-if="has_pattern" class="w-full h-[20vh] mt-6 relative">
+            <!-- center pattern -->
+            <div class="w-full h-full absolute z-[15] overflow-y-visible">
+              <div class="absolute w-fit h-full flex flex-col">
+                <div
+                  v-for="index in 6"
+                  :key="index"
+                  class="w-full h-[45px] flex flex-shrink-0 flex-row gap-6"
+                >
+                  <div
+                    v-for="index in 6"
+                    :key="index"
+                    class="w-[5px] h-[5px] flex-shrink-0 rounded-full bg-third"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- blog -->
+          <div v-if="is_blog" class="w-full flex full-hero">
             <span class="bg-secondary rounded-full text-white pr-4 pl-4">
               {{ blog_category ? blog_category : blog_type }}
             </span>
@@ -21,7 +42,7 @@
             <span class="ml-6"> {{ blog_date }} </span>
           </div>
           <!-- if it's a blog -->
-          <div v-show="is_blog" class="w-full mt-10 flex flex-wrap full-hero">
+          <div v-if="is_blog" class="w-full mt-10 flex flex-wrap full-hero">
             <div class="w-full flex full-hero">
               <router-link :to="read_more_link">
                 <Button
@@ -49,7 +70,7 @@
             ></a>
           </div>
           <!-- if it's a service -->
-          <div v-show="is_service" class="w-full flex mt-10 full-hero">
+          <div v-if="is_service" class="w-full flex mt-10 full-hero">
             <router-link :to="demo_link">
               <Button
                 class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
@@ -61,7 +82,7 @@
               </Button>
             </router-link>
           </div>
-          <div v-show="is_story" class="w-full mt-10 flex flex-wrap full-hero">
+          <div v-if="is_story" class="w-full mt-10 flex flex-wrap full-hero">
             <div class="w-full full-hero">
               <router-link :to="read_more_link">
                 <Button
@@ -89,7 +110,7 @@
             ></a>
           </div>
           <!-- is case studies -->
-          <div v-show="is_study" class="w-full mt-10 flex flex-wrap full-hero">
+          <div v-if="is_study" class="w-full mt-10 flex flex-wrap full-hero">
             <div class="w-full">
               <router-link :to="read_more_link"
                 ><Button variant="light"
@@ -109,10 +130,7 @@
             ></a>
           </div>
           <!-- industry -->
-          <div
-            v-show="is_industry"
-            class="w-full mt-10 flex flex-wrap full-hero"
-          >
+          <div v-if="is_industry" class="w-full mt-10 flex flex-wrap full-hero">
             <div class="w-full full-hero">
               <router-link to="/contact/book-a-demo">
                 <Button
@@ -128,7 +146,7 @@
           </div>
           <!-- testimonials -->
           <div
-            v-show="is_testimonial"
+            v-if="is_testimonial"
             class="w-full mt-6 flex flex-wrap full-hero"
           >
             <div class="w-full full-hero">
@@ -221,6 +239,7 @@ export default {
     is_testimonial: Boolean,
     is_story: Boolean,
     is_study: Boolean,
+    has_pattern: Boolean,
   },
 };
 </script>

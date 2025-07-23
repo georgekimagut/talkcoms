@@ -8,11 +8,12 @@
       small_title="FAQs"
       big_title="Got Questions? We’ve Got Real Answers"
       hero_description="Have a question in mind? You're not alone. Browse through the most common questions our users ask — and find the answers you need in seconds"
-      hero_image="/static/pic-3.png"
-      hero_small_image="/static/about-us.png"
+      hero_image="/static/faqs-banner-big.png"
+      hero_small_image="/static/faqs-banner.png"
+      has_pattern
     />
 
-    <div class="mt-32 w-full flex flex-wrap justify-center">
+    <div class="mt-20 w-full flex flex-wrap justify-center">
       <div class="w-[80%] flex justify-center">
         <div class="relative w-full max-w-sm items-center">
           <Input

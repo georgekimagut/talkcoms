@@ -3,7 +3,8 @@
   <Spinner v-if="page_is_loading && !unaivailable_service" />
   <div v-if="unaivailable_service" class="w-full">
     <Navbar :services="universal_services" />
-    <div class="w-full h-[40vh] flex justify-center">
+    <div class="w-full h-[40vh] flex justify-center relative">
+      <HeroPattern />
       <div class="h-full flex flex-col justify-center">
         <h1 class="text-default font-bold text-5xl">Service Not Found!</h1>
         <router-link to="/" class="mt-10 flex justify-center"
@@ -704,6 +705,7 @@ import SmallTitle from "../../components/text/SmallTitle.vue";
 import { text_colors, baseUrl } from "@/store/store";
 import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
+import HeroPattern from "@/components/patterns/HeroPattern.vue";
 
 export default {
   name: "SingleService",
@@ -714,6 +716,7 @@ export default {
     // RoundedButton,
     Footer,
     SmallTitle,
+    HeroPattern,
     BigTitle,
     Cta,
     ScrollPattern,

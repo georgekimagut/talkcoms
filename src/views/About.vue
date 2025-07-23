@@ -10,9 +10,10 @@
       hero_description="Talkcoms is a Leading IT Solutions Provider Incorporated in the UK in 2016."
       hero_image="/static/pic-3.png"
       hero_small_image="/static/about-us.png"
+      has_pattern
     />
     <!-- main about us -->
-    <div class="w-full flex justify-center mt-32">
+    <div class="w-full flex justify-center mt-20 pb-20">
       <div class="w-[90%] flex justify-center about-page">
         <div class="w-1/2 to-full">
           <p class="text-secondary">OUR STORY</p>
@@ -87,7 +88,7 @@
     </div>
     <Partners has_numbers />
     <!-- values -->
-    <div class="w-full flex flex-wrap justify-center overflow-hidden mt-36">
+    <div class="w-full flex flex-wrap justify-center overflow-hidden mt-20">
       <div class="w-[90%] flex justify-center flex-wrap about-page">
         <div class="w-full">
           <p class="w-full text-secondary text-center">
@@ -141,121 +142,60 @@
       </div>
     </div>
     <!-- solutions, what we offer -->
-    <div class="w-full bg-white mt-32 p-4 pb-32 flex justify-center">
-      <div class="w-[90%] flex flex-wrap">
-        <div class="w-full flex pb-12 border-b-1 border-[#e3e3e3]">
+    <div class="w-full bg-white mt-20 p-4 pb-20 flex justify-center">
+      <div class="w-[90%]">
+        <div class="w-full flex">
           <div class="w-full flex justify-center flex-wrap">
             <p class="text-secondary text-center w-full mt-6">SOLUTIONS</p>
-            <h1 class="text-4xl font-bold mt-4 text-center w-full">
+            <h1
+              class="text-4xl font-extrabold text-default mt-4 text-center w-full"
+            >
               What We Offer
             </h1>
-            <p class="mt-4 w-[60%] text-center">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at
-              aliquam tellus, nec congue urna.
-            </p>
           </div>
-          <!-- <div class="w-1/2 flex justify-end">
-            <div class="flex flex-col h-full justify-center">
-              <!-- <SquareButton
-                button_text="Get Started"
-                button_class="bg-secondary text-white rounded-lg p-3 h-fit w-[300px] cursor-pointer"
-                hover_color="bg-secondary"
-              /> ->
-            </div>
-          </div> -->
         </div>
         <!-- the services -->
-        <div
-          class="w-full flex justify-center mt-32 bg-white py-16 hero-component"
-        >
-          <div class="w-[90%] flex flex-wrap gap-2 hero-cards to-full">
+        <div class="w-full flex justify-center mt-10 bg-white hero-component">
+          <div class="w-full flex flex-wrap gap-4 hero-cards to-full">
             <div
               v-for="(solution, index) in solutions"
               :key="index"
-              class="w-[24%] bg-body p-4 pb-16 flex-shrink-0 to-full hover:shadow-md to-full"
+              class="w-[24%] bg-body p-4 pb-16 flex-shrink-0 to-full duration-300 ease-in-out custom-card-hover to-full"
             >
-              <i :class="solution.icon" class="text-secondary text-5xl"></i>
-              <h1 class="text-lg font-semibold mt-8">
-                <router-link :to="`/service/${solution.name}`">{{
-                  solution.name
-                }}</router-link>
-              </h1>
-              <p class="mt-8">{{ solution.title_description }}</p>
+              <router-link :to="`/service/${solution.name}`" class="w-full">
+                <i :class="solution.icon" class="text-secondary text-5xl"></i>
+                <h1 class="text-xl font-bold mt-8">{{ solution.name }}</h1>
+                <p class="mt-8">{{ solution.title_description }}</p>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!--  -->
-    <!-- <div
-      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36"
-    >
-      <div class="w-3/4">
-        <p class="text-secondary flex justify-center">TEAM</p>
-
-        <h1 class="text-4xl font-bold mt-4 p-2 flex justify-center">
-          Meet our team of experts
-        </h1>
-        <div class="w-full flex-wrap flex justify-center mt-16">
-          <div
-            v-for="(member, index) in members"
-            :key="index"
-            class="w-[23%] mr-[1%] p-4 bg-white"
-          >
-            <div class="w-full flex justify-center mt-6">
-              <img :src="member.pic" class="rounded-full" />
-            </div>
-            <p class="mt-12 flex justify-center">{{ member.name }}</p>
-            <p class="mt-4 text-secondary text-sm flex justify-center">
-              {{ member.position }}
-            </p>
-            <div class="mt-8 flex justify-center">
-              <a :href="member.linkedin" class="mr-2" target="_blank"
-                ><i class="fa-brands fa-linkedin"></i
-              ></a>
-              <a :href="member.x" class="mr-2" target="_blank"
-                ><i class="fa-brands fa-x-twitter"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <!-- location -->
     <div class="w-full flex justify-center py-20 bg-fourth hide-img">
-      <div class="w-[90%] flex justify-center">
-        <div class="w-[60%] flex justify-center">
-          <div class="h-[50vh] w-[90%] rounded-2xl overflow-hidden">
-            <Maps map_class="w-full h-full" />
+      <div class="w-[90%]">
+        <div class="w-full flex">
+          <div class="w-full flex justify-center flex-wrap">
+            <p class="text-secondary text-center w-full">OFFICES</p>
+            <h1
+              class="text-4xl font-extrabold text-default mt-4 text-center w-full"
+            >
+              Where to Find Us
+            </h1>
           </div>
         </div>
-        <div class="w-[40%]">
-          <p class="text-secondary">OFFICES</p>
-          <h1 class="text-4xl font-bold mt-4 p-2">
-            Where to <span class="mr-2 ml-2 text-primary">Find</span> Us
-          </h1>
-          <div class="w-[80%] mt-6">
-            <p class="mt-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at
-              aliquam tellusr Text
-            </p>
-            <!-- location details -->
-            <div class="flex flex-wrap w-full mt-8">
-              <div class="w-1/2">
-                <p class="text-secondary">
-                  <i class="fa-solid fa-phone"></i> +254 746 433 163
-                </p>
-              </div>
-              <div class="w-1/2">
-                <p class="text-secondary">
-                  <i class="fa-solid fa-envelope"></i> info@talkcoms.co.uk
-                </p>
-              </div>
-              <div class="w-full mt-10">
-                <p class="mt-2">The Well Mall, Karen</p>
-                <p class="mt-2">Skyrise Plaza, Eldama Ravine</p>
-              </div>
-            </div>
+        <div class="mt-10 w-full h-[50vh]">
+          <Maps map_class="w-full h-full" />
+        </div>
+        <div class="w-full flex flex-nowrap mt-10 gap-6">
+          <div
+            v-for="(office, index) in offices"
+            :key="index"
+            class="w-[33%] p-4"
+          >
+            <h1 class="text-2xl font-bold text-secondary">{{ office.name }}</h1>
+            <p class="mt-8 text-xl">{{ office.location }}</p>
           </div>
         </div>
       </div>
@@ -316,35 +256,21 @@ export default {
       ],
       solutions: [],
       services: [],
-      members: [
+      offices: [
         {
-          name: "Jackson Kimwaga",
-          pic: "/profiles/1.png",
-          position: "Product Designer",
-          linkedin: "#",
-
-          x: "#",
+          name: "United Kingdom",
+          location:
+            "The Kings Centre Main Road, Barleythorpe Oakham, LE15 7WD, United Kingdom",
         },
         {
-          name: "Carolyne Mwikali",
-          pic: "/profiles/2.png",
-          position: "Marketing Lead",
-          linkedin: "#",
-          x: "#",
+          name: "Nairobi",
+          location:
+            "Great Jubilee Center ( The Well), Karen, Nairobi 1’st Floor Unit No. 07, Kenya",
         },
         {
-          name: "Daniel Wandolo",
-          pic: "/profiles/3.png",
-          position: "Software Dev",
-          linkedin: "#",
-          x: "#",
-        },
-        {
-          name: "Jane Wachira",
-          pic: "/profiles/4.png",
-          position: "Public Relations",
-          linkedin: "#",
-          x: "#",
+          name: "Edama Ravine",
+          location:
+            "3rd Floor, Skyrise Plaza, Eldama Ravine Township, Along Ravine - Nakuru Road",
         },
       ],
     };
