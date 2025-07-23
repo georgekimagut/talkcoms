@@ -4,7 +4,7 @@
   <div v-if="page_is_loading === false" class="w-full">
     <Navbar :services="universal_services" />
     <!-- contact us -->
-    <div class="w-full flex justify-center bg-fourth py-16">
+    <div class="w-full flex justify-center bg-white py-16">
       <div class="w-[90%] flex flex-wrap hero-component to-full">
         <div v-if="type == 'contact-us'" class="w-1/2 to-full">
           <p class="text-secondary">CONTACT US</p>
@@ -18,81 +18,83 @@
         </div>
         <div
           class="flex h-full to-full contact-form"
-          :class="type == 'contact-us' ? 'w-1/2' : 'w-full'"
+          :class="
+            type == 'contact-us' ? 'w-1/2 bg-default rounded-md' : 'w-full'
+          "
         >
           <!-- contact us form -->
           <div
             class="w-full p-5 rounded-xl shadow-sm"
             :class="
-              type == 'contact-us'
-                ? 'w-1/2 bg-white'
-                : 'w-full flex justify-center'
+              type == 'contact-us' ? 'w-1/2 ' : 'w-full flex justify-center'
             "
           >
             <form
               @submit.prevent="enquire"
               class="flex flex-wrap inner-contact-form"
               :class="
-                type == 'contact-us' ? 'w-full' : 'w-[60%] bg-white p-8 to-full'
+                type == 'contact-us'
+                  ? 'w-full'
+                  : 'w-[60%] bg-default  p-8 to-full'
               "
             >
               <div class="w-full flex flex-wrap">
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm">First Name</label>
+                  <label class="text-sm text-white">First Name</label>
                   <Input
                     type="text"
                     placeholder="First Name"
-                    class="mt-2"
+                    class="mt-2 text-white"
                     required
                     v-model="f_name"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm">Last Name</label>
+                  <label class="text-sm text-white">Last Name</label>
                   <Input
                     type="text"
                     placeholder="Last Name"
-                    class="mt-2"
+                    class="mt-2 text-white"
                     required
                     v-model="l_name"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm">Email</label>
+                  <label class="text-sm text-white">Email</label>
                   <Input
                     type="email"
                     placeholder="Enter Your Email"
-                    class="mt-2"
+                    class="mt-2 text-white"
                     required
                     v-model="email"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm">Position/Role</label>
+                  <label class="text-sm text-white">Position/Role</label>
                   <Input
                     type="text"
                     placeholder="Enter Your Role"
-                    class="mt-2"
+                    class="mt-2 text-white"
                     required
                     v-model="role"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm">Company</label>
+                  <label class="text-sm text-white">Company</label>
                   <Input
                     type="text"
                     placeholder="Company Name"
-                    class="mt-2"
+                    class="mt-2 text-white"
                     required
                     v-model="company_name"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm">Company Phone</label>
+                  <label class="text-sm text-white">Company Phone</label>
                   <Input
                     type="text"
                     placeholder="Company Phone"
-                    class="mt-2"
+                    class="mt-2 text-white"
                     required
                     v-model="phone"
                   />
@@ -102,28 +104,30 @@
                   class="w-full p-2 flex flex-wrap"
                 >
                   <div class="w-1/2 p-2 to-full-form">
-                    <label class="text-sm">Company Size</label>
+                    <label class="text-sm text-white">Company Size</label>
                     <Input
                       type="text"
                       placeholder="Company Size"
-                      class="mt-2"
+                      class="mt-2 text-white"
                       required
                       v-model="company_size"
                     />
                   </div>
                   <div class="w/12 p-2 to-full-form">
-                    <label class="text-sm">Preferred day & time</label>
+                    <label class="text-sm text-white"
+                      >Preferred day & time</label
+                    >
                     <input
                       type="datetime-local"
-                      class="w-full border py-1 px-2 rounded-sm mt-2"
+                      class="w-full border py-1 px-2 rounded-sm mt-2 bg-transparent text-white"
                       v-model="date_time"
                     />
                   </div>
                 </div>
                 <div v-if="this.type != 'contact-us'" class="w-full p-2">
-                  <label class="text-sm">Subject</label>
+                  <label class="text-sm text-white">Subject</label>
                   <Select v-model="selected">
-                    <SelectTrigger class="w-full mt-2">
+                    <SelectTrigger class="w-full mt-2 text-white">
                       <SelectValue placeholder="Select a service" />
                     </SelectTrigger>
                     <SelectContent>
@@ -142,9 +146,9 @@
                 </div>
 
                 <div class="w-full p-2">
-                  <label class="text-sm">Message</label>
+                  <label class="text-sm text-white">Message</label>
                   <Textarea
-                    class="mt-2"
+                    class="mt-2 text-white"
                     placeholder="Type your message"
                     required
                     v-model="message"
@@ -152,7 +156,7 @@
                 </div>
                 <div class="w-full p-2">
                   <input type="checkbox" class="w-fit" required />
-                  <label class="text-sm ml-2"
+                  <label class="text-sm ml-2 text-white"
                     >Agree to
                     <span class="underline"
                       ><router-link to="/legal/Terms & Conditions"
@@ -170,7 +174,7 @@
                       <i class="fa-regular fa-paper-plane ml-3"></i
                     ></span>
                     <span
-                      class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                      class="absolute inset-0 bg-third transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
                     ></span>
                     <!-- submission -->
                     <span v-if="is_submitting" class="relative z-10"
@@ -189,9 +193,6 @@
     </div>
     <!-- contact details -->
     <div class="w-full flex justify-center mt-16 border-b pb-8 relative">
-      <div class="h-[50vh] w-full absolute flex justify-end z-[-10]">
-        <img src="/static/tribal.png" class="h-full w-auto max-w-none" />
-      </div>
       <div class="w-[90%] flex rounded-xl overflow-hidden contact-panel">
         <Card
           class="w-[32%] m-[1.5%] card rounded-xl border border-[##f5f5f5] shadow-none bg-white"
@@ -321,17 +322,17 @@ export default {
       ],
       offices: [
         {
-          name: "UK OFFICE",
+          name: "United Kingdom",
           location:
             "The Kings Centre Main Road, Barleythorpe Oakham, LE15 7WD, United Kingdom",
         },
         {
-          name: "NAIROBI OFFICE",
+          name: "Nairobi",
           location:
             "Great Jubilee Center ( The Well), Karen, Nairobi 1’st Floor Unit No. 07, Kenya",
         },
         {
-          name: "ELDAMA RAVINE OFFICE",
+          name: "Eldama Ravine",
           location:
             "3rd Floor, Skyrise Plaza, Eldama Ravine Township, Along Ravine - Nakuru Road",
         },

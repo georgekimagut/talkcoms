@@ -30,6 +30,13 @@
               >Contact Us</router-link
             >
           </li>
+          <li>
+            <router-link
+              to="/contact/get-started"
+              class="text-third hover:underline"
+              >Book a Demo</router-link
+            >
+          </li>
         </ul>
       </div>
       <!-- end -->

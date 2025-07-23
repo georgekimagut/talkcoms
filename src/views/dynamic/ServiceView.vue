@@ -6,7 +6,9 @@
     <div class="w-full h-[40vh] flex justify-center relative">
       <HeroPattern />
       <div class="h-full flex flex-col justify-center">
-        <h1 class="text-default font-bold text-5xl">Service Not Found!</h1>
+        <h1 class="text-default font-bold text-5xl">
+          Service details be upload soon
+        </h1>
         <router-link to="/" class="mt-10 flex justify-center"
           ><Button
             class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
