@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="universal_services" />
+    <Navbar :services="universal_services" :products="universal_products" />
     <!-- new hero -->
     <HeroSection
       v-for="(story, index) in all_stories_tracker.slice(0, 1)"
@@ -79,7 +79,7 @@
       </div>
     </div>
     <!-- footer -->
-    <Footer :services="universal_services" />
+    <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>
 <script>
@@ -115,6 +115,7 @@ export default {
       success_story: "story",
       services: [{ id: "0", name: "All", active_category: "" }],
       universal_services: [],
+      universal_products: [],
     };
   },
   methods: {
@@ -243,6 +244,7 @@ export default {
   async mounted() {
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
+    this.universal_products = universal_content().products;
 
     try {
       await Promise.all([
@@ -250,9 +252,6 @@ export default {
         await this.get_services(),
         await this.fetch_stories(),
       ]);
-      // await this.get_stories();
-      // await this.get_services();
-      // await this.fetch_stories();
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {

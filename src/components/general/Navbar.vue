@@ -40,9 +40,9 @@
                 class="mb-2 list-none"
               >
                 <router-link
-                  :to="`/service/${product.name}`"
+                  :to="`/product/${product.product_name}`"
                   class="custom-default-hover"
-                  >{{ product.name }}</router-link
+                  >{{ product.product_name }}</router-link
                 >
               </li>
             </div>
@@ -265,9 +265,9 @@
                 class="mb-2 list-none"
               >
                 <router-link
-                  :to="`/service/${product.name}`"
+                  :to="`/service/${product.product_name}`"
                   class="custom-default-hover"
-                  >{{ product.name }}</router-link
+                  >{{ product.product_name }}</router-link
                 >
               </li>
             </div>
@@ -428,6 +428,7 @@ export default {
   name: "Navbar",
   props: {
     services: Array,
+    products: Array,
   },
   components: { /*DefaultButton,*/ Link /*DarkButton*/ },
   data() {
@@ -441,7 +442,7 @@ export default {
       service_is_visible: false,
       industry_is_visible: false,
       site_logo: "/logo.svg",
-      products: [],
+      // products: [],
       socials: [
         {
           link: "#",
@@ -484,7 +485,6 @@ export default {
     };
   },
   created() {
-    this.get_services();
     this.get_solutions();
   },
   methods: {
@@ -506,39 +506,7 @@ export default {
     //     this.solutions_dropdown = false;
     //   }
     // },
-    async get_services() {
-      try {
-        const { data, error } = await supabase
-          .from("services")
-          .select("id, name, title_description, is_product")
-          .order("created_at", { ascending: false });
 
-        const retrieved_data = data.map((service) => {
-          const { data: imageData } = supabase.storage
-            .from("talkcoms")
-            .getPublicUrl(`services/${service.pic}`);
-
-          return {
-            ...service,
-            pic: imageData.publicUrl,
-          };
-        });
-        retrieved_data.forEach((item) => {
-          if (item.is_product === 1) {
-            this.products.push(item);
-          } else {
-            // this.services.push(item);
-          }
-        });
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
     //get solutions
     async get_solutions() {
       try {

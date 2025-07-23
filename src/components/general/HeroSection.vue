@@ -199,7 +199,7 @@
           >
             <img
               :src="hero_image"
-              alt="Blog image header"
+              :alt="hero_image_alt"
               class="w-full min-w-full max-w-none h-full max-h-none object-cover rounded-xl"
               :class="hero_small_image ? 'min-h-full ' : ''"
             />
@@ -242,6 +242,7 @@ export default {
     is_story: Boolean,
     is_study: Boolean,
     has_pattern: Boolean,
+    hero_image_alt: String,
   },
 };
 </script>

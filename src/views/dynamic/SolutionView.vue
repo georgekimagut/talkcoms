@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="services" />
+    <Navbar :services="universal_services" :products="universal_products" />
     <HeroSection
       :small_title="this.id"
       :big_title="solution.title"
@@ -158,7 +158,7 @@
     </div>
     <!-- footer and cta -->
     <Cta />
-    <Footer :services="services" />
+    <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>
 <script>
@@ -197,12 +197,14 @@ export default {
       product_ids: [],
       related_story: "",
       success_story: "case-study",
-      services: [],
+      universal_services: [],
+      universal_products: [],
     };
   },
   async created() {
     this.page_is_loading = true;
-    this.services = universal_content().services;
+    this.universal_services = universal_content().services;
+    this.universal_products = universal_content().products;
 
     try {
       await this.get_solution();
@@ -222,6 +224,8 @@ export default {
       () => this.$route.params,
       async () => {
         this.page_is_loading = true;
+        this.universal_services = universal_content().services;
+        this.universal_products = universal_content().products;
 
         try {
           await this.get_solution();

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+
 export const universal_content = defineStore("universal_content", {
   state: () => ({
     services: [],
@@ -20,4 +21,5 @@ export const universal_content = defineStore("universal_content", {
       this.phones = data;
     },
   },
+  persist: true, //  Enable persistence in localStorage
 });

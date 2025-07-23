@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading && !unaivailable_service" />
   <div v-if="unaivailable_service" class="w-full">
-    <Navbar :services="universal_services" />
+    <Navbar :services="universal_services" :products="universal_products" />
     <div class="w-full h-[40vh] flex justify-center relative">
       <HeroPattern />
       <div class="h-full flex flex-col justify-center">
@@ -20,41 +20,21 @@
         ></router-link>
       </div>
     </div>
-    <Footer :services="universal_services" />
+    <Footer :services="universal_services" :products="universal_products" />
   </div>
   <div v-if="!page_is_loading && !unaivailable_service" class="w-full">
-    <Navbar :services="universal_services" />
-
-    <div class="w-full flex justify-center">
-      <div class="w-[90%]">
-        {{ single_service }}
-      </div>
-    </div>
+    <Navbar :services="universal_services" :products="universal_products" />
     <HeroSection
-      v-if="!prev_service"
       :small_title="this.id"
-      :big_title="
-        single_service.main_title
-          ? single_service.main_title
-          : service.title_description
-      "
+      :big_title="single_service.main_title"
       :hero_description="
-        single_service.main_title
+        single_service.secondary_title
           ? single_service.secondary_title
-          : service.product_subtitle
+          : single_service.main_title
       "
       :read_more_link="`/demo/${this.id}`"
-      :hero_image="service.imageUrl"
-      :demo_link="`/contact/${this.id}`"
-      is_service
-    />
-    <HeroSection
-      v-if="prev_service"
-      :small_title="this.id"
-      :big_title="service.title_description"
-      :hero_description="service.product_subtitle"
-      :read_more_link="`/demo/${this.id}`"
-      :hero_image="service.imageUrl"
+      :hero_image="`${image_url}/${single_service.hero_media}`"
+      :hero_image_alt="`${single_service.main_title} - Hero image`"
       :demo_link="`/contact/${this.id}`"
       is_service
     />
@@ -124,17 +104,15 @@
     </div>
     <!-- description -->
     <!-- css only scroll -->
-    <div
-      v-if="!prev_service"
-      class="w-full flex justify-center py-20 hero-component"
-    >
+    <div class="w-full flex justify-center py-20 hero-component">
       <div class="w-[90%] flex flex-wrap relative hero-holder">
         <!-- <ScrollPattern :bg_color="random_bg" /> -->
         <!-- Sticky sidebar -->
         <div class="w-[40%] sticky top-[15vh] self-start to-full">
           <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit g">
             <img
-              :src="single_service.feature_section_image"
+              :src="`${image_url}/${single_service.feature_section_image.url}`"
+              :alt="`${this.id} - Service section image`"
               class="w-full h-full object-cover rounded-xl service-pic"
             />
           </div>
@@ -153,15 +131,24 @@
             </h1>
             <div class="w-full to-cards">
               <div
-                v-for="(feature, index) in features"
+                v-for="(feature, index) in single_service.Features"
                 :key="index"
                 class="w-[90%] py-4 border-b border-[#e3e3e3] card"
               >
-                <h1 class="text-xl font-semibold mt-4">
-                  {{ feature.feature_name }}
+                <h1 class="text-xl font-bold mt-4 text-default">
+                  {{ feature.title }}
                 </h1>
-                <p class="mt-4 text-[#828282]">
-                  {{ feature.feature_description }}
+                <h2 class="text-lg font-semibold mt-4">
+                  {{ feature.short_description }}
+                </h2>
+                <p
+                  v-for="(child, index) in feature.description"
+                  :key="index"
+                  class="mt-2 text-[#696969]"
+                >
+                  <span v-for="(text, index) in child.children" :key="index">
+                    {{ text.text }}
+                  </span>
                 </p>
               </div>
             </div>
@@ -179,8 +166,8 @@
               </router-link>
 
               <a
-                v-if="service.material_link"
-                :href="service.material_link"
+                v-if="single_service.downloadable_files"
+                :href="single_service.downloadable_files"
                 target="_blank"
               >
                 <Button
@@ -201,88 +188,10 @@
         <!-- end of sticky -->
       </div>
     </div>
-    <div
-      v-if="prev_service"
-      class="w-full flex justify-center py-20 hero-component"
-    >
-      <div class="w-[90%] flex flex-wrap relative hero-holder">
-        <!-- <ScrollPattern :bg_color="random_bg" /> -->
-        <!-- Sticky sidebar -->
-        <div class="w-[40%] sticky top-[15vh] self-start to-full">
-          <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit">
-            <img
-              :src="service.feature_pic"
-              class="w-full h-full object-cover rounded-xl service-pic"
-            />
-          </div>
-        </div>
-
-        <!-- Scrollable content -->
-        <div class="w-[60%] flex justify-end autoShow to-full">
-          <div
-            class="w-[80%] overflow-hidden transition-all duration-500 relative to-full"
-          >
-            <h1
-              class="text-5xl font-extrabold text-default sticky top-0 self-start py-4"
-            >
-              {{ this.id }}
-              <span class="text-secondary static">Features</span>
-            </h1>
-            <div class="w-full to-cards">
-              <div
-                v-for="(feature, index) in features"
-                :key="index"
-                class="w-[90%] py-4 border-b border-[#e3e3e3] card"
-              >
-                <h1 class="text-xl font-semibold mt-4">
-                  {{ feature.feature_name }}
-                </h1>
-                <p class="mt-4 text-[#828282]">
-                  {{ feature.feature_description }}
-                </p>
-              </div>
-            </div>
-            <!-- call to action -->
-            <div class="w-full flex mt-8 full-hero">
-              <router-link :to="`contact/${this.id}`">
-                <Button
-                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
-                >
-                  <span class="relative z-10">Request Free Demo</span>
-                  <span
-                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-                  ></span>
-                </Button>
-              </router-link>
-
-              <a
-                v-if="service.material_link"
-                :href="service.material_link"
-                target="_blank"
-              >
-                <Button
-                  variant="ghost"
-                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
-                >
-                  <span class="relative z-10 hover:text-[#131f6b]"
-                    >Download Material
-                  </span>
-                  <span
-                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-                  ></span>
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
-        <!-- end of sticky -->
-      </div>
-    </div>
-
     <!-- end of new scroll -->
     <!-- intergrations -->
     <div
-      v-if="intergrations != ''"
+      v-if="single_service.intergration.length > 0"
       class="w-full flex justify-center mt-10 py-28 hero-component"
     >
       <div class="w-[90%] flex gap-4 hero-holder">
@@ -366,82 +275,6 @@
     <!-- benefits -->
 
     <div
-      v-if="!prev_service"
-      class="w-full flex justify-center py-20 bg-fourth border border-[#007cba] rounded-xl orverflow-hidden"
-    >
-      <div class="w-[90%] flex flex-wrap relative">
-        <!-- <ScrollPattern :bg_color="random_bg" /> -->
-        <!-- Scrollable content -->
-        <div class="w-[50%] flex justify-end">
-          <div
-            class="w-[90%] overflow-hidden transition-all duration-500 relative autoShow"
-          >
-            <h1 class="text-5xl font-extrabold text-white sticky top-0 py-4">
-              Here’s Why You’ll Love Talkcoms'
-              <span class="text-white">{{ this.id }}</span>
-            </h1>
-            <div
-              v-for="(benefit, index) in single_service.Features"
-              :key="index"
-              class="w-[90%] py-4 border-b border-[#e3e3e3] flex gap-4"
-            >
-              <div class="">
-                <i
-                  class="fa-regular fa-circle-check mt-6 text-2xl text-white"
-                ></i>
-              </div>
-              <div class="">
-                <h1 class="text-xl font-semibold text-default mt-4">
-                  {{ benefit.title }}
-                </h1>
-                <p class="mt-4">
-                  {{ benefit.short_description }}
-                </p>
-              </div>
-            </div>
-            <!-- call to action -->
-            <div class="w-full flex mt-8">
-              <router-link to="/contact/get-started">
-                <Button
-                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
-                >
-                  <span class="relative z-10">Get Started </span>
-                  <span
-                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-                  ></span>
-                </Button>
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <!-- Sticky sidebar -->
-        <div class="w-[50%] sticky top-[15vh] self-start">
-          <div class="w-full overflow-hidden rounded-xl h-[80vh]">
-            <div class="w-full absolute">
-              <div
-                class="w-[300px] h-[300px] rounded-xl custom-linear-bg p-5 -z-10"
-              ></div>
-            </div>
-            <div class="w-full h-full flex justify-end absolute">
-              <div class="h-full flex flex-col justify-end">
-                <div
-                  class="w-[300px] h-[300px] rounded-xl custom-linear-bg p-5 -z-10"
-                ></div>
-              </div>
-            </div>
-
-            <div class="h-full w-full p-8 absolute z-20">
-              <img
-                :src="single_service.benefits_section_image"
-                class="w-full h-full object-cover rounded-xl imageReveal"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      v-if="prev_service"
       class="w-full flex justify-center py-20 bg-fourth border border-[#007cba] rounded-xl orverflow-hidden hero-component"
     >
       <div class="w-[90%] flex flex-wrap relative hero-holder">
@@ -457,22 +290,27 @@
             </h1>
             <div class="w-full to-cards">
               <div
-                v-for="(benefit, index) in benefits"
+                v-for="(benefit, index) in single_service.benefits"
                 :key="index"
-                class="w-[90%] py-4 border-b border-[#e3e3e3] flex gap-4 card"
+                class="w-[90%] flex card"
               >
-                <div class="">
-                  <i
-                    class="fa-regular fa-circle-check mt-6 text-2xl text-secondary"
-                  ></i>
-                </div>
-                <div class="">
-                  <h1 class="text-xl font-semibold text-default mt-4">
-                    {{ benefit.feature_name }}
-                  </h1>
-                  <p class="mt-4">
-                    {{ benefit.feature_description }}
-                  </p>
+                <div
+                  v-if="benefit.title"
+                  class="w-full flex flex-nowrap py-4 border-b border-[#e3e3e3] gap-4"
+                >
+                  <div class="">
+                    <i
+                      class="fa-regular fa-circle-check mt-6 text-2xl text-secondary"
+                    ></i>
+                  </div>
+                  <div class="">
+                    <h1 class="text-xl font-semibold text-default mt-4">
+                      {{ benefit.title }}
+                    </h1>
+                    <p class="mt-4">
+                      {{ benefit.description }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -511,7 +349,8 @@
 
             <div class="h-full w-full p-8 absolute z-20 to-h-fit">
               <img
-                :src="service.benefit_pic"
+                :src="`${image_url}/${single_service.benefits_section_image}`"
+                :alt="`${this.id} - Benefits section image`"
                 class="w-full h-full object-cover rounded-xl imageReveal service-pic"
               />
             </div>
@@ -521,10 +360,7 @@
     </div>
     <!-- end of content wrapper -->
     <!-- if has free demo -->
-    <div
-      v-if="service.has_demo"
-      class="w-full flex justify-center bg-white pb-20 has_demo"
-    >
+    <div class="w-full flex justify-center bg-white pb-20 has_demo">
       <div
         class="w-[80%] flex rounded-2xl h-[50vh] border border-[#82bc00] mt-32 overflow-hidden"
       >
@@ -533,12 +369,7 @@
         >
           <BigTitle text="Experience the Power—Live!" title_class="m-4" />
           <p class="text-xl m-4">
-            Book a free
-            <span v-if="service.has_demo === 1">demo</span>
-            <span v-else-if="service.has_demo === 2">site visit</span>
-            <span v-else-if="service.has_demo === 3">call</span>
-            and see how our solution can simplify your workflow and boost
-            efficiency—live and personalized.
+            Book a free book efficiency—live and personalized.
           </p>
           <router-link :to="`/contact/${this.id}`">
             <Button
@@ -546,13 +377,7 @@
               class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00] m-4"
             >
               <span class="relative z-10 hover:text-[#131f6b]"
-                >{{
-                  service.has_demo === 1
-                    ? "BOOK A FREE DEMO"
-                    : service.has_demo === 2
-                    ? "BOOK A SITE VISIT"
-                    : "BOOK A FREE CALL"
-                }}
+                >BOOK A FREE DEMO
               </span>
               <span
                 class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
@@ -561,13 +386,17 @@
           </router-link>
         </div>
         <div class="w-[35%] flex justify-center overflow-hidden img-holder">
-          <img :src="service.imageUrl" class="w-full h-full object-cover" />
+          <img
+            :src="`${image_url}/${single_service.hero_media}`"
+            :alt="`${single_service.main_title} - Booka demo image`"
+            class="w-full h-full object-cover"
+          />
         </div>
       </div>
     </div>
     <!-- packages -->
     <div
-      v-if="packages != ''"
+      v-if="single_service.packages.length > 0"
       class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 pb-20 packages"
     >
       <div class="w-3/4 flex flex-wrap justify-center">
@@ -634,17 +463,22 @@
     </div>
     <!-- related story -->
     <div
-      v-if="related_story"
+      v-if="single_service.success_stories.length > 0"
       class="w-full flex justify-center mt-16 bg-white py-16 hero-component"
     >
-      <div class="w-[90%] h-fit flex hero-holder">
+      <div
+        v-for="(story, index) in single_service.success_stories.slice(0, 1)"
+        :key="index"
+        class="w-[90%] h-fit flex hero-holder"
+      >
         <div class="w-1/2 flex h-full justify-center to-full">
           <div class="w-[90%] flex flex-wrap justify-center">
             <div
               class="w-[80%] max-h-[50vh] rounded-2xl flex justify-center overflow-hidden to-full"
             >
               <img
-                :src="related_story.pic"
+                src=""
+                :alt="`${single_service.main_title} - related story image`"
                 class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
               />
             </div>
@@ -652,26 +486,22 @@
         </div>
         <div class="w-1/2 to-full">
           <div class="w-[90%] mt-6">
-            <h1 class="text-5xl font-bold mt-4 text-default">
-              {{ related_story.title }}
-            </h1>
-            <p class="mt-6">{{ related_story.short_description }}</p>
-            <p class="mt-6">{{ related_story.client }}</p>
+            <h1 class="text-5xl font-bold mt-4 text-default">Story title</h1>
+            <p class="mt-2">Related story description/precept</p>
+            <p class="mt-2">{{ story.companyName }}</p>
 
             <div
               class="w-full h-[26px] flex flex-col justify-center mt-16 to-next-line"
             >
-              <p>Product/Service:</p>
-              <p class="mt-4">
-                <span class="p-2 border border-[#007cba] rounded-full">
-                  {{ this.id }}
-                </span>
+              <p
+                class="mt-2 p-1 px-2 border border-[#007cba] rounded-full w-fit"
+              >
+                {{ this.id }}
               </p>
             </div>
           </div>
           <div class="w-full mt-10 flex">
-            <router-link
-              :to="`/resources/${success_story}/${related_story.title}`"
+            <router-link :to="`/resources/${success_story}/${story.title}`"
               ><Button
                 variant="ghost"
                 class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
@@ -690,7 +520,7 @@
     <!-- Cta -->
     <Cta cta_class="pt-32" />
     <!-- footer -->
-    <Footer :services="universal_services" />
+    <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>
 <script>
@@ -733,7 +563,6 @@ export default {
     return {
       page_is_loading: true,
       is_side_hero: true,
-      prev_service: true,
       unaivailable_service: false,
       //service details
       service: "",
@@ -753,6 +582,7 @@ export default {
       success_story: "story",
       random_bg: "",
       universal_services: [],
+      universal_products: [],
       single_service: [],
       image_url: baseUrl,
     };
@@ -760,18 +590,20 @@ export default {
   async created() {
     this.page_is_loading = true;
     this.randomize_color();
+    /* set universal color */
     const store = universal_content();
     this.universal_services = store.services;
+    this.universal_products = store.products;
 
     try {
       await this.fetch_services();
-      await this.get_service();
+      // await this.get_service();
       await this.get_portfolio_items();
       await this.get_main_service_features();
       await this.get_features();
       await this.get_packages();
 
-      this.services = store.services;
+      // this.services = store.services;
       if (this.service_id != "") {
         this.get_story();
       }
@@ -788,12 +620,14 @@ export default {
         this.unaivailable_service = false;
         this.page_is_loading = true;
         this.randomize_color();
+        /* set universal content */
         const store = universal_content();
         this.universal_services = store.services;
+        this.universal_products = store.products;
 
         try {
           await this.fetch_services();
-          await this.get_service();
+          // await this.get_service();
           await this.get_portfolio_items();
           await this.get_main_service_features();
           await this.get_features();
@@ -820,7 +654,6 @@ export default {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
       const response_data = await response.json();
 
       if (response_data.data) {
@@ -829,6 +662,11 @@ export default {
           : response_data.data;
 
         this.single_service = data;
+        /* check if there is data */
+        if (!this.single_service) {
+          this.unaivailable_service = true;
+          this.page_is_loading = false;
+        }
       } else {
         throw new Error("No data found in response");
       }

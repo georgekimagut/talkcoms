@@ -23,9 +23,17 @@
             since 2016
           </h1>
           <div class="w-full mt-6">
-            <p class="mt-2">
-              {{ about_page[0].aboutstatement[0].children[0].text }}
-            </p>
+            <!-- <p class="mt-2">
+              {{ about_page[0].aboutstatement[0] }}
+            </p> -->
+            <div v-for="content in about_page" class="w-full">
+              <div v-for="child in content.aboutstatement">
+                <div v-for="inner in child.children">
+                  {{ inner.text }}
+                </div>
+              </div>
+            </div>
+
             <!-- mission -->
             <div class="flex w-full mt-8 about-card">
               <div class="w-[80px] min-w-[80px]">

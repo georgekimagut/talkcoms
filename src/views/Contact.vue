@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="universal_services" />
+    <Navbar :services="universal_services" :products="universal_products" />
     <!-- contact us -->
     <div class="w-full flex justify-center bg-white py-16">
       <div class="w-[90%] flex flex-wrap hero-component to-full">
@@ -260,7 +260,7 @@
       </div>
     </div>
     <!-- footer -->
-    <Footer :services="universal_services" />
+    <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>
 <script>
@@ -310,6 +310,7 @@ export default {
       services: [],
       enquiry_form: {},
       universal_services: [],
+      universal_products: [],
       subjects: [
         { value: "1", content: "Option one" },
         { value: "2", content: "Option two" },
@@ -362,6 +363,7 @@ export default {
   mounted() {
     this.load_page();
     this.universal_services = universal_content().services;
+    this.universal_products = universal_content().products;
     this.fetch_contact_us();
     this.get_services();
   },

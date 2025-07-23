@@ -17,7 +17,7 @@ export const apiEndpoint =
 export const home_end_point =
   "https://cms.talkcoms.co.uk/api/homepages/?populate=*&sort=createdAt:desc";
 export const services_end_point =
-  "https://cms.talkcoms.co.uk/api/service-pages/?populate=*&sort=createdAt:desc";
+  "https://cms.talkcoms.co.uk/api/service-pages/?populate=*";
 export const contact_us_end_point =
   "https://cms.talkcoms.co.uk/api/contact-us-pages/?populate=*&sort=createdAt:desc";
 

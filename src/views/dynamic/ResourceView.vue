@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full bg-white">
-    <Navbar :services="services" />
+    <Navbar :services="universal_services" :products="universal_products" />
     <div class="w-full flex justify-center flex-wrap hero-component">
       <div class="w-[90%] flex flex-wrap hero-holder">
         <!-- Sticky sidebar -->
@@ -127,7 +127,7 @@
     <!-- end -->
     <!-- footer  -->
     <Cta class="mt-20" />
-    <Footer :services="services" />
+    <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>
 <script>
@@ -173,12 +173,14 @@ export default {
       /* resource carousel */
       current_resource_slide: 0,
       total_resource_slides: 2,
-      services: [],
+      universal_services: [],
+      universal_products: [],
     };
   },
   async created() {
     this.page_is_loading = true;
-    this.services = universal_content().services;
+    this.universal_services = universal_content().services;
+    this.universal_products = universal_content().products;
 
     try {
       await this.get_resource();

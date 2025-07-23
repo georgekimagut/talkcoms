@@ -77,13 +77,12 @@
         <div class="w-[15%] p-1">
           <p class="mt-2 font-semibold">Products</p>
           <div class="w-full mt-4">
-            <p
-              v-for="(product, index) in footer_products"
-              :key="index"
-              class="mb-2"
-            >
-              <router-link :to="product.link" class="hover:text-[#8dc63f]">
-                {{ product.title }}
+            <p v-for="(product, index) in products" :key="index" class="mb-2">
+              <router-link
+                :to="`/product/${product.product_name}`"
+                class="hover:text-[#8dc63f]"
+              >
+                {{ product.product_name }}
               </router-link>
             </p>
           </div>
@@ -159,6 +158,7 @@ export default {
   name: "Footer",
   props: {
     services: Array,
+    products: Array,
   },
   components: {
     /*DefaultInput,*/
@@ -171,12 +171,7 @@ export default {
       footer_company_links: [
         { title: "About us", link: "/about" },
         { title: "Contact us", link: "/contact/contact-us" },
-        { title: "Blog", link: "/blogs" },
-      ],
-      footer_products: [
-        { title: "Contact Center Solution", link: "#" },
-        { title: "Web/App Development", link: "#" },
-        { title: "iTaaS", link: "#" },
+        { title: "Blogs", link: "/blogs" },
       ],
       footer_legal: [
         { title: "Cookie Policy", link: "/legal/cookie-policy" },

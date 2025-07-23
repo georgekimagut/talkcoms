@@ -1,33 +1,21 @@
-$("#contact-us").submit(function (e) {
-  e.preventDefault();
-
-  var name = $("#first-name").val();
-  var phone_number = $("#phone-number").val();
-  var email = $("#email").val();
-  var service = $(".itemslist").text();
-  var message = $("#message").val();
-  var company = $("#company").val();
-  var company_size = $("#company_size").val();
-  var positionincompany = $("#positionincompany").val();
-  var appointment_date = $("#block-date").val();
-  var appointment_time = $("#block-time").val();
-
-  var settings = {
-    url: "https://crm.talkcoms.co.uk/api/resource/Website%20Inquiry",
-    method: "POST",
-    timeout: 0,
-
-    data: JSON.stringify({
-      name: name,
-      phone_number: phone_number || null,
-      email: email,
-      service: service || null,
-      message: message,
-      company: company || null,
-      company_size: company_size || null,
-      positionincompany: positionincompany || null,
-      appointment_date: appointment_date || null,
-      appointment_time: appointment_time || null,
-    }),
-  };
-});
+/* book a call section service page */
+`
+<p class="text-xl m-4">
+            Book a free
+            <span v-if="single_service.has_demo === 1">demo</span>
+            <span v-else-if="service.has_demo === 2">site visit</span>
+            <span v-else-if="service.has_demo === 3">call</span>
+            and see how our solution can simplify your workflow and boost
+            efficiency—live and personalized.
+          </p>
+          <!-- button text -->
+          <span class="relative z-10 hover:text-[#131f6b]"
+                >{{
+                  service.has_demo === 1
+                    ? "BOOK A FREE DEMO"
+                    : service.has_demo === 2
+                    ? "BOOK A SITE VISIT"
+                    : "BOOK A FREE CALL"
+                }}
+              </span>
+`;

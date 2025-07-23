@@ -1,7 +1,8 @@
 <template>
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="services" />
+    <Navbar :services="universal_services" :products="universal_products" />
+
     <!-- new hero section -->
     <div class="w-full h-[80vh] flex relative">
       <div class="w-3/4 h-full absolute bg-linear-secondary z-[10] opacity-50">
@@ -694,7 +695,7 @@
     <!-- cta -->
     <Cta />
     <!-- footer -->
-    <Footer :services="services" />
+    <Footer :services="universal_services" :products="universal_products" />
     <!-- end of classes -->
   </div>
 </template>
@@ -708,7 +709,12 @@ import ExternalLink from "@/components/text/ExternalLink.vue";
 import CardDescription from "@/components/ui/card/CardDescription.vue";
 import CardTitle from "@/components/ui/card/CardTitle.vue";
 import CustomCard from "@/components/ui/card/CustomCard.vue";
-import { apiEndpoint, baseUrl, home_end_point } from "@/store/store.js";
+import {
+  apiEndpoint,
+  baseUrl,
+  home_end_point,
+  services_end_point,
+} from "@/store/store.js";
 import { supabase } from "@/lib/supabase.js";
 /* global values */
 import { universal_content } from "@/store/contentStore";
@@ -748,6 +754,8 @@ export default {
       landing_page_content: [],
       industries: [],
       services: [],
+      universal_services: [],
+      universal_products: [],
       products: [],
       /* services carousel */
       current_service_slide: 0,
@@ -786,6 +794,7 @@ export default {
         this.get_solutions(),
         this.fetch_blogs(),
         this.fetch_homepage(),
+        this.fetch_service_names(),
         this.get_stories(),
       ]);
     } catch (error) {
@@ -875,14 +884,14 @@ export default {
             : [responseData.data];
 
           this.landing_page_content = dataArray;
-          this.services = this.landing_page_content[0].services;
+          // this.services = this.landing_page_content[0].services;
           /* add content to pinia */
-          const service_names = this.services.map((service) => ({
-            product_name: service.product_name,
-          }));
+          // const service_names = this.services.map((service) => ({
+          //   product_name: service.product_name,
+          // }));
           // console.log(service_names);
-          const contentStore = universal_content();
-          contentStore.setServices(service_names);
+          // const contentStore = universal_content();
+          // contentStore.setServices(service_names);
         } else {
           console.error("Invalid response structure:", responseData);
         }
@@ -890,6 +899,35 @@ export default {
         console.log("Home content", this.landing_page_content);
       } catch (error) {
         console.error("Error fetching resources:", error);
+      }
+    },
+    /* fetch services */
+    async fetch_service_names() {
+      try {
+        const response = await fetch(services_end_point);
+        const responseData = await response.json();
+        if (responseData.data) {
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+          const fetched_services = dataArray;
+          /* store service universally */
+          fetched_services.forEach((item) => {
+            if (item.is_product === true) {
+              this.universal_products.push({ product_name: item.product_name });
+            } else {
+              this.universal_services.push({ product_name: item.product_name });
+            }
+            /* store service names for navigation */
+            const contentStore = universal_content();
+            contentStore.setServices(this.universal_services);
+            contentStore.setProducts(this.universal_products);
+          });
+        } else {
+          console.error("Invalide service response structure: ", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
       }
     },
     //GET BLOGS
@@ -908,7 +946,6 @@ export default {
             : [responseData.data];
 
           this.blogs = dataArray;
-          console.log("Blog: ", this.blogs);
         } else {
           console.error("Invalid response structure:", responseData);
         }
