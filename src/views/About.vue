@@ -170,10 +170,15 @@
               :key="index"
               class="w-[24%] bg-body p-4 pb-16 flex-shrink-0 to-full duration-300 ease-in-out custom-card-hover to-full"
             >
-              <router-link :to="`/service/${solution.name}`" class="w-full">
-                <i :class="solution.icon" class="text-secondary text-5xl"></i>
-                <h1 class="text-xl font-bold mt-8">{{ solution.name }}</h1>
-                <p class="mt-8">{{ solution.title_description }}</p>
+              <router-link
+                :to="`/service/${solution.product_name}`"
+                class="w-full"
+              >
+                <i class="fa-solid fa-check text-secondary text-5xl"></i>
+                <h1 class="text-xl font-bold mt-8">
+                  {{ solution.product_name }}
+                </h1>
+                <p class="mt-8">{{ solution.main_title }}</p>
               </router-link>
             </div>
           </div>
@@ -285,6 +290,8 @@ export default {
   async created() {
     // this.load_page();
     this.page_is_loading = true;
+    this.universal_services = universal_content().services;
+    this.universal_products = universal_content().products;
     try {
       await Promise.all([this.fetch_about(), this.fetch_services()]);
     } catch (error) {
@@ -292,9 +299,6 @@ export default {
     } finally {
       this.page_is_loading = false;
     }
-    // this.universal_services = universal_content().services;
-    // this.universal_products = universal_content().products;
-    // this.get_services();
   },
   methods: {
     /* fetch about us */
@@ -322,39 +326,17 @@ export default {
         console.error("Error fetching resources:", error);
       }
     },
-    load_page() {
-      setTimeout(() => {
-        this.page_is_loading = false;
-      }, 2000);
-    },
-    //get services
-    async get_services() {
-      try {
-        const { data, error } = await supabase
-          .from("services")
-          .select("name, id, icon, title_description")
-          .order("created_at", { ascending: false });
-        this.solutions = data;
-        if (error) {
-          console.log(error);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
+
     /* fetch services */
     async fetch_services() {
       try {
         const response = await fetch(
-          "https://cms.talkcoms.co.uk/api/service-pages/?fields[0]=product_name&fields[1]=main_title&fields[2]=icon"
+          "https://cms.talkcoms.co.uk/api/service-pages/?fields[0]=product_name&fields[1]=main_title"
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
-          const fetched_services = responseData.data;
-          console.log("Fetched services: ", fetched_services);
+          this.solutions = responseData.data;
+          console.log("Json data for service names: ", this.solutions);
         } else {
           console.error("Invalide service response structure: ", responseData);
         }

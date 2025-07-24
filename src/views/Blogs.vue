@@ -53,20 +53,6 @@
         <!-- other blogs -->
         <div class="w-full mt-10 flex flex-wrap hero-component">
           <div class="w-full flex flex-wrap gap-4 hero-cards">
-            <!-- <CustomCard
-              v-for="(blog, index) in blogs"
-              :key="index"
-              :card_pic="`${image_url}/${blog.hero_media.url}`"
-              :card_title="blog.Title"
-              :blog_category="blog.category ? blog.category : blog.Type"
-              :blog_date="`${format_date(blog.createdAt)}`"
-              card_class="w-[31%] min-w-[28%] m-[1%] mb-4 flex-shrink-0 to-full hover:shadow-md"
-              :link_to="`/resources/${is_blog}/${blog.slug}`"
-              :writer="blog.author"
-              :read_time="`${blog.read_time} mins`"
-              is_blog
-            /> -->
-
             <Card
               v-for="(blog, index) in blogs"
               :key="index"
@@ -99,7 +85,16 @@
                     {{ format_date(blog.createdAt) }}
                   </div>
                 </div>
-
+                <!-- <div
+                  class="text-base text-gray-800 [&_*]:!m-0 [&_*]:!mt-0 [&_*]:!mb-0 [&_*]:!p-0 [&_*]:!font-normal [&_*]:!text-inherit [&_*]:!text-base [&_*]:!bg-transparent [&_*]:!border-none [&_*]:!shadow-none !p-2"
+                  v-html="
+                    blog.articles_section
+                      .replace(/<br\s*\/?>/gi, '')
+                      .split(' ')
+                      .slice(0, 15)
+                      .join(' ')
+                  "
+                ></div> -->
                 <CardFooter>
                   <div
                     class="flex flex-nowrap relative gap-2 text-secondary p-2 h-[40px] flex-col justify-center read-more-hover"

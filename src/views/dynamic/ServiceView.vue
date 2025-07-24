@@ -33,7 +33,9 @@
           : single_service.main_title
       "
       :read_more_link="`/demo/${this.id}`"
-      :hero_image="`${image_url}/${single_service.hero_media}`"
+      :hero_image="`${image_url}/${
+        single_service?.formats?.large?.url || single_service.hero_media?.url
+      }`"
       :hero_image_alt="`${single_service.main_title} - Hero image`"
       :demo_link="`/contact/${this.id}`"
       is_service

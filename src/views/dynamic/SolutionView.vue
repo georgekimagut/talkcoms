@@ -8,12 +8,12 @@
       :big_title="solution.title"
       :hero_description="solution.description"
       :read_more_link="`/demo/${this.id}`"
-      :hero_image="solution.pic"
+      hero_image="/static/industries.svg"
       is_industry
     />
 
     <!-- advantages section -->
-    <div class="w-full flex justify-center mt-32 py-16 hero-component">
+    <div class="w-full flex justify-center mt-10 hero-component">
       <div class="w-[90%] flex flex-wrap relative hero-holder">
         <!-- Sticky sidebar -->
         <div class="w-[40%] sticky top-[15vh] self-start to-full">
@@ -21,7 +21,7 @@
             class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit hide-im"
           >
             <img
-              :src="solution.main_section_pic"
+              src="/static/industries-2.svg"
               class="w-full h-full object-cover rounded-xl"
             />
           </div>
@@ -30,7 +30,7 @@
         <!-- Scrollable content -->
         <div class="w-[60%] flex justify-end to-full autoShow">
           <div
-            class="w-[80%] overflow-hidden transition-all duration-500 relative to-full"
+            class="w-[80%] overflow-hidden transition-all duration-500 relative flex flex-col justify-center to-full"
           >
             <SmallTitle :text="`Our Impact in ${this.id} `" />
             <h1 class="text-5xl font-extrabold text-default sticky top-0 py-4">
@@ -55,7 +55,7 @@
       </div>
     </div>
     <!-- solutions -->
-    <div class="w-full flex justify-center mt-32 bg-white py-16 hero-component">
+    <div class="w-full flex justify-center mt-10 bg-white py-16 hero-component">
       <div class="w-[90%] flex flex-wrap gap-2 hero-cards to-full">
         <IconCard
           v-if="related_solutions.length >= 1"
@@ -71,32 +71,39 @@
     <!-- call to action -->
     <div class="w-full flex justify-center bg-white pb-20 has_demo">
       <div
-        class="w-[80%] flex rounded-2xl h-[50vh] border border-[#82bc00] mt-32 overflow-hidden"
+        class="w-[80%] flex rounded-2xl h-[65vh] bg-[linear-gradient(to_top_right,_#007cba_75%,_#82bc00_110%)] mt-10 overflow-hidden"
       >
+        <div class="w-1/2 h-full overflow-hidden img-holder relative p-8">
+          <div
+            class="w-[75%] h-[35vh] mt-[15vh] bg-[linear-gradient(to_top_right,_#82bc00_-10%,_#007cba_110%)] rounded-lg"
+          ></div>
+          <img
+            src="/static/faqs-banner-big.png"
+            class="object-cover absolute top-[10vh] left-[10%] w-[80%] rounded-lg h-[40vh]"
+          />
+        </div>
         <div
-          class="w-[64%] mr-[1%] h-full p-4 flex flex-col justify-center to-full"
+          class="w-1/2 mr-[1%] h-full p-4 flex flex-col justify-center to-full"
         >
-          <BigTitle text="Experience the Power—Live!" title_class="m-4" />
-          <p class="text-xl m-4">
+          <BigTitle
+            text="Experience the Power—Live!"
+            title_class="m-4 text-white text-5xl"
+          />
+          <p class="text-xl m-4 text-white">
             Get in touch and see how our solution can simplify your workflow and
-            boost efficiency—live and personalized.
+            boost efficiency-live and personalised.
           </p>
 
           <router-link to="/contact/contact-us"
             ><Button
               variant="ghost"
-              class="ml-4 relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+              class="ml-4 relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group bg-white"
             >
-              <span class="relative z-10 hover:text-[#131f6b]"
-                >Book A Call
-              </span>
+              <span class="relative z-10">Book A Call </span>
               <span
                 class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
               ></span> </Button
           ></router-link>
-        </div>
-        <div class="w-[35%] flex justify-center overflow-hidden img-holder">
-          <img :src="solution.pic" class="w-full h-full object-cover" />
         </div>
       </div>
     </div>
@@ -104,7 +111,7 @@
 
     <div
       v-if="related_story"
-      class="w-full flex justify-center mt-16 bg-white py-16 hero-component"
+      class="w-full flex justify-center bg-white py-10 hero-component"
     >
       <div class="w-[90%] h-fit flex hero-holder">
         <div class="w-1/2 flex h-full justify-center to-full">

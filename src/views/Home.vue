@@ -543,7 +543,9 @@
           >
             <CardHeader class="h-[40vh] p-0">
               <img
-                :src="`${image_url}/${blog.hero_media.url}`"
+                :src="`${image_url}/${
+                  blog.hero_media?.formats?.large?.url || blog.hero_media?.url
+                }`"
                 class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
               />
             </CardHeader>
@@ -564,7 +566,17 @@
                 {{ format_date(blog.createdAt) }}
               </div>
             </div>
-
+            <div
+              class="text-base text-gray-800 [&_*]:!m-0 [&_*]:!mt-0 [&_*]:!mb-0 [&_*]:!p-0 [&_*]:!font-normal [&_*]:!text-inherit [&_*]:!text-base [&_*]:!bg-transparent [&_*]:!border-none [&_*]:!shadow-none !p-2"
+              v-html="
+                blog.articles_section
+                  .replace(/<br\s*\/?>/gi, '')
+                  .split(' ')
+                  .slice(0, 15)
+                  .join(' ')
+              "
+            ></div>
+            <!-- <div class="w-full">{{ blog.articles_section }}</div> -->
             <CardFooter>
               <div
                 class="flex flex-nowrap relative gap-2 text-secondary p-2 h-[40px] flex-col justify-center read-more-hover"
@@ -917,7 +929,6 @@ export default {
         const responseData = await response.json();
         if (responseData.data) {
           const fetched_carousel = responseData.data;
-          console.log("New Carousel", fetched_carousel);
           this.services = fetched_carousel[0];
           this.total_slides = this.services.services.length;
         }
@@ -975,6 +986,11 @@ export default {
             : [responseData.data];
 
           this.blogs = dataArray;
+          this.blogs.forEach((blog) => {
+            // console.log(blog.articles_section);
+            const word_count = blog.articles_section.split(" ");
+            console.log(word_count.filter((word) => word !== " ").length);
+          });
         } else {
           console.error("Invalid response structure:", responseData);
         }

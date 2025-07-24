@@ -416,6 +416,9 @@ a {
 .bg-linear-secondary {
   background: linear-gradient(to right, #131f6b, transparent);
 }
+.bg-linear-third {
+  background: linear-gradient(to top right, #007cba 80%, #82bc00 100%);
+}
 .scrollable::-webkit-scrollbar {
   display: none;
 }
