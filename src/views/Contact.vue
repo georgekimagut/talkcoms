@@ -308,6 +308,7 @@ export default {
       is_submitting: false,
       sending_endpoint: "",
       services: [],
+      services_carousel: [],
       enquiry_form: {},
       universal_services: [],
       universal_products: [],

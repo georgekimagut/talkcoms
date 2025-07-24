@@ -2,7 +2,7 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="services" />
+    <Navbar :services="universal_services" :products="universal_products" />
 
     <HeroSection
       small_title="ABOUT US"
@@ -208,7 +208,7 @@
     </div>
     <!-- CTA -->
     <Cta />
-    <Footer :services="services" />
+    <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>
 <script>
@@ -261,7 +261,8 @@ export default {
         },
       ],
       solutions: [],
-      services: [],
+      universal_services: [],
+      universal_products: [],
       offices: [
         {
           name: "United Kingdom",
@@ -283,8 +284,8 @@ export default {
   },
   created() {
     this.load_page();
-    const store = universal_content();
-    this.services = store.services;
+    this.universal_services = universal_content().services;
+    this.universal_products = universal_content().products;
     this.get_services();
     this.fetch_about();
   },
@@ -300,11 +301,12 @@ export default {
         const responseData = await response.json();
 
         if (responseData.data) {
-          const dataArray = Array.isArray(responseData.data)
-            ? responseData.data
-            : [responseData.data];
+          // const dataArray = Array.isArray(responseData.data)
+          //   ? responseData.data
+          //   : [responseData.data];
 
-          this.about_page = dataArray;
+          // this.about_page = dataArray;
+          this.about_page = responseData.data;
           console.log("About content", this.about_page);
         } else {
           console.error("Invalid response structure:", responseData);
@@ -332,6 +334,40 @@ export default {
         }
       } catch (error) {
         console.log(error);
+      }
+    },
+    /* fetch services */
+    async fetch_service_names() {
+      try {
+        const response = await fetch(
+          "https://cms.talkcoms.co.uk/api/service-pages/?fields[0]=product_name&fields[1]=is_product&fields[2]"
+        );
+        const responseData = await response.json();
+        if (responseData.data) {
+          console.log("Json data for service names: ", responseData.data);
+
+          // const dataArray = Array.isArray(responseData.data)
+          //   ? responseData.data
+          //   : [responseData.data];
+          // const fetched_services = dataArray;
+          const fetched_services = responseData.data;
+          /* store service universally */
+          fetched_services.forEach((item) => {
+            if (item.is_product === true) {
+              this.universal_products.push({ product_name: item.product_name });
+            } else {
+              this.universal_services.push({ product_name: item.product_name });
+            }
+            /* store service names for navigation */
+            const contentStore = universal_content();
+            contentStore.setServices(this.universal_services);
+            contentStore.setProducts(this.universal_products);
+          });
+        } else {
+          console.error("Invalide service response structure: ", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
       }
     },
   },

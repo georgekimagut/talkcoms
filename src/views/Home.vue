@@ -71,11 +71,12 @@
       </div> -->
       <div class="w-full h-full flex flex-wrap justify-center overflow-hidden">
         <div class="w-[90%] flex flex-wrap mt-8 relative overflow-hidden">
+          <!-- {{ services.services }} -->
           <div
             class="h-[70vh] w-full flex overflow-y-hidden hide-scrollbar overflow-x-scroll snap-x snap-mandatory"
           >
             <div
-              v-for="(slide, index) in carousel_data"
+              v-for="(slide, index) in services.services"
               :key="index"
               @mouseenter="pauseAutoSlide()"
               @mouseleave="resumeAutoSlide()"
@@ -88,13 +89,13 @@
                     class="w-1/2 h-full flex flex-col justify-center block c-half"
                   >
                     <p class="text-secondary text-lg w-3/4 uppercase">
-                      {{ slide.sub_title }}
+                      {{ slide.product_name }}
                     </p>
                     <h1 class="text-4xl font-extrabold mt-6 w-3/4">
-                      {{ slide.title }}
+                      {{ slide.main_title }}
                     </h1>
                     <p class="w-3/4 mt-6 description">
-                      {{ slide.description }}
+                      {{ slide.second_title }}
                     </p>
                     <div class="w-full flex mt-10 btn-holder">
                       <router-link to="/contact/contact-us">
@@ -107,7 +108,10 @@
                           ></span>
                         </Button>
                       </router-link>
-                      <router-link :to="`/service/${slide.title}`" class="ml-4">
+                      <router-link
+                        :to="`/service/${slide.product_name}`"
+                        class="ml-4"
+                      >
                         <Button
                           variant="ghost"
                           class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
@@ -128,7 +132,8 @@
                         class="img-holder h-[60vh] overflow-hidden rounded-2xl"
                       >
                         <img
-                          :src="slide.pic"
+                          :src="slide.product_name"
+                          :alt="`${slide.product_name} - image`"
                           class="rounded-2xl min-w-full min-h-full max-h-none object-cover"
                         />
                       </div>
@@ -145,10 +150,10 @@
           @mouseleave="resumeAutoSlide()"
         >
           <div
-            v-for="(item, index) in carousel_data"
+            v-for="(item, index) in services.services"
             :key="index"
             @click="current_slide = index"
-            class="w-[18px] h-[18px] rounded-full cursor-pointer"
+            class="w-[16px] h-[16px] rounded-full cursor-pointer"
             :class="current_slide === index ? 'bg-default' : 'bg-gray-400'"
           ></div>
         </div>
@@ -788,7 +793,7 @@ export default {
     this.page_is_loading = true;
     try {
       await Promise.all([
-        this.get_carousel(),
+        // this.get_carousel(),
         this.get_services(),
         this.get_portfolio_items(),
         this.get_solutions(),
@@ -879,19 +884,15 @@ export default {
         const responseData = await response.json();
 
         if (responseData.data) {
-          const dataArray = Array.isArray(responseData.data)
-            ? responseData.data
-            : [responseData.data];
+          // const dataArray = Array.isArray(responseData.data)
+          //   ? responseData.data
+          //   : [responseData.data];
 
-          this.landing_page_content = dataArray;
-          // this.services = this.landing_page_content[0].services;
-          /* add content to pinia */
-          // const service_names = this.services.map((service) => ({
-          //   product_name: service.product_name,
-          // }));
-          // console.log(service_names);
-          // const contentStore = universal_content();
-          // contentStore.setServices(service_names);
+          // this.landing_page_content = dataArray;
+          this.landing_page_content = responseData.data;
+          this.services = this.landing_page_content[0];
+          this.total_slides = this.services.services.length;
+          // this.total_slides = this.services.length;
         } else {
           console.error("Invalid response structure:", responseData);
         }
@@ -904,13 +905,18 @@ export default {
     /* fetch services */
     async fetch_service_names() {
       try {
-        const response = await fetch(services_end_point);
+        const response = await fetch(
+          "https://cms.talkcoms.co.uk/api/service-pages/?fields[0]=product_name&fields[1]=is_product"
+        );
         const responseData = await response.json();
         if (responseData.data) {
-          const dataArray = Array.isArray(responseData.data)
-            ? responseData.data
-            : [responseData.data];
-          const fetched_services = dataArray;
+          console.log("Json data for service names: ", responseData.data);
+
+          // const dataArray = Array.isArray(responseData.data)
+          //   ? responseData.data
+          //   : [responseData.data];
+          // const fetched_services = dataArray;
+          const fetched_services = responseData.data;
           /* store service universally */
           fetched_services.forEach((item) => {
             if (item.is_product === true) {
@@ -1038,20 +1044,20 @@ export default {
       }
     },
     //get carouses
-    async get_carousel() {
-      try {
-        const { data, error } = await supabase.from("carousel").select("*");
+    // async get_carousel() {
+    //   try {
+    //     const { data, error } = await supabase.from("carousel").select("*");
 
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.carousel_data = data;
-        this.total_slides = this.carousel_data.length;
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    //     if (error) {
+    //       console.log(error);
+    //       return;
+    //     }
+    //     this.carousel_data = data;
+    //     this.total_slides = this.carousel_data.length;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
   },
 };
 </script>
