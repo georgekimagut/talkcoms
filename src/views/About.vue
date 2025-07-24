@@ -282,12 +282,19 @@ export default {
       ],
     };
   },
-  created() {
-    this.load_page();
-    this.universal_services = universal_content().services;
-    this.universal_products = universal_content().products;
-    this.get_services();
-    this.fetch_about();
+  async created() {
+    // this.load_page();
+    this.page_is_loading = true;
+    try {
+      await Promise.all([this.fetch_about(), this.fetch_services()]);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    } finally {
+      this.page_is_loading = false;
+    }
+    // this.universal_services = universal_content().services;
+    // this.universal_products = universal_content().products;
+    // this.get_services();
   },
   methods: {
     /* fetch about us */
@@ -337,32 +344,17 @@ export default {
       }
     },
     /* fetch services */
-    async fetch_service_names() {
+    async fetch_services() {
       try {
         const response = await fetch(
-          "https://cms.talkcoms.co.uk/api/service-pages/?fields[0]=product_name&fields[1]=is_product&fields[2]"
+          "https://cms.talkcoms.co.uk/api/service-pages/?fields[0]=product_name&fields[1]=main_title&fields[2]=icon"
         );
         const responseData = await response.json();
         if (responseData.data) {
           console.log("Json data for service names: ", responseData.data);
 
-          // const dataArray = Array.isArray(responseData.data)
-          //   ? responseData.data
-          //   : [responseData.data];
-          // const fetched_services = dataArray;
           const fetched_services = responseData.data;
-          /* store service universally */
-          fetched_services.forEach((item) => {
-            if (item.is_product === true) {
-              this.universal_products.push({ product_name: item.product_name });
-            } else {
-              this.universal_services.push({ product_name: item.product_name });
-            }
-            /* store service names for navigation */
-            const contentStore = universal_content();
-            contentStore.setServices(this.universal_services);
-            contentStore.setProducts(this.universal_products);
-          });
+          console.log("Fetched services: ", fetched_services);
         } else {
           console.error("Invalide service response structure: ", responseData);
         }

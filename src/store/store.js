@@ -32,5 +32,8 @@ export const enquiry_url =
 export const contact_us_url =
   "https://crm.talkcoms.co.uk/api/resource/Get%20In%20Touch";
 
+export const home_services_end_point =
+  "https://cms.talkcoms.co.uk/api/homepages?populate[services][populate]=*";
+
 export const baseUrl = "https://cms.talkcoms.co.uk"; // Base URL for Strapi
 export const is_blog = "blog";

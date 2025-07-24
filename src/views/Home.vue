@@ -72,6 +72,7 @@
       <div class="w-full h-full flex flex-wrap justify-center overflow-hidden">
         <div class="w-[90%] flex flex-wrap mt-8 relative overflow-hidden">
           <!-- {{ services.services }} -->
+
           <div
             class="h-[70vh] w-full flex overflow-y-hidden hide-scrollbar overflow-x-scroll snap-x snap-mandatory"
           >
@@ -83,6 +84,7 @@
               class="w-full flex-shrink-0 h-full transition-transform duration-500 ease-in-out snap-center"
               :style="{ transform: `translateX(-${current_slide * 100}%)` }"
             >
+              <!-- {{ slide.hero_media }} -->
               <div class="carousel-holder flex flex-nowrap w-full h-[60vh]">
                 <div class="w-full flex-shrink-0 h-full flex">
                   <div
@@ -132,7 +134,10 @@
                         class="img-holder h-[60vh] overflow-hidden rounded-2xl"
                       >
                         <img
-                          :src="slide.product_name"
+                          :src="`${image_url}/${
+                            slide.hero_media?.formats?.large?.url ||
+                            slide.hero_media?.url
+                          }`"
                           :alt="`${slide.product_name} - image`"
                           class="rounded-2xl min-w-full min-h-full max-h-none object-cover"
                         />
@@ -719,6 +724,7 @@ import {
   baseUrl,
   home_end_point,
   services_end_point,
+  home_services_end_point,
 } from "@/store/store.js";
 import { supabase } from "@/lib/supabase.js";
 /* global values */
@@ -800,6 +806,7 @@ export default {
         this.fetch_blogs(),
         this.fetch_homepage(),
         this.fetch_service_names(),
+        this.fetch_service_carousel(),
         this.get_stories(),
       ]);
     } catch (error) {
@@ -890,8 +897,8 @@ export default {
 
           // this.landing_page_content = dataArray;
           this.landing_page_content = responseData.data;
-          this.services = this.landing_page_content[0];
-          this.total_slides = this.services.services.length;
+          // this.services = this.landing_page_content[0];
+          // this.total_slides = this.services.services.length;
           // this.total_slides = this.services.length;
         } else {
           console.error("Invalid response structure:", responseData);
@@ -900,6 +907,22 @@ export default {
         console.log("Home content", this.landing_page_content);
       } catch (error) {
         console.error("Error fetching resources:", error);
+      }
+    },
+    /* fetch home service carousel */
+    async fetch_service_carousel() {
+      try {
+        const response = await fetch(home_services_end_point);
+
+        const responseData = await response.json();
+        if (responseData.data) {
+          const fetched_carousel = responseData.data;
+          console.log("New Carousel", fetched_carousel);
+          this.services = fetched_carousel[0];
+          this.total_slides = this.services.services.length;
+        }
+      } catch (error) {
+        console.error("Error fecthing carousel: ", error);
       }
     },
     /* fetch services */
