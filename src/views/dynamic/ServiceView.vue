@@ -39,6 +39,7 @@
       :hero_image_alt="`${single_service.main_title} - Hero image`"
       :demo_link="`/contact/${this.id}`"
       is_service
+      :service_icon="`${image_url}/${single_service.icon?.url}`"
     />
     <!-- main features -->
     <div

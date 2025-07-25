@@ -174,7 +174,10 @@
                 :to="`/service/${solution.product_name}`"
                 class="w-full"
               >
-                <i class="fa-solid fa-check text-secondary text-5xl"></i>
+                <img
+                  :src="`${image_url}/${solution.icon?.url}`"
+                  class="h-[50px] w-auto"
+                />
                 <h1 class="text-xl font-bold mt-8">
                   {{ solution.product_name }}
                 </h1>
@@ -225,7 +228,7 @@ import Navbar from "@/components/general/Navbar.vue";
 import Partners from "@/components/general/Partners.vue";
 import Spinner from "@/components/general/Spinner.vue";
 import { supabase } from "@/lib/supabase";
-import { about_end_point } from "@/store/store";
+import { about_end_point, baseUrl } from "@/store/store";
 import { universal_content } from "@/store/contentStore";
 
 // const store = universal_content();
@@ -245,6 +248,7 @@ export default {
     return {
       page_is_loading: true,
       about_page: [],
+      image_url: baseUrl,
       values: [
         {
           icon: "fa-regular fa-circle-check",
@@ -331,7 +335,7 @@ export default {
     async fetch_services() {
       try {
         const response = await fetch(
-          "https://cms.talkcoms.co.uk/api/service-pages/?fields[0]=product_name&fields[1]=main_title"
+          "https://cms.talkcoms.co.uk/api/service-pages?fields[0]=product_name&fields[1]=main_title&populate=icon"
         );
         const responseData = await response.json();
         if (responseData.data) {

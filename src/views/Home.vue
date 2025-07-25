@@ -56,7 +56,7 @@
     </div>
     <!-- hero section -->
     <!-- <div class="w-full">{{ services }}</div> -->
-    <div class="w-full h-[80vh] hero bg-fourth overflow-show">
+    <div class="w-full h-[80vh] hero bg-fourth overflow-show mt-[3vh]">
       <!-- navigation bar -->
       <!-- <div class="h-[80vh] w-full absolute opacity-50 hide-img">
         <img src="/icons/g26.svg" class="" />

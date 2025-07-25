@@ -8,7 +8,13 @@
       class="w-[90%] flex gap-4 overflow-hidden mt-16 hero-holder absolute z-[10]"
     >
       <div class="w-1/2 to-full">
-        <SmallTitle :text="small_title" />
+        <div class="w-full h-[50px] flex flex-nowrap gap-4">
+          <img :src="service_icon" />
+          <div class="h-full flex flex-col justify-center">
+            <SmallTitle :text="small_title" class="font-bold" />
+          </div>
+        </div>
+
         <BigTitle :text="big_title" title_class="mt-4 w-[88%]" />
         <p class="w-3/4 mt-6" :class="has_pattern ? 'text-secondary' : ''">
           {{ hero_description }}
@@ -243,6 +249,7 @@ export default {
     is_study: Boolean,
     has_pattern: Boolean,
     hero_image_alt: String,
+    service_icon: String,
   },
 };
 </script>
