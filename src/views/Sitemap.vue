@@ -76,11 +76,18 @@
       <div class="w-[25%]">
         <h2 class="text-xl">Product & Services</h2>
         <ul class="space-y-4 text-lg mt-4">
-          <li v-for="(service, index) in services" :key="index">
+          <li v-for="(product, index) in universal_products" :key="index">
             <router-link
-              :to="`/service/${service.name}`"
+              :to="`/product/${product.product_name}`"
               class="text-third hover:underline"
-              >{{ service.name }}</router-link
+              >{{ product.product_name }}</router-link
+            >
+          </li>
+          <li v-for="(service, index) in universal_services" :key="index">
+            <router-link
+              :to="`/service/${service.product_name}`"
+              class="text-third hover:underline"
+              >{{ service.product_name }}</router-link
             >
           </li>
         </ul>
@@ -105,20 +112,24 @@
 <script>
 import Spinner from "@/components/general/Spinner.vue";
 import { supabase } from "@/lib/supabase";
+import { universal_content } from "@/store/contentStore";
 export default {
   name: "Sitemap",
   components: { Spinner },
   data() {
     return {
-      services: [],
+      universal_services: [],
+      universal_products: [],
       solutions: [],
       page_is_loading: true,
     };
   },
   async created() {
     this.page_is_loading = true;
+    this.universal_products = universal_content().products;
+    this.universal_services = universal_content().services;
     try {
-      await Promise.all([this.get_services(), this.get_solutions()]);
+      await Promise.all([this.get_solutions()]);
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {
@@ -126,21 +137,6 @@ export default {
     }
   },
   methods: {
-    async get_services() {
-      try {
-        const { data, error } = await supabase
-          .from("services")
-          .select("name")
-          .order("created_at", { ascending: false });
-        this.services = data;
-        if (error) {
-          console.log(error);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
     //get solutions
     async get_solutions() {
       try {

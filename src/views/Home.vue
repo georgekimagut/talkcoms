@@ -5,7 +5,7 @@
 
     <!-- new hero section -->
     <div class="w-full h-[80vh] flex relative">
-      <div class="w-3/4 h-full absolute bg-linear-secondary z-[10] opacity-50">
+      <div class="w-3/4 h-full absolute bg-linear-secondary z-[10] opacity-80">
         <!-- background -->
       </div>
       <div class="w-full h-full absolute overflow-hidden">
