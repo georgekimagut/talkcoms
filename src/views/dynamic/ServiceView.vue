@@ -114,7 +114,10 @@
         <div class="w-[40%] sticky top-[15vh] self-start to-full">
           <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit g">
             <img
-              :src="`${image_url}/${single_service.feature_section_image?.url}`"
+              :src="`${image_url}/${
+                single_service.feature_section_image?.formats?.large?.url ||
+                single_service.feature_section_image?.url
+              }`"
               :alt="`${this.id} - Service section image`"
               class="w-full h-full object-cover rounded-xl service-pic"
             />
@@ -352,7 +355,10 @@
 
             <div class="h-full w-full p-8 absolute z-20 to-h-fit">
               <img
-                :src="`${image_url}/${single_service.benefits_section_image}`"
+                :src="`${image_url}/${
+                  single_service.benefits_section_image?.formats?.large?.url ||
+                  single_service.benefits_section_image?.url
+                }`"
                 :alt="`${this.id} - Benefits section image`"
                 class="w-full h-full object-cover rounded-xl imageReveal service-pic"
               />

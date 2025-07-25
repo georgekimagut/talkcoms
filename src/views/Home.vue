@@ -113,7 +113,7 @@
                         </Button>
                       </router-link>
                       <router-link
-                        :to="`/service/${slide.product_name}`"
+                        :to="`/service/${slide.main_title}`"
                         class="ml-4"
                       >
                         <Button
