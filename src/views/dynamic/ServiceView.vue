@@ -378,7 +378,10 @@
             class="w-[75%] h-[35vh] mt-[15vh] bg-[linear-gradient(to_top_right,_#82bc00_-10%,_#007cba_110%)] rounded-lg"
           ></div>
           <img
-            :src="`${image_url}/${single_service?.hero_media}`"
+            :src="`${image_url}/${
+              single_service?.formats?.large?.url ||
+              single_service.hero_media?.url
+            }`"
             class="object-cover absolute top-[10vh] left-[10%] w-[80%] rounded-lg h-[40vh]"
           />
         </div>

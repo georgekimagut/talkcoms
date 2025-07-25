@@ -8,7 +8,10 @@
       class="w-[90%] flex gap-4 overflow-hidden mt-16 hero-holder absolute z-[10]"
     >
       <div class="w-1/2 to-full">
-        <div class="w-full h-[50px] flex flex-nowrap gap-4">
+        <div
+          class="w-full h-[50px] flex flex-nowrap"
+          :class="service_icon ? 'gap-4' : ''"
+        >
           <img :src="service_icon" />
           <div class="h-full flex flex-col justify-center">
             <SmallTitle :text="small_title" class="font-bold" />
