@@ -144,9 +144,9 @@
                 <h1 class="text-xl font-bold mt-4 text-default">
                   {{ feature.title }}
                 </h1>
-                <h2 class="text-lg font-semibold mt-4">
+                <p class="text-lg font-semibold mt-4">
                   {{ feature.short_description }}
-                </h2>
+                </p>
                 <p
                   v-for="(child, index) in feature.description"
                   :key="index"
@@ -584,7 +584,7 @@ import Spinner from "@/components/general/Spinner.vue";
 import BigTitle from "../../components/text/BigTitle.vue";
 import ExternalLink from "../../components/text/ExternalLink.vue";
 import SmallTitle from "../../components/text/SmallTitle.vue";
-import { text_colors, baseUrl } from "@/store/store";
+import { text_colors, baseUrl, services_end_point } from "@/store/store";
 import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
@@ -697,25 +697,33 @@ export default {
   methods: {
     /* fetch services */
     async fetch_services() {
-      const response = await fetch(
+      /* const response = await fetch(
         `${baseUrl}/api/service-pages?filters[product_name][$eq]=${this.id}&populate=*`
-      );
+      ); */
+      const response = await fetch(services_end_point);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
       const response_data = await response.json();
 
       if (response_data.data) {
-        const data = Array.isArray(response_data.data)
-          ? response_data.data[0]
-          : response_data.data;
+        // Normalize data to an array
+        const dataArray = Array.isArray(response_data.data)
+          ? response_data.data
+          : [response_data.data];
 
-        this.single_service = data;
-        /* check if there is data */
+        // Find the service with matching product_name
+        const matchedService = dataArray.find(
+          (service) => service.product_name === this.id
+        );
+
+        this.single_service = matchedService;
+
+        // Handle case where no service matches the id
         if (!this.single_service) {
           this.unaivailable_service = true;
-          this.page_is_loading = false;
         }
       } else {
         throw new Error("No data found in response");
