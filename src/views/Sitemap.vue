@@ -125,6 +125,7 @@ export default {
     };
   },
   async created() {
+    document.title = "Talkcoms | Sitemap";
     this.page_is_loading = true;
     this.universal_products = universal_content().products;
     this.universal_services = universal_content().services;

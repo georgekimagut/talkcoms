@@ -810,6 +810,7 @@ export default {
     };
   },
   async created() {
+    document.title = "Talkcoms | Stay Connected";
     this.page_is_loading = true;
     try {
       await Promise.all([

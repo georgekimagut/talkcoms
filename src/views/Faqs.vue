@@ -93,7 +93,8 @@ export default {
       universal_products: [],
     };
   },
-  async mounted() {
+  async created() {
+    document.title = "Talkcoms | Frequently asked questions";
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;

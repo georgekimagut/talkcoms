@@ -177,6 +177,7 @@ export default {
     };
   },
   async created() {
+    document.title = "Talkcoms | Blog";
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;

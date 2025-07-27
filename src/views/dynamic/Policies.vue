@@ -318,6 +318,7 @@ export default {
     };
   },
   created() {
+    document.title = "Talkcoms | Stay connected";
     setTimeout(() => {
       this.page_is_loading = false;
     }, 2000);

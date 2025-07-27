@@ -361,7 +361,9 @@ export default {
       ],
     };
   },
-  mounted() {
+  created() {
+    document.title = "Talkcoms | Get started";
+
     this.load_page();
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;

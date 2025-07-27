@@ -75,7 +75,8 @@ export default {
       services: [],
     };
   },
-  mounted() {
+  created() {
+    document.title = "Talkcoms | Page not found";
     this.services = universal_content().services;
   },
 };

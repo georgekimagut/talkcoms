@@ -209,6 +209,7 @@ export default {
     };
   },
   async created() {
+    document.title = `Talkcoms | ${this.id}`;
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
@@ -230,6 +231,7 @@ export default {
     this.$watch(
       () => this.$route.params,
       async () => {
+        document.title = `Talkcoms | ${this.id}`;
         this.page_is_loading = true;
         this.universal_services = universal_content().services;
         this.universal_products = universal_content().products;

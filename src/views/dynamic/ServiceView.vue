@@ -638,6 +638,7 @@ export default {
     };
   },
   async created() {
+    document.title = `Talkcoms | ${this.id}`;
     this.page_is_loading = true;
     this.randomize_color();
     /* set universal color */
@@ -668,6 +669,7 @@ export default {
       () => this.$route.params,
       async () => {
         this.unaivailable_service = false;
+        document.title = `Talkcoms | ${this.id}`;
         this.page_is_loading = true;
         this.randomize_color();
         /* set universal content */
@@ -697,10 +699,10 @@ export default {
   methods: {
     /* fetch services */
     async fetch_services() {
-      /* const response = await fetch(
+      const response = await fetch(
         `${baseUrl}/api/service-pages?filters[product_name][$eq]=${this.id}&populate=*`
-      ); */
-      const response = await fetch(services_end_point);
+      );
+      // const response = await fetch(services_end_point);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -720,7 +722,7 @@ export default {
         );
 
         this.single_service = matchedService;
-
+        ("");
         // Handle case where no service matches the id
         if (!this.single_service) {
           this.unaivailable_service = true;

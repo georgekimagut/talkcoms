@@ -11,7 +11,10 @@
             <div
               class="w-full overflow-y-scroll hide-scrollbar bg-white p-4 border-1 border-[#e3e3e3]"
             >
-              <div class="w-full pb-4 border-b border-[#82bc00]">
+              <div
+                v-if="toggle_tbc"
+                class="w-full pb-4 border-b border-[#82bc00]"
+              >
                 <p
                   class="font-semibold cursor-pointer"
                   @click="toggle_tbc = !toggle_tbc"
@@ -50,12 +53,19 @@
           <div class="w-[95%] ml-[5%] mt-10 space-y-20 w-no-w">
             <!-- resource details -->
             <div class="w-full">
-              <BigTitle :text="resource.Title" title_class="mt-4 text-2xl" />
+              <h1 v-if="resource?.Title" class="font-extrabold mt-4 text-2xl">
+                {{ resource?.Title }}
+              </h1>
+              <!-- success story -->
+              <h1 v-if="success_story" class="font-extrabold mt-4 text-2xl">
+                {{ success_story?.description[0]?.children[0]?.text }}
+              </h1>
               <!-- <p class="w-full mt-6">
                 {{ resource.short_description ?? resource.description ?? "" }}
               </p> -->
+
               <!-- author -->
-              <div class="w-full flex">
+              <div v-if="resource" class="w-full flex">
                 <div class="w-1/2">
                   <p class="w-full text-secondary mt-4">
                     <span v-if="type === 'blog'"
@@ -77,17 +87,29 @@
             <!-- image -->
             <div class="w-full h-[60vh] overflow-hidden mt-[-8vh]">
               <img
+                v-if="resource"
                 :src="
                   !resource.hero_media.url
                     ? resource.pic
-                    : `${resource_image_url}/${resource.hero_media.url}`
+                    : `${resource_image_url}/${
+                        resource.hero_media?.formats?.large?.url ||
+                        resource.hero_media?.url
+                      }`
                 "
+                class="w-full h-auto object-cover"
+              />
+              <!-- success story -->
+              <img
+                v-if="success_story"
+                :src="success_story.image"
+                :alt="`${success_story?.description[0]?.children[0]?.text}`"
                 class="w-full h-auto object-cover"
               />
             </div>
 
             <!-- contents of the resource -->
             <div
+              v-if="resource"
               ref="content_body"
               v-html="
                 sanitized_resource
@@ -96,6 +118,18 @@
               "
               class="w-full mt-10 block"
             ></div>
+            <!-- success story -->
+            <div
+              v-if="success_story"
+              ref="content_body"
+              v-html="
+                sanitized_resource
+                  ? sanitized_resource || sanitized_resource
+                  : resource.content_body
+              "
+              class="w-full mt-10 block"
+            ></div>
+            <!-- review -->
             <div class="w-full mt-20 flex justify-center flex-wrap">
               <p class="text-lg">Was this helpful?</p>
               <div class="w-full flex justify-center gap-4 mt-8">
@@ -165,6 +199,7 @@ export default {
       toggle_tbc: true,
       is_blog: "blog",
       resource: "",
+      success_story: "",
       sanitized_resource: "",
       resource_image_url: baseUrl,
       blogs: [],
@@ -178,12 +213,13 @@ export default {
     };
   },
   async created() {
+    document.title = `Talkcoms | ${this.id}`;
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
 
     try {
-      await this.get_resource();
+      await this.fetch_resource();
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {
@@ -221,23 +257,10 @@ export default {
         this.current_resource_slide = this.total_resource_slides - 1;
       }
     },
-    async get_resource() {
+    async fetch_resource() {
       try {
         //check the type of service before retrieval
-        if (this.type === "story") {
-          const { data, error } = await supabase
-            .from("success_stories")
-            .select("*")
-            .eq("title", this.id)
-            .limit(1);
-
-          if (error) {
-            console.log(error);
-            return;
-          }
-          //map data
-          this.resource = data[0];
-        } else if (this.type === "blog") {
+        if (this.type === "blog") {
           const response = await fetch(
             `${baseUrl}/api/blog-posts?filters[slug][$eq]=${this.id}&populate=*`
           );
@@ -263,25 +286,30 @@ export default {
 
             const html = marked.parse(markdown);
             this.sanitized_resource = DOMPurify.sanitize(html);
-            //fetch other blogs
-            this.fetch_blogs();
           } else {
             throw new Error("No data found in response");
           }
-        } else if (this.type === "case-study") {
-          const { data, error } = await supabase
-            .from("case_studies")
-            .select("*")
-            .eq("title", this.id)
-            .limit(1);
+        } else if (this.type === "story") {
+          const response = await fetch(
+            `${baseUrl}/api/success-stories?filters[companyName][$eq]=${this.id}&populate=*`
+          );
 
-          if (error) {
-            console.log(error);
-            return;
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
           }
-          //map data
-          this.resource = data[0];
-          console.log(this.resource);
+
+          const response_data = await response.json();
+
+          if (response_data.data) {
+            const data = Array.isArray(response_data.data)
+              ? response_data.data[0]
+              : response_data.data;
+
+            this.success_story = data;
+            console.log("Single Success Story: ", this.success_story);
+          } else {
+            throw new Error("No data found in response");
+          }
         }
       } catch (error) {
         console.log(error);

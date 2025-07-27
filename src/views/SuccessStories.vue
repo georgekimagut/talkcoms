@@ -5,13 +5,14 @@
     <Navbar :services="universal_services" :products="universal_products" />
     <!-- new hero -->
     <HeroSection
-      v-for="(story, index) in all_stories_tracker.slice(0, 1)"
+      v-for="(story, index) in stories_page.slice(0, 1)"
       :key="index"
-      small_title="SUCCESS STORIES"
-      :big_title="story.title"
-      :hero_description="story.short_description"
-      :read_more_link="`/resources/${success_story}/${story.title}`"
+      :small_title="story.companyName"
+      :big_title="`${story?.description[0]?.children[0]?.text}`"
+      :hero_description="`Success story description`"
+      :read_more_link="`/resources/${success_story}/${story.companyName}`"
       :hero_image="story.pic"
+      :hero_image_alt="`${story?.description[0]?.children[0]?.text} - Hero image`"
       is_story
     />
     <!-- end of hero -->
@@ -38,24 +39,27 @@
       <div class="w-[90%] flex mt-16 hero-component">
         <div class="w-full flex flex-wrap hero-cards gap-4">
           <Card
-            v-for="(story, index) in success_stories"
+            v-for="(story, index) in stories_page"
             :key="index"
             class="w-[32%] border-0 shadow-none bg-body rounded-md flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover"
           >
             <router-link
-              :to="`/resources/${success_story}/${story.title}`"
+              :to="`/resources/${success_story}/${story.companyName}`"
               class="w-full flex-flex-wrap"
             >
               <CardHeader class="h-[40vh] p-0">
                 <img
                   :src="story.pic"
+                  :alt="`${story?.description[0]?.children[0]?.text}`"
                   class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
                 />
               </CardHeader>
               <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
-                story.client
+                story.companyName
               }}</CardTitle>
-              <CardDescription class="p-2">{{ story.title }}</CardDescription>
+              <CardDescription class="p-2">{{
+                story?.description[0]?.children[0]?.text
+              }}</CardDescription>
               <CardFooter>
                 <div
                   class="flex flex-nowrap relative gap-2 text-secondary p-2 pb-4 h-[40px] flex-col justify-center read-more-hover"
@@ -116,6 +120,7 @@ export default {
       services: [{ id: "0", name: "All", active_category: "" }],
       universal_services: [],
       universal_products: [],
+      stories_page: [],
     };
   },
   methods: {
@@ -161,22 +166,6 @@ export default {
 
     /* fetch stories */
     async fetch_stories() {
-      const cacheKey = "storiesCache";
-      let stories_page = "";
-      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
-
-      const cachedData = localStorage.getItem(cacheKey);
-      const now = Date.now();
-
-      if (cachedData) {
-        const { data, timestamp } = JSON.parse(cachedData);
-        if (now - timestamp < cacheExpiry) {
-          //map data
-          stories_page = data;
-          return;
-        }
-      }
-
       try {
         const response = await fetch(success_stories_end_point);
         if (!response.ok) {
@@ -190,32 +179,14 @@ export default {
             ? responseData.data
             : [responseData.data];
 
-          stories_page = dataArray;
-
-          localStorage.setItem(
-            cacheKey,
-            JSON.stringify({
-              data: dataArray,
-              timestamp: now,
-            })
-          );
+          this.stories_page = dataArray;
         } else {
           console.error("Invalid response structure:", responseData);
-          if (cachedData) {
-            console.log("Falling back to stale cache");
-            const { data } = JSON.parse(cachedData);
-            stories_page = data;
-          }
         }
 
-        console.log("Stories content", stories_page);
+        console.log("Stories content", this.stories_page);
       } catch (error) {
         console.error("Error fetching resources:", error);
-        if (cachedData) {
-          console.log("Using cached data after error");
-          const { data } = JSON.parse(cachedData);
-          this.blogs = data;
-        }
       }
     },
 
@@ -241,7 +212,8 @@ export default {
       }
     },
   },
-  async mounted() {
+  async created() {
+    document.title = "Talkcoms | Success stories";
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;

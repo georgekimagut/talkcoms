@@ -85,6 +85,7 @@ export default {
     };
   },
   async created() {
+    document.title = "Talkcoms | Get started";
     this.page_is_loading = true;
 
     try {

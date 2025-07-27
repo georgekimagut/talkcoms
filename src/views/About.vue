@@ -292,7 +292,7 @@ export default {
     };
   },
   async created() {
-    // this.load_page();
+    document.title = "Talkcoms | About us";
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
