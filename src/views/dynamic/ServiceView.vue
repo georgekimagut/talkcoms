@@ -125,9 +125,9 @@
         </div>
 
         <!-- Scrollable content -->
-        <div class="w-[60%] flex justify-end autoShow to-full">
+        <div class="w-[60%] justify-end flex autoShow to-full">
           <div
-            class="w-[80%] overflow-hidden transition-all duration-500 relative to-full"
+            class="w-[90%] overflow-hidden transition-all duration-500 relative to-full"
           >
             <h1
               class="text-5xl font-extrabold text-default sticky top-0 self-start py-4"

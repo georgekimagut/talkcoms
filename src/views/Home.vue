@@ -90,7 +90,7 @@
                   <div
                     class="w-1/2 h-full flex flex-col justify-center block c-half"
                   >
-                    <p class="text-lg w-3/4 uppercase">
+                    <p class="text-lg w-3/4 uppercase text-xl font-bold">
                       {{ slide.product_name }}
                     </p>
                     <h1
@@ -98,7 +98,7 @@
                     >
                       {{ slide.main_title }}
                     </h1>
-                    <p class="w-3/4 mt-6 description">
+                    <p class="w-3/4 mt-6 description text-xl">
                       {{ slide.second_title }}
                     </p>
                     <div class="w-full flex mt-10 btn-holder">

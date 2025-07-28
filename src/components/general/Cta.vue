@@ -44,7 +44,7 @@
             Business
             <span class="text-secondary ml-2 mr-2">With Tech?</span>
           </h1>
-          <p class="mt-2 text-center">
+          <p class="mt-2 text-center text-xl">
             Join thousands of professionals who have transformed their business
             with our solutions
           </p>
