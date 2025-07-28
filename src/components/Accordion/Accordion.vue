@@ -8,17 +8,17 @@
       <div class="accordion-header w-full flex flex-nowrap gap-1">
         <div class="w-[15%] flex justify-center">
           <div class="h-full flex-col justify-center">
-            <i
-              :class="faq.icon"
-              class="border border-[#bebebe] p-2 rounded-sm"
-            ></i>
+            <img
+              :src="faq.icon ? faq.icon : '/icons/help.png'"
+              class="border border-[#bebebe] p-2 rounded-sm w-[35px] h-[35px]"
+            />
           </div>
         </div>
         <div
           class="w-[70%] font-semibold cursor-pointer"
           @click="show_accordion(index)"
         >
-          {{ faq.title }}
+          {{ faq.question }}
         </div>
         <div class="w-[15%] flex justify-center" @click="show_accordion(index)">
           <div class="h-full flex-col justify-center cursor-pointer">
@@ -35,7 +35,7 @@
         class="accordion-body w-full flex justify-center transition-3"
       >
         <div class="w-[70%] pt-4 pb-4">
-          {{ faq.content }}
+          {{ faq.answer[0]?.children[0]?.text }}
         </div>
       </div>
     </div>

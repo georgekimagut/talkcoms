@@ -3,7 +3,6 @@
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
     <Navbar :services="universal_services" :products="universal_products" />
-
     <HeroSection
       small_title="FAQs"
       big_title="Got Questions? We’ve Got Real Answers"
@@ -63,6 +62,7 @@ import Spinner from "@/components/general/Spinner.vue";
 // import DefaultInput from "../components/ui/input/DefaultInput.vue";
 import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
+import { faqs_end_point } from "@/store/store";
 
 export default {
   name: "Faqs",
@@ -100,7 +100,8 @@ export default {
     this.universal_products = universal_content().products;
 
     try {
-      await this.get_faqs();
+      // await this.get_faqs();
+      await this.fetch_faqs();
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {
@@ -116,6 +117,29 @@ export default {
             index === item_index ? "bg-secondary text-white" : "text-secondary",
         };
       });
+    },
+    async fetch_faqs() {
+      try {
+        const response = await fetch(faqs_end_point);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.data) {
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+
+          // Extract FAQs from each object
+          this.faqs = dataArray.flatMap((item) => item.FAQs || []);
+        } else {
+          console.error("Invalid response structure:", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching resources:", error);
+      }
     },
     async get_faqs() {
       try {

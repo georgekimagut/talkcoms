@@ -35,5 +35,8 @@ export const contact_us_url =
 export const home_services_end_point =
   "https://cms.talkcoms.co.uk/api/homepages?populate[services][populate]=*";
 
+export const faqs_end_point =
+  "https://cms.talkcoms.co.uk/api/fa-qs-pages/?populate=*";
+
 export const baseUrl = "https://cms.talkcoms.co.uk"; // Base URL for Strapi
 export const is_blog = "blog";
