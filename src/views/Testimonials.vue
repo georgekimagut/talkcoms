@@ -8,7 +8,7 @@
       small_title="Testimonials"
       big_title="We have worked with thousands of amazing people"
       hero_description="We believe that the true measure of our success lies in the satisfaction and stories of the people we serve"
-      hero_image="/static/testimonials.webp"
+      hero_image="/static/testimonials.jpg"
       hero_small_image="/static/testimonial-small-2.svg"
       is_testimonial
     />
