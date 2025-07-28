@@ -9,7 +9,7 @@
       :key="index"
       :small_title="story.companyName"
       :big_title="`${story?.description[0]?.children[0]?.text}`"
-      :hero_description="`Success story description`"
+      hero_description=""
       :read_more_link="`/resources/${success_story}/${story.companyName}`"
       :hero_image="`${image_url}/${story?.image?.url}`"
       :hero_image_alt="`${story?.description[0]?.children[0]?.text} - Hero image`"

@@ -98,7 +98,7 @@
               <!-- success story -->
               <img
                 v-if="success_story"
-                :src="success_story.image"
+                :src="`${image_url}/${success_story?.image?.url}`"
                 :alt="`${success_story?.description[0]?.children[0]?.text}`"
                 class="w-full h-auto object-cover"
               />
@@ -116,16 +116,12 @@
               class="w-full mt-10 block"
             ></div>
             <!-- success story -->
-            <div
-              v-if="success_story"
-              ref="content_body"
-              v-html="
-                sanitized_resource
-                  ? sanitized_resource || sanitized_resource
-                  : resource.content_body
-              "
-              class="w-full mt-10 block"
-            ></div>
+            <div ref="content_body" class="w-full">
+              <div v-for="content in success_body" class="w-full">
+                <div v-for="inner in content" v-html="inner.text"></div>
+              </div>
+            </div>
+
             <!-- review -->
             <div class="w-full mt-20 flex justify-center flex-wrap">
               <p class="text-lg">Was this helpful?</p>
@@ -207,6 +203,7 @@ export default {
       total_resource_slides: 2,
       universal_services: [],
       universal_products: [],
+      success_body: [],
     };
   },
   async created() {
@@ -303,7 +300,23 @@ export default {
               : response_data.data;
 
             this.success_story = data;
-            console.log("Single Success Story: ", this.success_story);
+            this.success_story?.description.forEach((description) => {
+              this.success_body.push(description?.children);
+            });
+
+            console.log("Success body: ", this.success_body);
+            // const success_story_body =
+
+            // let markdown = this.success_story_body?.description || "";
+            // marked.setOptions({
+            //   headerIds: true,
+            //   headerPrefix: "",
+            //   mangle: false,
+            // });
+
+            // const html = marked.parse(markdown);
+            // this.sanitized_resource = DOMPurify.sanitize(html);
+            // console.log("Story: ", this.sanitized_resource);
           } else {
             throw new Error("No data found in response");
           }
