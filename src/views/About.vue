@@ -28,9 +28,7 @@
             </p> -->
             <div v-for="content in about_page" class="w-full">
               <div v-for="child in content.aboutstatement">
-                <div v-for="inner in child.children">
-                  {{ inner.text }}
-                </div>
+                <div v-for="inner in child.children" v-html="inner.text"></div>
               </div>
             </div>
 
@@ -251,26 +249,7 @@ export default {
       page_is_loading: true,
       about_page: [],
       image_url: baseUrl,
-      values: [
-        {
-          icon: "fa-regular fa-circle-check",
-          title: "Execution",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet varius est. Cras id tempus sapien. Vestibulum et libero scelerisque, tempor tortor in, finibus ante.",
-        },
-        {
-          icon: "fa-solid fa-user-check",
-          title: "Accountability",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet varius est. Cras id tempus sapien. Vestibulum et libero scelerisque, tempor tortor in, finibus ante.",
-        },
-        {
-          icon: "fa-solid fa-headset",
-          title: "Support",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet varius est. Cras id tempus sapien. Vestibulum et libero scelerisque, tempor tortor in, finibus ante.",
-        },
-      ],
+      values: [],
       solutions: [],
       universal_services: [],
       universal_products: [],
