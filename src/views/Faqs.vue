@@ -28,15 +28,13 @@
           </span>
         </div>
       </div> -->
-      <div
-        class="mt-0 w-[80%] flex justify-center overflow-x-scroll hide-scrollbar"
-      >
+      <div class="mt-0 w-[80%] flex overflow-x-scroll hide-scrollbar">
         <div
           v-for="(solution, index) in solutions_list"
           :key="index"
           class="p-2 pr-4 pl-4 mr-2 rounded-full border border-[#82bc00] flex justify-center cursor-pointer flex-shrink-0"
           :class="solution.solution_class"
-          @click="change_solution(index)"
+          @click="change_solution(index, solution.name)"
         >
           {{ solution.name }}
         </div>
@@ -78,19 +76,13 @@ export default {
   data() {
     return {
       page_is_loading: true,
-      solutions_list: [
-        { name: "All", solution_class: "text-secondary" },
-        { name: "Omnichannel CC", solution_class: "text-secondary" },
-        { name: "Outsourced CC", solution_class: "text-secondary" },
-        { name: "PBX", solution_class: "text-secondary" },
-        { name: "iTaaS", solution_class: "text-secondary" },
-        { name: "Internet Solutions", solution_class: "text-secondary" },
-        { name: "ERP", solution_class: "text-secondary" },
-        { name: "CRM", solution_class: "text-secondary" },
-      ],
+      all_solutions: [],
+      solutions_list: [],
       faqs: [],
       universal_services: [],
       universal_products: [],
+      filtered_faqs: [],
+      all_faqs_tracker: [],
     };
   },
   async created() {
@@ -101,7 +93,7 @@ export default {
 
     try {
       // await this.get_faqs();
-      await this.fetch_faqs();
+      await Promise.all([this.fetch_faqs()]);
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {
@@ -109,7 +101,11 @@ export default {
     }
   },
   methods: {
-    change_solution(item_index) {
+    async faqs_filtering() {
+      this.filtered_faqs = [...this.faqs];
+      this.all_faqs_tracker = [...this.faqs];
+    },
+    change_solution(item_index, item_name) {
       this.solutions_list = this.solutions_list.map((solution, index) => {
         return {
           ...solution,
@@ -117,7 +113,22 @@ export default {
             index === item_index ? "bg-secondary text-white" : "text-secondary",
         };
       });
+      //filter and show only specific faqs
+      this.faqs = this.all_faqs_tracker;
+      if (item_name == "All") {
+        return;
+      }
+      const selected_category = item_name;
+      this.filtered_faqs = this.faqs.filter(
+        (faq) => faq.main_title === selected_category
+      );
+      // set faqs to filtered
+      this.faqs = this.filtered_faqs;
+
+      // actions for categories
     },
+
+    /* fetch faqs */
     async fetch_faqs() {
       try {
         const response = await fetch(faqs_end_point);
@@ -132,8 +143,17 @@ export default {
             ? responseData.data
             : [responseData.data];
 
-          // Extract FAQs from each object
-          this.faqs = dataArray.flatMap((item) => item.FAQs || []);
+          this.faqs = dataArray.flatMap((item) => {
+            const mainTitle = item.main_title || "";
+            return (item.FAQs || []).map((faq) => ({
+              ...faq,
+              main_title: mainTitle,
+            }));
+          });
+
+          /* create filtering and categories */
+          this.generate_services();
+          this.faqs_filtering();
         } else {
           console.error("Invalid response structure:", responseData);
         }
@@ -141,19 +161,25 @@ export default {
         console.error("Error fetching resources:", error);
       }
     },
-    async get_faqs() {
-      try {
-        const { data, error } = await supabase.from("faqs").select("*");
+    async generate_services() {
+      const retrieved_services = [
+        { name: "All", solution_class: "text-secondary" },
+      ];
 
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.faqs = data;
-        console.log(this.faqs);
-      } catch (error) {
-        console.log(error);
-      }
+      this.faqs.forEach((service) => {
+        //push types to types arrays
+        retrieved_services.push({
+          name: service.main_title,
+          solution_class: "text-secondary",
+        });
+      });
+      this.solutions_list = Object.values(
+        retrieved_services.reduce((service, item) => {
+          service[item.name] = item;
+          return service;
+        }, {})
+      );
+      console.log("Solutions List: ", this.solutions_list);
     },
   },
 };
