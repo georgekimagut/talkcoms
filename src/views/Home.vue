@@ -201,36 +201,6 @@
               </div>
             </div>
           </Card>
-
-          <!-- <Card
-            v-if="prev_story"
-            v-for="(story, index) in success_stories.slice(0, 3)"
-            :key="index"
-            class="mb-4 m-[1.2%] bg-transparent shadow-none pb-8 rounded-xl border overflow-hidden card zoom-animate relative h-[45vh] story-card snap-center"
-            :class="index === 0 ? 'w-[60%]' : 'w-[32%]'"
-          >
-            <router-link :to="`/resources/${success_story}/${story.title}`">
-              <div
-                class="w-full h-full absolute bg-default opacity-40 z-1"
-              ></div>
-              <div
-                class="w-full h-full absolute flex flex-col justify-end z-2 p-4"
-              >
-                <CardTitle class="text-white mt-4 p-4 text-4xl">{{
-                  story.client
-                }}</CardTitle>
-                <CardDescription class="px-4 text-white text-xl">
-                  {{ story.title }}
-                </CardDescription>
-              </div>
-              <div class="w-full h-full absolute overflow-hidden z-[-5]">
-                <img
-                  :src="story.pic"
-                  class="h-full w-auto min-w-full max-w-none object-cover"
-                />
-              </div>
-            </router-link>
-          </Card> -->
         </div>
       </div>
     </div>

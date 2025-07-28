@@ -43,7 +43,8 @@
     />
     <!-- main features -->
     <div
-      class="w-full flex flex-wrap justify-center bg-white !py-20 main-features"
+      v-if="single_service?.main_features"
+      class="w-full flex flex-wrap justify-center bg-white !py-10 main-features"
     >
       <div
         class="w-[90%] flex overflow-x-scroll hide-scrollbar relative snap-x snap-mandatory"
@@ -77,8 +78,12 @@
         </div>
       </div>
     </div>
+
     <!-- portfolio -->
-    <div v-if="portfolio_items != ''" class="w-full flex justify-center mt-4">
+    <div
+      v-if="single_service?.portfolio"
+      class="w-full flex justify-center mt-4 hero-component"
+    >
       <div class="w-[90%] flex justify-center flex-wrap">
         <div class="w-full flex justify-center">
           <SmallTitle text="PORTFOLIO" text_class="text-center w-full" />
@@ -86,25 +91,46 @@
         <div class="w-full flex justify-center">
           <BigTitle
             text="For a Clean & Professional Look"
-            title_class="text-default text-center mt-10"
+            title_class="text-default text-center mt-6"
           />
         </div>
-        <div class="w-full flex justify-center mt-16 overflow-hidden gap-4">
-          <CustomCard
-            v-if="portfolio_items"
-            v-for="(project, index) in portfolio_items"
+        <!-- portfolio -->
+        <div
+          class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories snap-x snap-mandatory gap-4 hero-cards"
+        >
+          <Card
+            v-for="(item, index) in portfolio"
             :key="index"
-            :card_pic="project.pic"
-            :card_title="project.name"
-            card_class="w-[33%]"
-            link_text="VISIT SITE"
-            :link_to="project.link"
-            has_external_link
-            has_link
-          />
+            class="w-[32%] mb-4 border-0 shadow-none rounded-none bg-body overflow-hidden flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover snap-center"
+            :class="
+              index === 0
+                ? 'bg-secondary'
+                : index === 1
+                ? 'bg-third'
+                : 'bg-default'
+            "
+          >
+            <CardHeader class="h-[30vh] p-0 overflow-hidden">
+              <img :src="item.pic" class="w-full h-auto max-h-none" />
+            </CardHeader>
+            <div class="w-full flex flex-wrap justify-center mt-6">
+              <div class="w-[60%] flex justify-center">
+                <img
+                  :src="item.icon"
+                  class="h-[70px] w-auto max-w-none object-cover"
+                />
+              </div>
+              <div class="w-[90%] text-white mt-4 pb-4">
+                <p class="text-center w-full">
+                  {{ item.description }}
+                </p>
+              </div>
+            </div>
+          </Card>
         </div>
       </div>
     </div>
+
     <!-- description -->
     <!-- css only scroll -->
     <div class="w-full flex justify-center py-20 hero-component">
@@ -634,6 +660,27 @@ export default {
       universal_services: [],
       universal_products: [],
       single_service: [],
+      portfolio: [
+        {
+          name: "Kipkenda ",
+          pic: "/static/kipkenda.webp",
+          description: "Top tier, full service kenyan law firm",
+          icon: "/icons/partners/9.png",
+        },
+        {
+          name: "Chunic LTD ",
+          pic: "/static/chunic.jpg",
+          description:
+            "Logistics company specializing in international Relocation, Sourcing & Procurement and Shipping",
+          icon: "/icons/partners/chunic-white.png",
+        },
+        {
+          name: "TKDM",
+          pic: "/static/tkdm.webp",
+          description: "News & Media Company",
+          icon: "/icons/partners/tkdm-white.png",
+        },
+      ],
       image_url: baseUrl,
     };
   },

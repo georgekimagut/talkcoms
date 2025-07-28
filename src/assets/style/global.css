@@ -736,6 +736,12 @@ a {
   .hidden-map {
     @apply flex;
   }
+  .hero-component.universal_hero {
+    @apply h-fit;
+  }
+  .hero-component.hero-component.universal_hero .universal_hero_holder {
+    @apply relative;
+  }
   .hero-component .hero-holder .resource .w-no-w {
     @apply mt-0;
   }
