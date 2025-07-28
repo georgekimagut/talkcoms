@@ -262,7 +262,7 @@
               <li
                 v-for="(product, index) in products"
                 :key="index"
-                class="mb-2 list-none"
+                class="mt-2 mb-4 list-none"
               >
                 <router-link
                   :to="`/service/${product.product_name}`"
@@ -293,7 +293,7 @@
               <li
                 v-for="(service, index) in services"
                 :key="index"
-                class="my-2 list-none"
+                class="my-2 mb-4 list-none"
               >
                 <router-link
                   :to="`/service/${service.product_name}`"
@@ -326,7 +326,7 @@
               <li
                 v-for="(industry, index) in industries"
                 :key="index"
-                class="mb-2 list-none"
+                class="mt-2 mb-4 list-none"
               >
                 <router-link
                   :to="`/solution/${industry.name}`"
@@ -354,17 +354,17 @@
               v-if="resource_is_visible"
               class="w-fit bg-white pt-2 border-y mt-4 rounded-b-sm"
             >
-              <li class="my-2 list-none">
+              <li class="my-2 mb-4 list-none">
                 <router-link to="/blogs" class="custom-default-hover"
                   >Blogs</router-link
                 >
               </li>
-              <li class="my-2 list-none">
+              <li class="my-2 mb-4 list-none">
                 <router-link to="/success-stories" class="custom-default-hover"
                   >Success stories</router-link
                 >
               </li>
-              <li class="my-2 list-none">
+              <li class="my-2 mb-4 list-none">
                 <router-link to="/testimonials" class="custom-default-hover"
                   >Testimonials</router-link
                 >
