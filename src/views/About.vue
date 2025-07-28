@@ -37,11 +37,11 @@
               <div class="w-[80px] min-w-[80px]">
                 <div class="w-[60px] h-[60px] relative">
                   <div
-                    class="h-full w-full absolute bg-secondary rounded-full opacity-50"
+                    class="h-full w-full absolute bg-secondary rounded-full"
                   ></div>
                   <div class="absolute z-10 h-full w-full flex justify-center">
                     <div class="h-full flex flex-col justify-center">
-                      <span class="font-bold text-2xl text-secondary">
+                      <span class="font-bold text-2xl text-white">
                         <i class="fa-solid fa-bullseye"></i>
                       </span>
                     </div>
@@ -60,11 +60,11 @@
               <div class="w-[80px] min-w-[80px]">
                 <div class="w-[60px] h-[60px] relative">
                   <div
-                    class="h-full w-full absolute bg-secondary rounded-full opacity-50"
+                    class="h-full w-full absolute bg-secondary rounded-full"
                   ></div>
                   <div class="absolute z-10 h-full w-full flex justify-center">
                     <div class="h-full flex flex-col justify-center">
-                      <span class="font-bold text-2xl text-secondary">
+                      <span class="font-bold text-2xl text-white">
                         <i class="fa-solid fa-eye"></i>
                       </span>
                     </div>
@@ -125,11 +125,11 @@
               <div class="w-[80px] min-w-[80px]">
                 <div class="w-[60px] h-[60px] relative">
                   <div
-                    class="h-full w-full absolute bg-secondary rounded-full opacity-50"
+                    class="h-full w-full absolute bg-secondary rounded-full"
                   ></div>
                   <div class="absolute z-10 h-full w-full flex justify-center">
                     <div class="h-full flex flex-col justify-center">
-                      <span class="font-bold text-2xl text-secondary">
+                      <span class="font-bold text-2xl text-white">
                         <i class="fa-solid fa-handshake"></i>
                       </span>
                     </div>

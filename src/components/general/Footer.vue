@@ -150,10 +150,7 @@
   </div>
 </template>
 <script>
-// import DefaultSquareButton from "./buttons/SquareButton.vue";
-// import DefaultInput from "./ui/input/DefaultInput.vue";
-// import Chat from "./Chat.vue";
-
+import { universal_content } from "@/store/contentStore";
 export default {
   name: "Footer",
   props: {
@@ -179,14 +176,8 @@ export default {
         { title: "Privacy Policy", link: "/legal/privacy-policy" },
         { title: "Sitemap", link: "/sitemap" },
       ],
-      footer_contacts: [
-        { title: " +254746433163" },
-        { title: "+447746433163" },
-      ],
-      footer_emails: [
-        { title: "support@talkcoms.co.uk" },
-        { title: "solutions@talkcoms.co.uk" },
-      ],
+      footer_contacts: [],
+      footer_emails: [],
       footer_locations: [
         {
           title: "UNITED KINGDOM",
@@ -197,8 +188,10 @@ export default {
       ],
     };
   },
-  mounted() {
+  created() {
     window.addEventListener("scroll", this.handleScroll);
+    /* set universal content */
+    this.footer_contacts = universal_content().phones;
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);

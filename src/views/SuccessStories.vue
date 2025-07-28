@@ -11,7 +11,7 @@
       :big_title="`${story?.description[0]?.children[0]?.text}`"
       :hero_description="`Success story description`"
       :read_more_link="`/resources/${success_story}/${story.companyName}`"
-      :hero_image="story.pic"
+      :hero_image="`${image_url}/${story?.image?.url}`"
       :hero_image_alt="`${story?.description[0]?.children[0]?.text} - Hero image`"
       is_story
     />
@@ -49,7 +49,7 @@
             >
               <CardHeader class="h-[40vh] p-0">
                 <img
-                  :src="story.pic"
+                  :src="`${image_url}/${story?.image?.url}`"
                   :alt="`${story?.description[0]?.children[0]?.text}`"
                   class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
                 />
@@ -95,7 +95,7 @@ import Spinner from "@/components/general/Spinner.vue";
 import BigTitle from "@/components/text/BigTitle.vue";
 import SmallTitle from "@/components/text/SmallTitle.vue";
 import { supabase } from "@/lib/supabase";
-import { success_stories_end_point } from "@/store/store";
+import { baseUrl, success_stories_end_point } from "@/store/store";
 import { universal_content } from "@/store/contentStore";
 import { CardDescription } from "@/components/ui/card";
 
@@ -121,6 +121,7 @@ export default {
       universal_services: [],
       universal_products: [],
       stories_page: [],
+      image_url: baseUrl,
     };
   },
   methods: {

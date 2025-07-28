@@ -11,10 +11,7 @@
             <div
               class="w-full overflow-y-scroll hide-scrollbar bg-white p-4 border-1 border-[#e3e3e3]"
             >
-              <div
-                v-if="toggle_tbc"
-                class="w-full pb-4 border-b border-[#82bc00]"
-              >
+              <div class="w-full pb-4 border-b border-[#82bc00]">
                 <p
                   class="font-semibold cursor-pointer"
                   @click="toggle_tbc = !toggle_tbc"

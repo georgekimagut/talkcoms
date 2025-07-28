@@ -360,7 +360,7 @@
         </h1>
       </div>
       <div
-        class="w-full flex gap-4 mt-8 flex-nowrap overflow-scroll hide-scrollbar snap-x snap-mandatory hero-cards"
+        class="w-full flex gap-4 mt-8 flex-nowrap overflow-x-scroll hide-scrollbar snap-x snap-mandatory hero-cards"
       >
         <Card
           v-for="(blog, index) in blogs"
