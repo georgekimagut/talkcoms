@@ -5,7 +5,9 @@
 
     <!-- new hero section -->
     <div class="w-full h-[80vh] flex relative new-hero">
-      <div class="w-3/4 h-full absolute bg-linear-secondary z-[10] opacity-80">
+      <div
+        class="w-3/4 h-full absolute bg-linear-secondary z-[10] opacity-80 to-full"
+      >
         <!-- background -->
       </div>
       <div class="w-full h-full absolute overflow-hidden">
@@ -15,7 +17,7 @@
         />
       </div>
       <!-- front panel -->
-      <div class="w-full h-full absolute z-[20] flex content-holer">
+      <div class="w-full h-full absolute z-[20] flex content-holder">
         <div class="w-[35%] ml-[5%] flex flex-col py-4 justify-center to-full">
           <h1 class="text-4xl font-extrabold text-white">
             Powering Digital Transformation Across Finance, Healthcare, Legal
@@ -57,24 +59,12 @@
     <!-- hero section -->
     <!-- <div class="w-full">{{ services }}</div> -->
     <div class="w-full h-[80vh] hero bg-fourth overflow-show mt-[3vh]">
-      <!-- navigation bar -->
-      <!-- <div class="h-[80vh] w-full absolute opacity-50 hide-img">
-        <img src="/icons/g26.svg" class="" />
-      </div> -->
-      <!-- <div class="h-[80vh] w-full absolute flex justify-end hide-img">
-        <img src="/static/tribal.png" class="h-full w-auto max-w-none" />
-      </div> -->
-      <!-- <div
-        class="absolute z-[20] w-full h-full flex justify-end overflow-hidden"
-      >
-        <img src="/public/static/tribal.png" class="!h-full w-auto" />
-      </div> -->
       <div class="w-full h-full flex flex-wrap justify-center overflow-hidden">
         <div class="w-[90%] flex flex-wrap mt-8 relative overflow-hidden">
           <!-- {{ services.services }} -->
 
           <div
-            class="h-[70vh] w-full flex overflow-y-hidden hide-scrollbar overflow-x-scroll snap-x snap-mandatory"
+            class="h-[70vh] w-full flex overflow-y-hidden hero-inner hide-scrollbar overflow-x-scroll snap-x snap-mandatory"
           >
             <div
               v-for="(slide, index) in services.services"
@@ -152,7 +142,7 @@
           </div>
         </div>
         <div
-          class="w-full flex justify-center gap-1"
+          class="w-full flex justify-center gap-1 mt-4"
           @mouseenter="pauseAutoSlide()"
           @mouseleave="resumeAutoSlide()"
         >
@@ -166,146 +156,10 @@
         </div>
       </div>
     </div>
-
-    <!-- services highlights -->
-    <!-- <div
-      class="w-full flex flex-wrap justify-center overflow-hidden bg-white py-16 services"
-    >
-      <div class="w-[90%] flex justify-center flex-wrap">
-        <div class="w-[80%] flex gap-1 overflow-x-scroll hide-scrollbar py-4">
-          <button
-            v-for="(service, index) in home_services"
-            :key="index"
-            class="p-2 text-sm rounded-t-md cursor-pointer border flex-shrink-0"
-            :class="
-              service_in_view === index
-                ? 'bg-default text-white border-[#131f6b]'
-                : 'text-default'
-            "
-            @click="toggle_service(index)"
-          >
-            <i :class="service.icon"></i>
-            {{ service.name }}
-          </button>
-        </div>
-        <div class="w-full flex overflow-hidden mt-8 hero-component">
-          <div
-            v-if="home_services[service_in_view]"
-            class="w-full flex flex-shrink-0 flex-grow rounded-md overflow-hidden hero-holder"
-          >
-            <div class="w-1/2 flex justify-end to-full">
-              <div class="w-[90%] flex to-full">
-                <div class="w-[70%] flex flex-wrap to-full">
-                  <div class="w-full flex flex-col justify-center">
-                    <h1 class="text-4xl font-extrabold text-default">
-                      <i
-                        class="text-secondary"
-                        :class="home_services[service_in_view].icon"
-                      ></i>
-                      {{ home_services[service_in_view].name }}
-                    </h1>
-                    <p class="mt-8">
-                      {{ home_services[service_in_view].title_description }}
-                    </p>
-                    <div class="w-full flex flex-row mt-8 full-hero gap-2">
-                      <router-link to="/contact/contact-us">
-                        <Button
-                          class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
-                        >
-                          <span class="relative z-10">Book A Demo</span>
-                          <span
-                            class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-                          ></span>
-                        </Button>
-                      </router-link>
-                      <router-link to="/contact/get-started">
-                        <Button
-                          variant="ghost"
-                          class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
-                        >
-                          <span class="relative z-10 hover:text-[#131f6b]"
-                            >Get Started
-                          </span>
-                          <span
-                            class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-                          ></span>
-                        </Button>
-                      </router-link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="w-1/2 to-full">
-              <div
-                class="w-[90%] flex justify-center rounded-xl overflow-hidden to-full"
-              >
-                <img
-                  :src="home_services[service_in_view].imageUrl"
-                  class="w-full h-auto max-h-none object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- prev service -->
-    <div
-      v-if="prev_service"
-      class="w-full flex flex-wrap justify-center overflow-hidden bg-white py-16 services"
-    >
-      <div class="w-[90%] flex justify-center flex-wrap">
-        <div class="w-full flex">
-          <div class="w-3/4 to-full">
-            <h1 class="text-4xl font-bold mt-4 p-2 ml-[1%]">
-              Services
-              <span class="text-secondary w-fit">Tailored</span>
-              To Meet Your Business Needs
-            </h1>
-          </div>
-          <div v-if="prev_service" class="w-1/4 flex justify-end to-hide">
-            <Button @click="prevServiceSlide" variant="light" class="mt-4"
-              ><i class="fa-solid fa-angle-left"></i
-            ></Button>
-            <Button @click="nextServiceSlide" variant="light" class="mt-4 ml-4"
-              ><i class="fa-solid fa-angle-right"></i
-            ></Button>
-          </div>
-        </div>
-
-        <!-- new services -->
-        <div
-          class="w-full flex overflow-x-scroll hide-scrollbar snap-x snap-mandatory inner-service"
-        >
-          <Card
-            v-for="(service, index) in home_services"
-            :key="index"
-            class="w-[32%] mb-4 m-[1.2%] min-w-[31%] bg-white shadow-none pb-8 rounded-xl border overflow-hidden zoom-animate snap-center"
-            ><router-link :to="`/service/${service.name}`">
-              <CardHeader class="p-0">
-                <CardTitle class="h-[35vh] overflow-hidden"
-                  ><img
-                    :src="service.imageUrl"
-                    class="h-full w-auto min-w-full max-w-none object-cover"
-                  />
-                </CardTitle>
-              </CardHeader>
-              <CardTitle class="custom-default-hover mt-4 p-4 text-xl">{{
-                service.name
-              }}</CardTitle>
-              <CardDescription class="px-4">
-                {{ service.title_description }}
-              </CardDescription>
-            </router-link>
-          </Card>
-        </div>
-      </div>
-    </div>
     <!-- end -->
     <!-- success stories  -->
     <div class="w-full flex flex-wrap justify-center overflow-hidden py-16">
-      <div class="w-[90%] flex justify-center flex-wrap gap-1">
+      <div class="w-[90%] flex justify-center flex-wrap gap-1 hero-component">
         <div class="w-full">
           <p class="text-secondary text-center text-lg">
             <router-link to="/success-stories">STORIES</router-link>
@@ -316,12 +170,12 @@
           </h1>
         </div>
         <div
-          class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories snap-x snap-mandatory gap-4"
+          class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories snap-x snap-mandatory gap-4 hero-cards"
         >
           <Card
             v-for="(item, index) in portfolio"
             :key="index"
-            class="w-[32%] mb-4 border-0 shadow-none rounded-none bg-body overflow-hidden flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover"
+            class="w-[32%] mb-4 border-0 shadow-none rounded-none bg-body overflow-hidden flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover snap-center"
             :class="
               index === 0
                 ? 'bg-secondary'
@@ -523,7 +377,9 @@
     <Partners class="mt-0" />
     <!-- blogs -->
     <!-- blogs -->
-    <div class="w-full flex justify-center flex-wrap mt-10 p-4 pb-20 blogs">
+    <div
+      class="w-full flex justify-center flex-wrap mt-10 p-4 pb-20 hero-component"
+    >
       <div class="w-[90%]">
         <p class="text-secondary w-full flex justify-center">
           <router-link to="/blogs" class="text-lg">BLOG</router-link>
@@ -533,11 +389,13 @@
           <span class="text-secondary mx-1">Trends</span>
         </h1>
       </div>
-      <div class="w-full flex gap-4 mt-8">
+      <div
+        class="w-full flex gap-4 mt-8 flex-nowrap overflow-scroll hide-scrollbar snap-x snap-mandatory hero-cards"
+      >
         <Card
           v-for="(blog, index) in blogs"
           :key="index"
-          class="w-[32%] border-0 shadow-none bg-body rounded-md flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover"
+          class="w-[32%] border-0 shadow-none bg-body rounded-md flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover snap-center"
         >
           <router-link
             :to="`/resources/${is_blog}/${blog.slug}`"

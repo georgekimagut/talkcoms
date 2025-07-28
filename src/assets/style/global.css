@@ -620,7 +620,7 @@ a {
     margin-left: 1%;
   }
   .carousel-holder .c-half:first-child .description {
-    display: none;
+    @apply text-center w-[100%];
   }
 }
 @media only screen and (max-width: 920px) {
@@ -725,7 +725,13 @@ a {
 }
 @media only screen and (max-width: 1020px) {
   .new-hero .content-holder .to-full {
-    @apply w-[100%];
+    @apply w-[90%];
+  }
+  .new-hero .to-full.absolute {
+    @apply w-[100%] opacity-100;
+  }
+  .new-hero .w-full img {
+    @apply h-full w-auto max-h-none;
   }
   .hidden-map {
     @apply flex;
@@ -754,6 +760,10 @@ a {
   }
   .contact-form {
     @apply mt-6;
+  }
+  .hero .carousel-holder,
+  .hero .hero-inner {
+    @apply h-fit;
   }
   .hero .carousel-holder .w-full {
     flex-wrap: wrap;
@@ -794,7 +804,7 @@ a {
     margin-top: 20px;
   }
   .hero {
-    height: fit-content;
+    @apply h-fit;
   }
   .hero .carousel-holder .c-half:nth-child(2) .img-holder {
     height: auto;
