@@ -554,7 +554,7 @@
             >
               <img
                 src=""
-                :alt="`${single_service.main_title} - related story image`"
+                :alt="`${story?.description[0]?.children[0]?.text} - related story image`"
                 class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
               />
             </div>
@@ -562,8 +562,10 @@
         </div>
         <div class="w-1/2 to-full">
           <div class="w-[90%] mt-6">
-            <h1 class="text-5xl font-bold mt-4 text-default">Story title</h1>
-            <p class="mt-2">Related story description/precept</p>
+            <h1 class="text-5xl font-bold mt-4 text-default">
+              {{ story?.description[0]?.children[0]?.text }}
+            </h1>
+            <p class="mt-2">{{ story?.description[0]?.children[0]?.text }}</p>
             <p class="mt-2">{{ story.companyName }}</p>
 
             <div
@@ -577,7 +579,8 @@
             </div>
           </div>
           <div class="w-full mt-10 flex">
-            <router-link :to="`/resources/${success_story}/${story.title}`"
+            <router-link
+              :to="`/resources/${success_story}/${story.companyName}`"
               ><Button
                 variant="ghost"
                 class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
