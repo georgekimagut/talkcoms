@@ -113,7 +113,7 @@
                   ? sanitized_resource || sanitized_resource
                   : resource.content_body
               "
-              class="w-full mt-10 block"
+              class="w-full mt-8 block"
             ></div>
             <!-- success story -->
             <div ref="content_body" class="w-full">
