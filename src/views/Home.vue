@@ -4,7 +4,7 @@
     <Navbar :services="universal_services" :products="universal_products" />
 
     <!-- new hero section -->
-    <div class="w-full h-[80vh] flex relative">
+    <div class="w-full h-[80vh] flex relative new-hero">
       <div class="w-3/4 h-full absolute bg-linear-secondary z-[10] opacity-80">
         <!-- background -->
       </div>
@@ -15,8 +15,8 @@
         />
       </div>
       <!-- front panel -->
-      <div class="w-full h-full absolute z-[20] flex">
-        <div class="w-[35%] ml-[5%] flex flex-col py-4 justify-center">
+      <div class="w-full h-full absolute z-[20] flex content-holer">
+        <div class="w-[35%] ml-[5%] flex flex-col py-4 justify-center to-full">
           <h1 class="text-4xl font-extrabold text-white">
             Powering Digital Transformation Across Finance, Healthcare, Legal
             Sectors & Other Industries

@@ -120,7 +120,7 @@
           </div>
           <div class="w-1/2 to-full">
             <div
-              v-for="(value, index) in values"
+              v-for="(value, index) in about_page[0].ourValues"
               :key="index"
               class="flex w-full mt-8 about-card"
             >
@@ -132,16 +132,18 @@
                   <div class="absolute z-10 h-full w-full flex justify-center">
                     <div class="h-full flex flex-col justify-center">
                       <span class="font-bold text-2xl text-secondary">
-                        <i :class="value.icon"></i>
+                        <i class="fa-solid fa-handshake"></i>
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="w-[70%] to-full">
-                <h1 class="text-xl font-semibold">{{ value.title }}</h1>
+                <h1 class="text-xl font-semibold">
+                  {{ value?.title }}
+                </h1>
                 <p class="mt-2">
-                  {{ value.content }}
+                  {{ value?.content[0]?.children[0]?.text }}
                 </p>
               </div>
             </div>

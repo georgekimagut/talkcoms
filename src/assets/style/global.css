@@ -724,6 +724,9 @@ a {
   }
 }
 @media only screen and (max-width: 1020px) {
+  .new-hero .content-holder .to-full {
+    @apply w-[100%];
+  }
   .hidden-map {
     @apply flex;
   }
