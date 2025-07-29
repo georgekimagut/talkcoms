@@ -2,7 +2,11 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
     <HeroSection
       small_title="FAQs"
       big_title="Got Questions? We’ve Got Answers"
@@ -81,6 +85,7 @@ export default {
       faqs: [],
       universal_services: [],
       universal_products: [],
+      universal_industries: [],
       filtered_faqs: [],
       all_faqs_tracker: [],
     };
@@ -90,6 +95,7 @@ export default {
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
+    this.universal_industries = universal_content().industries;
 
     try {
       // await this.get_faqs();

@@ -2,7 +2,11 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
 
     <HeroSection
       small_title="ABOUT US"
@@ -233,7 +237,6 @@ import Maps from "@/components/general/Maps.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import Partners from "@/components/general/Partners.vue";
 import Spinner from "@/components/general/Spinner.vue";
-import { supabase } from "@/lib/supabase";
 import { about_end_point, baseUrl } from "@/store/store";
 import { universal_content } from "@/store/contentStore";
 
@@ -259,6 +262,7 @@ export default {
       solutions: [],
       universal_services: [],
       universal_products: [],
+      universal_industries: [],
       offices: [
         {
           name: "United Kingdom",
@@ -283,6 +287,7 @@ export default {
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
+    this.universal_industries = universal_content().industries;
     try {
       await Promise.all([this.fetch_about(), this.fetch_services()]);
     } catch (error) {

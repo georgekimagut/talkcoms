@@ -2,7 +2,11 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
     <!-- new hero -->
     <HeroSection
       v-for="(testimonial, index) in testimonials.slice(0, 1)"
@@ -99,6 +103,7 @@ export default {
       success_story: "story",
       universal_services: [],
       universal_products: [],
+      universal_industries: [],
     };
   },
   methods: {
@@ -125,25 +130,13 @@ export default {
         console.error("Error fetching resources:", error);
       }
     },
-    // async get_testimonials() {
-    //   try {
-    //     const { data, error } = await supabase.from("testimonials").select("*");
-
-    //     if (error) {
-    //       console.log(error);
-    //       return;
-    //     }
-    //     this.testimonials = data;
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
   },
   async created() {
     document.title = "Talkcoms | Testimonials";
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
+    this.universal_industries = universal_content().industries;
 
     try {
       await Promise.all([this.fetch_testimonials()]);

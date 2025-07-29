@@ -2,14 +2,18 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
     <!-- new hero -->
     <HeroSection
       v-for="(story, index) in stories_page.slice(0, 1)"
       :key="index"
       :small_title="story.companyName"
       :big_title="story?.title"
-      hero_description=""
+      :hero_description="story?.sub_title"
       :read_more_link="`/resources/${success_story}/${story.companyName}`"
       :hero_image="`${image_url}/${story?.image?.url}`"
       :hero_image_alt="`${story?.title} - Hero image`"
@@ -118,6 +122,7 @@ export default {
       services: [{ id: "0", name: "All", active_category: "" }],
       universal_services: [],
       universal_products: [],
+      universal_industries: [],
       stories_page: [],
       image_url: baseUrl,
     };
@@ -216,6 +221,7 @@ export default {
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
+    this.universal_industries = universal_content().industries;
 
     try {
       await Promise.all([
