@@ -8,11 +8,11 @@
       v-for="(story, index) in stories_page.slice(0, 1)"
       :key="index"
       :small_title="story.companyName"
-      :big_title="`${story?.description[0]?.children[0]?.text}`"
-      hero_description=""
+      :big_title="story?.title"
+      :hero_description="story?.title"
       :read_more_link="`/resources/${success_story}/${story.companyName}`"
       :hero_image="`${image_url}/${story?.image?.url}`"
-      :hero_image_alt="`${story?.description[0]?.children[0]?.text} - Hero image`"
+      :hero_image_alt="`${story?.title} - Hero image`"
       is_story
     />
     <!-- end of hero -->
@@ -50,16 +50,14 @@
               <CardHeader class="h-[40vh] p-0">
                 <img
                   :src="`${image_url}/${story?.image?.url}`"
-                  :alt="`${story?.description[0]?.children[0]?.text}`"
+                  :alt="story?.title"
                   class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
                 />
               </CardHeader>
               <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
                 story.companyName
               }}</CardTitle>
-              <CardDescription class="p-2">{{
-                story?.description[0]?.children[0]?.text
-              }}</CardDescription>
+              <CardDescription class="p-2">{{ story?.title }}</CardDescription>
               <CardFooter>
                 <div
                   class="flex flex-nowrap relative gap-2 text-secondary p-2 pb-4 h-[40px] flex-col justify-center read-more-hover"

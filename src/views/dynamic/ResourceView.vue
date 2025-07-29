@@ -7,7 +7,7 @@
       <div class="w-[90%] flex flex-wrap hero-holder">
         <!-- Sticky sidebar -->
         <div class="w-[30%] sticky top-[15vh] self-start to-full tbc !h-fit">
-          <div class="w-full pt-4 pb-4">
+          <div class="w-full pt-4 pb-4 border rounded-md shadow-sm">
             <div
               class="w-full overflow-y-scroll hide-scrollbar bg-white p-4 border-1 border-[#e3e3e3]"
             >
@@ -30,7 +30,7 @@
                 <li
                   v-for="(item, index) in table_of_contents"
                   :key="index"
-                  class="list-disc"
+                  class="list-disc hover:ml-2 duration-300 ease-in-out"
                 >
                   <a
                     :href="'#' + item.id"
@@ -50,12 +50,12 @@
           <div class="w-[95%] ml-[5%] mt-10 space-y-20 w-no-w">
             <!-- resource details -->
             <div class="w-full">
-              <h1 v-if="resource?.Title" class="font-extrabold mt-4 text-2xl">
+              <h1 v-if="resource?.Title" class="font-extrabold mt-4 text-3xl">
                 {{ resource?.Title }}
               </h1>
               <!-- success story -->
-              <h1 v-if="success_story" class="font-extrabold mt-4 text-2xl">
-                {{ success_story?.description[0]?.children[0]?.text }}
+              <h1 v-if="success_story" class="font-extrabold mt-4 text-3xl">
+                {{ success_story?.title }}
               </h1>
               <!-- <p class="w-full mt-6">
                 {{ resource.short_description ?? resource.description ?? "" }}
