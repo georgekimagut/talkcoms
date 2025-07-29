@@ -2,7 +2,11 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading && !unaivailable_service" />
   <div v-if="unaivailable_service" class="w-full">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
     <div class="w-full h-[40vh] flex justify-center relative">
       <HeroPattern />
       <div class="h-full flex flex-col justify-center">
@@ -23,7 +27,11 @@
     <Footer :services="universal_services" :products="universal_products" />
   </div>
   <div v-if="!page_is_loading && !unaivailable_service" class="w-full">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
     <HeroSection
       :small_title="this.id"
       :big_title="single_service.main_title"
@@ -723,6 +731,7 @@ export default {
       random_bg: "",
       universal_services: [],
       universal_products: [],
+      universal_industries: [],
       single_service: [],
 
       portfolio: [
@@ -757,6 +766,7 @@ export default {
     const store = universal_content();
     this.universal_services = store.services;
     this.universal_products = store.products;
+    this.universal_industries = store.industries;
 
     try {
       await this.fetch_services();
@@ -788,6 +798,7 @@ export default {
         const store = universal_content();
         this.universal_services = store.services;
         this.universal_products = store.products;
+        this.universal_industries = store.industries;
 
         try {
           await this.fetch_services();

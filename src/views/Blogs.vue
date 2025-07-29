@@ -2,7 +2,11 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
     <HeroSection
       v-for="(blog, index) in all_blog_tracker.slice(0, 1)"
       :key="index"
@@ -174,6 +178,7 @@ export default {
       image_url: baseUrl,
       universal_services: [],
       universal_products: [],
+      universal_industries: [],
     };
   },
   async created() {
@@ -181,6 +186,7 @@ export default {
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
+    this.universal_industries = universal_content().industries;
 
     try {
       // await this.get_blogs();

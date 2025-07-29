@@ -64,6 +64,10 @@ export default {
   name: "Partners",
   props: {
     has_numbers: Boolean,
+    projects: String,
+    members: String,
+    reviews: String,
+    clients: String,
   },
   data() {
     return {
@@ -79,31 +83,33 @@ export default {
         { client_pic: "/icons/partners/8.svg" },
       ],
       stats: [
-        {
-          icon: "fa-regular fa-circle-check text-secondary text-2xl",
-          number: 20,
-          item: "Complete Projects",
-        },
-        {
-          icon: "fa-solid fa-users text-secondary text-2xl",
-          number: 20,
-          item: "Team Members",
-        },
-        {
-          icon: "fa-regular fa-message text-secondary text-2xl",
-          number: 200,
-          item: "Reviews",
-        },
-        {
-          icon: "fa-solid fa-users text-secondary text-2xl",
-          number: 10,
-          item: "Happy Clients",
-        },
+        // {
+        //   icon: "fa-regular fa-circle-check text-secondary text-2xl",
+        //   number: 20,
+        //   item: "Complete Projects",
+        // },
+        // {
+        //   icon: "fa-solid fa-users text-secondary text-2xl",
+        //   number: 20,
+        //   item: "Team Members",
+        // },
+        // {
+        //   icon: "fa-regular fa-message text-secondary text-2xl",
+        //   number: 200,
+        //   item: "Reviews",
+        // },
+        // {
+        //   icon: "fa-solid fa-users text-secondary text-2xl",
+        //   number: 10,
+        //   item: "Happy Clients",
+        // },
       ],
       animatedStats: [],
     };
   },
-  mounted() {
+  async mounted() {
+    /* set numbers from parent */
+    this.set_starts();
     this.prepareAnimatedStats();
     this.observeStatsSection();
   },
@@ -153,6 +159,33 @@ export default {
           }
         }, 1000 / frameRate);
       });
+    },
+    /* set statistics */
+    set_starts() {
+      this.stats.push(
+        {
+          icon: "fa-regular fa-circle-check text-secondary text-2xl",
+          number: this.projects,
+          item: "Complete Projects",
+        },
+        {
+          icon: "fa-solid fa-users text-secondary text-2xl",
+          number: this.members,
+          item: "Team Members",
+        },
+        {
+          icon: "fa-regular fa-message text-secondary text-2xl",
+          number: this.reviews,
+          item: "Testimonials",
+        },
+        {
+          icon: "ffa-solid fa-users text-secondary text-2xl",
+          number: this.clients,
+          item: "Happy Clients",
+        }
+      );
+
+      console.log(this.clients);
     },
   },
 };

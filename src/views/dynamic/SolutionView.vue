@@ -2,13 +2,21 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
     <HeroSection
+      :key="index"
       :small_title="this.id"
-      :big_title="solution.title"
-      :hero_description="solution.description"
+      :big_title="industry_solution[0]?.secondary_title"
+      hero_description=""
       :read_more_link="`/demo/${this.id}`"
-      hero_image="/static/industries.svg"
+      :hero_image="`${image_url}/${
+        industry_solution[0]?.formats?.large?.url ||
+        industry_solution[0].hero_image?.url
+      }`"
       is_industry
     />
 
@@ -32,13 +40,13 @@
           <div
             class="w-[80%] overflow-hidden transition-all duration-500 relative flex flex-col justify-center to-full"
           >
-            <SmallTitle :text="`Our Impact in ${this.id} `" />
+            <p class="text-secondary text-xl uppercase">
+              Our impact in {{ id }}
+            </p>
             <h1 class="text-5xl font-extrabold text-default sticky top-0 py-4">
-              {{ solution.section_title }}
+              {{ industry_solution[0]?.secondary_title }}
             </h1>
             <div
-              v-for="(feature, index) in features"
-              :key="index"
               class="w-[90%] py-4 border-b border-[#e3e3e3] flex flex-nowrap"
             >
               <div class="">
@@ -47,7 +55,9 @@
                 ></i>
               </div>
               <div class="ml-[10px]">
-                <p class="mt-2"><span></span>{{ feature.description }}</p>
+                <p class="mt-2">
+                  <span></span>{{ industry_solution[0]?.description_title }}
+                </p>
               </div>
             </div>
           </div>
@@ -56,7 +66,27 @@
     </div>
     <!-- solutions -->
     <div class="w-full flex justify-center mt-10 bg-white py-16 hero-component">
-      <div class="w-[90%] flex flex-wrap gap-2 hero-cards to-full">
+      <div
+        class="w-[90%] flex justify-center flex-wrap gap-2 hero-cards to-full"
+      >
+        <!-- solutions related -->
+        <div
+          v-for="(solution, index) in industry_solution[0].service_pages"
+          :key="index"
+          class="w-[24%] bg-body p-4 pb-16 flex-shrink-0 to-full duration-300 ease-in-out custom-card-hover to-full"
+        >
+          <router-link :to="`/service/${solution.product_name}`" class="w-full">
+            <img
+              :src="`${image_url}/${solution.icon?.url}`"
+              class="h-[50px] w-auto"
+            />
+            <h1 class="text-xl font-bold mt-8">
+              {{ solution.product_name }}
+            </h1>
+            <p class="mt-8">{{ solution.main_title }}</p>
+          </router-link>
+        </div>
+        <!-- end of new -->
         <IconCard
           v-if="related_solutions.length >= 1"
           v-for="(related_solution, index) in related_solutions"
@@ -180,6 +210,7 @@ import Cta from "@/components/general/Cta.vue";
 import IconCard from "@/components/ui/card/IconCard.vue";
 import HeroSection from "@/components/general/HeroSection.vue";
 import { universal_content } from "@/store/contentStore";
+import { baseUrl } from "@/store/store";
 
 export default {
   name: "SolutionView",
@@ -197,7 +228,7 @@ export default {
   data() {
     return {
       page_is_loading: true,
-      solution: "",
+      solution: [],
       solution_id: "",
       features: [],
       related_solutions: [],
@@ -206,6 +237,9 @@ export default {
       success_story: "case-study",
       universal_services: [],
       universal_products: [],
+      industry_solution: [],
+      universal_industries: [],
+      image_url: baseUrl,
     };
   },
   async created() {
@@ -213,14 +247,16 @@ export default {
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
+    this.universal_industries = universal_content().industries;
 
     try {
-      await this.get_solution();
-      await this.get_products();
-      if (this.solution_id != "") {
-        this.get_features();
-        this.get_study();
-      }
+      // await this.get_solution();
+      await Promise.all([this.fetch_industry()]);
+      // await this.get_products();
+      // if (this.solution_id != "") {
+      //   this.get_features();
+      //   this.get_study();
+      // }
     } catch (error) {
       console.log("Loading error:", error);
     } finally {
@@ -235,9 +271,11 @@ export default {
         this.page_is_loading = true;
         this.universal_services = universal_content().services;
         this.universal_products = universal_content().products;
+        this.universal_industries = universal_content().industries;
 
         try {
-          await this.get_solution();
+          // await this.get_solution();
+          await Promise.all([this.fetch_industry()]);
         } catch (error) {
           console.error("Loading failed:", error);
         } finally {
@@ -329,6 +367,30 @@ export default {
         this.related_story = data[0];
       } catch (error) {
         console.log(error);
+      }
+    },
+
+    /* fetch industry */
+    async fetch_industry() {
+      try {
+        const response = await fetch(
+          `${baseUrl}/api/industries/?filters[main_title][$eq]=${this.id}&populate=*`
+        );
+        const responseData = await response.json();
+        if (responseData.data) {
+          console.log("Json data for service names: ", responseData.data);
+
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+          // const fetched_industries = dataArray;
+          this.industry_solution = dataArray;
+          console.log("The solution", this.industry_solution);
+        } else {
+          console.error("Invalid industry response structure: ", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
       }
     },
   },

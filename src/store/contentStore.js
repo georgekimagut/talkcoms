@@ -6,6 +6,7 @@ export const universal_content = defineStore("universal_content", {
     products: [],
     emails: [],
     phones: [],
+    industries: [],
   }),
   actions: {
     setServices(data) {
@@ -19,6 +20,9 @@ export const universal_content = defineStore("universal_content", {
     },
     setPhones(data) {
       this.phones = data;
+    },
+    setIndustries(data) {
+      this.industries = data;
     },
   },
   persist: true, //  Enable persistence in localStorage

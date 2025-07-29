@@ -2,7 +2,11 @@
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full bg-white">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
     <div class="w-full flex justify-center flex-wrap hero-component">
       <div class="w-[90%] flex flex-wrap hero-holder">
         <!-- Sticky sidebar -->
@@ -203,6 +207,7 @@ export default {
       total_resource_slides: 2,
       universal_services: [],
       universal_products: [],
+      universal_industries: [],
       success_body: [],
     };
   },
@@ -211,6 +216,7 @@ export default {
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
+    this.universal_industries = universal_content().industries;
 
     try {
       await this.fetch_resource();

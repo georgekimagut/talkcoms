@@ -98,6 +98,9 @@
 export default {
   name: "Cta",
   components: {},
-  props: { cta_class: String, service_cta: String },
+  props: {
+    cta_class: String,
+    service_cta: String,
+  },
 };
 </script>

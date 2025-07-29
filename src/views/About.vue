@@ -214,8 +214,14 @@
         </div>
       </div>
     </div>
+    {{ about_page[0].company_status }}
     <!-- CTA -->
-    <Cta />
+    <Cta
+      :projects="about_page[0].company_status"
+      :members="about_page[0].team_members"
+      :reviews="about_page[0].reviews"
+      :clients="about_page[0].clients"
+    />
     <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>

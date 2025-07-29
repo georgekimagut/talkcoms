@@ -1,7 +1,11 @@
 <template>
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
-    <Navbar :services="universal_services" :products="universal_products" />
+    <Navbar
+      :services="universal_services"
+      :products="universal_products"
+      :industries="universal_industries"
+    />
     <!-- new hero section -->
     <div class="w-full h-[80vh] flex relative new-hero">
       <div
@@ -190,15 +194,15 @@
       <div class="w-[90%] flex justify-center flex-wrap gap-1 hero-component">
         <div class="w-full">
           <p class="text-secondary text-center text-lg">
-            <router-link to="/success-stories">STORIES</router-link>
+            <router-link to="/success-stories">PORTFOLIO</router-link>
           </p>
 
-          <h1 class="text-4xl font-bold mt-4 p-2 text-center text-default">
-            Success Stories From Our Clients
+          <h1 class="text-5xl font-extrabold mt-4 p-2 text-center text-default">
+            Explore our previous work
           </h1>
         </div>
         <div
-          class="w-full flex flex-nowrap mt-4 overflow-scroll hide-scrollbar stories snap-x snap-mandatory gap-4 hero-cards"
+          class="w-full flex flex-nowrap mt-6 overflow-scroll hide-scrollbar stories snap-x snap-mandatory gap-4 hero-cards"
         >
           <Card
             v-for="(item, index) in portfolio"
@@ -257,22 +261,22 @@
             Select your industry. Discover our impact.
           </h1>
         </div>
+        <!-- {{ industries }} -->
         <div class="w-full flex flex-wrap mt-16 w730">
           <div
             v-for="(industry, index) in industries"
             :key="index"
             class="industry-card w-[49%] ml-[1%] flex flex-nowrap cursor-pointer pt-3 pb-3 px-2 ease-in-out border-b border-[#dfdfdf] hover:bg-white c-half"
           >
-            <router-link :to="`/solution/${industry.name}`" class="w-full flex"
+            <router-link
+              :to="`/solution/${industry?.main_title}`"
+              class="w-full flex"
               ><div class="w-[90%] flex flex-nowrap">
                 <div class="w-[20px]">
-                  <i
-                    :class="industry.icon"
-                    class="text-secondary ml-2 pt-2"
-                  ></i>
+                  <i class="fa-solid fa-industry text-secondary ml-2 pt-2"></i>
                 </div>
 
-                <p class="ml-4 text-2xl">{{ industry.name }}</p>
+                <p class="ml-4 text-2xl">{{ industry?.main_title }}</p>
               </div>
               <div class="w-[10%] flex justify-end">
                 <i
@@ -408,6 +412,7 @@ import {
   home_end_point,
   services_end_point,
   home_services_end_point,
+  industries_end_point,
 } from "@/store/store.js";
 import { supabase } from "@/lib/supabase.js";
 /* global values */
@@ -451,6 +456,7 @@ export default {
       services: [],
       universal_services: [],
       universal_products: [],
+      universal_industries: [],
       products: [],
       /* services carousel */
       current_service_slide: 0,
@@ -487,11 +493,12 @@ export default {
         // this.get_carousel(),
         this.get_services(),
         this.get_portfolio_items(),
-        this.get_solutions(),
+        // this.get_solutions(),
         this.fetch_blogs(),
         this.fetch_homepage(),
         this.fetch_service_names(),
         this.fetch_service_carousel(),
+        this.fetch_industry_names(),
         this.get_stories(),
       ]);
     } catch (error) {
@@ -609,6 +616,7 @@ export default {
         console.error("Error fecthing carousel: ", error);
       }
     },
+
     /* fetch services */
     async fetch_service_names() {
       try {
@@ -619,11 +627,10 @@ export default {
         if (responseData.data) {
           console.log("Json data for service names: ", responseData.data);
 
-          // const dataArray = Array.isArray(responseData.data)
-          //   ? responseData.data
-          //   : [responseData.data];
-          // const fetched_services = dataArray;
-          const fetched_services = responseData.data;
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+          const fetched_services = dataArray;
           /* store service universally */
           fetched_services.forEach((item) => {
             if (item.is_product === true) {
@@ -638,6 +645,34 @@ export default {
           });
         } else {
           console.error("Invalide service response structure: ", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    },
+    /* fetch industry names */
+    async fetch_industry_names() {
+      try {
+        const response = await fetch(industries_end_point);
+        const responseData = await response.json();
+        if (responseData.data) {
+          console.log("Json data for service names: ", responseData.data);
+
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+          const fetched_industries = dataArray;
+          this.industries = dataArray;
+          /* store industry universally */
+          fetched_industries.forEach((item) => {
+            this.universal_industries.push({ main_title: item.main_title });
+
+            const contentStore = universal_content();
+            contentStore.setIndustries(this.universal_industries);
+            console.log("Industries: ", this.universal_industries);
+          });
+        } else {
+          console.error("Invalide industry response structure: ", responseData);
         }
       } catch (error) {
         console.error("Error fetching services:", error);

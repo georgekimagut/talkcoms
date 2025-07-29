@@ -471,7 +471,7 @@ a {
 }
 
 /* smooth scrol animation, fade and slide */
-.autoShow {
+/* .autoShow {
   animation: text-appear both;
   animation-timeline: view();
   animation-range: entry 20% cover 100vh;
@@ -485,7 +485,7 @@ a {
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
 
 /* image reveal */
 .imageReveal {

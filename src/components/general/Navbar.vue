@@ -100,9 +100,9 @@
                 class="mb-2 list-none"
               >
                 <router-link
-                  :to="`/solution/${industry.name}`"
+                  :to="`/solution/${industry.main_title}`"
                   class="custom-default-hover"
-                  >{{ industry.name }}</router-link
+                  >{{ industry.main_title }}</router-link
                 >
               </li>
             </div>
@@ -421,6 +421,7 @@
 // import DefaultButton from "./buttons/RoundedButton.vue";
 import { supabase } from "@/lib/supabase";
 import Link from "../text/Link.vue";
+import { universal_content } from "@/store/contentStore";
 // import DarkButton from "./ui/button/DarkButton.vue";
 // import Button from "../ui/button/Button.vue";
 
@@ -429,6 +430,7 @@ export default {
   props: {
     services: Array,
     products: Array,
+    industries: Array,
   },
   components: { /*DefaultButton,*/ Link /*DarkButton*/ },
   data() {
@@ -481,11 +483,11 @@ export default {
         { name: "Insurance" },
       ],
       departments: [],
-      industries: [],
     };
   },
   created() {
-    this.get_solutions();
+    // this.industries = universal_content().industries;
+    // this.get_solutions();
   },
   methods: {
     // show_service_dropdown(key) {
