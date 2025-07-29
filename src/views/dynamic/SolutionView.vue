@@ -29,7 +29,10 @@
             class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit hide-im"
           >
             <img
-              src="/static/industries-2.svg"
+              :src="`${image_url}/${
+                industry_solution[0]?.image?.formats?.large?.url ||
+                industry_solution[0].image?.url
+              }`"
               class="w-full h-full object-cover rounded-xl"
             />
           </div>
@@ -194,7 +197,8 @@
       </div>
     </div>
     <!-- footer and cta -->
-    <Cta />
+
+    <Cta :service_cta="industry_solution[0].footer" />
     <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>
