@@ -554,7 +554,7 @@
             >
               <img
                 :src="`${image_url}/${story?.image?.url}`"
-                :alt="`${story?.description[0]?.children[0]?.text} - related story image`"
+                :alt="`${story?.title} - related story image`"
                 class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
               />
             </div>
@@ -563,7 +563,7 @@
         <div class="w-1/2 to-full">
           <div class="w-[90%] mt-6">
             <h1 class="text-5xl font-bold mt-4 text-default">
-              {{ story?.description[0]?.children[0]?.text }}
+              {{ story?.title }}
             </h1>
             <p class="mt-4 text-xl">{{ story.companyName }}</p>
 
@@ -596,7 +596,7 @@
       </div>
     </div>
     <!-- Cta -->
-    <Cta cta_class="pt-32" :service_cta="footer_heading" />
+    <Cta cta_class="pt-32" :service_cta="single_service.footer_heading" />
     <!-- footer -->
     <Footer :services="universal_services" :products="universal_products" />
   </div>

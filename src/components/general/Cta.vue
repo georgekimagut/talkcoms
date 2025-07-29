@@ -40,7 +40,7 @@
         <div class="w-full">
           <h1
             v-if="service_cta"
-            class="text-5xl font-extrabold mt-4 p-2 text-center text-default"
+            class="text-5xl font-extrabold mt-4 p-2 text-center text-secondary"
           >
             {{ service_cta }}
           </h1>
