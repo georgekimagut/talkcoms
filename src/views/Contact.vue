@@ -198,21 +198,30 @@
       </div>
     </div>
     <!-- contact details -->
-    <div class="w-full flex justify-center mt-16 border-b pb-8 relative">
+    <div
+      class="w-full flex justify-center mt-16 border py-8 relative bg-fourth rounded-xl border-[#007cba]"
+    >
       <div class="w-[90%] flex rounded-xl overflow-hidden contact-panel">
+        <!-- <div
+            v-for="(office, index) in offices"
+            :key="index"
+            class="w-[33%] p-4 to-full"
+          >
+            <h1 class="text-2xl font-bold text-secondary">{{ office.name }}</h1>
+            <p class="mt-8 text-xl">{{ office.location }}</p>
+          </div> -->
         <Card
-          class="w-[32%] m-[1.5%] card rounded-xl border border-[##f5f5f5] shadow-none bg-white"
+          class="w-[32%] m-[1.5%] card rounded-xl shadow-none bg-transparent border-none card"
         >
           <!-- phones -->
           <CardHeader>
-            <CardDescription class="text-xl"
-              ><i class="fa-solid fa-phone text-secondary"></i> Call us
-              on</CardDescription
+            <CardDescription class="text-2xl font-bold text-secondary">
+              Call us on</CardDescription
             >
             <CardTitle
               v-for="(phone, index) in phones"
               :key="index"
-              class="mt-2 text-normal"
+              class="mt- text-xl"
             >
               <a :href="`tel:${phone.phone}`">{{ phone.phone }}</a></CardTitle
             >
@@ -220,17 +229,16 @@
         </Card>
         <!-- emails -->
         <Card
-          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white card"
+          class="w-[32%] m-[1.5%] card rounded-xl shadow-none bg-transparent border-none card"
         >
           <CardHeader>
-            <CardDescription class="text-xl"
-              ><i class="fa-regular fa-envelope text-secondary"></i> You can
-              email us</CardDescription
+            <CardDescription class="text-2xl font-bold text-secondary"
+              >You can email us</CardDescription
             >
             <CardTitle
               v-for="(email, index) in emails"
               :key="index"
-              class="mt-4"
+              class="mt-2 text-xl"
             >
               <a :href="`mailto:${email.email}`">{{
                 email.email
@@ -240,20 +248,21 @@
         </Card>
         <!-- location -->
         <Card
-          class="w-[32%] m-[1.5%] rounded-xl border border-[##f5f5f5] shadow-none bg-white card"
+          class="w-[32%] m-[1.5%] card rounded-xl shadow-none bg-transparent border-none card"
         >
           <CardHeader>
-            <CardDescription class="text-xl"
-              ><i class="fa-solid fa-location-dot text-secondary"></i> Our
-              Offfices</CardDescription
+            <CardDescription class="text-2xl font-bold text-secondary">
+              Our Offfices</CardDescription
             >
             <div
-              class="w-full mt-4"
+              class="w-full mt-2"
               v-for="(office, index) in offices"
               :key="index"
             >
-              <CardDescription>{{ office.name }}</CardDescription>
-              <CardTitle>{{ office.location }}</CardTitle>
+              <CardDescription class="text-normal">{{
+                office.name
+              }}</CardDescription>
+              <CardTitle class="text-xl">{{ office.location }}</CardTitle>
             </div>
           </CardHeader>
         </Card>

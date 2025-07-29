@@ -218,7 +218,6 @@
         </div>
       </div>
     </div>
-    {{ about_page[0].company_status }}
     <!-- CTA -->
     <Cta
       :projects="about_page[0].company_status"
