@@ -11,7 +11,7 @@
       :key="index"
       :small_title="this.id"
       :big_title="industry_solution[0]?.secondary_title"
-      hero_description=""
+      :hero_description="industry_solution[0]?.description_title"
       :read_more_link="`/demo/${this.id}`"
       :hero_image="`${image_url}/${
         industry_solution[0]?.formats?.large?.url ||
@@ -48,21 +48,17 @@
               Our impact in {{ id }}
             </p>
             <h1 class="text-5xl font-extrabold text-default sticky top-0 py-4">
-              {{ industry_solution[0]?.secondary_title }}
+              Who we serve
             </h1>
             <div
-              class="w-[90%] py-4 border-b border-[#e3e3e3] flex flex-nowrap"
+              v-for="(who_is_served, index) in industry_solution[0].whoweserve"
+              :key="index"
+              class="w-[90%] py-1 border-b border-[#e3e3e3] flex flex-nowrap"
             >
-              <div class="">
-                <i
-                  class="fa-solid fa-circle-check text-default mt-4 text-xl"
-                ></i>
-              </div>
-              <div class="ml-[10px]">
-                <p class="mt-2">
-                  <span></span>{{ industry_solution[0]?.description_title }}
-                </p>
-              </div>
+              <i class="fa-solid fa-circle-check text-default mt-4 text-xl"></i>
+              <p class="mt-4 ml-[5px]">
+                <span></span>{{ who_is_served?.title }}
+              </p>
             </div>
           </div>
         </div>
@@ -75,19 +71,19 @@
       >
         <!-- solutions related -->
         <div
-          v-for="(solution, index) in industry_solution[0].service_pages"
+          v-for="(who_is_served, index) in industry_solution[0]?.cardbyindustry"
           :key="index"
           class="w-[24%] bg-body p-4 pb-16 flex-shrink-0 to-full duration-300 ease-in-out custom-card-hover to-full"
         >
-          <router-link :to="`/service/${solution.product_name}`" class="w-full">
+          <router-link :to="`/service/${who_is_served?.title}`" class="w-full">
             <img
-              :src="`${image_url}/${solution.icon?.url}`"
+              :src="`${image_url}/${who_is_served.icon?.url}`"
               class="h-[50px] w-auto"
             />
             <h1 class="text-xl font-bold mt-8">
-              {{ solution.product_name }}
+              {{ who_is_served?.title }}
             </h1>
-            <p class="mt-8">{{ solution.main_title }}</p>
+            <p class="mt-8">{{ who_is_served?.description }}</p>
           </router-link>
         </div>
         <!-- end of new -->
