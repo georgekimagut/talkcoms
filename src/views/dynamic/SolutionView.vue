@@ -33,6 +33,7 @@
                 industry_solution[0]?.image?.formats?.large?.url ||
                 industry_solution[0].image?.url
               }`"
+              :alt="industry_solution[0]?.secondary_title"
               class="w-full h-full object-cover rounded-xl"
             />
           </div>
@@ -143,17 +144,25 @@
     <!-- case study -->
 
     <div
-      v-if="related_story"
-      class="w-full flex justify-center bg-white py-10 hero-component"
+      v-if="industry_solution[0]?.success_stories.length > 0"
+      class="w-full flex justify-center mt-16 bg-white py-16 hero-component"
     >
-      <div class="w-[90%] h-fit flex hero-holder">
+      <div
+        v-for="(story, index) in industry_solution[0]?.success_stories.slice(
+          0,
+          1
+        )"
+        :key="index"
+        class="w-[90%] h-fit flex hero-holder"
+      >
         <div class="w-1/2 flex h-full justify-center to-full">
           <div class="w-[90%] flex flex-wrap justify-center">
             <div
               class="w-[80%] max-h-[50vh] rounded-2xl flex justify-center overflow-hidden to-full"
             >
               <img
-                :src="related_story.pic"
+                :src="`${image_url}/${story?.image?.url}`"
+                :alt="`${story?.title} - related story image`"
                 class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
               />
             </div>
@@ -162,25 +171,23 @@
         <div class="w-1/2 to-full">
           <div class="w-[90%] mt-6">
             <h1 class="text-5xl font-bold mt-4 text-default">
-              {{ related_story.title }}
+              {{ story?.title }}
             </h1>
-            <p class="mt-6">{{ related_story.short_description }}</p>
-            <p class="mt-6">{{ related_story.client }}</p>
+            <p class="mt-4 text-xl">{{ story.companyName }}</p>
 
             <div
-              class="w-full h-[26px] flex flex-col justify-center mt-16 to-next-line"
+              class="w-full h-[26px] flex flex-col justify-center mt-10 to-next-line"
             >
-              <p>Product/Service:</p>
-              <p class="mt-4">
-                <span class="p-2 border border-[#007cba] rounded-full">
-                  {{ this.id }}
-                </span>
+              <p
+                class="mt-2 p-1 px-2 border border-[#007cba] rounded-full w-fit"
+              >
+                {{ this.id }}
               </p>
             </div>
           </div>
           <div class="w-full mt-10 flex">
             <router-link
-              :to="`/resources/${success_story}/${related_story.title}`"
+              :to="`/resources/${success_story}/${story.companyName}`"
               ><Button
                 variant="ghost"
                 class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
@@ -197,8 +204,10 @@
       </div>
     </div>
     <!-- footer and cta -->
-
-    <Cta :service_cta="industry_solution[0].footer" />
+    <Cta
+      :service_cta="industry_solution[0].footer"
+      :service_cta_description="industry_solution[0].footer_description"
+    />
     <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>

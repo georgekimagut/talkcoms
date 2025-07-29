@@ -50,7 +50,10 @@
             Business
             <span class="text-secondary ml-2 mr-2">With Tech?</span>
           </h1>
-          <p class="mt-2 text-center text-xl">
+          <p v-if="service_cta_description" class="mt-2 text-center text-xl">
+            {{ service_cta_description }}
+          </p>
+          <p v-else class="mt-2 text-center text-xl">
             Join thousands of professionals who have transformed their business
             with our solutions
           </p>
@@ -101,6 +104,7 @@ export default {
   props: {
     cta_class: String,
     service_cta: String,
+    service_cta_description: String,
   },
 };
 </script>
