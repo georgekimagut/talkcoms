@@ -258,11 +258,12 @@ export default {
       }
     },
     async fetch_resource() {
+      const encoded_title = encodeURIComponent(this.id);
       try {
         //check the type of service before retrieval
         if (this.type === "blog") {
           const response = await fetch(
-            `${baseUrl}/api/blog-posts?filters[slug][$eq]=${this.id}&populate=*`
+            `${baseUrl}/api/blog-posts?filters[slug][$eq]=${encoded_title}&populate=*`
           );
 
           if (!response.ok) {
@@ -291,7 +292,7 @@ export default {
           }
         } else if (this.type === "story") {
           const response = await fetch(
-            `${baseUrl}/api/success-stories?filters[companyName][$eq]=${this.id}&populate=*`
+            `${baseUrl}/api/success-stories?filters[companyName][$eq]=${encoded_title}&populate=*`
           );
 
           if (!response.ok) {
@@ -331,30 +332,7 @@ export default {
         console.log(error);
       }
     },
-    /* fetch blogs */
-    async fetch_blogs() {
-      try {
-        const response = await fetch(apiEndpoint + "6");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
 
-        const responseData = await response.json();
-
-        if (responseData.data) {
-          const dataArray = Array.isArray(responseData.data)
-            ? responseData.data
-            : [responseData.data];
-
-          this.blogs = dataArray;
-          console.log(this.blogs);
-        } else {
-          console.error("Invalid response structure:", responseData);
-        }
-      } catch (error) {
-        console.error("Error fetching resources:", error);
-      }
-    },
     //change date format
     format_date(date_to_change) {
       const date = new Date(date_to_change);

@@ -822,8 +822,9 @@ export default {
   methods: {
     /* fetch services */
     async fetch_services() {
+      const encoded_title = encodeURIComponent(this.id);
       const response = await fetch(
-        `${baseUrl}/api/service-pages?filters[product_name][$eq]=${this.id}&populate=*`
+        `${baseUrl}/api/service-pages?filters[product_name][$eq]=${encoded_title}&populate=*`
       );
       // const response = await fetch(services_end_point);
 

@@ -372,9 +372,10 @@ export default {
 
     /* fetch industry */
     async fetch_industry() {
+      const encoded_title = encodeURIComponent(this.id);
       try {
         const response = await fetch(
-          `${baseUrl}/api/industries/?filters[main_title][$eq]=${this.id}&populate=*`
+          `${baseUrl}/api/industries/?filters[main_title][$eq]=${encoded_title}&populate=*`
         );
         const responseData = await response.json();
         if (responseData.data) {
