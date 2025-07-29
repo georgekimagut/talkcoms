@@ -44,5 +44,8 @@ export const testimonials_end_point =
 export const industries_end_point =
   "https://cms.talkcoms.co.uk/api/industries/?populate=*";
 
+export const portfolio_end_point =
+  "https://cms.talkcoms.co.uk/api/portfolios/?populate=*&sort=createdAt:desc&pagination[limit]=3";
+
 export const baseUrl = "https://cms.talkcoms.co.uk"; // Base URL for Strapi
 export const is_blog = "blog";

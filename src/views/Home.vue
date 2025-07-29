@@ -226,7 +226,9 @@
               <!-- Actual Image -->
               <img
                 v-show="imageLoaded"
-                :src="item.pic"
+                :src="`${image_url}/${
+                  item?.image?.formats?.large?.url || item.image?.url
+                }`"
                 alt="Talkcoms limited hero image"
                 @load="onImageLoad"
                 class="w-full h-auto max-h-none object-cover transition-opacity duration-500"
@@ -236,13 +238,16 @@
             <div class="w-full flex flex-wrap justify-center mt-6">
               <div class="w-[60%] flex justify-center">
                 <img
-                  :src="item.icon"
+                  :src="`${image_url}/${
+                    item?.logo?.formats?.large?.url || item.logo?.url
+                  }`"
+                  :alt="item?.companyName"
                   class="h-[70px] w-auto max-w-none object-cover"
                 />
               </div>
               <div class="w-[90%] text-white mt-4 pb-4">
                 <p class="text-center w-full">
-                  {{ item.description }}
+                  {{ item?.projectDescription[0]?.children[0]?.text }}
                 </p>
               </div>
             </div>
@@ -411,6 +416,7 @@ import {
   baseUrl,
   home_end_point,
   services_end_point,
+  portfolio_end_point,
   home_services_end_point,
   industries_end_point,
 } from "@/store/store.js";
@@ -463,25 +469,25 @@ export default {
       total_service_slides: 2,
       service_in_view: 0,
       portfolio: [
-        {
-          name: "Kipkenda ",
-          pic: "/static/kipkenda.webp",
-          description: "Top tier, full service kenyan law firm",
-          icon: "/icons/partners/9.png",
-        },
-        {
-          name: "Chunic LTD ",
-          pic: "/static/chunic.jpg",
-          description:
-            "Logistics company specializing in international Relocation, Sourcing & Procurement and Shipping",
-          icon: "/icons/partners/chunic-white.png",
-        },
-        {
-          name: "TKDM",
-          pic: "/static/tkdm.webp",
-          description: "News & Media Company",
-          icon: "/icons/partners/tkdm-white.png",
-        },
+        // {
+        //   name: "Kipkenda ",
+        //   pic: "/static/kipkenda.webp",
+        //   description: "Top tier, full service kenyan law firm",
+        //   icon: "/icons/partners/9.png",
+        // },
+        // {
+        //   name: "Chunic LTD ",
+        //   pic: "/static/chunic.jpg",
+        //   description:
+        //     "Logistics company specializing in international Relocation, Sourcing & Procurement and Shipping",
+        //   icon: "/icons/partners/chunic-white.png",
+        // },
+        // {
+        //   name: "TKDM",
+        //   pic: "/static/tkdm.webp",
+        //   description: "News & Media Company",
+        //   icon: "/icons/partners/tkdm-white.png",
+        // },
       ],
     };
   },
@@ -491,15 +497,16 @@ export default {
     try {
       await Promise.all([
         // this.get_carousel(),
-        this.get_services(),
-        this.get_portfolio_items(),
+        // this.get_services(),
+        // this.get_portfolio_items(),
         // this.get_solutions(),
-        this.fetch_blogs(),
         this.fetch_homepage(),
+        this.fetch_blogs(),
         this.fetch_service_names(),
         this.fetch_service_carousel(),
         this.fetch_industry_names(),
-        this.get_stories(),
+        this.fetch_portfolios(),
+        // this.get_stories(),
       ]);
     } catch (error) {
       console.error("Loading failed:", error);
@@ -645,6 +652,29 @@ export default {
           });
         } else {
           console.error("Invalide service response structure: ", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    },
+    /* fetch portfolio*/
+    async fetch_portfolios() {
+      try {
+        const response = await fetch(portfolio_end_point);
+        const responseData = await response.json();
+        if (responseData.data) {
+          console.log("Json data for service names: ", responseData.data);
+
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+          this.portfolio = dataArray;
+          console.log("Portfolios: ", this.portfolio);
+        } else {
+          console.error(
+            "Invalide portfolio response structure: ",
+            responseData
+          );
         }
       } catch (error) {
         console.error("Error fetching services:", error);
