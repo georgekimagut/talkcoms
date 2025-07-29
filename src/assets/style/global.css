@@ -77,7 +77,27 @@ a {
 .nav-bar-phone {
   display: none;
 }
+/* shimmer animation for image loading */
+@keyframes shimmer {
+  0% {
+    background-position: -800px 0;
+  }
+  100% {
+    background-position: 800px 0;
+  }
+}
 
+.animate-shimmer {
+  background-image: linear-gradient(
+    to right,
+    #f0f7fb 0%,
+    rgb(235, 235, 236) 20%,
+    rgb(226, 226, 226) 40%,
+    #f0f7fb 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
+}
 /* dark button */
 .btn-dark,
 .btn-light {

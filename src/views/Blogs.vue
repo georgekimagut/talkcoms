@@ -7,13 +7,13 @@
       v-for="(blog, index) in all_blog_tracker.slice(0, 1)"
       :key="index"
       small_title="BLOGS"
-      :big_title="blog.Title"
-      :hero_description="blog.Title"
-      :blog_category="blog.category"
-      :blog_type="blog.Type"
+      :big_title="blog?.Title"
+      hero_description=""
+      :blog_category="blog?.category"
+      :blog_type="blog?.Type"
       :blog_date="format_date(blog.createdAt)"
-      :read_more_link="`/resources/${is_blog}/${blog.slug}`"
-      :hero_image="`${image_url}/${blog.hero_media.url}`"
+      :read_more_link="`/resources/${is_blog}/${blog?.slug}`"
+      :hero_image="`${image_url}/${blog.hero_media?.url}`"
       is_blog
     />
     <!-- blog panel -->

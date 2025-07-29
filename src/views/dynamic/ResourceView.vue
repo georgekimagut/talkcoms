@@ -116,7 +116,7 @@
               class="w-full mt-8 block"
             ></div>
             <!-- success story -->
-            <div ref="content_body" class="w-full">
+            <div v-if="success_story" ref="content_body" class="w-full">
               <div v-for="content in success_body" class="w-full">
                 <div v-for="inner in content" v-html="inner.text"></div>
               </div>

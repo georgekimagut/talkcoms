@@ -10,9 +10,19 @@
         <!-- background -->
       </div>
       <div class="w-full h-full absolute overflow-hidden">
+        <!-- Shimmer Placeholder -->
+        <div
+          v-if="!imageLoaded"
+          class="absolute inset-0 bg-gray-200 opacity-50 animate-shimmer"
+        ></div>
+
+        <!-- Actual Image -->
         <img
+          v-show="imageLoaded"
           src="/static/hero-pic.png"
-          class="w-full h-auto max-h-none object-cover"
+          alt="Talkcoms limited hero image"
+          @load="onImageLoad"
+          class="w-full h-auto max-h-none object-cover transition-opacity duration-500"
         />
       </div>
       <!-- front panel -->
@@ -124,7 +134,24 @@
                       <div
                         class="img-holder h-[60vh] overflow-hidden rounded-2xl"
                       >
+                        <!-- Shimmer Placeholder -->
+                        <div
+                          v-if="!imageLoaded"
+                          class="absolute inset-0 bg-gray-200 opacity-50 animate-shimmer"
+                        ></div>
+
+                        <!-- Actual Image -->
                         <img
+                          v-show="imageLoaded"
+                          :src="`${image_url}/${
+                            slide.hero_media?.formats?.large?.url ||
+                            slide.hero_media?.url
+                          }`"
+                          :alt="`${slide.product_name} - image`"
+                          @load="onImageLoad"
+                          class="rounded-2xl min-w-full min-h-full max-h-none object-cover transition-opacity duration-500"
+                        />
+                        <!-- <img
                           v-lazy="
                             `${image_url}/${
                               slide.hero_media?.formats?.large?.url ||
@@ -133,7 +160,7 @@
                           "
                           :alt="`${slide.product_name} - image`"
                           class="rounded-2xl min-w-full min-h-full max-h-none object-cover"
-                        />
+                        /> -->
                       </div>
                     </div>
                   </div>
@@ -186,7 +213,21 @@
             "
           >
             <CardHeader class="h-[30vh] p-0 overflow-hidden">
-              <img :src="item.pic" class="w-full h-auto max-h-none" />
+              <!-- Shimmer Placeholder -->
+              <div
+                v-if="!imageLoaded"
+                class="absolute inset-0 bg-gray-200 opacity-50 animate-shimmer"
+              ></div>
+
+              <!-- Actual Image -->
+              <img
+                v-show="imageLoaded"
+                :src="item.pic"
+                alt="Talkcoms limited hero image"
+                @load="onImageLoad"
+                class="w-full h-auto max-h-none object-cover transition-opacity duration-500"
+              />
+              <!-- <img :src="item.pic" class="w-full h-auto max-h-none" /> -->
             </CardHeader>
             <div class="w-full flex flex-wrap justify-center mt-6">
               <div class="w-[60%] flex justify-center">
@@ -272,12 +313,28 @@
             class="w-full flex-flex-wrap"
           >
             <CardHeader class="h-[40vh] p-0">
+              <!-- Shimmer Placeholder -->
+              <div
+                v-if="!imageLoaded"
+                class="absolute inset-0 bg-gray-200 opacity-50 animate-shimmer"
+              ></div>
+
+              <!-- Actual Image -->
               <img
+                v-show="imageLoaded"
+                :src="`${image_url}/${
+                  blog.hero_media?.formats?.large?.url || blog.hero_media?.url
+                }`"
+                alt="Talkcoms limited hero image"
+                @load="onImageLoad"
+                class="min-h-full h-full min-w-full w-auto max-w-none rounded-md object-cover transition-opacity duration-500"
+              />
+              <!-- <img
                 :src="`${image_url}/${
                   blog.hero_media?.formats?.large?.url || blog.hero_media?.url
                 }`"
                 class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
-              />
+              /> -->
             </CardHeader>
             <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
               blog.Title
@@ -326,122 +383,6 @@
             </CardFooter>
           </router-link>
         </Card>
-      </div>
-      <div v-if="prev_blog" class="w-full flex justify-center gap-4 mt-16">
-        <div class="w-[80%] flex blog-inner">
-          <div class="w-[40%] m-1 flex justify-center col-1">
-            <div
-              v-for="(blog, index) in blogs.slice(0, 1)"
-              :key="index"
-              class="w-[90%] card mx-2 bg-white overflow-hidden zoom-animate p-2"
-            >
-              <!-- router -->
-              <router-link :to="`/resources/${is_blog}/${blog.slug}`">
-                <div class="w-full h-[40vh] overflow-hidden relative">
-                  <div
-                    class="absolute pointer-to-show z-20 top-[33vh] h-fit text-white w-fit px-2 cursor-pointer bg-secondary"
-                  >
-                    <!-- <i class="fa-solid fa-angle-right text-2xl"></i> -->
-                    Read More
-                  </div>
-                  <img
-                    :src="`${image_url}/${blog.hero_media.url}`"
-                    class="min-h-full h-full min-w-full w-auto max-w-none"
-                  />
-                </div>
-                <div class="p-4">
-                  <div class="w-full pt-2 pb-2 flex">
-                    <span
-                      class="bg-secondary text-sm text-white rounded-full pl-2 pr-2"
-                      >{{ blog.category ? blog.category : blog.Type }}</span
-                    >
-                    <div class="line w-[1px] bg-secondary ml-6 h-[23px]"></div>
-                    <span class="ml-6 text-sm">{{
-                      format_date(blog.createdAt)
-                    }}</span>
-                  </div>
-                  <router-link :to="`/resources/${is_blog}/${blog.slug}`"
-                    ><h3 class="font-semibold text-xl custom-default-hover">
-                      {{ blog.Title }}
-                    </h3></router-link
-                  >
-                  <div class="w-full mt-10 flex">
-                    <div class="w-[50px] h-[50px]">
-                      <img src="/icons/profile.png" />
-                    </div>
-                    <div class="pl-4 pr-4" style="width: calc(100% - 50px)">
-                      <p class="text-sm">{{ blog.author }}</p>
-                      <p class="text-sm">{{ blog.read_time }} mins</p>
-                    </div>
-                  </div>
-                </div>
-              </router-link>
-              <!-- router here -->
-            </div>
-          </div>
-          <div
-            class="w-[60%] m-1 flex flex-col col-2 hide-scrollbar snap-x snap-mandatory"
-          >
-            <div
-              v-for="(blog, index) in blogs.slice(1, 3)"
-              :key="index"
-              class="w-full card flex bg-white h-[40vh] zoom-animate p-2 snap-center"
-            >
-              <!-- router link -->
-              <router-link
-                class="w-full flex"
-                :to="`/resources/${is_blog}/${blog.slug}`"
-              >
-                <div class="w-[40%] h-full overflow-hidden relative img-holder">
-                  <img
-                    :src="`${image_url}/${blog.hero_media.url}`"
-                    class="min-h-full h-full min-w-full w-auto max-w-none"
-                  />
-                  <div
-                    class="absolute pointer-to-show z-20 top-[33vh] h-fit text-white w-fit px-2 cursor-pointer bg-secondary"
-                  >
-                    <!-- <i class="fa-solid fa-angle-right text-2xl"></i> -->
-                    Read More
-                  </div>
-                </div>
-                <div class="w-[60%] overflow-hidden p-4 card-body">
-                  <router-link :to="`/resources/${is_blog}/${blog.slug}`"
-                    ><h3 class="font-semibold text-xl custom-default-hover">
-                      {{ blog.Title }}
-                    </h3></router-link
-                  >
-                  <div class="w-full h-full flex flex-col pb-4">
-                    <div class="w-full pt-2 pb-2 flex">
-                      <span
-                        class="bg-secondary h-fit text-sm text-white rounded-full pl-2 pr-2"
-                        >{{ blog.category ? blog.category : blog.Type }}</span
-                      >
-                      <div
-                        class="line w-[1px] bg-secondary ml-6 h-[23px]"
-                      ></div>
-                      <span class="ml-6 text-sm">{{
-                        format_date(blog.createdAt)
-                      }}</span>
-                    </div>
-                    <div class="w-full mt-10 flex">
-                      <div class="w-[50px] h-[50px]">
-                        <img src="/icons/profile.png" />
-                      </div>
-                      <div
-                        class="pl-4 pr-4 pb-4"
-                        style="width: calc(100% - 50px)"
-                      >
-                        <p class="text-sm">{{ blog.author }}</p>
-                        <p class="text-sm">{{ blog.read_time }} mins</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </router-link>
-              <!-- router link -->
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <!-- cta -->
@@ -730,9 +671,7 @@ export default {
         console.error("Error fetching resources:", error);
       }
     },
-    onImageLoad() {
-      this.imageLoaded = true;
-    },
+
     /* dae formate */
     format_date(date_to_change) {
       const date = new Date(date_to_change);
@@ -817,65 +756,10 @@ export default {
         console.log(error);
       }
     },
-    //get carouses
-    // async get_carousel() {
-    //   try {
-    //     const { data, error } = await supabase.from("carousel").select("*");
-
-    //     if (error) {
-    //       console.log(error);
-    //       return;
-    //     }
-    //     this.carousel_data = data;
-    //     this.total_slides = this.carousel_data.length;
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
+    // load image animation
+    onImageLoad() {
+      this.imageLoaded = true;
+    },
   },
 };
 </script>
-
-<style>
-.image-wrapper {
-  position: relative;
-  width: 600px;
-  height: 400px;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-/* shimmer placeholder */
-.shimmer-loader {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    #f0f0f0 0%,
-    #e0e0e0 20%,
-    #f0f0f0 40%,
-    #f0f0f0 100%
-  );
-  background-size: 800px 100%;
-  animation: shimmer 1.5s infinite linear;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -800px 0;
-  }
-  100% {
-    background-position: 800px 0;
-  }
-}
-
-.loaded-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-</style>

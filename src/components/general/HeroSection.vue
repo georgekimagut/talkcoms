@@ -194,27 +194,57 @@
         </div>
       </div>
       <div class="w-1/2 h-[55vh] to-full">
-        <div class="w-full h-full flex rounded-xl overflow-hidden">
+        <div class="w-full h-full flex rounded-xl overflow-hidden relative">
           <div
             v-if="hero_small_image"
             class="h-full w-[30%] overflow-hidden rounded-xl small-img flex justify-center"
           >
+            <!-- Shimmer Placeholder -->
+            <div
+              v-if="!imageLoaded"
+              class="absolute inset-0 bg-gray-200 opacity-50 animate-shimmer"
+            ></div>
+
+            <!-- Actual Image -->
             <img
+              v-show="imageLoaded"
+              :src="hero_small_image"
+              alt="Small hero image"
+              @load="onImageLoad"
+              class="h-full min-w-full w-auto max-w-none max-h-none object-cover rounded-xl transition-opacity duration-500"
+            />
+            <!-- <img
               :src="hero_small_image"
               alt="Blog image header"
               class="h-full min-w-full w-auto max-w-none max-h-none object-cover rounded-xl"
-            />
+            /> -->
           </div>
+          <!-- big image -->
           <div
             class="h-full overflow-hidden rounded-xl big-img"
             :class="hero_small_image ? 'w-[67%] ml-[3%]' : 'w-full ml-0'"
           >
+            <!-- Shimmer Placeholder -->
+            <div
+              v-if="!imageLoaded"
+              class="absolute inset-0 bg-gray-200 opacity-50 animate-shimmer"
+            ></div>
+
+            <!-- Actual Image -->
             <img
+              v-show="imageLoaded"
+              :src="hero_image"
+              :alt="hero_image_alt"
+              @load="onImageLoad"
+              class="w-full min-w-full max-w-none h-full max-h-none object-cover rounded-xl transition-opacity duration-500"
+              :class="hero_small_image ? 'min-h-full ' : ''"
+            />
+            <!-- <img
               :src="hero_image"
               :alt="hero_image_alt"
               class="w-full min-w-full max-w-none h-full max-h-none object-cover rounded-xl"
               :class="hero_small_image ? 'min-h-full ' : ''"
-            />
+            /> -->
           </div>
         </div>
       </div>
@@ -256,6 +286,17 @@ export default {
     has_pattern: Boolean,
     hero_image_alt: String,
     service_icon: String,
+  },
+  data() {
+    return {
+      imageLoaded: false,
+    };
+  },
+  methods: {
+    // load image animation
+    onImageLoad() {
+      this.imageLoaded = true;
+    },
   },
 };
 </script>

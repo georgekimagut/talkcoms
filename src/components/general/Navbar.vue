@@ -380,7 +380,7 @@
           <div class="w-full mb-4">
             <router-link
               to="/about"
-              class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 custom-default-hover"
+              class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out custom-default-hover"
               active-class="text-secondary font-medium"
               >About us</router-link
             >
