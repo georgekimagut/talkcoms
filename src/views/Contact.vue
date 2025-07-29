@@ -9,7 +9,9 @@
         <div v-if="type == 'contact-us'" class="w-1/2 to-full">
           <p class="text-secondary">CONTACT US</p>
           <div class="w-[90%] to-full">
-            <BigTitle text="Get in touch" title_class="mt-4 text-5xl" />
+            <h1 class="mt-4 text-5xl font-extrabold text-default">
+              Get in touch
+            </h1>
             <!-- maps -->
             <div class="w-full mt-6 h-[60vh] hide-img">
               <Maps map_class="w-full h-full" />

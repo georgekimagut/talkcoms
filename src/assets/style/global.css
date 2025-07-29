@@ -731,7 +731,7 @@ a {
     @apply w-[100%] opacity-100;
   }
   .new-hero .w-full img {
-    @apply h-full w-auto max-h-none;
+    @apply h-full w-auto max-h-none min-w-full;
   }
   .hidden-map {
     @apply flex;

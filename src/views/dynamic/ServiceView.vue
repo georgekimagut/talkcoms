@@ -137,7 +137,7 @@
       <div class="w-[90%] flex flex-wrap relative hero-holder">
         <!-- <ScrollPattern :bg_color="random_bg" /> -->
         <!-- Sticky sidebar -->
-        <div class="w-[40%] sticky top-[15vh] self-start to-full">
+        <div class="w-[45%] sticky top-[15vh] self-start to-full">
           <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit g">
             <img
               :src="`${image_url}/${
@@ -151,7 +151,7 @@
         </div>
 
         <!-- Scrollable content -->
-        <div class="w-[60%] justify-end flex autoShow to-full">
+        <div class="w-[55%] justify-end flex autoShow to-full">
           <div
             class="w-[90%] overflow-hidden transition-all duration-500 relative to-full"
           >
@@ -471,8 +471,8 @@
       </div>
     </div> -->
     <!-- packages -->
+    <!-- v-if="single_service.packages.length > 0" -->
     <div
-      v-if="single_service.packages.length > 0"
       class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 pb-20 packages"
     >
       <div class="w-3/4 flex flex-wrap justify-center">
@@ -484,7 +484,7 @@
           Our Pricing Plans
         </h1>
         <p class="flex text-center mt-2">
-          Aenean vitae felis commodo, ultricies augue in, lacinia ante. Maecenas
+          Affordable, flexible, and tailored packages to meet your unique needs.
         </p>
       </div>
       <!-- the packages -->
@@ -553,7 +553,7 @@
               class="w-[80%] max-h-[50vh] rounded-2xl flex justify-center overflow-hidden to-full"
             >
               <img
-                src=""
+                :src="`${image_url}/${story?.image?.url}`"
                 :alt="`${story?.description[0]?.children[0]?.text} - related story image`"
                 class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
               />
@@ -565,11 +565,10 @@
             <h1 class="text-5xl font-bold mt-4 text-default">
               {{ story?.description[0]?.children[0]?.text }}
             </h1>
-            <p class="mt-2">{{ story?.description[0]?.children[0]?.text }}</p>
-            <p class="mt-2">{{ story.companyName }}</p>
+            <p class="mt-4 text-xl">{{ story.companyName }}</p>
 
             <div
-              class="w-full h-[26px] flex flex-col justify-center mt-16 to-next-line"
+              class="w-full h-[26px] flex flex-col justify-center mt-10 to-next-line"
             >
               <p
                 class="mt-2 p-1 px-2 border border-[#007cba] rounded-full w-fit"
@@ -597,7 +596,7 @@
       </div>
     </div>
     <!-- Cta -->
-    <Cta cta_class="pt-32" />
+    <Cta cta_class="pt-32" :service_cta="footer_heading" />
     <!-- footer -->
     <Footer :services="universal_services" :products="universal_products" />
   </div>
@@ -651,7 +650,69 @@ export default {
       content: "",
       features: [],
       benefits: [],
-      packages: [],
+      packages: [
+        {
+          is_popular: true,
+          package_name: "Standard",
+          description: "Essential call center features for small teams.",
+          package_price: "80",
+          features: `
+      <li class='list-disc'>Agent License (s)</li>
+      <li class='list-disc'>Multi-Level IVR</li>
+      <li class='list-disc'>Automatic Call Distributor</li>
+      <li class='list-disc'>Call Disposition</li>
+      <li class='list-disc'>Call Recording</li>
+      <li class='list-disc'>Real-time Reports</li>
+      <li class='list-disc'>Voice Channel</li>
+    `,
+        },
+        {
+          is_popular: false,
+          package_name: "Advanced",
+          description: "Includes email support for broader communication.",
+          package_price: "120",
+          features: `
+      <li class='list-disc'>Agent License (s)</li>
+      <li class='list-disc'>Multi-Level IVR</li>
+      <li class='list-disc'>Automatic Call Distributor</li>
+      <li class='list-disc'>Call Disposition</li>
+      <li class='list-disc'>Call Recording</li>
+      <li class='list-disc'>Real-time Reports</li>
+      <li class='list-disc'>Dual Channel (Voice and Email)</li>
+    `,
+        },
+        {
+          is_popular: false,
+          package_name: "Pro",
+          description: "Expand reach with WhatsApp and SMS integration.",
+          package_price: "160",
+          features: `
+      <li class='list-disc'>Agent License (s)</li>
+      <li class='list-disc'>Multi-Level IVR</li>
+      <li class='list-disc'>Automatic Call Distributor</li>
+      <li class='list-disc'>Call Disposition</li>
+      <li class='list-disc'>Call Recording</li>
+      <li class='list-disc'>Real-time Reports</li>
+      <li class='list-disc'>Omni-channel (Voice, Email, SMS, and WhatsApp)</li>
+    `,
+        },
+        {
+          is_popular: false,
+          package_name: "Enterprise",
+          description: "All-in-one solution with CRM and social integration.",
+          package_price: "200",
+          features: `
+      <li class='list-disc'>Agent License (s)</li>
+      <li class='list-disc'>Multi-Level IVR</li>
+      <li class='list-disc'>Automatic Call Distributor</li>
+      <li class='list-disc'>Call Disposition</li>
+      <li class='list-disc'>Call Recording</li>
+      <li class='list-disc'>Real-time Reports</li>
+      <li class='list-disc'>Omni-channel (Voice, Email, SMS, and social media)</li>
+      <li class='list-disc'>CRM Integration</li>
+    `,
+        },
+      ],
       intergrations: [],
       services: [],
       service_id: "",
@@ -663,6 +724,7 @@ export default {
       universal_services: [],
       universal_products: [],
       single_service: [],
+
       portfolio: [
         {
           name: "Kipkenda ",

@@ -2,7 +2,6 @@
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
     <Navbar :services="universal_services" :products="universal_products" />
-
     <!-- new hero section -->
     <div class="w-full h-[80vh] flex relative new-hero">
       <div
@@ -58,7 +57,7 @@
     </div>
     <!-- hero section -->
     <!-- <div class="w-full">{{ services }}</div> -->
-    <div class="w-full h-[80vh] hero bg-fourth overflow-show mt-[3vh]">
+    <div class="w-full h-[90vh] hero bg-fourth overflow-show pt-[3vh]">
       <div class="w-full h-full flex flex-wrap justify-center overflow-hidden">
         <div class="w-[90%] flex flex-wrap mt-8 relative overflow-hidden">
           <!-- {{ services.services }} -->
@@ -126,10 +125,12 @@
                         class="img-holder h-[60vh] overflow-hidden rounded-2xl"
                       >
                         <img
-                          :src="`${image_url}/${
-                            slide.hero_media?.formats?.large?.url ||
-                            slide.hero_media?.url
-                          }`"
+                          v-lazy="
+                            `${image_url}/${
+                              slide.hero_media?.formats?.large?.url ||
+                              slide.hero_media?.url
+                            }`
+                          "
                           :alt="`${slide.product_name} - image`"
                           class="rounded-2xl min-w-full min-h-full max-h-none object-cover"
                         />
@@ -205,107 +206,6 @@
       </div>
     </div>
     <!-- end -->
-    <div
-      v-if="pre_portfolio"
-      class="w-full flex flex-nowrap overflow-hidden justify-center top-56 mt-36"
-    >
-      <div
-        class="w-[90%] bg-white p-4 h-full flex flex-nowrap transition-transform duration-500 ease-in-out overflow-hidden"
-      >
-        <div class="w-[30%] h-full p-6">
-          <p class="text-secondary w-3/4 text-lg">PORTFOLIO</p>
-          <h1 class="text-4xl font-bold mt-10 p-2">
-            <span class="text-secondary">Solutions</span> We've Built For
-            <span class="text-secondary">Businesses</span> Like Yours
-          </h1>
-          <p class="mt-2 p-2">
-            Discover custom solutions we've developed to help businesses like
-            yours grow and thrive efficiently
-          </p>
-          <!-- list item -->
-          <div class="w-full p-2 h-[25px] flex flex-nowrap">
-            <div class="h-full w-[10px] flex flex-col justify-center">
-              <div class="h-[10px] w-full bg-black rounded-full"></div>
-            </div>
-            <div class="h-full flex ml-[10px]" style="width: calc(100% - 15px)">
-              <div class="h-full flex flex-col justify-center">
-                <li class="list-none">Managed Services and Products</li>
-              </div>
-            </div>
-          </div>
-          <!-- end of list -->
-          <!-- list item -->
-          <div class="w-full p-2 h-[25px] flex flex-nowrap">
-            <div class="h-full w-[10px] flex flex-col justify-center">
-              <div class="h-[10px] w-full bg-black rounded-full"></div>
-            </div>
-            <div class="h-full flex ml-[10px]" style="width: calc(100% - 15px)">
-              <div class="h-full flex flex-col justify-center">
-                <li class="list-none">Flexibility and Adaptability</li>
-              </div>
-            </div>
-          </div>
-          <!-- end of list -->
-          <!-- list item -->
-          <div class="w-full p-2 h-[25px] flex flex-nowrap">
-            <div class="h-full w-[10px] flex flex-col justify-center">
-              <div class="h-[10px] w-full bg-black rounded-full"></div>
-            </div>
-            <div class="h-full flex ml-[10px]" style="width: calc(100% - 15px)">
-              <div class="h-full flex flex-col justify-center">
-                <li class="list-none">Competitive Advantage</li>
-              </div>
-            </div>
-          </div>
-          <!-- end of list -->
-        </div>
-        <!-- 2nd part -->
-        <div class="w-[70%] h-[65vh] flex justify-center pt-6">
-          <div
-            class="w-[96%] flex overflow-x-scroll overflow-y-hidden custom-scrollbar relative"
-          >
-            <!-- portfolio item -->
-            <div
-              v-for="(project, index) in portfolio_items"
-              :key="index"
-              class="w-[36%] min-w-[36%] h-[90%] relative cursor-pointer overflow-hidden ml-4 custom-portfolio-hover"
-            >
-              <img
-                :src="project.pic"
-                class="h-full absolute w-auto max-w-none"
-              />
-              <div class="h-full w-full flex flex-col absolute z-10">
-                <div class="h-[40%] w-full bg-body">
-                  <h1 class="text-5xl p-4 font-semibold">
-                    {{ project.name }}
-                  </h1>
-                </div>
-              </div>
-              <div
-                class="h-full w-full absolute z-10 bg-black opacity-0 c-background"
-              ></div>
-              <div
-                class="h-full w-full absolute z-20 bg-transparent flex justify-center"
-              >
-                <div class="h-full flex-col justify-center c-layer hidden">
-                  <h1 class="text-5xl p-4 font-semibold text-white">
-                    {{ project.name }}
-                  </h1>
-                  <ExternalLink
-                    :link_to="project.link"
-                    link_text="Visit Site"
-                    class="w-fit mt-4 ml-6"
-                  />
-                </div>
-              </div>
-            </div>
-            <!-- end of it -->
-
-            <!-- end of it -->
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- industry -->
     <div
       class="w-full flex justify-center mt-8 pt-10 pb-32 bg-fourth border border-[#9ecce4] rounded-lg"
@@ -592,6 +492,7 @@ export default {
       /* handle swap */
       startX: 0,
       endX: 0,
+      imageLoaded: false,
       /* pause on hover */
       interval: null,
       isPaused: false,
@@ -829,6 +730,9 @@ export default {
         console.error("Error fetching resources:", error);
       }
     },
+    onImageLoad() {
+      this.imageLoaded = true;
+    },
     /* dae formate */
     format_date(date_to_change) {
       const date = new Date(date_to_change);
@@ -931,3 +835,47 @@ export default {
   },
 };
 </script>
+
+<style>
+.image-wrapper {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* shimmer placeholder */
+.shimmer-loader {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #f0f0f0 0%,
+    #e0e0e0 20%,
+    #f0f0f0 40%,
+    #f0f0f0 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -800px 0;
+  }
+  100% {
+    background-position: 800px 0;
+  }
+}
+
+.loaded-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+</style>

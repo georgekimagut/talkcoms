@@ -104,9 +104,13 @@
           <p class="mt-2 font-semibold">Legal</p>
           <div class="w-full mt-4">
             <p v-for="(legal, index) in footer_legal" :key="index" class="mb-2">
-              <router-link :to="legal.link" class="hover:text-[#8dc63f]">
+              <a
+                :href="legal.link"
+                target="_blank"
+                class="hover:text-[#8dc63f]"
+              >
                 {{ legal.title }}
-              </router-link>
+              </a>
             </p>
           </div>
         </div>
@@ -171,13 +175,25 @@ export default {
         { title: "Blogs", link: "/blogs" },
       ],
       footer_legal: [
-        { title: "Cookie Policy", link: "/legal/cookie-policy" },
-        { title: "Terms & Conditions", link: "/legal/Terms & Conditions" },
-        { title: "Privacy Policy", link: "/legal/privacy-policy" },
+        {
+          title: "Cookie Policy",
+          link: "https://app.termly.io/policy-viewer/policy.html?policyUUID=ea802309-46cd-4afa-8b87-4525ab3ad7a1",
+        },
+        {
+          title: "Terms & Conditions",
+          link: "https://app.termly.io/policy-viewer/policy.html?policyUUID=ea802309-46cd-4afa-8b87-4525ab3ad7a1",
+        },
+        {
+          title: "Privacy Policy",
+          link: "https://app.termly.io/policy-viewer/policy.html?policyUUID=ea802309-46cd-4afa-8b87-4525ab3ad7a1",
+        },
         { title: "Sitemap", link: "/sitemap" },
       ],
-      footer_contacts: [],
-      footer_emails: [],
+      footer_contacts: [{ title: "+254746433163" }, { title: "+447746433163" }],
+      footer_emails: [
+        { title: "solutions@talkcoms.co.uk" },
+        { title: "solutions@talkcoms.co.uk" },
+      ],
       footer_locations: [
         {
           title: "UNITED KINGDOM",
@@ -190,8 +206,6 @@ export default {
   },
   created() {
     window.addEventListener("scroll", this.handleScroll);
-    /* set universal content */
-    this.footer_contacts = universal_content().phones;
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);

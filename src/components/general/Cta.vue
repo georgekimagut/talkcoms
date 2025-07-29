@@ -38,7 +38,13 @@
     <div class="w-[55%] h-full flex justify-center cta-inner">
       <div class="h-full flex flex-col justify-center">
         <div class="w-full">
-          <h1 class="text-5xl font-extrabold mt-4 p-2 text-center">
+          <h1
+            v-if="service_cta"
+            class="text-5xl font-extrabold mt-4 p-2 text-center text-default"
+          >
+            {{ service_cta }}
+          </h1>
+          <h1 v-else class="text-5xl font-extrabold mt-4 p-2 text-center">
             Ready To
             <span class="text-secondary ml-2 mr-2">Transform</span> Your
             Business
@@ -92,6 +98,6 @@
 export default {
   name: "Cta",
   components: {},
-  props: { cta_class: String },
+  props: { cta_class: String, service_cta: String },
 };
 </script>

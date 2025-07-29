@@ -4,11 +4,8 @@ export const universal_content = defineStore("universal_content", {
   state: () => ({
     services: [],
     products: [],
-    emails: [
-      { title: "solutions@talkcoms.co.uk" },
-      { title: "solutions@talkcoms.co.uk" },
-    ],
-    phones: [{ title: "+254746433163" }, { title: "+447746433163" }],
+    emails: [],
+    phones: [],
   }),
   actions: {
     setServices(data) {
