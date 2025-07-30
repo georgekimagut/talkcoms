@@ -15,9 +15,10 @@
         </h1>
         <router-link to="/" class="mt-10 flex justify-center"
           ><Button
-            class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+            variant="ghost"
+            class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
           >
-            <span class="relative z-10">Go Home</span>
+            <span class="relative z-10 hover:text-[#131f6b]">Go home </span>
             <span
               class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
             ></span> </Button
@@ -149,8 +150,8 @@
           <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit g">
             <img
               :src="`${image_url}/${
-                single_service.feature_section_image?.formats?.large?.url ||
-                single_service.feature_section_image?.url
+                single_service?.feature_section_image?.formats?.large?.url ||
+                single_service?.feature_section_image?.url
               }`"
               :alt="`${this.id} - Service section image`"
               class="w-full h-full object-cover rounded-xl service-pic"
@@ -237,11 +238,15 @@
       <div class="w-[90%] flex gap-4 hero-holder">
         <div class="w-[40%] to-full">
           <div class="w-[90%] flex flex-wrap">
-            <SmallTitle text="INTERGRATIONS" />
-            <BigTitle
+            <!-- <SmallTitle text="INTERGRATIONS" /> -->
+            <p class="text-secondary text-xl">INTERGRATIONS</p>
+            <h1 class="text-white font-extrabold text-4lx">
+              Customize your customer experience with custom intergrations
+            </h1>
+            <!-- <BigTitle
               title_class="mt-10"
               text="Customize your customer experience with custom intergrations"
-            />
+            /> -->
             <p class="mt-10">
               Create a unique customer experience, customized to your contact
               center operations. Our tools range from fully integrated partners
@@ -422,10 +427,13 @@
         <div
           class="w-1/2 mr-[1%] h-full p-4 flex flex-col justify-center to-full"
         >
-          <BigTitle
+          <!-- <BigTitle
             text="Experience the Power—Live!"
             title_class="m-4 text-white text-5xl"
-          />
+          /> -->
+          <h1 class="m-4 text-white text-5xl font-extrabold">
+            Experience the Power—Live!
+          </h1>
           <p class="text-xl m-4 text-white">
             Get in touch and see how our solution can simplify your workflow and
             boost efficiency-live and personalised.
@@ -444,42 +452,8 @@
         </div>
       </div>
     </div>
-    <!-- <div class="w-full flex justify-center bg-white pb-20 has_demo">
-      <div
-        class="w-[80%] flex rounded-2xl h-[50vh] border border-[#82bc00] mt-32 overflow-hidden"
-      >
-        <div
-          class="w-[64%] mr-[1%] h-full p-4 flex flex-col justify-center to-full"
-        >
-          <BigTitle text="Experience the Power—Live!" title_class="m-4" />
-          <p class="text-xl m-4">
-            Book a free book efficiency—live and personalized.
-          </p>
-          <router-link :to="`/contact/${this.id}`">
-            <Button
-              variant="ghost"
-              class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00] m-4"
-            >
-              <span class="relative z-10 hover:text-[#131f6b]"
-                >BOOK A FREE DEMO
-              </span>
-              <span
-                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-              ></span>
-            </Button>
-          </router-link>
-        </div>
-        <div class="w-[35%] flex justify-center overflow-hidden img-holder">
-          <img
-            :src="`${image_url}/${single_service?.hero_media}`"
-            :alt="`${single_service.main_title} - Booka demo image`"
-            class="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-    </div> -->
+
     <!-- packages -->
-    <!-- v-if="single_service.packages.length > 0" -->
     <div
       v-if="related_story"
       class="w-full flex justify-center bg-white py-16 hero-component"
@@ -533,13 +507,15 @@
         </div>
       </div>
     </div>
+    <!-- packages -->
     <div
       v-if="single_service?.packages.length > 0"
-      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 pb-20 packages"
+      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-20 pb-20 packages"
     >
       <div class="w-3/4 flex flex-wrap justify-center">
         <p class="text-secondary flex justify-center text-2xl">
-          <SmallTitle text="PACKAGES" />
+          <!-- <SmallTitle text="PACKAGES" /> -->
+          PACKAGES
         </p>
 
         <h1 class="text-4xl font-extrabold mt-4 p-2 text-center w-full">
@@ -611,8 +587,6 @@
       </div>
     </div>
     <!-- related story -->
-    <!-- {{ related_story }} -->
-
     <!-- Cta -->
     <Cta
       cta_class="pt-32"
@@ -631,10 +605,10 @@ import HeroSection from "@/components/general/HeroSection.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import ScrollPattern from "../../components/patterns/ScrollPattern.vue";
 import Spinner from "@/components/general/Spinner.vue";
-import BigTitle from "../../components/text/BigTitle.vue";
+// import BigTitle from "../../components/text/BigTitle.vue";
 import ExternalLink from "../../components/text/ExternalLink.vue";
-import SmallTitle from "../../components/text/SmallTitle.vue";
-import { text_colors, baseUrl, services_end_point } from "@/store/store";
+// import SmallTitle from "../../components/text/SmallTitle.vue";
+import { text_colors, baseUrl } from "@/store/store";
 import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
@@ -647,9 +621,7 @@ export default {
     Navbar,
     // RoundedButton,
     Footer,
-    SmallTitle,
     HeroPattern,
-    BigTitle,
     Cta,
     ScrollPattern,
     ExternalLink,
@@ -785,12 +757,6 @@ export default {
 
     try {
       await this.fetch_services();
-      // await this.get_service();
-      await this.get_portfolio_items();
-      await this.get_main_service_features();
-      await this.get_features();
-      await this.get_packages();
-
       // this.services = store.services;
       if (this.service_id != "") {
         this.get_story();
@@ -817,13 +783,6 @@ export default {
 
         try {
           await this.fetch_services();
-          // await this.fetch_related_story();
-          // await this.get_service();
-          await this.get_portfolio_items();
-          await this.get_main_service_features();
-          await this.get_features();
-          await this.get_packages();
-
           if (this.service_id != "") {
             this.get_story();
           }
@@ -838,20 +797,7 @@ export default {
   methods: {
     /* fetch services */
     async fetch_services() {
-      // const words = this.id.split(" ").filter((w) => w.trim() !== "");
-      // const params = new URLSearchParams();
-
       const encoded_title = encodeURIComponent(this.id);
-
-      // const response = await fetch(
-      //     `${baseUrl}/api/industries/?filters[main_title][$eq]=${encoded_title}&populate=*`
-      //   );
-
-      // words.forEach((word, index) => {
-      //   params.append(`filters[$or][${index}][product_name][$containsi]`, word);
-      // });
-
-      // params.append("populate", "*");
 
       const response = await fetch(
         `${baseUrl}/api/service-pages/?filters[product_name][$eq]=${encoded_title}&populate=*`
@@ -911,142 +857,12 @@ export default {
         console.error("Error fetching services:", error);
       }
     },
-    async get_service() {
-      try {
-        const { data, error } = await supabase
-          .from("services")
-          .select("*")
-          .eq("name", this.id)
-          .limit(1);
 
-        if (error) {
-          console.log(error);
-          return;
-        }
-        if (data.length < 1) {
-          this.unaivailable_service = true;
-          this.page_is_loading = false;
-        }
-        this.services = data.map((service) => {
-          const { data: imageData } = supabase.storage
-            .from("talkcoms")
-            .getPublicUrl(`services/${service.pic}`);
-
-          return {
-            ...service,
-            imageUrl: imageData.publicUrl,
-          };
-        });
-
-        //map data
-        this.service = this.services[0];
-        this.service_title = this.services[0].title_description;
-        this.service_description = this.services[0].product_subtitle;
-        this.service_pic = this.services[0].imageUrl;
-        this.content = this.services[0].description;
-        this.service_id = this.services[0].id;
-      } catch (error) {
-        console.log(error);
-      }
-    },
     //randomize color
     randomize_color() {
       const random_color =
         text_colors[Math.floor(Math.random() * text_colors.length)];
       this.random_bg = random_color.color_name;
-    },
-    async get_features() {
-      try {
-        const { data, error } = await supabase
-          .from("service_features")
-          .select("*")
-          .eq("service_id", this.service_id);
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-        const retrieved_data = data;
-        retrieved_data.forEach((feature) => {
-          if (feature.is_benefit === true) {
-            this.benefits.push(feature);
-          } else if (feature.is_intergration === true) {
-            this.intergrations.push(feature);
-          } else {
-            this.features.push(feature);
-          }
-        });
-        // this.features = data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    //carousel scrollbar
-
-    async get_packages() {
-      try {
-        const { data, error } = await supabase
-          .from("service_packages")
-          .select("*")
-          .eq("service_id", this.service_id);
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.packages = data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async get_main_service_features() {
-      try {
-        const { data, error } = await supabase
-          .from("main_service_features")
-          .select("*")
-          .eq("service_id", this.service_id);
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.channels = data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async get_portfolio_items() {
-      try {
-        const { data, error } = await supabase
-          .from("portfolio")
-          .select("*")
-          .eq("service_id", this.service_id);
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.portfolio_items = data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async get_story() {
-      try {
-        const { data, error } = await supabase
-          .from("success_stories")
-          .select("*")
-          .eq("service_id", this.service_id)
-          .limit(1);
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.related_story = data[0];
-      } catch (error) {
-        console.log(error);
-      }
     },
   },
 };

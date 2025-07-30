@@ -310,7 +310,7 @@
         </h1>
       </div>
       <div
-        class="w-full flex gap-4 mt-8 flex-nowrap overflow-x-scroll hide-scrollbar snap-x snap-mandatory hero-cards"
+        class="w-full flex gap-4 mt-8 flex-nowrap pb-4 overflow-x-scroll hide-scrollbar snap-x snap-mandatory hero-cards"
       >
         <Card
           v-for="(blog, index) in blogs"
@@ -338,12 +338,6 @@
                 @load="onImageLoad"
                 class="min-h-full h-full min-w-full w-auto max-w-none rounded-md object-cover transition-opacity duration-500"
               />
-              <!-- <img
-                :src="`${image_url}/${
-                  blog.hero_media?.formats?.large?.url || blog.hero_media?.url
-                }`"
-                class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
-              /> -->
             </CardHeader>
             <CardTitle class="p-2 text-2xl text-default pt-2 font-bold">{{
               blog.Title
@@ -408,19 +402,17 @@ import Navbar from "@/components/general/Navbar.vue";
 import Partners from "@/components/general/Partners.vue";
 import Spinner from "@/components/general/Spinner.vue";
 import ExternalLink from "@/components/text/ExternalLink.vue";
-import CardDescription from "@/components/ui/card/CardDescription.vue";
+// import CardDescription from "@/components/ui/card/CardDescription.vue";
 import CardTitle from "@/components/ui/card/CardTitle.vue";
 import CustomCard from "@/components/ui/card/CustomCard.vue";
 import {
   apiEndpoint,
   baseUrl,
   home_end_point,
-  services_end_point,
   portfolio_end_point,
   home_services_end_point,
   industries_end_point,
 } from "@/store/store.js";
-import { supabase } from "@/lib/supabase.js";
 /* global values */
 import { universal_content } from "@/store/contentStore";
 
@@ -446,11 +438,11 @@ export default {
       interval: null,
       isPaused: false,
       //service carousel
-      success_story: "story",
+      // success_story: "story",
       is_blog: "blog",
       image_url: baseUrl,
       carousel_data: [],
-      home_services: [],
+      // home_services: [],
       portfolio_items: [],
       success_stories: [],
       blogs: [],
@@ -461,7 +453,7 @@ export default {
       universal_products: [],
       universal_industries: [],
       products: [],
-      service_in_view: 0,
+      // service_in_view: 0,
       portfolio: [],
     };
   },
@@ -503,27 +495,7 @@ export default {
     resumeAutoSlide() {
       this.isPaused = false;
     },
-    /* handle swap */
-    onTouchStart(e) {
-      this.startX = e.touches[0].clientX;
-    },
-    onTouchEnd(e) {
-      this.endX = e.changedTouches[0].clientX;
-      this.handleSwipe();
-    },
-    handleSwipe() {
-      const threshold = 50; // Minimum swipe distance
-      const diff = this.endX - this.startX;
-      if (Math.abs(diff) > threshold) {
-        if (diff > 0) {
-          this.prevSlide(); // Swiped right
-          this.nextServiceSlide();
-        } else {
-          this.nextSlide(); // Swiped left
-          this.nextServiceSlide();
-        }
-      }
-    },
+
     nextSlide() {
       if (this.current_slide < this.total_slides - 1) {
         this.current_slide++;
@@ -536,18 +508,18 @@ export default {
         this.current_slide--;
       }
     },
-    nextServiceSlide() {
-      if (this.current_service_slide < this.total_service_slides - 1) {
-        this.current_service_slide++;
-      }
-    },
-    prevServiceSlide() {
-      if (this.current_service_slide > 0) {
-        this.current_service_slide--;
-      } else {
-        this.current_service_slide = this.total_service_slides - 1;
-      }
-    },
+    // nextServiceSlide() {
+    //   if (this.current_service_slide < this.total_service_slides - 1) {
+    //     this.current_service_slide++;
+    //   }
+    // },
+    // prevServiceSlide() {
+    //   if (this.current_service_slide > 0) {
+    //     this.current_service_slide--;
+    //   } else {
+    //     this.current_service_slide = this.total_service_slides - 1;
+    //   }
+    // },
     //fetch home
     async fetch_homepage() {
       try {
@@ -559,15 +531,12 @@ export default {
         const responseData = await response.json();
 
         if (responseData.data) {
-          // const dataArray = Array.isArray(responseData.data)
-          //   ? responseData.data
-          //   : [responseData.data];
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
 
           // this.landing_page_content = dataArray;
-          this.landing_page_content = responseData.data;
-          // this.services = this.landing_page_content[0];
-          // this.total_slides = this.services.services.length;
-          // this.total_slides = this.services.length;
+          this.landing_page_content = dataArray;
         } else {
           console.error("Invalid response structure:", responseData);
         }
@@ -711,68 +680,6 @@ export default {
       const date = new Date(date_to_change);
       const date_options = { month: "long", day: "numeric", year: "numeric" };
       return date.toLocaleDateString("en-US", date_options);
-    },
-    // get services
-    async get_services() {
-      try {
-        const { data, error } = await supabase
-          .from("services")
-          .select("pic, title_description, name, icon")
-          .limit(6);
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-
-        // Shuffle data randomly
-
-        // this.home_services = data;
-        this.home_services = data.map((service) => {
-          const { data: imageData } = supabase.storage
-            .from("talkcoms")
-            .getPublicUrl(`services/${service.pic}`);
-
-          return {
-            ...service,
-            imageUrl: imageData.publicUrl,
-          };
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    //get solutions
-    async get_solutions() {
-      try {
-        const { data, error } = await supabase
-          .from("solutions_by_industry")
-          .select("id, name, is_department, icon")
-          .order("created_at", { ascending: false });
-
-        this.industries = data;
-        if (error) {
-          console.log(error);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    //get portfolio
-    async get_portfolio_items() {
-      try {
-        const { data, error } = await supabase.from("portfolio").select("*");
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.portfolio_items = data;
-      } catch (error) {
-        console.log(error);
-      }
     },
     // load image animation
     onImageLoad() {

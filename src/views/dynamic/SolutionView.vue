@@ -118,10 +118,9 @@
         <div
           class="w-1/2 mr-[1%] h-full p-4 flex flex-col justify-center to-full"
         >
-          <BigTitle
-            text="Experience the Power—Live!"
-            title_class="m-4 text-white text-5xl"
-          />
+          <h1 class="m-4 text-white text-5xl font-extrabold">
+            Experience the Power—Live!
+          </h1>
           <p class="text-xl m-4 text-white">
             Get in touch and see how our solution can simplify your workflow and
             boost efficiency-live and personalised.
@@ -206,9 +205,8 @@
 //new imports
 import Spinner from "@/components/general/Spinner.vue";
 import Navbar from "@/components/general/Navbar.vue";
-import { supabase } from "@/lib/supabase";
-import SmallTitle from "@/components/text/SmallTitle.vue";
-import BigTitle from "@/components/text/BigTitle.vue";
+// import SmallTitle from "@/components/text/SmallTitle.vue";
+// import BigTitle from "@/components/text/BigTitle.vue";
 import Footer from "@/components/general/Footer.vue";
 import Cta from "@/components/general/Cta.vue";
 import IconCard from "@/components/ui/card/IconCard.vue";
@@ -222,8 +220,8 @@ export default {
   components: {
     Spinner,
     Navbar,
-    SmallTitle,
-    BigTitle,
+    // SmallTitle,
+    // BigTitle,
     Footer,
     Cta,
     IconCard,
@@ -232,16 +230,12 @@ export default {
   data() {
     return {
       page_is_loading: true,
-      solution: [],
-      solution_id: "",
-      features: [],
-      related_solutions: [],
-      product_ids: [],
       related_story: [],
       success_story: "story",
       universal_services: [],
       universal_products: [],
       industry_solution: [],
+      related_solutions: [],
       universal_industries: [],
       image_url: baseUrl,
       encoded_success_title: "",
@@ -255,13 +249,7 @@ export default {
     this.universal_industries = universal_content().industries;
 
     try {
-      // await this.get_solution();
       await Promise.all([this.fetch_industry()]);
-      // await this.get_products();
-      // if (this.solution_id != "") {
-      //   this.get_features();
-      //   this.get_study();
-      // }
     } catch (error) {
       console.log("Loading error:", error);
     } finally {
@@ -290,91 +278,6 @@ export default {
     );
   },
   methods: {
-    async get_solution() {
-      try {
-        const { data, error } = await supabase
-          .from("solutions_by_industry")
-          .select("*")
-          .eq("name", this.id);
-        if (error) {
-          console.log(error);
-          return;
-        }
-        //map data
-        this.solution = data[0];
-        this.solution_id = this.solution.id;
-        this.product_ids = this.solution.solutions;
-      } catch (error) {
-        console.log("Error fetching data:", error);
-      }
-    },
-    //get features
-    async get_features() {
-      try {
-        const { data, error } = await supabase
-          .from("solutions_features")
-          .select("*")
-          .eq("solution_id", this.solution_id);
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.features = data;
-        // this.features = data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    //get solutions
-    async get_products() {
-      // Clear the array first to avoid duplicates
-      this.related_solutions = [];
-
-      try {
-        const promises = this.solution.solutions.map(async (solution_id) => {
-          try {
-            const { data, error } = await supabase
-              .from("services")
-              .select("name, icon, title_description")
-              .eq("id", solution_id);
-
-            if (error) throw error;
-            return data; // data is an array
-          } catch (error) {
-            console.log("Error fetching product:", error);
-            return []; // Return empty array on error
-          }
-        });
-
-        // Wait for all promises and flatten the array of arrays
-        const results = await Promise.all(promises);
-        this.related_solutions = results.flat(); // Flatten the nested arrays
-
-        console.log("Final related solutions:", this.related_solutions);
-      } catch (error) {
-        console.log("Error in Promise.all:", error);
-      }
-    },
-    // get story
-    async get_study() {
-      try {
-        const { data, error } = await supabase
-          .from("case_studies")
-          .select("*")
-          .eq("solution_id", this.solution_id)
-          .limit(1);
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.related_story = data[0];
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
     /* fetch industry */
     async fetch_industry() {
       const encoded_title = encodeURIComponent(this.id);
