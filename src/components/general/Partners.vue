@@ -2,7 +2,6 @@
   <div class="w-full py-10 p-4 bg-white">
     <!-- Header -->
     <div class="w-full flex justify-center">
-      <!-- <p class="text-secondary w-full flex justify-center text-lg">CLIENTS</p> -->
       <h1 class="text-5xl font-extrabold mt-4 p-2 text-center flex-wrap">
         Trusted by <span class="mx-2 text-secondary w-fit">10+</span> Companies
         since 2016
@@ -64,10 +63,10 @@ export default {
   name: "Partners",
   props: {
     has_numbers: Boolean,
-    projects: String,
-    members: String,
-    reviews: String,
-    clients: String,
+    projects: [String, Number],
+    members: [String, Number],
+    reviews: [String, Number],
+    clients: [String, Number],
   },
   data() {
     return {
@@ -82,39 +81,40 @@ export default {
         { client_pic: "/icons/partners/7.png" },
         { client_pic: "/icons/partners/8.svg" },
       ],
-      stats: [
-        // {
-        //   icon: "fa-regular fa-circle-check text-secondary text-2xl",
-        //   number: 20,
-        //   item: "Complete Projects",
-        // },
-        // {
-        //   icon: "fa-solid fa-users text-secondary text-2xl",
-        //   number: 20,
-        //   item: "Team Members",
-        // },
-        // {
-        //   icon: "fa-regular fa-message text-secondary text-2xl",
-        //   number: 200,
-        //   item: "Reviews",
-        // },
-        // {
-        //   icon: "fa-solid fa-users text-secondary text-2xl",
-        //   number: 10,
-        //   item: "Happy Clients",
-        // },
-      ],
+      stats: [],
       animatedStats: [],
     };
   },
-  async mounted() {
-    /* set numbers from parent */
+  mounted() {
     this.set_starts();
     this.prepareAnimatedStats();
     this.observeStatsSection();
-    console.log("Stats: ", this.stat);
   },
   methods: {
+    set_starts() {
+      this.stats.push(
+        {
+          icon: "fa-regular fa-circle-check text-secondary text-2xl",
+          number: Number(this.projects),
+          item: "Complete Projects",
+        },
+        {
+          icon: "fa-solid fa-users text-secondary text-2xl",
+          number: Number(this.members),
+          item: "Team Members",
+        },
+        {
+          icon: "fa-regular fa-message text-secondary text-2xl",
+          number: Number(this.reviews),
+          item: "Testimonials",
+        },
+        {
+          icon: "fa-solid fa-users text-secondary text-2xl", // fixed typo here
+          number: Number(this.clients),
+          item: "Happy Clients",
+        }
+      );
+    },
     prepareAnimatedStats() {
       this.animatedStats = this.stats.map((stat) => ({
         ...stat,
@@ -130,9 +130,7 @@ export default {
             observer.disconnect();
           }
         },
-        {
-          threshold: 0.3,
-        }
+        { threshold: 0.3 }
       );
 
       this.$nextTick(() => {
@@ -160,33 +158,6 @@ export default {
           }
         }, 1000 / frameRate);
       });
-    },
-    /* set statistics */
-    set_starts() {
-      this.stats.push(
-        {
-          icon: "fa-regular fa-circle-check text-secondary text-2xl",
-          number: this.projects,
-          item: "Complete Projects",
-        },
-        {
-          icon: "fa-solid fa-users text-secondary text-2xl",
-          number: this.members,
-          item: "Team Members",
-        },
-        {
-          icon: "fa-regular fa-message text-secondary text-2xl",
-          number: this.reviews,
-          item: "Testimonials",
-        },
-        {
-          icon: "ffa-solid fa-users text-secondary text-2xl",
-          number: this.clients,
-          item: "Happy Clients",
-        }
-      );
-
-      console.log(this.clients);
     },
   },
 };

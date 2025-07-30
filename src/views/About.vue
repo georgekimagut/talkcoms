@@ -96,7 +96,14 @@
         </div>
       </div>
     </div>
-    <Partners has_numbers />
+    <!-- {{ about_page[0].company_status?.clients }} -->
+    <Partners
+      has_numbers
+      :projects="about_page[0].company_status?.complete_projects"
+      :members="about_page[0].company_status?.team_members"
+      :reviews="about_page[0].company_status?.reviews"
+      :clients="about_page[0].company_status?.clients"
+    />
     <!-- values -->
     <div class="w-full flex flex-wrap justify-center overflow-hidden mt-20">
       <div class="w-[90%] flex justify-center flex-wrap about-page">
@@ -219,12 +226,8 @@
       </div>
     </div>
     <!-- CTA -->
-    <Cta
-      :projects="about_page[0].company_status"
-      :members="about_page[0].team_members"
-      :reviews="about_page[0].reviews"
-      :clients="about_page[0].clients"
-    />
+
+    <Cta />
     <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>
