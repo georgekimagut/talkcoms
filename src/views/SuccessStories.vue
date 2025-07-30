@@ -96,7 +96,6 @@ import HeroSection from "@/components/general/HeroSection.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
 import SmallTitle from "@/components/text/SmallTitle.vue";
-import { supabase } from "@/lib/supabase";
 import { baseUrl, success_stories_end_point } from "@/store/store";
 import { universal_content } from "@/store/contentStore";
 import { CardDescription } from "@/components/ui/card";
@@ -149,23 +148,6 @@ export default {
       this.success_stories = this.filtered_stories;
     },
     //get stories
-    async get_stories() {
-      try {
-        const { data, error } = await supabase
-          .from("success_stories")
-          .select("*");
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.success_stories = data;
-        this.all_stories_tracker = this.success_stories;
-        this.filtered_stories = this.success_stories;
-      } catch (error) {
-        console.log(error);
-      }
-    },
 
     /* fetch stories */
     async fetch_stories() {
@@ -192,28 +174,6 @@ export default {
         console.error("Error fetching resources:", error);
       }
     },
-
-    async get_services() {
-      try {
-        const { data, error } = await supabase
-          .from("services")
-          .select("id, name")
-          .order("created_at", { ascending: false });
-        data.forEach((service) => {
-          this.services.push({
-            id: service.id,
-            name: service.name,
-            active_category: false,
-          });
-        });
-        if (error) {
-          console.log(error);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
   },
   async created() {
     document.title = "Talkcoms | Success stories";
@@ -224,8 +184,8 @@ export default {
 
     try {
       await Promise.all([
-        await this.get_stories(),
-        await this.get_services(),
+        // await this.get_stories(),
+        // await this.get_services(),
         await this.fetch_stories(),
       ]);
     } catch (error) {

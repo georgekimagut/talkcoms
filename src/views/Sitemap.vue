@@ -106,7 +106,6 @@
 </template>
 <script>
 import Spinner from "@/components/general/Spinner.vue";
-import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 export default {
   name: "Sitemap",
@@ -127,7 +126,7 @@ export default {
     this.universal_services = universal_content().services;
     this.universal_industries = universal_content().industries;
     try {
-      await Promise.all([this.get_solutions()]);
+      //await Promise.all([this.get_solutions()]);
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {
@@ -136,22 +135,6 @@ export default {
   },
   methods: {
     //get solutions
-    async get_solutions() {
-      try {
-        const { data, error } = await supabase
-          .from("solutions_by_industry")
-          .select("name")
-          .order("created_at", { ascending: false });
-
-        this.solutions = data;
-        if (error) {
-          console.log(error);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
   },
 };
 </script>

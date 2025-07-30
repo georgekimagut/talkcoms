@@ -9,9 +9,7 @@ import ResourceView from "@/views/dynamic/ResourceView.vue";
 import NotFound from "@/views/NotFound.vue";
 import Contact from "@/views/Contact.vue";
 import SolutionView from "@/views/dynamic/SolutionView.vue";
-import CaseStudies from "@/views/CaseStudies.vue";
 import Testimonials from "@/views/Testimonials.vue";
-import Policies from "@/views/dynamic/Policies.vue";
 import Sitemap from "@/views/Sitemap.vue";
 
 const routes = [
@@ -75,12 +73,6 @@ const routes = [
     meta: { title: "Success Stories" },
   },
   {
-    path: "/case-studies",
-    name: "Case Studies",
-    component: CaseStudies,
-    meta: { title: "Case Studies" },
-  },
-  {
     path: "/resources/:type/:id",
     name: "Resource",
     component: ResourceView,
@@ -94,13 +86,7 @@ const routes = [
     meta: { title: "Testimonials" },
     props: true,
   },
-  {
-    path: "/legal/:id",
-    name: "Privacy Policy",
-    component: Policies,
-    meta: { title: "Legal" },
-    props: true,
-  },
+
   {
     path: "/sitemap",
     name: "Sitemap",

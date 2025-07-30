@@ -336,7 +336,6 @@ import HeroPattern from "@/components/patterns/HeroPattern.vue";
 import CardTitle from "@/components/ui/card/CardTitle.vue";
 import Maps from "@/components/general/Maps.vue";
 import { enquiry_url, contact_us_url } from "@/store/store.js";
-import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 
 export default {

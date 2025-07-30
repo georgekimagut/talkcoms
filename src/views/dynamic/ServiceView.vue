@@ -598,18 +598,12 @@
   </div>
 </template>
 <script>
-import CustomCard from "@/components/ui/card/CustomCard.vue";
 import Cta from "@/components/general/Cta.vue";
 import Footer from "@/components/general/Footer.vue";
 import HeroSection from "@/components/general/HeroSection.vue";
 import Navbar from "@/components/general/Navbar.vue";
-import ScrollPattern from "../../components/patterns/ScrollPattern.vue";
 import Spinner from "@/components/general/Spinner.vue";
-// import BigTitle from "../../components/text/BigTitle.vue";
-import ExternalLink from "../../components/text/ExternalLink.vue";
-// import SmallTitle from "../../components/text/SmallTitle.vue";
 import { text_colors, baseUrl } from "@/store/store";
-import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
 
@@ -619,17 +613,10 @@ export default {
   components: {
     Spinner,
     Navbar,
-    // RoundedButton,
     Footer,
     HeroPattern,
     Cta,
-    ScrollPattern,
-    ExternalLink,
-    // RoundedExternal,
-    CustomCard,
     HeroSection,
-    // LightButton,
-    // DarkButton,
   },
   data() {
     return {
@@ -637,81 +624,7 @@ export default {
       is_side_hero: true,
       unaivailable_service: false,
       //service details
-      service: "",
-      service_title: "",
-      service_description: "",
-      service_pic: "",
-      content: "",
-      features: [],
-      benefits: [],
-      packages: [
-        {
-          is_popular: true,
-          package_name: "Standard",
-          description: "Essential call center features for small teams.",
-          package_price: "80",
-          features: `
-      <li class='list-disc'>Agent License (s)</li>
-      <li class='list-disc'>Multi-Level IVR</li>
-      <li class='list-disc'>Automatic Call Distributor</li>
-      <li class='list-disc'>Call Disposition</li>
-      <li class='list-disc'>Call Recording</li>
-      <li class='list-disc'>Real-time Reports</li>
-      <li class='list-disc'>Voice Channel</li>
-    `,
-        },
-        {
-          is_popular: false,
-          package_name: "Advanced",
-          description: "Includes email support for broader communication.",
-          package_price: "120",
-          features: `
-      <li class='list-disc'>Agent License (s)</li>
-      <li class='list-disc'>Multi-Level IVR</li>
-      <li class='list-disc'>Automatic Call Distributor</li>
-      <li class='list-disc'>Call Disposition</li>
-      <li class='list-disc'>Call Recording</li>
-      <li class='list-disc'>Real-time Reports</li>
-      <li class='list-disc'>Dual Channel (Voice and Email)</li>
-    `,
-        },
-        {
-          is_popular: false,
-          package_name: "Pro",
-          description: "Expand reach with WhatsApp and SMS integration.",
-          package_price: "160",
-          features: `
-      <li class='list-disc'>Agent License (s)</li>
-      <li class='list-disc'>Multi-Level IVR</li>
-      <li class='list-disc'>Automatic Call Distributor</li>
-      <li class='list-disc'>Call Disposition</li>
-      <li class='list-disc'>Call Recording</li>
-      <li class='list-disc'>Real-time Reports</li>
-      <li class='list-disc'>Omni-channel (Voice, Email, SMS, and WhatsApp)</li>
-    `,
-        },
-        {
-          is_popular: false,
-          package_name: "Enterprise",
-          description: "All-in-one solution with CRM and social integration.",
-          package_price: "200",
-          features: `
-      <li class='list-disc'>Agent License (s)</li>
-      <li class='list-disc'>Multi-Level IVR</li>
-      <li class='list-disc'>Automatic Call Distributor</li>
-      <li class='list-disc'>Call Disposition</li>
-      <li class='list-disc'>Call Recording</li>
-      <li class='list-disc'>Real-time Reports</li>
-      <li class='list-disc'>Omni-channel (Voice, Email, SMS, and social media)</li>
-      <li class='list-disc'>CRM Integration</li>
-    `,
-        },
-      ],
-      intergrations: [],
-      services: [],
-      service_id: "",
       channels: [],
-      portfolio_items: [],
       related_story: [],
       success_story: "story",
       random_bg: "",

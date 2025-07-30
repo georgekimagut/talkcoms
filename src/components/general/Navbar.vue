@@ -418,13 +418,6 @@
   </div>
 </template>
 <script>
-// import DefaultButton from "./buttons/RoundedButton.vue";
-import { supabase } from "@/lib/supabase";
-import Link from "../text/Link.vue";
-import { universal_content } from "@/store/contentStore";
-// import DarkButton from "./ui/button/DarkButton.vue";
-// import Button from "../ui/button/Button.vue";
-
 export default {
   name: "Navbar",
   props: {
@@ -432,7 +425,7 @@ export default {
     products: Array,
     industries: Array,
   },
-  components: { /*DefaultButton,*/ Link /*DarkButton*/ },
+
   data() {
     return {
       service_dropdown: false,
@@ -474,66 +467,7 @@ export default {
         },
       ],
       // services: [],
-      fields: [
-        { name: "Information Technology" },
-        { name: "Healthcare" },
-        { name: "Banking" },
-        { name: "Saccos and Chamas" },
-        { name: "Travel & Logistics" },
-        { name: "Insurance" },
-      ],
-      departments: [],
     };
-  },
-  created() {
-    // this.industries = universal_content().industries;
-    // this.get_solutions();
-  },
-  methods: {
-    // show_service_dropdown(key) {
-    //   if (key === "service") {
-    //     this.service_dropdown = true;
-    //   } else if (key === "product") {
-    //     this.product_dropdown = true;
-    //   } else if (key === "solution") {
-    //     this.solutions_dropdown = true;
-    //   }
-    // },
-    // hide_service_dropdown(key) {
-    //   if (key === "service") {
-    //     this.service_dropdown = false;
-    //   } else if (key === "product") {
-    //     this.product_dropdown = false;
-    //   } else if (key === "solution") {
-    //     this.solutions_dropdown = false;
-    //   }
-    // },
-
-    //get solutions
-    async get_solutions() {
-      try {
-        const { data, error } = await supabase
-          .from("solutions_by_industry")
-          .select("id, name, is_department")
-          .order("created_at", { ascending: false });
-
-        this.industries = data;
-        // const retrieved_data = data;
-        // retrieved_data.forEach((item) => {
-        //   if (item.is_department === true) {
-        //     this.departments.push(item);
-        //   } else {
-        //     this.industries.push(item);
-        //   }
-        // });
-        if (error) {
-          console.log(error);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
   },
 };
 </script>
