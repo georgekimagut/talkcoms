@@ -96,11 +96,11 @@
       <div class="w-[25%]">
         <h2 class="text-xl">Solutions By Industry</h2>
         <ul class="space-y-4 text-lg mt-4">
-          <li v-for="(sol, index) in solutions" :key="index">
+          <li v-for="(industry, index) in universal_industries" :key="index">
             <router-link
-              :to="`/solution/${sol.name}`"
+              :to="`/solution/${industry.name}`"
               class="text-third hover:underline"
-              >{{ sol.name }}</router-link
+              >{{ industry.name }}</router-link
             >
           </li>
         </ul>
@@ -120,6 +120,7 @@ export default {
     return {
       universal_services: [],
       universal_products: [],
+      universal_industries: [],
       solutions: [],
       page_is_loading: true,
     };
@@ -129,6 +130,7 @@ export default {
     this.page_is_loading = true;
     this.universal_products = universal_content().products;
     this.universal_services = universal_content().services;
+    this.universal_industries = universal_industries.industries;
     try {
       await Promise.all([this.get_solutions()]);
     } catch (error) {

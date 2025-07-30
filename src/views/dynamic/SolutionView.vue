@@ -238,7 +238,7 @@ export default {
       related_solutions: [],
       product_ids: [],
       related_story: [],
-      success_story: "case-study",
+      success_story: "story",
       universal_services: [],
       universal_products: [],
       industry_solution: [],
