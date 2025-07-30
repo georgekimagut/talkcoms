@@ -17,21 +17,6 @@
     />
 
     <div class="mt-10 w-full flex flex-wrap justify-center">
-      <!-- <div class="w-[80%] flex justify-center">
-        <div class="relative w-full max-w-sm items-center">
-          <Input
-            id="search"
-            type="text"
-            placeholder="Search..."
-            class="pl-10 py-6 w-full border-[#82bc00]"
-          />
-          <span
-            class="absolute start-0 inset-y-0 flex items-center justify-center px-2"
-          >
-            <Search class="size-6 text-muted-foreground" />
-          </span>
-        </div>
-      </div> -->
       <div class="mt-0 w-[80%] flex overflow-x-scroll hide-scrollbar">
         <div
           v-for="(solution, index) in solutions_list"
@@ -61,8 +46,6 @@ import Footer from "@/components/general/Footer.vue";
 import HeroSection from "@/components/general/HeroSection.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
-// import DefaultInput from "../components/ui/input/DefaultInput.vue";
-import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 import { faqs_end_point } from "@/store/store";
 
@@ -148,7 +131,7 @@ export default {
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
-
+          console.log("Data array: ", dataArray);
           this.faqs = dataArray.flatMap((item) => {
             const mainTitle = item.main_title || "";
             return (item.FAQs || []).map((faq) => ({

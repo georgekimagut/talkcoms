@@ -1,4 +1,5 @@
 <template>
+  <!-- {{ success_stories[0] }} -->
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
   <div v-if="page_is_loading === false" class="w-full">
@@ -94,7 +95,6 @@ import Footer from "@/components/general/Footer.vue";
 import HeroSection from "@/components/general/HeroSection.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
-import BigTitle from "@/components/text/BigTitle.vue";
 import SmallTitle from "@/components/text/SmallTitle.vue";
 import { supabase } from "@/lib/supabase";
 import { baseUrl, success_stories_end_point } from "@/store/store";
@@ -109,7 +109,6 @@ export default {
     HeroSection,
     Footer,
     SmallTitle,
-    BigTitle,
     CustomCard,
   },
   data() {

@@ -1,6 +1,7 @@
 <template>
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
+
   <div v-if="page_is_loading === false" class="w-full bg-white">
     <Navbar
       :services="universal_services"
@@ -165,16 +166,13 @@
 import Footer from "@/components/general/Footer.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
-import { supabase } from "@/lib/supabase";
-import BigTitle from "../../components/text/BigTitle.vue";
 import Cta from "@/components/general/Cta.vue";
-import { apiEndpoint, baseUrl } from "@/store/store";
+import { baseUrl } from "@/store/store";
 import { universal_content } from "@/store/contentStore";
 
 //markup content
 import DOMPurify from "dompurify";
 import { marked } from "marked";
-import CustomCard from "@/components/ui/card/CustomCard.vue";
 
 export default {
   name: "ResourceView",
@@ -182,9 +180,7 @@ export default {
   components: {
     Navbar,
     Spinner,
-    CustomCard,
     Footer,
-    BigTitle,
     // SquareButton,
     Cta,
   },
@@ -245,18 +241,7 @@ export default {
       });
       // console.log(this.table_of_contents);
     },
-    nextResourceSlide() {
-      if (this.current_resource_slide < this.total_resource_slides - 1) {
-        this.current_resource_slide++;
-      }
-    },
-    prevResourceSlide() {
-      if (this.current_resource_slide > 0) {
-        this.current_resource_slide--;
-      } else {
-        this.current_resource_slide = this.total_resource_slides - 1;
-      }
-    },
+
     async fetch_resource() {
       const encoded_title = encodeURIComponent(this.id);
       try {
@@ -312,18 +297,6 @@ export default {
             });
 
             console.log("Success body: ", this.success_body);
-            // const success_story_body =
-
-            // let markdown = this.success_story_body?.description || "";
-            // marked.setOptions({
-            //   headerIds: true,
-            //   headerPrefix: "",
-            //   mangle: false,
-            // });
-
-            // const html = marked.parse(markdown);
-            // this.sanitized_resource = DOMPurify.sanitize(html);
-            // console.log("Story: ", this.sanitized_resource);
           } else {
             throw new Error("No data found in response");
           }

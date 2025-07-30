@@ -71,15 +71,11 @@
   </div>
 </template>
 <script>
-import CustomCard from "@/components/ui/card/CustomCard.vue";
 import Cta from "@/components/general/Cta.vue";
 import Footer from "@/components/general/Footer.vue";
 import HeroSection from "@/components/general/HeroSection.vue";
 import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
-import BigTitle from "@/components/text/BigTitle.vue";
-import SmallTitle from "@/components/text/SmallTitle.vue";
-import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 import { testimonials_end_point } from "@/store/store";
 
@@ -90,9 +86,6 @@ export default {
     Navbar,
     HeroSection,
     Footer,
-    SmallTitle,
-    BigTitle,
-    CustomCard,
     Cta,
   },
   data() {

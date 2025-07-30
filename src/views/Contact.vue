@@ -1,6 +1,7 @@
 <template>
   <!-- load spinner before -->
   <Spinner v-if="page_is_loading" />
+
   <div v-if="page_is_loading === false" class="w-full">
     <Navbar
       :services="universal_services"
@@ -183,9 +184,9 @@
                         <SelectItem
                           v-for="(service, index) in services"
                           :key="index"
-                          :value="service.name"
+                          :value="service.product_name"
                         >
-                          {{ service.name }}
+                          {{ service.product_name }}
                         </SelectItem>
                       </SelectGroup>
                     </SelectContent>
@@ -334,11 +335,7 @@ import BigTitle from "@/components/text/BigTitle.vue";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
 import CardTitle from "@/components/ui/card/CardTitle.vue";
 import Maps from "@/components/general/Maps.vue";
-import {
-  contact_us_end_point,
-  enquiry_url,
-  contact_us_url,
-} from "@/store/store.js";
+import { enquiry_url, contact_us_url } from "@/store/store.js";
 import { supabase } from "@/lib/supabase";
 import { universal_content } from "@/store/contentStore";
 
@@ -429,14 +426,13 @@ export default {
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
     this.universal_industries = universal_content().industries;
-    this.fetch_contact_us();
-    this.get_services();
+    this.services = [...this.universal_products, ...this.universal_services];
   },
   methods: {
     load_page() {
       setTimeout(() => {
         this.page_is_loading = false;
-      }, 1500);
+      }, 1000);
     },
     /* get in touch */
     async enquire() {
@@ -506,82 +502,7 @@ export default {
         this.is_submitting = false;
       }
     },
-    /* fetch contacts */
-    async fetch_contact_us() {
-      const cacheKey = "contactCache";
-      let contact_us_page = "";
-      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
-
-      const cachedData = localStorage.getItem(cacheKey);
-      const now = Date.now();
-
-      if (cachedData) {
-        const { data, timestamp } = JSON.parse(cachedData);
-        if (now - timestamp < cacheExpiry) {
-          //map data
-          contact_us_page = data;
-          return;
-        }
-      }
-
-      try {
-        const response = await fetch(contact_us_end_point);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-
-        if (responseData.data) {
-          const dataArray = Array.isArray(responseData.data)
-            ? responseData.data
-            : [responseData.data];
-
-          contact_us_page = dataArray;
-
-          localStorage.setItem(
-            cacheKey,
-            JSON.stringify({
-              data: dataArray,
-              timestamp: now,
-            })
-          );
-        } else {
-          console.error("Invalid response structure:", responseData);
-          if (cachedData) {
-            console.log("Falling back to stale cache");
-            const { data } = JSON.parse(cachedData);
-            contact_us_page = data;
-          }
-        }
-
-        console.log("Contact content", contact_us_page);
-      } catch (error) {
-        console.error("Error fetching resources:", error);
-        if (cachedData) {
-          console.log("Using cached data after error");
-          const { data } = JSON.parse(cachedData);
-          this.blogs = data;
-        }
-      }
-    },
     //get services
-    async get_services() {
-      try {
-        const { data, error } = await supabase.from("services").select("name");
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-
-        // Shuffle data randomly
-        this.services = data;
-        console.log(this.services);
-      } catch (error) {
-        console.log(error);
-      }
-    },
   },
 };
 </script>
