@@ -98,9 +98,9 @@
         <ul class="space-y-4 text-lg mt-4">
           <li v-for="(industry, index) in universal_industries" :key="index">
             <router-link
-              :to="`/solution/${industry.name}`"
+              :to="`/solution/${industry.main_title}`"
               class="text-third hover:underline"
-              >{{ industry.name }}</router-link
+              >{{ industry.main_title }}</router-link
             >
           </li>
         </ul>
@@ -130,7 +130,7 @@ export default {
     this.page_is_loading = true;
     this.universal_products = universal_content().products;
     this.universal_services = universal_content().services;
-    this.universal_industries = universal_industries.industries;
+    this.universal_industries = universal_content().industries;
     try {
       await Promise.all([this.get_solutions()]);
     } catch (error) {
