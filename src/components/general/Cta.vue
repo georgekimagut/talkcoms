@@ -7,7 +7,7 @@
     <div class="w-full flex h-[70vh] absolute patterns">
       <div class="w-1/2 flex flex-col justify-end">
         <div
-          v-for="index in 6"
+          v-for="index in 4"
           :key="index"
           class="w-full h-[45px] flex flex-row gap-6"
         >
@@ -21,12 +21,12 @@
       <div class="w-1/2 h-fulll flex justify-end">
         <div class="h-full flex flex-col">
           <div
-            v-for="index in 6"
+            v-for="index in 4"
             :key="index"
             class="w-full h-[45px] flex flex-row gap-6"
           >
             <div
-              v-for="index in 5"
+              v-for="index in 4"
               :key="index"
               class="w-[5px] h-[5px] rounded-full bg-secondary"
             ></div>

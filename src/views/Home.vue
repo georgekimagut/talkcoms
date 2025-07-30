@@ -207,7 +207,7 @@
           <Card
             v-for="(item, index) in portfolio"
             :key="index"
-            class="w-[32%] mb-4 border-0 shadow-none rounded-none bg-body overflow-hidden flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover snap-center"
+            class="w-[32%] mb-4 border-0 shadow-none rounded-none bg-body overflow-hidden flex-shrink-0 to-full duration-300 ease-in custom-card-hover snap-center"
             :class="
               index === 0
                 ? 'bg-secondary'

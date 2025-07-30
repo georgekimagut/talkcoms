@@ -77,9 +77,14 @@
         >
           <router-link :to="`/service/${who_is_served?.title}`" class="w-full">
             <img
-              :src="`${image_url}/${who_is_served.icon?.url}`"
+              :src="
+                who_is_served?.icon?.url
+                  ? `${image_url}/${who_is_served.icon.url}`
+                  : '/icons/erp.svg'
+              "
               class="h-[50px] w-auto"
             />
+
             <h1 class="text-xl font-bold mt-8">
               {{ who_is_served?.title }}
             </h1>
@@ -140,7 +145,7 @@
     <!-- case study -->
 
     <div
-      v-if="industry_solution[0]?.success_stories.length > 0"
+      v-if="related_story.length > 0"
       class="w-full flex justify-center mt-16 bg-white py-16 hero-component"
     >
       <div
@@ -242,7 +247,7 @@ export default {
       features: [],
       related_solutions: [],
       product_ids: [],
-      related_story: "",
+      related_story: [],
       success_story: "case-study",
       universal_services: [],
       universal_products: [],

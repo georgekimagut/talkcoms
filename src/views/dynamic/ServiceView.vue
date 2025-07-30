@@ -546,23 +546,20 @@
       </div>
     </div>
     <!-- related story -->
+    <!-- {{ related_story }} -->
     <div
-      v-if="single_service.success_stories.length > 0"
+      v-if="related_story"
       class="w-full flex justify-center mt-16 bg-white py-16 hero-component"
     >
-      <div
-        v-for="(story, index) in single_service.success_stories.slice(0, 1)"
-        :key="index"
-        class="w-[90%] h-fit flex hero-holder"
-      >
+      <div class="w-[90%] h-fit flex hero-holder">
         <div class="w-1/2 flex h-full justify-center to-full">
           <div class="w-[90%] flex flex-wrap justify-center">
             <div
               class="w-[80%] max-h-[50vh] rounded-2xl flex justify-center overflow-hidden to-full"
             >
               <img
-                :src="`${image_url}/${story?.image?.url}`"
-                :alt="`${story?.title} - related story image`"
+                :src="`${image_url}/${related_story?.image?.url}`"
+                :alt="`${related_story?.title} - related story image`"
                 class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
               />
             </div>
@@ -571,9 +568,9 @@
         <div class="w-1/2 to-full">
           <div class="w-[90%] mt-6">
             <h1 class="text-5xl font-bold mt-4 text-default">
-              {{ story?.title }}
+              {{ related_story?.title }}
             </h1>
-            <p class="mt-4 text-xl">{{ story.companyName }}</p>
+            <p class="mt-4 text-xl">{{ related_story.companyName }}</p>
 
             <div
               class="w-full h-[26px] flex flex-col justify-center mt-10 to-next-line"
@@ -587,7 +584,7 @@
           </div>
           <div class="w-full mt-10 flex">
             <router-link
-              :to="`/resources/${success_story}/${story.companyName}`"
+              :to="`/resources/${success_story}/${related_story.companyName}`"
               ><Button
                 variant="ghost"
                 class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
@@ -733,6 +730,7 @@ export default {
       universal_products: [],
       universal_industries: [],
       single_service: [],
+      encoded_success_title: "",
 
       portfolio: [
         {
@@ -802,6 +800,7 @@ export default {
 
         try {
           await this.fetch_services();
+          // await this.fetch_related_story();
           // await this.get_service();
           await this.get_portfolio_items();
           await this.get_main_service_features();
@@ -822,11 +821,18 @@ export default {
   methods: {
     /* fetch services */
     async fetch_services() {
-      const encoded_title = encodeURIComponent(this.id);
+      const words = this.id.split(" ").filter((w) => w.trim() !== "");
+      const params = new URLSearchParams();
+
+      words.forEach((word, index) => {
+        params.append(`filters[$or][${index}][product_name][$containsi]`, word);
+      });
+
+      params.append("populate", "*");
+
       const response = await fetch(
-        `${baseUrl}/api/service-pages?filters[product_name][$eq]=${encoded_title}&populate=*`
+        `${baseUrl}/api/service-pages?${params.toString()}`
       );
-      // const response = await fetch(services_end_point);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -840,19 +846,46 @@ export default {
           ? response_data.data
           : [response_data.data];
 
-        // Find the service with matching product_name
-        const matchedService = dataArray.find(
-          (service) => service.product_name === this.id
-        );
+        // Just take the first result
+        this.single_service = dataArray[0];
 
-        this.single_service = matchedService;
-        ("");
-        // Handle case where no service matches the id
         if (!this.single_service) {
           this.unaivailable_service = true;
+          return;
         }
+
+        // Get the first success_stories title
+        const stories = this.single_service.success_stories;
+        if (Array.isArray(stories) && stories.length > 0) {
+          this.encoded_success_title = encodeURIComponent(
+            stories[0]?.title || ""
+          );
+        }
+        this.fetch_related_story();
       } else {
         throw new Error("No data found in response");
+      }
+    },
+    /* fetch story */
+    async fetch_related_story() {
+      try {
+        const response = await fetch(
+          `${baseUrl}/api/success-stories/?filters[title][$eq]=${this.encoded_success_title}&populate=*`
+        );
+        const responseData = await response.json();
+        if (responseData.data) {
+          console.log("Json data for service names: ", responseData.data);
+
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+
+          this.related_story = dataArray[0];
+        } else {
+          console.error("Invalid response structure: ", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
       }
     },
     async get_service() {
