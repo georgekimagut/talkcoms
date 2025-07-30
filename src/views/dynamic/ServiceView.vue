@@ -534,6 +534,7 @@
       </div>
     </div>
     <div
+      v-if="single_service?.packages.length > 0"
       class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 pb-20 packages"
     >
       <div class="w-3/4 flex flex-wrap justify-center">
@@ -549,9 +550,10 @@
         </p>
       </div>
       <!-- the packages -->
+      <!-- {{ single_service?.packages }} -->
       <div class="w-[90%] flex flex-wrap justify-center mt-16 inner-package">
         <div
-          v-for="(pack, index) in packages"
+          v-for="(pack, index) in single_service?.packages"
           :key="index"
           class="w-[22%] ml-[1.5%] relative flex flex-wrap justify-center card"
         >
@@ -570,21 +572,25 @@
             <!-- Top content -->
             <div>
               <p class="text-secondary font-semibold flex justify-center">
-                {{ pack.package_name }}
+                {{ pack.name }}
               </p>
               <p class="mt-8 flex justify-center">
-                {{ pack.description }}
+                {{ pack.short_description }}
               </p>
               <p v-if="pack.package_price" class="mt-8 flex justify-center">
                 <span class="text-4xl font-extrabold text-default">
-                  ${{ pack.package_price }}
+                  ${{ pack.price }}
                 </span>
                 <span class="mr-2 ml-2 text-[#ababab] h-full flex justify-end">
                   /month
                 </span>
               </p>
               <div class="w-full p-2 mt-15 border-t-1 border-[#e3e3e3]">
-                <div v-html="pack.features"></div>
+                <div
+                  v-for="feature in pack?.features"
+                  v-html="feature?.children[0]?.text"
+                ></div>
+                <!-- <div v-html="pack?.features[0]?.text"></div> -->
               </div>
             </div>
 
@@ -832,17 +838,23 @@ export default {
   methods: {
     /* fetch services */
     async fetch_services() {
-      const words = this.id.split(" ").filter((w) => w.trim() !== "");
-      const params = new URLSearchParams();
+      // const words = this.id.split(" ").filter((w) => w.trim() !== "");
+      // const params = new URLSearchParams();
 
-      words.forEach((word, index) => {
-        params.append(`filters[$or][${index}][product_name][$containsi]`, word);
-      });
+      const encoded_title = encodeURIComponent(this.id);
 
-      params.append("populate", "*");
+      // const response = await fetch(
+      //     `${baseUrl}/api/industries/?filters[main_title][$eq]=${encoded_title}&populate=*`
+      //   );
+
+      // words.forEach((word, index) => {
+      //   params.append(`filters[$or][${index}][product_name][$containsi]`, word);
+      // });
+
+      // params.append("populate", "*");
 
       const response = await fetch(
-        `${baseUrl}/api/service-pages?${params.toString()}`
+        `${baseUrl}/api/service-pages/?filters[product_name][$eq]=${encoded_title}&populate=*`
       );
 
       if (!response.ok) {
