@@ -481,75 +481,8 @@
     <!-- packages -->
     <!-- v-if="single_service.packages.length > 0" -->
     <div
-      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 pb-20 packages"
-    >
-      <div class="w-3/4 flex flex-wrap justify-center">
-        <p class="text-secondary flex justify-center text-2xl">
-          <SmallTitle text="PACKAGES" />
-        </p>
-
-        <h1 class="text-4xl font-extrabold mt-4 p-2 text-center w-full">
-          Our Pricing Plans
-        </h1>
-        <p class="flex text-center mt-2">
-          Affordable, flexible, and tailored packages to meet your unique needs.
-        </p>
-      </div>
-      <!-- the packages -->
-      <div class="w-[90%] flex flex-wrap justify-center mt-16 inner-package">
-        <div
-          v-for="(pack, index) in packages"
-          :key="index"
-          class="w-[22%] ml-[1.5%] relative flex flex-wrap justify-center h-fit card"
-        >
-          <div
-            v-if="pack.is_popular === true"
-            class="w-[80%] flex justify-center text-sm bg-secondary rounded-t-sm text-white"
-          >
-            Popular
-          </div>
-          <div
-            class="w-full rounded-xl border p-4"
-            :class="
-              pack.is_popular === true ? 'border-[#82bc00]' : 'border-[#e3e3e3]'
-            "
-          >
-            <p class="text-secondary font-semibold flex justify-center">
-              {{ pack.package_name }}
-            </p>
-            <p class="mt-8 flex justify-center">
-              {{ pack.description }}
-            </p>
-            <p v-if="pack.package_price" class="mt-8 flex justify-center">
-              <span class="text-4xl font-extrabold text-default"
-                >${{ pack.package_price }}</span
-              >
-              <span class="mr-2 ml-2 text-[#ababab] h-full flex justify-end"
-                >/month</span
-              >
-            </p>
-            <div class="w-full p-2 mt-15 border-t-1 border-[#e3e3e3]">
-              <div v-html="pack.features"></div>
-            </div>
-            <router-link
-              to="/contact/get-started"
-              class="w-full flex justify-center p-2 rounded-sm mt-10"
-              :class="
-                pack.is_popular
-                  ? 'bg-secondary text-white'
-                  : 'border border-[#131f6b] text-default btn-hover'
-              "
-              >Get Started</router-link
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- related story -->
-    <!-- {{ related_story }} -->
-    <div
       v-if="related_story"
-      class="w-full flex justify-center mt-16 bg-white py-16 hero-component"
+      class="w-full flex justify-center bg-white py-16 hero-component"
     >
       <div class="w-[90%] h-fit flex hero-holder">
         <div class="w-1/2 flex h-full justify-center to-full">
@@ -600,8 +533,86 @@
         </div>
       </div>
     </div>
+    <div
+      class="w-full flex flex-wrap justify-center overflow-hidden top-56 mt-36 pb-20 packages"
+    >
+      <div class="w-3/4 flex flex-wrap justify-center">
+        <p class="text-secondary flex justify-center text-2xl">
+          <SmallTitle text="PACKAGES" />
+        </p>
+
+        <h1 class="text-4xl font-extrabold mt-4 p-2 text-center w-full">
+          Our Pricing Plans
+        </h1>
+        <p class="flex text-center mt-2">
+          Affordable, flexible, and tailored packages to meet your unique needs.
+        </p>
+      </div>
+      <!-- the packages -->
+      <div class="w-[90%] flex flex-wrap justify-center mt-16 inner-package">
+        <div
+          v-for="(pack, index) in packages"
+          :key="index"
+          class="w-[22%] ml-[1.5%] relative flex flex-wrap justify-center card"
+        >
+          <div
+            v-if="pack.is_popular === true"
+            class="w-[80%] flex justify-center text-sm bg-secondary rounded-t-sm text-white"
+          >
+            Popular
+          </div>
+
+          <!-- Uniform height & flex column layout -->
+          <div
+            class="w-full flex flex-col justify-between rounded-xl border p-4"
+            :class="pack.is_popular ? 'border-[#82bc00]' : 'border-[#e3e3e3]'"
+          >
+            <!-- Top content -->
+            <div>
+              <p class="text-secondary font-semibold flex justify-center">
+                {{ pack.package_name }}
+              </p>
+              <p class="mt-8 flex justify-center">
+                {{ pack.description }}
+              </p>
+              <p v-if="pack.package_price" class="mt-8 flex justify-center">
+                <span class="text-4xl font-extrabold text-default">
+                  ${{ pack.package_price }}
+                </span>
+                <span class="mr-2 ml-2 text-[#ababab] h-full flex justify-end">
+                  /month
+                </span>
+              </p>
+              <div class="w-full p-2 mt-15 border-t-1 border-[#e3e3e3]">
+                <div v-html="pack.features"></div>
+              </div>
+            </div>
+
+            <!-- Button at the bottom -->
+            <router-link
+              to="/contact/get-started"
+              class="w-full flex justify-center p-2 rounded-sm mt-auto"
+              :class="
+                pack.is_popular
+                  ? 'bg-secondary text-white'
+                  : 'border border-[#131f6b] text-default btn-hover'
+              "
+            >
+              Get Started
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- related story -->
+    <!-- {{ related_story }} -->
+
     <!-- Cta -->
-    <Cta cta_class="pt-32" :service_cta="single_service.footer_heading" />
+    <Cta
+      cta_class="pt-32"
+      :service_cta="single_service?.footer_heading"
+      :service_cta_description="single_service?.description_footer"
+    />
     <!-- footer -->
     <Footer :services="universal_services" :products="universal_products" />
   </div>

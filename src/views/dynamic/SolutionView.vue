@@ -19,7 +19,7 @@
       }`"
       is_industry
     />
-    <!-- {{ industry_solution[0] }} -->
+    {{ industry_solution[0].cardbyindustry }}
     <!-- advantages section -->
     <div class="w-full flex justify-center mt-10 hero-component">
       <div class="w-[90%] flex flex-wrap relative hero-holder">
