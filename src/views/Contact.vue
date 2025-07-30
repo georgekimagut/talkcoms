@@ -41,66 +41,96 @@
               :class="
                 type == 'contact-us'
                   ? 'w-full'
-                  : 'w-[60%] bg-default  p-8 to-full'
+                  : 'w-[60%] bg-fourth border rounded-xl border-[#007cba]  p-8 to-full'
               "
             >
               <div class="w-full flex flex-wrap">
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm text-white">First Name</label>
+                  <label
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    >First Name</label
+                  >
                   <Input
                     type="text"
                     placeholder="First Name"
-                    class="mt-2 text-white"
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
                     required
                     v-model="f_name"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm text-white">Last Name</label>
+                  <label
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    >Last Name</label
+                  >
                   <Input
                     type="text"
                     placeholder="Last Name"
-                    class="mt-2 text-white"
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
                     required
                     v-model="l_name"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm text-white">Email</label>
+                  <label
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    >Email</label
+                  >
                   <Input
                     type="email"
                     placeholder="Enter Your Email"
-                    class="mt-2 text-white"
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
                     required
                     v-model="email"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm text-white">Position/Role</label>
+                  <label
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    >Position/Role</label
+                  >
                   <Input
                     type="text"
                     placeholder="Enter Your Role"
-                    class="mt-2 text-white"
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
                     required
                     v-model="role"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm text-white">Company</label>
+                  <label
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    >Company</label
+                  >
                   <Input
                     type="text"
                     placeholder="Company Name"
-                    class="mt-2 text-white"
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
                     required
                     v-model="company_name"
                   />
                 </div>
                 <div class="w-1/2 p-2 to-full-form">
-                  <label class="text-sm text-white">Company Phone</label>
+                  <label
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    >Company Phone</label
+                  >
                   <Input
                     type="text"
                     placeholder="Company Phone"
-                    class="mt-2 text-white"
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
                     required
                     v-model="phone"
                   />
@@ -110,17 +140,24 @@
                   class="w-full p-2 flex flex-wrap"
                 >
                   <div class="w-1/2 p-2 to-full-form">
-                    <label class="text-sm text-white">Company Size</label>
+                    <label
+                      class="text-sm"
+                      :class="type == 'contact-us' ? 'text-white' : ''"
+                      >Company Size</label
+                    >
                     <Input
                       type="text"
                       placeholder="Company Size"
-                      class="mt-2 text-white"
+                      class="text-sm"
+                      :class="type == 'contact-us' ? 'text-white' : ''"
                       required
                       v-model="company_size"
                     />
                   </div>
                   <div class="w/12 p-2 to-full-form">
-                    <label class="text-sm text-white"
+                    <label
+                      class="text-sm"
+                      :class="type == 'contact-us' ? 'text-white' : ''"
                       >Preferred day & time</label
                     >
                     <input
@@ -131,7 +168,11 @@
                   </div>
                 </div>
                 <div v-if="this.type != 'contact-us'" class="w-full p-2">
-                  <label class="text-sm text-white">Subject</label>
+                  <label
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    >Subject</label
+                  >
                   <Select v-model="selected">
                     <SelectTrigger class="w-full mt-2 text-white">
                       <SelectValue placeholder="Select a service" />
@@ -152,9 +193,14 @@
                 </div>
 
                 <div class="w-full p-2">
-                  <label class="text-sm text-white">Message</label>
+                  <label
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    >Message</label
+                  >
                   <Textarea
-                    class="mt-2 text-white"
+                    class="text-sm"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
                     placeholder="Type your message"
                     required
                     v-model="message"
@@ -162,7 +208,9 @@
                 </div>
                 <div class="w-full p-2">
                   <input type="checkbox" class="w-fit" required />
-                  <label class="text-sm ml-2 text-white"
+                  <label
+                    class="text-sm ml-2"
+                    :class="type == 'contact-us' ? 'text-white' : ''"
                     >Agree to
                     <span class="underline"
                       ><router-link to="/legal/Terms & Conditions"
