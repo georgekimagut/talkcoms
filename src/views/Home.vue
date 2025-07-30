@@ -441,9 +441,6 @@ export default {
       page_is_loading: true,
       current_slide: 0,
       total_slides: "", // Number of slides
-      /* handle swap */
-      startX: 0,
-      endX: 0,
       imageLoaded: false,
       /* pause on hover */
       interval: null,
@@ -464,31 +461,8 @@ export default {
       universal_products: [],
       universal_industries: [],
       products: [],
-      /* services carousel */
-      current_service_slide: 0,
-      total_service_slides: 2,
       service_in_view: 0,
-      portfolio: [
-        // {
-        //   name: "Kipkenda ",
-        //   pic: "/static/kipkenda.webp",
-        //   description: "Top tier, full service kenyan law firm",
-        //   icon: "/icons/partners/9.png",
-        // },
-        // {
-        //   name: "Chunic LTD ",
-        //   pic: "/static/chunic.jpg",
-        //   description:
-        //     "Logistics company specializing in international Relocation, Sourcing & Procurement and Shipping",
-        //   icon: "/icons/partners/chunic-white.png",
-        // },
-        // {
-        //   name: "TKDM",
-        //   pic: "/static/tkdm.webp",
-        //   description: "News & Media Company",
-        //   icon: "/icons/partners/tkdm-white.png",
-        // },
-      ],
+      portfolio: [],
     };
   },
   async created() {
@@ -496,17 +470,12 @@ export default {
     this.page_is_loading = true;
     try {
       await Promise.all([
-        // this.get_carousel(),
-        // this.get_services(),
-        // this.get_portfolio_items(),
-        // this.get_solutions(),
         this.fetch_homepage(),
         this.fetch_blogs(),
         this.fetch_service_names(),
         this.fetch_service_carousel(),
         this.fetch_industry_names(),
         this.fetch_portfolios(),
-        // this.get_stories(),
       ]);
     } catch (error) {
       console.error("Loading failed:", error);
@@ -773,23 +742,7 @@ export default {
         console.log(error);
       }
     },
-    //get stories
-    async get_stories() {
-      try {
-        const { data, error } = await supabase
-          .from("success_stories")
-          .select("*");
 
-        if (error) {
-          console.log(error);
-          return;
-        }
-        this.success_stories = data;
-        this.success_stories.push(this.success_stories[0]);
-      } catch (error) {
-        console.log(error);
-      }
-    },
     //get solutions
     async get_solutions() {
       try {

@@ -271,7 +271,7 @@
               :key="index"
               class="mt- text-xl"
             >
-              <a :href="`tel:${phone.phone}`">{{ phone.phone }}</a></CardTitle
+              <a :href="`tel:${phone.title}`">{{ phone.title }}</a></CardTitle
             >
           </CardHeader>
         </Card>
