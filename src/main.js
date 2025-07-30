@@ -8,8 +8,13 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 
-/* lazy load */
-import VueLazyLoad from "vue3-lazy";
+/* google analytics */
+// import VueGtag from "vue-gtag";
+// // Configure GA4
+// .use(VueGtag, {
+//   config: { id: 'G-DPNLM1SX69' }  // Replace with your Measurement ID
+// }, router)
+
 /* shadcn components */
 import Button from "./components/ui/button/Button.vue";
 import Input from "./components/ui/input/Input.vue";
@@ -35,10 +40,7 @@ import {
 createApp(App)
   .use(pinia)
   .use(router)
-  .use(VueLazyLoad, {
-    loading: "loading-placeholder.jpg",
-    error: "/icons/image_load.gif",
-  })
+
   .component("Button", Button)
   .component("Input", Input)
   .component("Textarea", Textarea)

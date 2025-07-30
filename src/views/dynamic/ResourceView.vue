@@ -11,9 +11,9 @@
       <div class="w-[90%] flex flex-wrap hero-holder">
         <!-- Sticky sidebar -->
         <div class="w-[30%] sticky top-[15vh] self-start to-full tbc !h-fit">
-          <div class="w-full pt-4 pb-4 border rounded-md shadow-sm">
+          <div class="w-full pt-4 pb-4 border rounded-md shadow-sm bg-white">
             <div
-              class="w-full overflow-y-scroll hide-scrollbar bg-white p-4 border-1 border-[#e3e3e3]"
+              class="w-full overflow-y-scroll hide-scrollbar p-4 border-1 border-[#e3e3e3]"
             >
               <div class="w-full pb-4 border-b border-[#82bc00]">
                 <p
@@ -86,7 +86,7 @@
               </div>
             </div>
             <!-- image -->
-            <div class="w-full h-[60vh] overflow-hidden mt-[-8vh]">
+            <div class="w-full h-auto overflow-hidden mt-[-8vh]">
               <img
                 v-if="resource"
                 :src="
