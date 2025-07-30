@@ -292,7 +292,7 @@ export default {
           }
         } else if (this.type === "story") {
           const response = await fetch(
-            `${baseUrl}/api/success-stories?filters[companyName][$eq]=${encoded_title}&populate=*`
+            `${baseUrl}/api/success-stories?filters[title][$eq]=${encoded_title}&populate=*`
           );
 
           if (!response.ok) {

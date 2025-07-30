@@ -584,7 +584,7 @@
           </div>
           <div class="w-full mt-10 flex">
             <router-link
-              :to="`/resources/${success_story}/${related_story.companyName}`"
+              :to="`/resources/${success_story}/${related_story.title}`"
               ><Button
                 variant="ghost"
                 class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"

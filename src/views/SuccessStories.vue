@@ -14,7 +14,7 @@
       :small_title="story.companyName"
       :big_title="story?.title"
       :hero_description="story?.sub_title"
-      :read_more_link="`/resources/${success_story}/${story.companyName}`"
+      :read_more_link="`/resources/${success_story}/${story.title}`"
       :hero_image="`${image_url}/${story?.image?.url}`"
       :hero_image_alt="`${story?.title} - Hero image`"
       is_story
@@ -48,7 +48,7 @@
             class="w-[32%] border-0 shadow-none bg-body rounded-md flex-shrink-0 to-full cursor-pointer duration-300 ease-in custom-card-hover"
           >
             <router-link
-              :to="`/resources/${success_story}/${story.companyName}`"
+              :to="`/resources/${success_story}/${story.title}`"
               class="w-full flex-flex-wrap"
             >
               <CardHeader class="h-[40vh] p-0">
