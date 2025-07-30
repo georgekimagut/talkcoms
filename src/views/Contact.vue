@@ -162,7 +162,7 @@
                     >
                     <input
                       type="datetime-local"
-                      class="w-full border py-1 px-2 rounded-sm mt-2 bg-transparent text-white"
+                      class="w-full border py-1 px-2 rounded-sm mt-2 bg-transparent"
                       v-model="date_time"
                     />
                   </div>
@@ -381,11 +381,8 @@ export default {
         { value: "2", content: "Option two" },
         { value: "3", content: "Option three" },
       ],
-      phones: [{ phone: "+2547 592 009 98" }, { phone: "+254 746 433 163" }],
-      emails: [
-        { email: "support@talkcoms.co.uk" },
-        { email: "solutions@talkcoms.co.uk" },
-      ],
+      phones: [{ title: "+254747039334" }, { title: "+441572376000" }],
+      emails: [{ email: "solutions@talkcoms.io" }],
       offices: [
         {
           name: "United Kingdom",

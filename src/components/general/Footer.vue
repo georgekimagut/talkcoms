@@ -74,6 +74,9 @@
             </p>
           </div>
         </div>
+        <!-- <div class="w-[30%]">
+          new footer
+        </div> -->
         <div class="w-[15%] p-1">
           <p class="mt-2 font-semibold">Products</p>
           <div class="w-full mt-4">
@@ -138,6 +141,16 @@
                 </a>
               </p>
             </div>
+            <div class="w-full">
+              <div hidden class="user-count">
+                <h2>Active Users:</h2>
+                <p class="number">{{ activeUsers }}</p>
+
+                <!-- <p class="text-sm text-green-600">
+                  Active users right now: {{ activeUsers }}
+                </p> -->
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -154,7 +167,8 @@
   </div>
 </template>
 <script>
-import { universal_content } from "@/store/contentStore";
+// import { universal_content } from "@/store/contentStore";
+import { io } from "socket.io-client";
 export default {
   name: "Footer",
   props: {
@@ -169,6 +183,8 @@ export default {
     return {
       isVisible: false,
       site_logo: "/logo.svg",
+      activeUsers: 0,
+      socket: null,
       footer_company_links: [
         { title: "About us", link: "/about" },
         { title: "Contact us", link: "/contact/contact-us" },
@@ -189,11 +205,8 @@ export default {
         },
         { title: "Sitemap", link: "/sitemap" },
       ],
-      footer_contacts: [{ title: "+254746433163" }, { title: "+447746433163" }],
-      footer_emails: [
-        { title: "solutions@talkcoms.co.uk" },
-        { title: "solutions@talkcoms.co.uk" },
-      ],
+      footer_contacts: [{ title: "+254747039334" }, { title: "+441572376000" }],
+      footer_emails: [{ title: "solutions@talkcoms.io" }],
       footer_locations: [
         {
           title: "UNITED KINGDOM",
@@ -206,9 +219,21 @@ export default {
   },
   created() {
     window.addEventListener("scroll", this.handleScroll);
+
+    /* check users */
+    // Connect to Socket.IO server
+    this.socket = io("http://localhost:5173");
+
+    // Listen for "users" event
+    this.socket.on("users", (count) => {
+      this.activeUsers = count;
+    });
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+    if (this.socket) {
+      this.socket.disconnect();
+    }
   },
   methods: {
     handleScroll() {
@@ -218,6 +243,36 @@ export default {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
+      });
+    },
+    /* active users */
+    check_active_users() {
+      const express = require("express");
+      const http = require("http");
+      const socketIO = require("socket.io");
+
+      const app = express();
+      const server = http.createServer(app);
+      const io = socketIO(server, {
+        cors: {
+          origin: "*",
+        },
+      });
+
+      let onlineUsers = 0;
+
+      io.on("connection", (socket) => {
+        onlineUsers++;
+        io.emit("users", onlineUsers);
+
+        socket.on("disconnect", () => {
+          onlineUsers--;
+          io.emit("users", onlineUsers);
+        });
+      });
+
+      server.listen(3000, () => {
+        console.log("Socket.IO server running on http://localhost:5173");
       });
     },
   },
