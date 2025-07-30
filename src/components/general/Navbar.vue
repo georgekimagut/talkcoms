@@ -203,11 +203,11 @@
   <div
     class="nav-bar-phone w-full flex justify-center flex-wrap sticky top-0 bg-white z-[1000] border-b-1 border-[#e3e3e3]"
   >
-    <div class="w-[90%] h-fit flex py-2">
+    <div class="w-[90%] h-fit flex py-2 ml-[5%]">
       <div class="w-1/2">
         <div class="h-full flex flex-col justify-center">
           <router-link to="/"
-            ><img :src="site_logo" class="w-[40px] h-[40px] min-w-[50px]"
+            ><img :src="site_logo" class="w-[45px] h-auto"
           /></router-link>
         </div>
       </div>
