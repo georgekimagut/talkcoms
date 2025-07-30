@@ -65,11 +65,6 @@
               >FAQs</router-link
             >
           </li>
-          <li>
-            <router-link to="/case-studies" class="text-third hover:underline"
-              >Case Studies</router-link
-            >
-          </li>
         </ul>
       </div>
       <!-- end -->
