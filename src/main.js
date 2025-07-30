@@ -9,11 +9,7 @@ const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 
 /* google analytics */
-// import VueGtag from "vue-gtag";
-// // Configure GA4
-// .use(VueGtag, {
-//   config: { id: 'G-DPNLM1SX69' }  // Replace with your Measurement ID
-// }, router)
+import VueGtag from "vue-gtag-next";
 
 /* shadcn components */
 import Button from "./components/ui/button/Button.vue";
@@ -40,7 +36,16 @@ import {
 createApp(App)
   .use(pinia)
   .use(router)
-
+  .use(
+    VueGtag,
+    {
+      property: {
+        id: "G-DPNLM1SX69", // <-- your GA4 Measurement ID
+      },
+    },
+    router
+  )
+  // Configure GA4
   .component("Button", Button)
   .component("Input", Input)
   .component("Textarea", Textarea)

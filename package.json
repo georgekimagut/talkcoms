@@ -26,7 +26,7 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
     "vue": "^3.5.17",
-    "vue-gtag": "^3.5.2",
+    "vue-gtag-next": "^1.14.0",
     "vue-router": "^4.5.1",
     "vue3-lazy": "^1.0.0-alpha.1"
   },

@@ -329,9 +329,9 @@
                 class="mt-2 mb-4 list-none"
               >
                 <router-link
-                  :to="`/solution/${industry.name}`"
+                  :to="`/solution/${industry.main_title}`"
                   class="custom-default-hover"
-                  >{{ industry.name }}</router-link
+                  >{{ industry.main_title }}</router-link
                 >
               </li>
             </div>
