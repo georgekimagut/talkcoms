@@ -112,6 +112,7 @@ export default {
     this.set_starts();
     this.prepareAnimatedStats();
     this.observeStatsSection();
+    console.log("Stats: ", this.stat);
   },
   methods: {
     prepareAnimatedStats() {

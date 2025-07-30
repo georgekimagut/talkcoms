@@ -19,7 +19,7 @@
       }`"
       is_industry
     />
-
+    <!-- {{ industry_solution[0] }} -->
     <!-- advantages section -->
     <div class="w-full flex justify-center mt-10 hero-component">
       <div class="w-[90%] flex flex-wrap relative hero-holder">
@@ -44,12 +44,10 @@
           <div
             class="w-[80%] overflow-hidden transition-all duration-500 relative flex flex-col justify-center to-full"
           >
-            <p class="text-secondary text-xl uppercase">
-              Our impact in {{ id }}
-            </p>
-            <h1 class="text-5xl font-extrabold text-default sticky top-0 py-4">
-              Who we serve
-            </h1>
+            <p class="text-secondary text-xl uppercase">Who we serve</p>
+            <!-- <h1 class="text-5xl font-extrabold text-default sticky top-0 py-4">
+              
+            </h1> -->
             <div
               v-for="(who_is_served, index) in industry_solution[0].whoweserve"
               :key="index"
@@ -179,7 +177,8 @@
             </div>
           </div>
           <div class="w-full mt-10 flex">
-            <router-link :to="`/resources/${success_story}/${story.title}`"
+            <router-link
+              :to="`/resources/${success_story}/${related_story.title}`"
               ><Button
                 variant="ghost"
                 class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
@@ -385,20 +384,19 @@ export default {
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
           // const fetched_industries = dataArray;
           this.industry_solution = dataArray;
           // Get the first success_stories title
-          const stories = this.industry_solution.success_stories;
+          const stories = this.industry_solution[0].success_stories;
           if (Array.isArray(stories) && stories.length > 0) {
             this.encoded_success_title = encodeURIComponent(
               stories[0]?.title || ""
             );
           }
+          console.log("Story title: ", this.encoded_success_title);
           this.fetch_related_story();
         } else {
           console.error("Invalid industry response structure: ", responseData);
