@@ -116,11 +116,5 @@ const router = createRouter({
     return { top: 0 };
   },
 });
-/* scroll behaviour */
-
-// router.beforeEach((to, from, next) => {
-//   document.title = to.meta?.title ? `Talkcoms - ${to.meta.title}` : "Talkcoms";
-//   next();
-// });
 
 export default router;

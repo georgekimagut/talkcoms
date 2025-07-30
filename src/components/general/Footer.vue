@@ -28,6 +28,7 @@
         <div class="w-1/2 h-full flex flex-col justify-end to-full">
           <div class="w-full flex justify-end">
             <form
+              @submit.prevent=""
               class="h-[55px] w-full min-w-[350px] max-w-[500px] bg-white flex flex-nowrap"
             >
               <Input

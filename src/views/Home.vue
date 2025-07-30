@@ -278,7 +278,7 @@
               class="w-full flex"
               ><div class="w-[90%] flex flex-nowrap">
                 <div class="w-[20px]">
-                  <i class="fa-solid fa-industry text-secondary ml-2 pt-2"></i>
+                  <img src="/icons/next.png" class="mt-2 w-[30px]" />
                 </div>
 
                 <p class="ml-4 text-2xl">{{ industry?.main_title }}</p>
