@@ -14,7 +14,10 @@
         >
           <img :src="service_icon" />
           <div class="h-full flex flex-col justify-center">
-            <p class="font-bold text-secondary text-xl uppercase !text-left">
+            <p
+              class="font-bold text-secondary text-xl uppercase"
+              :class="service_icon ? '!text-left' : ''"
+            >
               {{ small_title }}
             </p>
             <!-- <SmallTitle :text="small_title" class="font-bold" /> -->
@@ -27,7 +30,10 @@
         </p>
         <div class="w-full flex flex-wrap mt-4 btn-holder">
           <!-- about us & faq -->
-          <div v-if="has_pattern" class="w-full h-[20vh] mt-6 relative">
+          <div
+            v-if="has_pattern"
+            class="w-full h-[20vh] mt-6 relative hide-img"
+          >
             <!-- center pattern -->
             <div class="w-full h-full absolute z-[15] overflow-y-visible">
               <div class="absolute w-fit h-full flex flex-col">
