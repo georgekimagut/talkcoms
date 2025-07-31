@@ -24,7 +24,7 @@
     <div class="w-full flex justify-center mt-10 hero-component">
       <div class="w-[90%] flex flex-wrap relative hero-holder">
         <!-- Sticky sidebar -->
-        <div class="w-[40%] sticky top-[15vh] self-start to-full">
+        <div class="w-[40%] sticky top-[15vh] self-start to-full hide-img">
           <div
             class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit hide-im"
           >

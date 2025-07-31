@@ -16,6 +16,7 @@
       :hero_description="testimonial.description"
       hero_image="/static/testimonials.jpg"
       hero_small_image="/static/testimonial-small-2.svg"
+      hero_image_alt="Testimonials - We believe that the true measure of our success lies in the satisfaction and stories of the people we serve "
       is_testimonial
     />
     <!-- end of hero -->

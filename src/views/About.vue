@@ -14,6 +14,7 @@
       hero_description="Talkcoms is a Leading IT Solutions Provider Incorporated in the UK in 2016."
       hero_image="/static/pic-3.png"
       hero_small_image="/static/about-us.png"
+      hero_image_alt="About us - Talkcoms is a Leading IT Solutions Provider Incorporated in the UK in 2016. "
       has_pattern
     />
     <!-- main about us -->

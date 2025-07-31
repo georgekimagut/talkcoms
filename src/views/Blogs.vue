@@ -18,6 +18,7 @@
       :blog_date="format_date(blog.createdAt)"
       :read_more_link="`/resources/${is_blog}/${blog?.slug}`"
       :hero_image="`${image_url}/${blog.hero_media?.url}`"
+      :hero_image_alt="blog?.Title"
       is_blog
     />
     <!-- blog panel -->
@@ -68,7 +69,8 @@
               >
                 <CardHeader class="h-[40vh] p-0">
                   <img
-                    :src="`${image_url}/${blog.hero_media.url}`"
+                    :src="`${image_url}/${blog?.hero_media.url}`"
+                    :alt="blog?.Title"
                     class="min-h-full h-full min-w-full w-auto max-w-none rounded-md"
                   />
                 </CardHeader>
