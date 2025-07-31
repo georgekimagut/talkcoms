@@ -240,17 +240,15 @@
           <div class="w-[90%] flex flex-wrap">
             <!-- <SmallTitle text="INTERGRATIONS" /> -->
             <p class="text-secondary text-xl">INTERGRATIONS</p>
-            <h1 class="text-white font-extrabold text-4lx">
-              Customize your customer experience with custom intergrations
+            <h1 class="text-default font-extrabold text-4xl">
+              Seamless Integrations to Power Your Communications
             </h1>
-            <!-- <BigTitle
-              title_class="mt-10"
-              text="Customize your customer experience with custom intergrations"
-            /> -->
+
             <p class="mt-10">
-              Create a unique customer experience, customized to your contact
-              center operations. Our tools range from fully integrated partners
-              like CRMs to digital channels and custom workflow builders.
+              Talkcoms PBX Systems are designed to integrate smoothly with your
+              existing business tools—so you can boost efficiency, reduce silos,
+              and enable smarter workflows without overhauling your
+              entire tech stack.
             </p>
           </div>
 
@@ -283,7 +281,7 @@
         <div class="w-[60%] to-full">
           <div class="w-full flex flex-wrap to-cards">
             <div
-              v-for="(intergration, index) in intergrations"
+              v-for="(intergration, index) in single_service.intergration"
               :key="index"
               class="shift-hover w-[48%] mr-[2%] p-4 rounded-xl mb-4 card"
             >
@@ -305,10 +303,10 @@
               </div>
               <div class="bottom-part">
                 <h1 class="font-semibold text-xl mt-4 text-default">
-                  {{ intergration.feature_name }}
+                  {{ intergration.title }}
                 </h1>
                 <p class="mt-4">
-                  {{ intergration.feature_description }}
+                  {{ intergration.short_description }}
                 </p>
               </div>
             </div>
