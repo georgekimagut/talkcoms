@@ -151,21 +151,6 @@
                       >*</span
                     >
                   </label>
-
-                  <!-- <Input
-                    type="text"
-                    placeholder="Company Phone"
-                    class="text-sm"
-                    :class="[
-                      type === 'contact-us' ? 'text-white' : '',
-                      phone_is_number
-                        ? 'border border-[#007cba]'
-                        : 'border border-red-500',
-                    ]"
-                    required
-                    v-model="phone"
-                  /> -->
-
                   <Input
                     type="text"
                     placeholder="Company Phone"

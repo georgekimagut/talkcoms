@@ -229,7 +229,7 @@
                 :src="`${image_url}/${
                   item?.image?.formats?.large?.url || item.image?.url
                 }`"
-                alt="Talkcoms limited hero image"
+                :alt="item?.projectDescription[0]?.children[0]?.text"
                 @load="onImageLoad"
                 class="w-full h-auto max-h-none object-cover transition-opacity duration-500"
               />
@@ -278,7 +278,11 @@
               class="w-full flex"
               ><div class="w-[90%] flex flex-nowrap">
                 <div class="w-[20px]">
-                  <img src="/icons/next.png" class="mt-2 w-[30px]" />
+                  <img
+                    src="/icons/next.png"
+                    class="mt-2 w-[30px]"
+                    alt="Industry icon"
+                  />
                 </div>
 
                 <p class="ml-4 text-2xl">{{ industry?.main_title }}</p>
@@ -334,7 +338,7 @@
                 :src="`${image_url}/${
                   blog.hero_media?.formats?.large?.url || blog.hero_media?.url
                 }`"
-                alt="Talkcoms limited hero image"
+                :alt="blog.Title"
                 @load="onImageLoad"
                 class="min-h-full h-full min-w-full w-auto max-w-none rounded-md object-cover transition-opacity duration-500"
               />

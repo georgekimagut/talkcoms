@@ -28,13 +28,22 @@
           <div
             class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit hide-im"
           >
+            <!-- Shimmer Placeholder -->
+            <div
+              v-if="!imageLoaded"
+              class="absolute inset-0 bg-gray-200 opacity-50 animate-shimmer"
+            ></div>
+
+            <!-- Actual Image -->
             <img
+              v-show="imageLoaded"
               :src="`${image_url}/${
                 industry_solution[0]?.image?.formats?.large?.url ||
                 industry_solution[0].image?.url
               }`"
               :alt="industry_solution[0]?.secondary_title"
-              class="w-full h-full object-cover rounded-xl"
+              @load="onImageLoad"
+              class="w-full h-full object-cover rounded-xl service-pic transition-opacity duration-500"
             />
           </div>
         </div>
@@ -112,6 +121,7 @@
           ></div>
           <img
             src="/static/faqs-banner-big.png"
+            :alt="industry_solution[0]?.secondary_title"
             class="object-cover absolute top-[10vh] left-[10%] w-[80%] rounded-lg h-[40vh]"
           />
         </div>
@@ -239,6 +249,7 @@ export default {
       universal_industries: [],
       image_url: baseUrl,
       encoded_success_title: "",
+      imageLoaded: false,
     };
   },
   async created() {
@@ -329,6 +340,10 @@ export default {
       } catch (error) {
         console.error("Error fetching services:", error);
       }
+    },
+    // load image animation
+    onImageLoad() {
+      this.imageLoaded = true;
     },
   },
 };

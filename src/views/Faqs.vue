@@ -13,6 +13,7 @@
       hero_description="Have a question in mind? You're not alone. Browse through the most common questions our users ask — and find the answers you need in seconds"
       hero_image="/static/faqs-banner-big.png"
       hero_small_image="/static/faqs-banner.png"
+      hero_image_alt="Got Questions? We’ve Got Answers"
       has_pattern
     />
 

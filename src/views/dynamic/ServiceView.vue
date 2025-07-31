@@ -120,12 +120,17 @@
             "
           >
             <CardHeader class="h-[30vh] p-0 overflow-hidden">
-              <img :src="item.pic" class="w-full h-auto max-h-none" />
+              <img
+                :src="item.pic"
+                :alt="item.description"
+                class="w-full h-auto max-h-none"
+              />
             </CardHeader>
             <div class="w-full flex flex-wrap justify-center mt-6">
               <div class="w-[60%] flex justify-center">
                 <img
                   :src="item.icon"
+                  :alt="item.description"
                   class="h-[70px] w-auto max-w-none object-cover"
                 />
               </div>
@@ -147,14 +152,25 @@
         <!-- <ScrollPattern :bg_color="random_bg" /> -->
         <!-- Sticky sidebar -->
         <div class="w-[45%] sticky top-[15vh] self-start to-full">
-          <div class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit g">
+          <div
+            class="w-full overflow-hidden rounded-xl h-[80vh] to-h-fit g relative"
+          >
+            <!-- Shimmer Placeholder -->
+            <div
+              v-if="!imageLoaded"
+              class="absolute inset-0 bg-gray-200 opacity-50 animate-shimmer"
+            ></div>
+
+            <!-- Actual Image -->
             <img
+              v-show="imageLoaded"
               :src="`${image_url}/${
                 single_service?.feature_section_image?.formats?.large?.url ||
                 single_service?.feature_section_image?.url
               }`"
               :alt="`${this.id} - Service section image`"
-              class="w-full h-full object-cover rounded-xl service-pic"
+              @load="onImageLoad"
+              class="w-full h-full object-cover rounded-xl service-pic transition-opacity duration-500"
             />
           </div>
         </div>
@@ -391,13 +407,22 @@
             </div>
 
             <div class="h-full w-full p-8 absolute z-20 to-h-fit">
+              <!-- Shimmer Placeholder -->
+              <div
+                v-if="!imageLoaded"
+                class="absolute inset-0 bg-gray-200 opacity-50 animate-shimmer"
+              ></div>
+
+              <!-- Actual Image -->
               <img
+                v-show="imageLoaded"
                 :src="`${image_url}/${
                   single_service.benefits_section_image?.formats?.large?.url ||
                   single_service.benefits_section_image?.url
                 }`"
                 :alt="`${this.id} - Benefits section image`"
-                class="w-full h-full object-cover rounded-xl imageReveal service-pic"
+                @load="onImageLoad"
+                class="w-full h-full object-cover rounded-xl service-pic transition-opacity duration-500"
               />
             </div>
           </div>
@@ -419,6 +444,7 @@
               single_service?.formats?.large?.url ||
               single_service.hero_media?.url
             }`"
+            :alt="`${this.id} - Call to Action`"
             class="object-cover absolute top-[10vh] left-[10%] w-[80%] rounded-lg h-[40vh]"
           />
         </div>
@@ -631,28 +657,7 @@ export default {
       universal_industries: [],
       single_service: [],
       encoded_success_title: "",
-
-      portfolio: [
-        {
-          name: "Kipkenda ",
-          pic: "/static/kipkenda.webp",
-          description: "Top tier, full service kenyan law firm",
-          icon: "/icons/partners/9.png",
-        },
-        {
-          name: "Chunic LTD ",
-          pic: "/static/chunic.jpg",
-          description:
-            "Logistics company specializing in international Relocation, Sourcing & Procurement and Shipping",
-          icon: "/icons/partners/chunic-white.png",
-        },
-        {
-          name: "TKDM",
-          pic: "/static/tkdm.webp",
-          description: "News & Media Company",
-          icon: "/icons/partners/tkdm-white.png",
-        },
-      ],
+      imageLoaded: false,
       image_url: baseUrl,
     };
   },
@@ -774,6 +779,10 @@ export default {
       const random_color =
         text_colors[Math.floor(Math.random() * text_colors.length)];
       this.random_bg = random_color.color_name;
+    },
+    // load image animation
+    onImageLoad() {
+      this.imageLoaded = true;
     },
   },
 };
