@@ -13,18 +13,19 @@
           :class="service_icon ? 'gap-4' : ''"
         >
           <img :src="service_icon" />
-          <div class="h-full flex flex-col justify-center">
+          <div class="h-full w-full flex flex-col justify-center">
             <p
               class="font-bold text-secondary text-xl uppercase"
               :class="service_icon ? '!text-left' : ''"
             >
               {{ small_title }}
             </p>
-            <!-- <SmallTitle :text="small_title" class="font-bold" /> -->
           </div>
         </div>
 
-        <BigTitle :text="big_title" title_class="mt-4 w-[88%]" />
+        <h1 class="text-4xl font-extrabold mt-4 w-[88%]">
+          {{ big_title }}
+        </h1>
         <p class="w-3/4 mt-6" :class="has_pattern ? 'text-secondary' : ''">
           {{ hero_description }}
         </p>
@@ -259,15 +260,11 @@
 </template>
 <script>
 import HeroPattern from "../patterns/HeroPattern.vue";
-import BigTitle from "../text/BigTitle.vue";
-import SmallTitle from "../text/SmallTitle.vue";
 
 export default {
   name: "HeroSection",
   components: {
     HeroPattern,
-    SmallTitle,
-    BigTitle,
   },
   props: {
     small_title: String,
