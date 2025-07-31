@@ -38,7 +38,7 @@
           >
             <form
               @submit.prevent="enquire"
-              class="flex flex-wrap inner-contact-form"
+              class="flex flex-wrap inner-contact-form to-full"
               :class="
                 type == 'contact-us'
                   ? 'w-full'
@@ -56,7 +56,9 @@
                     type="text"
                     placeholder="First Name"
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     required
                     v-model="f_name"
                   />
@@ -64,14 +66,18 @@
                 <div class="w-1/2 p-2 to-full-form">
                   <label
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     >Last Name</label
                   >
                   <Input
                     type="text"
                     placeholder="Last Name"
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     required
                     v-model="l_name"
                   />
@@ -79,14 +85,18 @@
                 <div class="w-1/2 p-2 to-full-form">
                   <label
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     >Email</label
                   >
                   <Input
                     type="email"
                     placeholder="Enter Your Email"
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     required
                     v-model="email"
                   />
@@ -94,14 +104,18 @@
                 <div class="w-1/2 p-2 to-full-form">
                   <label
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     >Position/Role</label
                   >
                   <Input
                     type="text"
                     placeholder="Enter Your Role"
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     required
                     v-model="role"
                   />
@@ -109,14 +123,18 @@
                 <div class="w-1/2 p-2 to-full-form">
                   <label
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     >Company</label
                   >
                   <Input
                     type="text"
                     placeholder="Company Name"
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     required
                     v-model="company_name"
                   />
@@ -124,14 +142,46 @@
                 <div class="w-1/2 p-2 to-full-form">
                   <label
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
-                    >Company Phone</label
+                    :class="[type === 'contact-us' ? 'text-white' : '']"
                   >
+                    {{ phone_text }}
+                    <span
+                      v-if="phone_is_number === false"
+                      class="text-red-500 font-bold"
+                      >*</span
+                    >
+                  </label>
+
+                  <!-- <Input
+                    type="text"
+                    placeholder="Company Phone"
+                    class="text-sm"
+                    :class="[
+                      type === 'contact-us' ? 'text-white' : '',
+                      phone_is_number
+                        ? 'border border-[#007cba]'
+                        : 'border border-red-500',
+                    ]"
+                    required
+                    v-model="phone"
+                  /> -->
+
                   <Input
                     type="text"
                     placeholder="Company Phone"
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="[
+                      'border',
+                      type === 'contact-us' ? 'text-white' : '',
+                      type === 'contact-us' && phone_is_number
+                        ? ' border-white'
+                        : '',
+                      phone_is_number
+                        ? type !== 'contact-us'
+                          ? 'border-[#007cba]'
+                          : ''
+                        : 'border-red-500',
+                    ]"
                     required
                     v-model="phone"
                   />
@@ -143,19 +193,35 @@
                   <div class="w-1/2 p-2 to-full-form">
                     <label
                       class="text-sm"
-                      :class="type == 'contact-us' ? 'text-white' : ''"
-                      >Company Size</label
+                      :class="[type === 'contact-us' ? 'text-white' : '']"
                     >
+                      {{ company_text }}
+                      <span
+                        v-if="size_is_number === false"
+                        class="text-red-500 font-bold"
+                        >*</span
+                      >
+                    </label>
                     <Input
                       type="text"
                       placeholder="Company Size"
                       class="text-sm"
-                      :class="type == 'contact-us' ? 'text-white' : ''"
+                      :class="[
+                        'border',
+                        type === 'contact-us' && size_is_number
+                          ? 'text-white border-white'
+                          : '',
+                        size_is_number
+                          ? type !== 'contact-us'
+                            ? 'border-[#007cba]'
+                            : ''
+                          : 'border-red-500',
+                      ]"
                       required
                       v-model="company_size"
                     />
                   </div>
-                  <div class="w/12 p-2 to-full-form">
+                  <div class="w-1/2 p-2 to-full-form">
                     <label
                       class="text-sm"
                       :class="type == 'contact-us' ? 'text-white' : ''"
@@ -163,7 +229,7 @@
                     >
                     <input
                       type="datetime-local"
-                      class="w-full border py-1 px-2 rounded-sm mt-2 bg-transparent"
+                      class="w-full border py-1 px-2 rounded-sm mt-2 bg-transparent border-[#007cba]"
                       v-model="date_time"
                     />
                   </div>
@@ -174,8 +240,10 @@
                     :class="type == 'contact-us' ? 'text-white' : ''"
                     >Subject</label
                   >
-                  <Select v-model="selected">
-                    <SelectTrigger class="w-full mt-2 text-white">
+                  <Select v-model="selected" class="border-[#007cba]">
+                    <SelectTrigger
+                      class="w-full mt-2 text-black border-[#007cba]"
+                    >
                       <SelectValue placeholder="Select a service" />
                     </SelectTrigger>
                     <SelectContent>
@@ -196,12 +264,16 @@
                 <div class="w-full p-2">
                   <label
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     >Message</label
                   >
                   <Textarea
                     class="text-sm"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     placeholder="Type your message"
                     required
                     v-model="message"
@@ -211,11 +283,15 @@
                   <input type="checkbox" class="w-fit" required />
                   <label
                     class="text-sm ml-2"
-                    :class="type == 'contact-us' ? 'text-white' : ''"
+                    :class="
+                      type == 'contact-us' ? 'text-white' : 'border-[#007cba]'
+                    "
                     >Agree to
                     <span class="underline"
-                      ><router-link to="/legal/Terms & Conditions"
-                        >Terms & Conditions</router-link
+                      ><a
+                        href="https://app.termly.io/policy-viewer/policy.html?policyUUID=ea802309-46cd-4afa-8b87-4525ab3ad7a1"
+                        target="_blank"
+                        >Terms & Conditions</a
                       ></span
                     ></label
                   >
@@ -251,14 +327,6 @@
       class="w-full flex justify-center mt-16 border py-8 relative bg-fourth rounded-xl border-[#007cba]"
     >
       <div class="w-[90%] flex rounded-xl overflow-hidden contact-panel">
-        <!-- <div
-            v-for="(office, index) in offices"
-            :key="index"
-            class="w-[33%] p-4 to-full"
-          >
-            <h1 class="text-2xl font-bold text-secondary">{{ office.name }}</h1>
-            <p class="mt-8 text-xl">{{ office.location }}</p>
-          </div> -->
         <Card
           class="w-[32%] m-[1.5%] card rounded-xl shadow-none bg-transparent border-none card"
         >
@@ -372,11 +440,12 @@ export default {
       universal_services: [],
       universal_products: [],
       universal_industries: [],
-      subjects: [
-        { value: "1", content: "Option one" },
-        { value: "2", content: "Option two" },
-        { value: "3", content: "Option three" },
-      ],
+      /* validation */
+      phone_is_number: true,
+      size_is_number: true,
+      phone_text: "Company Phone",
+      company_text: "Company Size",
+      /* contacts */
       phones: [{ title: "+254747039334" }, { title: "+441572376000" }],
       emails: [{ email: "solutions@talkcoms.io" }],
       offices: [
@@ -441,7 +510,23 @@ export default {
       ) {
         return;
       }
+
+      // Check if phone is an integer
+      if (!/^\d+$/.test(this.phone)) {
+        this.phone_is_number = false;
+        this.phone_text = "Input a valid number";
+        return;
+      }
+
+      // Check if company size is provided and is an integer (only if applicable)
+      if (this.selected !== "" && !/^\d+$/.test(this.company_size)) {
+        this.size_is_number = false;
+        this.company_text = "Input a valid number";
+        return;
+      }
+
       this.is_submitting = true;
+
       if (this.selected == "") {
         this.enquiry_form = {
           first_name: this.f_name,
@@ -466,7 +551,6 @@ export default {
           positionincompany: this.role,
           appoitment_date: this.date_time,
         };
-
         this.sending_endpoint = enquiry_url;
       }
 
@@ -482,6 +566,7 @@ export default {
         const data = await res.json();
         console.log("sent:", data);
         this.button_message = "Sent. Thank you!";
+
         setTimeout(() => {
           this.button_message = "Send";
           this.f_name = "";
@@ -493,14 +578,19 @@ export default {
           this.selected = "";
           this.date_time = "";
           this.message = "";
+          this.company_size = "";
+          (this.phone_is_number = true),
+            (this.size_is_number = true),
+            (this.company_text = "Company Size"),
+            (this.phone_text = "Company Phone");
         }, 4000);
       } catch (err) {
         console.error("Error:", err);
-        /* submission failed */
       } finally {
         this.is_submitting = false;
       }
     },
+
     //get services
   },
 };

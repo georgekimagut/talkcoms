@@ -40,7 +40,7 @@
         <div class="w-full">
           <h1
             v-if="service_cta"
-            class="text-5xl font-extrabold mt-4 p-2 text-center text-secondary"
+            class="text-5xl font-extrabold mt-4 p-2 text-center"
           >
             {{ service_cta }}
           </h1>
@@ -50,7 +50,10 @@
             Business
             <span class="text-secondary ml-2 mr-2">With Tech?</span>
           </h1>
-          <p v-if="service_cta_description" class="mt-2 text-center text-xl">
+          <p
+            v-if="service_cta_description"
+            class="mt-2 text-center text-xl text-secondary"
+          >
             {{ service_cta_description }}
           </p>
           <p v-else class="mt-2 text-center text-xl">

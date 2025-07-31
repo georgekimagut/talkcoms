@@ -470,9 +470,9 @@
             </div>
           </div>
         </div>
-        <div class="w-1/2 to-full">
+        <div class="w-1/2 to-full p-2">
           <div class="w-[90%] mt-6">
-            <h1 class="text-5xl font-bold mt-4 text-default">
+            <h1 class="text-4xl font-bold mt-4 text-default w-full">
               {{ related_story?.title }}
             </h1>
             <p class="mt-4 text-xl">{{ related_story.companyName }}</p>

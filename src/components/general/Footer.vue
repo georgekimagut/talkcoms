@@ -110,7 +110,7 @@
             <p v-for="(legal, index) in footer_legal" :key="index" class="mb-2">
               <a
                 :href="legal.link"
-                target="_blank"
+                :target="legal.new_tab ? '_blank' : ''"
                 class="hover:text-[#8dc63f]"
               >
                 {{ legal.title }}
@@ -195,16 +195,19 @@ export default {
         {
           title: "Cookie Policy",
           link: "https://app.termly.io/policy-viewer/policy.html?policyUUID=ea802309-46cd-4afa-8b87-4525ab3ad7a1",
+          new_tab: true,
         },
         {
           title: "Terms & Conditions",
           link: "https://app.termly.io/policy-viewer/policy.html?policyUUID=ea802309-46cd-4afa-8b87-4525ab3ad7a1",
+          new_tab: true,
         },
         {
           title: "Privacy Policy",
           link: "https://app.termly.io/policy-viewer/policy.html?policyUUID=ea802309-46cd-4afa-8b87-4525ab3ad7a1",
+          new_tab: true,
         },
-        { title: "Sitemap", link: "/sitemap" },
+        { title: "Sitemap", link: "/sitemap", new_tab: false },
       ],
       footer_contacts: [{ title: "+254747039334" }, { title: "+441572376000" }],
       footer_emails: [{ title: "solutions@talkcoms.io" }],
