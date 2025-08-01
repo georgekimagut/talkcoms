@@ -47,50 +47,60 @@
                 </li>
               </ul>
             </div>
-          </div>
-          <!-- top stories -->
-          <div class="w-full p-4 border rounded-md shadow-sm bg-body mt-10">
-            <div class="w-full pb-4 border-b border-[#82bc00]">
-              <p class="font-bold text-default cursor-pointer text-xl">
-                Top stories
-              </p>
-            </div>
-            <ul class="content-body px-4 mt-4 border-b pb-10">
-              <li
-                v-for="(blog, index) in blogs"
-                :key="index"
-                class="list-disc hover:ml-2 duration-300 ease-in-out py-2 border-b"
-              >
-                <router-link
-                  :to="`/resources/${type}/${
-                    type === 'blog'
-                      ? blog?.attributes?.slug || blog?.slug
-                      : encodeURIComponent(
-                          blog?.attributes?.title || blog?.title
-                        )
-                  }`"
-                  class="custom-default-hover"
-                  active-class="text-third"
+            <!-- top stories -->
+            <div class="w-full p-4 pt-10">
+              <div class="w-full pb-4 border-b border-[#82bc00]">
+                <p
+                  @click="related_story_in_view = !related_story_in_view"
+                  class="font-bold text-default cursor-pointer text-xl"
                 >
-                  {{
-                    blog?.attributes?.Title ||
-                    blog?.Title ||
-                    blog?.title ||
-                    blog?.attributes?.title
-                  }}
-                </router-link>
-                <div class="w-full mt-2">
-                  <span
-                    class="mt-2 w-full text-sm text-default text-semibold"
-                    >{{
-                      format_date(
-                        blog?.attributes?.createdAt || blog?.createdAt
-                      )
-                    }}</span
+                  Top stories
+                  <i
+                    class="fa-solid"
+                    :class="toggle_tbc ? 'fa-angle-up' : 'fa-angle-down'"
+                  ></i>
+                </p>
+              </div>
+              <ul
+                v-if="related_story_in_view"
+                class="content-body px-4 mt-4 border-b pb-10"
+              >
+                <li
+                  v-for="(blog, index) in blogs"
+                  :key="index"
+                  class="list-disc hover:ml-2 duration-300 ease-in-out py-2 border-b"
+                >
+                  <router-link
+                    :to="`/resources/${type}/${
+                      type === 'blog'
+                        ? blog?.attributes?.slug || blog?.slug
+                        : encodeURIComponent(
+                            blog?.attributes?.title || blog?.title
+                          )
+                    }`"
+                    class="custom-default-hover"
+                    active-class="text-third"
                   >
-                </div>
-              </li>
-            </ul>
+                    {{
+                      blog?.attributes?.Title ||
+                      blog?.Title ||
+                      blog?.title ||
+                      blog?.attributes?.title
+                    }}
+                  </router-link>
+                  <div class="w-full mt-2">
+                    <span
+                      class="mt-2 w-full text-sm text-default text-semibold"
+                      >{{
+                        format_date(
+                          blog?.attributes?.createdAt || blog?.createdAt
+                        )
+                      }}</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -262,6 +272,7 @@ export default {
       universal_products: [],
       universal_industries: [],
       success_body: [],
+      related_story_in_view: true,
     };
   },
   async created() {
