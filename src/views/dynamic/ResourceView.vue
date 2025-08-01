@@ -12,13 +12,13 @@
       <div class="w-[90%] flex flex-wrap hero-holder">
         <!-- Sticky sidebar -->
         <div class="w-[30%] sticky top-[15vh] self-start to-full tbc !h-fit">
-          <div class="w-full pt-4 pb-4 border rounded-md shadow-sm bg-white">
+          <div class="w-full pt-4 pb-4 border rounded-md shadow-sm bg-body">
             <div
               class="w-full overflow-y-scroll hide-scrollbar p-4 border-1 border-[#e3e3e3]"
             >
               <div class="w-full pb-4 border-b border-[#82bc00]">
                 <p
-                  class="font-semibold cursor-pointer"
+                  class="font-bold text-default cursor-pointer text-xl"
                   @click="toggle_tbc = !toggle_tbc"
                 >
                   Table of Contents
@@ -48,6 +48,50 @@
               </ul>
             </div>
           </div>
+          <!-- top stories -->
+          <div class="w-full p-4 border rounded-md shadow-sm bg-body mt-10">
+            <div class="w-full pb-4 border-b border-[#82bc00]">
+              <p class="font-bold text-default cursor-pointer text-xl">
+                Top stories
+              </p>
+            </div>
+            <ul class="content-body px-4 mt-4 border-b pb-10">
+              <li
+                v-for="(blog, index) in blogs"
+                :key="index"
+                class="list-disc hover:ml-2 duration-300 ease-in-out py-2 border-b"
+              >
+                <router-link
+                  :to="`/resources/${type}/${
+                    type === 'blog'
+                      ? blog?.attributes?.slug || blog?.slug
+                      : encodeURIComponent(
+                          blog?.attributes?.title || blog?.title
+                        )
+                  }`"
+                  class="custom-default-hover"
+                  active-class="text-third"
+                >
+                  {{
+                    blog?.attributes?.Title ||
+                    blog?.Title ||
+                    blog?.title ||
+                    blog?.attributes?.title
+                  }}
+                </router-link>
+                <div class="w-full mt-2">
+                  <span
+                    class="mt-2 w-full text-sm text-default text-semibold"
+                    >{{
+                      format_date(
+                        blog?.attributes?.createdAt || blog?.createdAt
+                      )
+                    }}</span
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <!-- Scrollable content -->
@@ -55,32 +99,57 @@
           <div class="w-[95%] ml-[5%] mt-10 space-y-20 w-no-w">
             <!-- resource details -->
             <div class="w-full">
-              <h1 v-if="resource?.Title" class="font-extrabold mt-4 text-3xl">
+              <h1
+                v-if="resource?.attributes?.Title"
+                class="font-extrabold mt-4 text-3xl"
+              >
+                {{ resource?.attributes?.Title }}
+              </h1>
+              <h1
+                v-else-if="resource?.Title"
+                class="font-extrabold mt-4 text-3xl"
+              >
                 {{ resource?.Title }}
               </h1>
               <!-- success story -->
-              <h1 v-if="success_story" class="font-extrabold mt-4 text-3xl">
+              <h1
+                v-if="success_story?.attributes?.title"
+                class="font-extrabold mt-4 text-3xl"
+              >
+                {{ success_story?.attributes?.title }}
+              </h1>
+              <h1
+                v-else-if="success_story?.title"
+                class="font-extrabold mt-4 text-3xl"
+              >
                 {{ success_story?.title }}
               </h1>
-              <!-- <p class="w-full mt-6">
-                {{ resource.short_description ?? resource.description ?? "" }}
-              </p> -->
 
               <!-- author -->
               <div v-if="resource" class="w-full flex">
                 <div class="w-1/2">
                   <p class="w-full text-secondary mt-4">
                     <span v-if="type === 'blog'"
-                      >By: {{ resource.author }} ,
-                      {{ format_date(resource.createdAt) }}</span
+                      >By:
+                      {{ resource?.attributes?.author || resource?.author }} ,
+                      {{
+                        format_date(
+                          resource?.attributes?.createdAt || resource?.createdAt
+                        )
+                      }}</span
                     >
-                    <span v-else class="font-bold">{{ resource.client }}</span>
+                    <span v-else class="font-bold">{{
+                      resource?.attributes?.client || resource?.client
+                    }}</span>
                   </p>
                 </div>
                 <div class="w-1/2 flex justify-end">
                   <p class="w-full text-end mt-4">
                     <span v-if="type === 'blog'">
-                      {{ resource.read_time }} mins</span
+                      {{
+                        resource?.attributes?.read_time || resource?.read_time
+                      }}
+                      mins</span
                     >
                   </p>
                 </div>
@@ -89,23 +158,31 @@
             <!-- image -->
             <div class="w-full h-auto overflow-hidden mt-[-8vh]">
               <img
-                v-if="resource"
+                v-if="resource && (resource.attributes || resource)"
                 :src="
-                  !resource.hero_media.url
-                    ? resource.pic
-                    : `${resource_image_url}/${
-                        resource.hero_media?.formats?.large?.url ||
-                        resource.hero_media?.url
-                      }`
+                  resource?.attributes?.hero_media?.data?.attributes?.url
+                    ? `${resource_image_url}/${resource.attributes.hero_media.data.attributes.url}`
+                    : resource?.hero_media?.url
+                    ? `${resource_image_url}/${resource.hero_media.url}`
+                    : resource?.pic
                 "
-                class="w-full h-auto object-cover"
+                class="w-full h-auto object-cover rounded-xl"
               />
               <!-- success story -->
               <img
-                v-if="success_story"
-                :src="`${image_url}/${success_story?.image?.url}`"
-                :alt="`${success_story?.description[0]?.children[0]?.text}`"
-                class="w-full h-auto object-cover"
+                v-if="
+                  success_story && (success_story.attributes || success_story)
+                "
+                :src="`${image_url}/${
+                  success_story?.attributes?.image?.data?.attributes?.url ||
+                  success_story?.image?.url
+                }`"
+                :alt="`${
+                  success_story?.attributes?.description?.[0]?.children?.[0]
+                    ?.text ||
+                  success_story?.description?.[0]?.children?.[0]?.text
+                }`"
+                class="w-full h-auto object-cover rounded-xl"
               />
             </div>
 
@@ -115,41 +192,23 @@
               ref="content_body"
               v-html="
                 sanitized_resource
-                  ? sanitized_resource || sanitized_resource
-                  : resource.content_body
+                  ? sanitized_resource
+                  : resource?.attributes?.content_body || resource?.content_body
               "
               class="w-full mt-8 block"
             ></div>
             <!-- success story -->
             <div v-if="success_story" ref="content_body" class="w-full">
-              <div v-for="content in success_body" class="w-full">
-                <div v-for="inner in content" v-html="inner.text"></div>
-              </div>
-            </div>
-
-            <!-- review -->
-            <div class="w-full mt-20 flex justify-center flex-wrap">
-              <p class="text-lg">Was this helpful?</p>
-              <div class="w-full flex justify-center gap-4 mt-8">
-                <Button
-                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
-                >
-                  <span class="relative z-10">Yes. Thank you. </span>
-                  <span
-                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-                  ></span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
-                >
-                  <span class="relative z-10 hover:text-[#131f6b]"
-                    >Not Really
-                  </span>
-                  <span
-                    class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-                  ></span>
-                </Button>
+              <div
+                v-for="(content, index) in success_body"
+                :key="index"
+                class="w-full"
+              >
+                <div
+                  v-for="(inner, innerIndex) in content"
+                  :key="innerIndex"
+                  v-html="inner.text"
+                ></div>
               </div>
             </div>
           </div>
@@ -158,7 +217,7 @@
     </div>
     <!-- end -->
     <!-- footer  -->
-    <Cta class="mt-20" />
+    <Cta class="mt-32 bg-fourth border border-[#9ecce4] rounded-lg" />
     <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>
@@ -181,7 +240,6 @@ export default {
     Navbar,
     Spinner,
     Footer,
-    // SquareButton,
     Cta,
   },
 
@@ -191,14 +249,13 @@ export default {
       has_no_hero: false,
       toggle_tbc: true,
       is_blog: "blog",
-      resource: "",
-      success_story: "",
+      resource: null,
+      success_story: null,
       sanitized_resource: "",
       resource_image_url: baseUrl,
       blogs: [],
       table_of_contents: [],
       image_url: baseUrl,
-      /* resource carousel */
       current_resource_slide: 0,
       total_resource_slides: 2,
       universal_services: [],
@@ -221,22 +278,51 @@ export default {
     ) {
       this.fetch_service_names();
     }
+
     try {
       await this.fetch_resource();
+      await this.fetch_blogs();
     } catch (error) {
       console.error("Loading failed:", error);
     } finally {
       this.page_is_loading = false;
       this.$nextTick(() => {
-        setTimeout(() => this.generate_table_of_contents(), 200);
+        this.generate_table_of_contents();
       });
     }
+
+    this.$watch(
+      () => this.$route.params.id,
+      async (newId, oldId) => {
+        if (newId !== oldId) {
+          document.title = `Talkcoms | ${newId}`;
+          this.page_is_loading = true;
+          this.universal_services = universal_content().services;
+          this.universal_products = universal_content().products;
+          this.universal_industries = universal_content().industries;
+
+          try {
+            await this.fetch_resource();
+            await this.fetch_blogs();
+          } catch (error) {
+            console.error("Loading failed:", error);
+          } finally {
+            this.page_is_loading = false;
+            this.$nextTick(() => {
+              this.generate_table_of_contents();
+            });
+          }
+        }
+      }
+    );
   },
+
   methods: {
-    //create table of contents
     generate_table_of_contents() {
-      const headings = this.$refs.content_body.querySelectorAll("h1, h2, h3");
+      if (!this.$refs.content_body) return;
+
       this.table_of_contents = [];
+      const headings = this.$refs.content_body.querySelectorAll("h1, h2, h3");
 
       headings.forEach((heading, index) => {
         if (!heading.id) heading.id = `heading-${index}`;
@@ -246,13 +332,11 @@ export default {
           level: heading.tagName,
         });
       });
-      // console.log(this.table_of_contents);
     },
 
     async fetch_resource() {
       const encoded_title = encodeURIComponent(this.id);
       try {
-        //check the type of service before retrieval
         if (this.type === "blog") {
           const response = await fetch(
             `${baseUrl}/api/blog-posts?filters[slug][$eq]=${encoded_title}&populate=*`
@@ -270,7 +354,11 @@ export default {
               : response_data.data;
 
             this.resource = data;
-            let markdown = this.resource?.articles_section || "";
+            let markdown =
+              this.resource?.attributes?.articles_section ||
+              this.resource?.articles_section ||
+              "";
+
             marked.setOptions({
               headerIds: true,
               headerPrefix: "",
@@ -299,11 +387,18 @@ export default {
               : response_data.data;
 
             this.success_story = data;
-            this.success_story?.description.forEach((description) => {
-              this.success_body.push(description?.children);
-            });
+            this.success_body = [];
 
-            console.log("Success body: ", this.success_body);
+            const description =
+              this.success_story?.attributes?.description ||
+              this.success_story?.description ||
+              [];
+
+            description.forEach((desc) => {
+              if (desc?.children) {
+                this.success_body.push(desc.children);
+              }
+            });
           } else {
             throw new Error("No data found in response");
           }
@@ -312,7 +407,7 @@ export default {
         console.log(error);
       }
     },
-    /* fetch service names */
+
     async fetch_service_names() {
       try {
         const response = await fetch(
@@ -320,34 +415,72 @@ export default {
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
           const fetched_services = dataArray;
-          /* store service universally */
+
+          this.universal_services = [];
+          this.universal_products = [];
+
           fetched_services.forEach((item) => {
-            if (item.is_product === true) {
-              this.universal_products.push({ product_name: item.product_name });
+            if (item.attributes?.is_product || item.is_product) {
+              this.universal_products.push({
+                product_name:
+                  item.attributes?.product_name || item.product_name,
+              });
             } else {
-              this.universal_services.push({ product_name: item.product_name });
+              this.universal_services.push({
+                product_name:
+                  item.attributes?.product_name || item.product_name,
+              });
             }
-            /* store service names for navigation */
-            const contentStore = universal_content();
-            contentStore.setServices(this.universal_services);
-            contentStore.setProducts(this.universal_products);
           });
+
+          const contentStore = universal_content();
+          contentStore.setServices(this.universal_services);
+          contentStore.setProducts(this.universal_products);
         } else {
-          console.error("Invalide service response structure: ", responseData);
+          console.error("Invalid service response structure: ", responseData);
         }
       } catch (error) {
         console.error("Error fetching services:", error);
       }
     },
 
-    //change date format
+    async fetch_blogs() {
+      try {
+        let response = "";
+        if (this.type === "blog") {
+          response = await fetch(
+            "https://cms.talkcoms.co.uk/api/blog-posts?fields[0]=Title&fields[1]=slug&fields[2]=createdAt&populate=*&sort=createdAt:desc&pagination[limit]=5"
+          );
+        } else {
+          response = await fetch(
+            "https://cms.talkcoms.co.uk/api/success-stories?fields[0]=title&fields[1]=title&populate=*&sort=createdAt:desc&pagination[limit]=5"
+          );
+        }
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.data) {
+          this.blogs = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+        } else {
+          console.error("Invalid response structure:", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching resources:", error);
+      }
+    },
+
     format_date(date_to_change) {
+      if (!date_to_change) return "";
       const date = new Date(date_to_change);
       const date_options = { month: "long", day: "numeric", year: "numeric" };
       return date.toLocaleDateString("en-US", date_options);
