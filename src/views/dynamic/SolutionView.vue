@@ -215,8 +215,6 @@
 //new imports
 import Spinner from "@/components/general/Spinner.vue";
 import Navbar from "@/components/general/Navbar.vue";
-// import SmallTitle from "@/components/text/SmallTitle.vue";
-// import BigTitle from "@/components/text/BigTitle.vue";
 import Footer from "@/components/general/Footer.vue";
 import Cta from "@/components/general/Cta.vue";
 import IconCard from "@/components/ui/card/IconCard.vue";
@@ -259,6 +257,14 @@ export default {
     this.universal_products = universal_content().products;
     this.universal_industries = universal_content().industries;
 
+    if (
+      this.universal_services == "" ||
+      this.universal_products == "" ||
+      this.universal_industries == ""
+    ) {
+      this.fetch_service_names();
+    }
+
     try {
       await Promise.all([this.fetch_industry()]);
     } catch (error) {
@@ -276,6 +282,14 @@ export default {
         this.universal_services = universal_content().services;
         this.universal_products = universal_content().products;
         this.universal_industries = universal_content().industries;
+
+        if (
+          this.universal_services == "" ||
+          this.universal_products == "" ||
+          this.universal_industries == ""
+        ) {
+          this.fetch_service_names();
+        }
 
         try {
           // await this.get_solution();
@@ -314,6 +328,39 @@ export default {
           this.fetch_related_story();
         } else {
           console.error("Invalid industry response structure: ", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    },
+    /* fetch service names */
+    async fetch_service_names() {
+      try {
+        const response = await fetch(
+          "https://cms.talkcoms.co.uk/api/service-pages/?fields[0]=product_name&fields[1]=is_product"
+        );
+        const responseData = await response.json();
+        if (responseData.data) {
+          console.log("Json data for service names: ", responseData.data);
+
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+          const fetched_services = dataArray;
+          /* store service universally */
+          fetched_services.forEach((item) => {
+            if (item.is_product === true) {
+              this.universal_products.push({ product_name: item.product_name });
+            } else {
+              this.universal_services.push({ product_name: item.product_name });
+            }
+            /* store service names for navigation */
+            const contentStore = universal_content();
+            contentStore.setServices(this.universal_services);
+            contentStore.setProducts(this.universal_products);
+          });
+        } else {
+          console.error("Invalide service response structure: ", responseData);
         }
       } catch (error) {
         console.error("Error fetching services:", error);

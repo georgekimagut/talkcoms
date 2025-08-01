@@ -480,12 +480,53 @@ export default {
     this.universal_products = universal_content().products;
     this.universal_industries = universal_content().industries;
     this.services = [...this.universal_products, ...this.universal_services];
+
+    if (
+      this.universal_services == "" ||
+      this.universal_products == "" ||
+      this.universal_industries == ""
+    ) {
+      this.fetch_service_names();
+    }
   },
   methods: {
     load_page() {
       setTimeout(() => {
         this.page_is_loading = false;
       }, 1000);
+    },
+    /* fetch service names */
+    async fetch_service_names() {
+      try {
+        const response = await fetch(
+          "https://cms.talkcoms.co.uk/api/service-pages/?fields[0]=product_name&fields[1]=is_product"
+        );
+        const responseData = await response.json();
+        if (responseData.data) {
+          console.log("Json data for service names: ", responseData.data);
+
+          const dataArray = Array.isArray(responseData.data)
+            ? responseData.data
+            : [responseData.data];
+          const fetched_services = dataArray;
+          /* store service universally */
+          fetched_services.forEach((item) => {
+            if (item.is_product === true) {
+              this.universal_products.push({ product_name: item.product_name });
+            } else {
+              this.universal_services.push({ product_name: item.product_name });
+            }
+            /* store service names for navigation */
+            const contentStore = universal_content();
+            contentStore.setServices(this.universal_services);
+            contentStore.setProducts(this.universal_products);
+          });
+        } else {
+          console.error("Invalide service response structure: ", responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
     },
     /* get in touch */
     async enquire() {
