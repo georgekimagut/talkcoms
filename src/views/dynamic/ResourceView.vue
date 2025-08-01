@@ -11,7 +11,9 @@
     <div class="w-full flex justify-center flex-wrap hero-component">
       <div class="w-[90%] flex flex-wrap hero-holder">
         <!-- Sticky sidebar -->
-        <div class="w-[30%] sticky top-[15vh] self-start to-full tbc !h-fit">
+        <div
+          class="w-[30%] sticky top-[15vh] self-start to-full tbc !h-fit bg-white"
+        >
           <div class="w-full pt-4 pb-4 border rounded-md shadow-sm bg-body">
             <div
               class="w-full overflow-y-scroll hide-scrollbar p-4 border-1 border-[#e3e3e3]"
@@ -47,60 +49,63 @@
                 </li>
               </ul>
             </div>
-            <!-- top stories -->
-            <div class="w-full p-4 pt-10">
-              <div class="w-full pb-4 border-b border-[#82bc00]">
-                <p
-                  @click="related_story_in_view = !related_story_in_view"
-                  class="font-bold text-default cursor-pointer text-xl"
-                >
-                  Top stories
-                  <i
-                    class="fa-solid"
-                    :class="toggle_tbc ? 'fa-angle-up' : 'fa-angle-down'"
-                  ></i>
-                </p>
-              </div>
-              <ul
-                v-if="related_story_in_view"
-                class="content-body px-4 mt-4 border-b pb-10"
+          </div>
+          <!-- top stories -->
+
+          <div class="w-full p-4 mt-6 border rounded-md shadow-sm bg-body">
+            <div class="w-full pb-4 border-b border-[#82bc00]">
+              <p
+                @click="related_story_in_view = !related_story_in_view"
+                class="font-bold text-default cursor-pointer text-xl"
               >
-                <li
-                  v-for="(blog, index) in blogs"
-                  :key="index"
-                  class="list-disc hover:ml-2 duration-300 ease-in-out py-2 border-b"
-                >
-                  <router-link
-                    :to="`/resources/${type}/${
-                      type === 'blog'
-                        ? blog?.attributes?.slug || blog?.slug
-                        : encodeURIComponent(
-                            blog?.attributes?.title || blog?.title
-                          )
-                    }`"
-                    class="custom-default-hover"
-                    active-class="text-third"
-                  >
-                    {{
-                      blog?.attributes?.Title ||
-                      blog?.Title ||
-                      blog?.title ||
-                      blog?.attributes?.title
-                    }}
-                  </router-link>
-                  <div class="w-full mt-2">
-                    <span
-                      class="mt-2 w-full text-sm text-default text-semibold"
-                      >{{
-                        format_date(
-                          blog?.attributes?.createdAt || blog?.createdAt
-                        )
-                      }}</span
-                    >
-                  </div>
-                </li>
-              </ul>
+                Top Articles
+                <i
+                  class="fa-solid"
+                  :class="
+                    related_story_in_view ? 'fa-angle-up' : 'fa-angle-down'
+                  "
+                ></i>
+              </p>
             </div>
+            <ul
+              v-if="related_story_in_view"
+              class="content-body px-4 mt-4 border-b pb-10"
+            >
+              <li
+                v-for="(blog, index) in blogs"
+                :key="index"
+                class="list-disc hover:ml-2 duration-300 ease-in-out py-2 border-b"
+              >
+                <router-link
+                  :to="`/resources/${type}/${
+                    type === 'blog'
+                      ? blog?.attributes?.slug || blog?.slug
+                      : encodeURIComponent(
+                          blog?.attributes?.title || blog?.title
+                        )
+                  }`"
+                  class="custom-default-hover"
+                  active-class="text-third"
+                >
+                  {{
+                    blog?.attributes?.Title ||
+                    blog?.Title ||
+                    blog?.title ||
+                    blog?.attributes?.title
+                  }}
+                </router-link>
+                <div class="w-full mt-2">
+                  <span
+                    class="mt-2 w-full text-sm text-default text-semibold"
+                    >{{
+                      format_date(
+                        blog?.attributes?.createdAt || blog?.createdAt
+                      )
+                    }}</span
+                  >
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
