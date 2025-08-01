@@ -194,15 +194,15 @@
       <div class="w-[90%] flex justify-center flex-wrap gap-1 hero-component">
         <div class="w-full">
           <p class="text-secondary text-center text-lg">
-            <router-link to="/success-stories">PORTFOLIO</router-link>
+            <router-link to="/success-stories">SUCCESS STORIES</router-link>
           </p>
 
           <h1 class="text-5xl font-extrabold mt-4 p-2 text-center text-default">
-            Explore our previous work
+            Success Stories from our clients
           </h1>
         </div>
         <div
-          class="w-full flex flex-nowrap mt-6 overflow-scroll hide-scrollbar stories snap-x snap-mandatory gap-4 hero-cards"
+          class="w-full flex flex-nowrap mt-10 overflow-scroll hide-scrollbar stories snap-x snap-mandatory gap-4 hero-cards"
         >
           <Card
             v-for="(item, index) in portfolio"
