@@ -249,7 +249,7 @@
     <!-- intergrations -->
     <div
       v-if="single_service.intergration.length > 0"
-      class="w-full flex justify-center mt-10 py-28 hero-component"
+      class="w-full flex justify-center mt-10 py-28 hero-component bg-white"
     >
       <div class="w-[90%] flex gap-4 hero-holder">
         <div class="w-[40%] to-full">
@@ -261,10 +261,10 @@
             </h1>
 
             <p class="mt-10">
-              Talkcoms PBX Systems are designed to integrate smoothly with your
+              Talkcoms solutions are designed to integrate smoothly with your
               existing business tools—so you can boost efficiency, reduce silos,
-              and enable smarter workflows without overhauling your
-              entire tech stack.
+              and enable smarter workflows without overhauling your entire tech
+              stack.
             </p>
           </div>
 
@@ -577,7 +577,8 @@
               <p class="mt-8 flex justify-center">
                 {{ pack.short_description }}
               </p>
-              <p v-if="pack.package_price" class="mt-8 flex justify-center">
+
+              <p v-if="pack.price" class="mt-8 flex justify-center">
                 <span class="text-4xl font-extrabold text-default">
                   ${{ pack.price }}
                 </span>
