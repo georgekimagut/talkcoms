@@ -7,12 +7,21 @@
       :products="universal_products"
       :industries="universal_industries"
     />
+
     <HeroSection
       v-for="(blog, index) in all_blog_tracker.slice(0, 1)"
       :key="index"
       small_title="BLOGS"
       :big_title="blog?.Title"
-      hero_description=""
+      :hero_description="`${
+        blog.articles_section
+          .replace(/<br\s*\/?>/gi, '')
+          .substring(blog.articles_section.indexOf('.') + 1)
+          .trim()
+          .split(' ')
+          .slice(0, 32)
+          .join(' ') + '...'
+      }`"
       :blog_category="blog?.category"
       :blog_type="blog?.Type"
       :blog_date="format_date(blog.createdAt)"
@@ -91,16 +100,7 @@
                     {{ format_date(blog.createdAt) }}
                   </div>
                 </div>
-                <!-- <div
-                  class="text-base text-gray-800 [&_*]:!m-0 [&_*]:!mt-0 [&_*]:!mb-0 [&_*]:!p-0 [&_*]:!font-normal [&_*]:!text-inherit [&_*]:!text-base [&_*]:!bg-transparent [&_*]:!border-none [&_*]:!shadow-none !p-2"
-                  v-html="
-                    blog.articles_section
-                      .replace(/<br\s*\/?>/gi, '')
-                      .split(' ')
-                      .slice(0, 15)
-                      .join(' ')
-                  "
-                ></div> -->
+
                 <CardFooter>
                   <div
                     class="flex flex-nowrap relative gap-2 text-secondary p-2 h-[40px] flex-col justify-center read-more-hover"

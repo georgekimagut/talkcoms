@@ -365,9 +365,11 @@
               v-html="
                 blog.articles_section
                   .replace(/<br\s*\/?>/gi, '')
+                  .substring(blog.articles_section.indexOf('.') + 1)
+                  .trim()
                   .split(' ')
                   .slice(0, 15)
-                  .join(' ')
+                  .join(' ') + '...'
               "
             ></div>
             <!-- <div class="w-full">{{ blog.articles_section }}</div> -->
