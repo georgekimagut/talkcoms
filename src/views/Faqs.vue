@@ -107,8 +107,6 @@ export default {
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
@@ -173,7 +171,6 @@ export default {
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
-          console.log("Data array: ", dataArray);
           this.faqs = dataArray.flatMap((item) => {
             const mainTitle = item.main_title || "";
             return (item.FAQs || []).map((faq) => ({
@@ -210,7 +207,6 @@ export default {
           return service;
         }, {})
       );
-      console.log("Solutions List: ", this.solutions_list);
     },
   },
 };

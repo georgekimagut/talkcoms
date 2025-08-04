@@ -215,8 +215,6 @@ export default {
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
@@ -322,7 +320,6 @@ export default {
         );
         // set blogs to filtered
         this.blogs = this.filtered_blogs;
-        console.log("Blog types :", this.blogs);
 
         // actions for categories
       } else if (action_type == "category") {

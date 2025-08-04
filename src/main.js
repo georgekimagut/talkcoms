@@ -11,6 +11,8 @@ pinia.use(piniaPluginPersistedstate);
 /* google analytics */
 import VueGtag from "vue-gtag-next";
 
+/* cloudinary for image optimization */
+
 /* shadcn components */
 import Button from "./components/ui/button/Button.vue";
 import Input from "./components/ui/input/Input.vue";

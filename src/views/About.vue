@@ -317,8 +317,6 @@ export default {
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
@@ -359,7 +357,6 @@ export default {
 
           // this.about_page = dataArray;
           this.about_page = responseData.data;
-          console.log("About content", this.about_page);
         } else {
           console.error("Invalid response structure:", responseData);
         }
@@ -377,7 +374,6 @@ export default {
         const responseData = await response.json();
         if (responseData.data) {
           this.solutions = responseData.data;
-          console.log("Json data for service names: ", this.solutions);
         } else {
           console.error("Invalide service response structure: ", responseData);
         }

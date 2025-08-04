@@ -503,8 +503,6 @@ export default {
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
@@ -590,7 +588,6 @@ export default {
         });
 
         const data = await res.json();
-        console.log("sent:", data);
         this.button_message = "Sent. Thank you!";
 
         setTimeout(() => {

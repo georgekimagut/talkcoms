@@ -276,7 +276,7 @@ export default {
       });
 
       server.listen(3000, () => {
-        console.log("Socket.IO server running on http://localhost:5173");
+        // console.log("Socket.IO server running on http://localhost:5173");
       });
     },
   },

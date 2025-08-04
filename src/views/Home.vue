@@ -546,8 +546,6 @@ export default {
         } else {
           console.error("Invalid response structure:", responseData);
         }
-
-        console.log("Home content", this.landing_page_content);
       } catch (error) {
         console.error("Error fetching resources:", error);
       }
@@ -576,8 +574,6 @@ export default {
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
@@ -607,13 +603,10 @@ export default {
         const response = await fetch(portfolio_end_point);
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
           this.portfolio = dataArray;
-          console.log("Portfolios: ", this.portfolio);
         } else {
           console.error(
             "Invalide portfolio response structure: ",
@@ -630,8 +623,6 @@ export default {
         const response = await fetch(industries_end_point);
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
@@ -643,7 +634,6 @@ export default {
 
             const contentStore = universal_content();
             contentStore.setIndustries(this.universal_industries);
-            console.log("Industries: ", this.universal_industries);
           });
         } else {
           console.error("Invalide industry response structure: ", responseData);
@@ -669,9 +659,7 @@ export default {
 
           this.blogs = dataArray;
           this.blogs.forEach((blog) => {
-            // console.log(blog.articles_section);
             const word_count = blog.articles_section.split(" ");
-            console.log(word_count.filter((word) => word !== " ").length);
           });
         } else {
           console.error("Invalid response structure:", responseData);

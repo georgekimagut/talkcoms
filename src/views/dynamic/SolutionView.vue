@@ -324,7 +324,6 @@ export default {
               stories[0]?.title || ""
             );
           }
-          console.log("Story title: ", this.encoded_success_title);
           this.fetch_related_story();
         } else {
           console.error("Invalid industry response structure: ", responseData);
@@ -341,8 +340,6 @@ export default {
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
@@ -374,8 +371,6 @@ export default {
         );
         const responseData = await response.json();
         if (responseData.data) {
-          console.log("Json data for service names: ", responseData.data);
-
           const dataArray = Array.isArray(responseData.data)
             ? responseData.data
             : [responseData.data];
