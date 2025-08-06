@@ -40,11 +40,14 @@
         <div class="w-full">
           <h1
             v-if="service_cta"
-            class="text-5xl font-extrabold mt-4 p-2 text-center"
+            class="text-5xl font-extrabold mt-4 p-2 text-center text-default"
           >
             {{ service_cta }}
           </h1>
-          <h1 v-else class="text-5xl font-extrabold mt-4 p-2 text-center">
+          <h1
+            v-else
+            class="text-5xl font-extrabold mt-4 p-2 text-center text-default"
+          >
             Ready To
             <span class="text-secondary ml-2 mr-2">Transform</span> Your
             Business
@@ -52,11 +55,11 @@
           </h1>
           <p
             v-if="service_cta_description"
-            class="mt-2 text-center text-xl text-secondary"
+            class="mt-2 text-center text-default text-xl text-secondary"
           >
             {{ service_cta_description }}
           </p>
-          <p v-else class="mt-2 text-center text-xl">
+          <p v-else class="mt-2 text-center text-default text-xl">
             Join thousands of professionals who have transformed their business
             with our solutions
           </p>

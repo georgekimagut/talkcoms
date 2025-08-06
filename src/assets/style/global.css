@@ -230,7 +230,7 @@ a {
   width: 60px;
 }
 .text-default {
-  color: #131f6b;
+  @apply text-[#131f6b];
 }
 .bg-default {
   background-color: #131f6b;
@@ -406,12 +406,7 @@ a {
 .custom-card {
   transition: 0.3s ease-in-out;
 }
-.resource-dropdown {
-  display: none;
-}
-.nav-bar .drop-resource:hover .resource-dropdown {
-  display: block;
-}
+
 /* This targets the popup content wrapper */
 .leaflet-popup-content-wrapper {
   background-color: #82bc00 !important;
@@ -943,5 +938,120 @@ a {
   }
   .hero .carousel-holder .c-half:first-child .btn-holder .ml-4 {
     @apply ml-0 mt-4;
+  }
+}
+
+/* scroll animations */
+
+.fade-in-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+.bounce-button {
+  animation: bounceIn 0.7s ease-out forwards;
+  transform-origin: bottom center;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+.nav-bar-move-in {
+  animation: navbarMoveIn 0.4s ease-in-out forwards;
+}
+
+/* Keyframes for modern approach */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    /* transform: scale(0.3) translateY(100%); */
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes navbarMoveIn {
+  0% {
+    @apply opacity-0 ml-[-10%];
+  }
+  100% {
+    @apply opacity-100 ml-0;
+  }
+}
+
+.dropdown-animated {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+.dropdown-animated.show {
+  max-height: 70vh; /* 10max expected height */
+  opacity: 1;
+}
+
+/* scroll animations */
+/* Base class for scroll-triggered elements */
+.scroll-animate {
+  opacity: 0;
+  animation-timeline: view();
+  animation-fill-mode: both;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-range: entry 0% cover 30%;
+}
+
+/* Move up */
+.scroll-up {
+  animation-name: fadeInUp;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Move left */
+.scroll-left {
+  animation-name: fadeInLeft;
+}
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Move right */
+.scroll-right {
+  animation-name: fadeInRight;
+}
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

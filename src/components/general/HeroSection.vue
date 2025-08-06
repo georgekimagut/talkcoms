@@ -23,7 +23,7 @@
           </div>
         </div>
 
-        <h1 class="text-4xl font-extrabold mt-4 w-[88%]">
+        <h1 class="text-4xl font-extrabold mt-4 w-[88%] fade-in-up">
           {{ big_title }}
         </h1>
         <p class="w-3/4 mt-6" :class="has_pattern ? 'text-secondary' : ''">
@@ -68,7 +68,7 @@
               <router-link :to="read_more_link">
                 <Button
                   variant="ghost"
-                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00] bounce-button"
                 >
                   <span class="relative z-10 hover:text-[#131f6b]"
                     >Read Full Blog
@@ -94,7 +94,7 @@
           <div v-if="is_service" class="w-full flex mt-10 full-hero">
             <router-link :to="demo_link">
               <Button
-                class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+                class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group bounce-button"
               >
                 <span class="relative z-10">Book A Demo </span>
                 <span
@@ -108,7 +108,7 @@
               <router-link :to="read_more_link">
                 <Button
                   variant="ghost"
-                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00] bounce-button"
                 >
                   <span class="relative z-10 hover:text-[#131f6b]"
                     >Read Full Story
@@ -155,7 +155,7 @@
             <div class="w-full full-hero">
               <router-link to="/contact/book-a-demo">
                 <Button
-                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+                  class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group bounce-button"
                 >
                   <span class="relative z-10">Book A Free Call </span>
                   <span
@@ -174,7 +174,7 @@
               <router-link to="/contact/contact-us">
                 <Button
                   variant="ghost"
-                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00]"
+                  class="relative overflow-hidden p-6 px-8 text-secondary cursor-pointer group border border-[#82bc00] bounce-button"
                 >
                   <span class="relative z-10 hover:text-[#131f6b]"
                     >Find Your Solution

@@ -20,7 +20,7 @@
             Home
           </router-link>
           <div
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative group"
             active-class="text-secondary font-medium"
           >
             <div
@@ -28,11 +28,13 @@
             >
               <div class="h-full flex flex-col justify-center">Products</div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i class="fa-solid fa-angle-down"></i>
+                <i
+                  class="fa-solid fa-angle-down transition-all duration-300 group-hover:rotate-180"
+                ></i>
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] border border-[#e3e3e3] rounded-b-sm shadow-2xl hidden group-hover:block"
             >
               <li
                 v-for="(product, index) in products"
@@ -49,7 +51,7 @@
           </div>
 
           <div
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative group"
             active-class="text-secondary font-medium"
           >
             <div
@@ -57,11 +59,13 @@
             >
               <div class="h-full flex flex-col justify-center">Services</div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i class="fa-solid fa-angle-down"></i>
+                <i
+                  class="fa-solid fa-angle-down transition-all duration-300 group-hover:rotate-180"
+                ></i>
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] border border-[#e3e3e3] rounded-b-sm shadow-2xl hidden group-hover:block"
             >
               <li
                 v-for="(service, index) in services"
@@ -78,7 +82,7 @@
           </div>
 
           <div
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative group"
             active-class="text-secondary font-medium"
           >
             <div
@@ -88,11 +92,13 @@
                 Solutions By Industry
               </div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i class="fa-solid fa-angle-down"></i>
+                <i
+                  class="fa-solid fa-angle-down transition-all duration-300 group-hover:rotate-180"
+                ></i>
               </div>
             </div>
             <div
-              class="w-[250px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              class="w-[250px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] border border-[#e3e3e3] rounded-b-sm shadow-2xl hidden group-hover:block"
             >
               <li
                 v-for="(industry, index) in industries"
@@ -130,7 +136,7 @@
             </div>
           </router-link> -->
           <div
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative drop-resource"
+            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative group"
             active-class="text-secondary font-medium"
           >
             <div
@@ -138,11 +144,13 @@
             >
               <div class="h-full flex flex-col justify-center">Resources</div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i class="fa-solid fa-angle-down"></i>
+                <i
+                  class="fa-solid fa-angle-down transition-all duration-300 group-hover:rotate-180"
+                ></i>
               </div>
             </div>
             <div
-              class="w-[200px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] resource-dropdown border border-[#e3e3e3] rounded-b-sm shadow-2xl"
+              class="w-[200px] absolute bg-white p-4 pt-0 top-[12vh] z-[100] border border-[#e3e3e3] rounded-b-sm shadow-2xl hidden group-hover:block"
             >
               <li class="my-2 list-none">
                 <router-link to="/blogs" class="custom-default-hover"
@@ -213,11 +221,34 @@
       </div>
       <div class="w-1/2 flex justify-end">
         <div class="h-full flex flex-col justify-center">
-          <i
+          <div
+            @click="phone_navigation = !phone_navigation"
+            class="p-2 rounded-sm border-2 border-[#82bc00] group cursor-pointer w-fit"
+          >
+            <!-- Top bar -->
+            <div
+              class="w-[30px] h-[3px] bg-secondary transition-transform duration-300 origin-center"
+              :class="phone_navigation ? 'rotate-45 translate-y-[11px]' : ''"
+            ></div>
+
+            <!-- Middle bar -->
+            <div
+              class="w-[30px] h-[3px] bg-secondary my-[6px] transition-opacity duration-300"
+              :class="phone_navigation ? 'opacity-0' : 'opacity-100'"
+            ></div>
+
+            <!-- Bottom bar -->
+            <div
+              class="w-[30px] h-[3px] bg-secondary transition-transform duration-300 origin-center"
+              :class="phone_navigation ? '-rotate-45 -translate-y-[11px]' : ''"
+            ></div>
+          </div>
+
+          <!-- <i
             @click="phone_navigation = !phone_navigation"
             class="fa-solid text-xl cursor-pointer text-secondary border border-[#82bc00] px-3 py-2 rounded-sm"
             :class="phone_navigation ? 'fa-close' : 'fa-bars'"
-          ></i>
+          ></i> -->
         </div>
       </div>
     </div>
@@ -231,7 +262,7 @@
           class="w-full h-full bg-default opacity-50 absolute z-[-1y]"
         ></div>
         <div
-          class="w-[70%] max-w-[400px] h-full bg-white py-4 absolute z-2000 overflow-y-scroll hide-scrollbar"
+          class="w-[70%] max-w-[400px] h-full bg-white py-4 absolute z-2000 overflow-y-scroll hide-scrollbar nav-bar-move-in"
         >
           <div class="w-full mb-4">
             <router-link
@@ -243,7 +274,7 @@
             </router-link>
           </div>
           <div
-            class="pl-4 mb-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out relative drop-resource"
+            class="pl-4 mb-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out relative"
             active-class="text-secondary font-medium"
           >
             <div
@@ -252,12 +283,17 @@
             >
               <div class="h-full flex flex-col justify-center">Products</div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i class="fa-solid fa-angle-down"></i>
+                <i
+                  class="fa-solid fa-angle-down transition-all duration-300"
+                  :class="product_is_visible ? 'rotate-180' : ''"
+                ></i>
               </div>
             </div>
             <div
-              v-if="product_is_visible"
-              class="w-fit bg-white pt-2 border-y mt-4 rounded-b-sm"
+              :class="[
+                'w-fit bg-white border-y dropdown-animated',
+                product_is_visible ? 'show' : '',
+              ]"
             >
               <li
                 v-for="(product, index) in products"
@@ -274,7 +310,7 @@
           </div>
 
           <div
-            class="pl-4 mb-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out relative drop-resource"
+            class="pl-4 mb-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out relative"
             active-class="text-secondary font-medium"
           >
             <div
@@ -283,12 +319,17 @@
             >
               <div class="h-full flex flex-col justify-center">Services</div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i class="fa-solid fa-angle-down"></i>
+                <i
+                  class="fa-solid fa-angle-down transition-all duration-300"
+                  :class="service_is_visible ? 'rotate-180' : ''"
+                ></i>
               </div>
             </div>
             <div
-              v-if="service_is_visible"
-              class="w-fit bg-white pt-2 border-y mt-4 rounded-b-sm"
+              :class="[
+                'w-fit bg-white border-y dropdown-animated',
+                service_is_visible ? 'show' : '',
+              ]"
             >
               <li
                 v-for="(service, index) in services"
@@ -305,7 +346,7 @@
           </div>
           <!-- item -->
           <div
-            class="pl-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out mb-4 relative drop-resource"
+            class="pl-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out mb-4 relative"
             active-class="text-secondary font-medium"
           >
             <div
@@ -316,12 +357,17 @@
                 Solutions By Industry
               </div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i class="fa-solid fa-angle-down"></i>
+                <i
+                  class="fa-solid fa-angle-down transition-all duration-300"
+                  :class="industry_is_visible ? 'rotate-180' : ''"
+                ></i>
               </div>
             </div>
             <div
-              v-if="industry_is_visible"
-              class="w-fit bg-white pt-2 border-y mt-4 rounded-b-sm"
+              :class="[
+                'w-fit bg-white border-y dropdown-animated',
+                industry_is_visible ? 'show' : '',
+              ]"
             >
               <li
                 v-for="(industry, index) in industries"
@@ -338,7 +384,7 @@
           </div>
           <!-- item -->
           <div
-            class="pl-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out mb-4 relative drop-resource"
+            class="pl-4 pr-4 w-full flex flex-col justify-center transition duration-500 ease-in-out mb-4 relative"
             active-class="text-secondary font-medium"
           >
             <div
@@ -347,12 +393,17 @@
             >
               <div class="h-full flex flex-col justify-center">Resources</div>
               <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i class="fa-solid fa-angle-down"></i>
+                <i
+                  class="fa-solid fa-angle-down transition-all duration-300"
+                  :class="resource_is_visible ? 'rotate-180' : ''"
+                ></i>
               </div>
             </div>
             <div
-              v-if="resource_is_visible"
-              class="w-fit bg-white pt-2 border-y mt-4 rounded-b-sm"
+              :class="[
+                'w-fit bg-white border-y dropdown-animated',
+                resource_is_visible ? 'show' : '',
+              ]"
             >
               <li class="my-2 mb-4 list-none">
                 <router-link to="/blogs" class="custom-default-hover"
@@ -389,7 +440,7 @@
           <div class="w-full pl-4 pr-4 flex flex-col gap-1">
             <router-link to="/contact/book-a-demo">
               <Button
-                class="relative overflow-hidden p-5 px-8 bg-default text-white cursor-pointer group"
+                class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
               >
                 <span class="relative z-10">Book A Demo </span>
                 <span
@@ -418,6 +469,8 @@
   </div>
 </template>
 <script>
+import { RotateCcwIcon } from "lucide-vue-next";
+
 export default {
   name: "Navbar",
   props: {

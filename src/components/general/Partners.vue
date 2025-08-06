@@ -2,7 +2,9 @@
   <div class="w-full py-10 p-4 bg-white">
     <!-- Header -->
     <div class="w-full flex justify-center">
-      <h1 class="text-5xl font-extrabold mt-4 p-2 text-center flex-wrap">
+      <h1
+        class="text-5xl font-extrabold mt-4 p-2 text-center flex-wrap text-default"
+      >
         Trusted by <span class="mx-2 text-secondary w-fit">10+</span> Companies
         since 2016
       </h1>

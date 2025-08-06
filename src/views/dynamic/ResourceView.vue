@@ -278,6 +278,8 @@ export default {
       universal_industries: [],
       success_body: [],
       related_story_in_view: true,
+      footer_description: "",
+      footer_title: "",
     };
   },
   async created() {
@@ -415,6 +417,8 @@ export default {
                 this.success_body.push(desc.children);
               }
             });
+            // this.footer_title: "",
+            // this.footer_description: ""
           } else {
             throw new Error("No data found in response");
           }

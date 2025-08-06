@@ -6,6 +6,18 @@
       :products="universal_products"
       :industries="universal_industries"
     />
+    <!-- <div class="w-full h-[100vh]">
+      <!-- <div class="spacer"></div> ->
+
+      <div class="animation-container">
+        <div class="box slide-up">Slide Up From Bottom</div>
+        <div class="box slide-left">Slide In From Left</div>
+        <div class="box slide-right">Slide In From Right</div>
+        <div class="box fade-in">Fade In</div>
+      </div>
+
+      <!-- <div class="spacer"></div> ->
+    </div> -->
     <!-- new hero section -->
     <div class="w-full h-[80vh] flex relative new-hero">
       <div
@@ -32,7 +44,7 @@
       <!-- front panel -->
       <div class="w-full h-full absolute z-[20] flex content-holder">
         <div class="w-[35%] ml-[5%] flex flex-col py-4 justify-center to-full">
-          <h1 class="text-4xl font-extrabold text-white">
+          <h1 class="text-4xl font-extrabold text-white fade-in-up">
             Powering Digital Transformation Across Finance, Healthcare, Legal
             Sectors & Other Industries
           </h1>
@@ -42,7 +54,7 @@
           </h2>
           <router-link to="/about" class="mt-4">
             <Button
-              class="relative bg-third overflow-hidden p-6 px-10 text-white cursor-pointer group"
+              class="relative bg-third overflow-hidden p-6 px-10 text-white cursor-pointer group bounce-button"
             >
               <span class="relative z-10">Go to about </span>
               <span
@@ -90,10 +102,8 @@
               <!-- {{ slide.hero_media }} -->
               <div class="carousel-holder flex flex-nowrap w-full h-[60vh]">
                 <div class="w-full flex-shrink-0 h-full flex">
-                  <div
-                    class="w-1/2 h-full flex flex-col justify-center block c-half"
-                  >
-                    <p class="text-lg w-3/4 uppercase text-xl font-bold">
+                  <div class="w-1/2 h-full flex flex-col justify-center c-half">
+                    <p class="text-lg w-3/4 uppercase font-bold">
                       {{ slide.product_name }}
                     </p>
                     <h1
@@ -153,7 +163,7 @@
                           }`"
                           :alt="`${slide.product_name} - image`"
                           @load="onImageLoad"
-                          class="rounded-2xl min-w-full min-h-full max-h-none object-cover transition-opacity duration-500"
+                          class="rounded-2xl w-[98%] min-h-full max-h-none object-cover transition-opacity duration-500"
                         />
                         <!-- <img
                           v-lazy="
@@ -308,7 +318,9 @@
         <p class="text-secondary w-full flex justify-center">
           <router-link to="/blogs" class="text-lg">BLOG</router-link>
         </p>
-        <h1 class="text-3xl font-extrabold mt-3 w-full flex justify-center">
+        <h1
+          class="text-4xl font-extrabold mt-3 w-full flex justify-center text-default"
+        >
           Tech <span class="text-secondary mx-1">Tips</span> &
           <span class="text-secondary mx-1">Trends</span>
         </h1>
