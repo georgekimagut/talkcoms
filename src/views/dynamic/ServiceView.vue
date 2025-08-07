@@ -542,7 +542,9 @@
           PACKAGES
         </p>
 
-        <h1 class="text-4xl font-extrabold mt-4 p-2 text-center w-full">
+        <h1
+          class="text-4xl font-extrabold mt-4 p-2 text-center w-full text-default"
+        >
           Our Pricing Plans
         </h1>
         <p class="flex text-center mt-2">

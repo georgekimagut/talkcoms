@@ -20,7 +20,7 @@
       <div class="w-[90%] flex flex-wrap">
         <div class="w-1/2 to-full">
           <p class="text-secondary text-lg">NEWSLETTER</p>
-          <h1 class="text-4xl font-extrabold mt-4 w-3/4">
+          <h1 class="text-4xl font-extrabold mt-4 w-3/4 text-default">
             Join Our Community To Receive
             <span class="ml-1 text-secondary">Updates</span>
           </h1>

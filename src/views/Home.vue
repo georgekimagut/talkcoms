@@ -6,18 +6,7 @@
       :products="universal_products"
       :industries="universal_industries"
     />
-    <!-- <div class="w-full h-[100vh]">
-      <!-- <div class="spacer"></div> ->
 
-      <div class="animation-container">
-        <div class="box slide-up">Slide Up From Bottom</div>
-        <div class="box slide-left">Slide In From Left</div>
-        <div class="box slide-right">Slide In From Right</div>
-        <div class="box fade-in">Fade In</div>
-      </div>
-
-      <!-- <div class="spacer"></div> ->
-    </div> -->
     <!-- new hero section -->
     <div class="w-full h-[80vh] flex relative new-hero">
       <div
@@ -35,7 +24,7 @@
         <!-- Actual Image -->
         <img
           v-show="imageLoaded"
-          src="/static/hero-pic.png"
+          src="/static/hero-pic.avif"
           alt="Talkcoms limited hero image"
           @load="onImageLoad"
           class="w-full h-auto max-h-none object-cover transition-opacity duration-500"

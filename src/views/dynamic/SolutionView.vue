@@ -87,7 +87,7 @@
               :src="
                 who_is_served?.icon?.url
                   ? `${image_url}/${who_is_served.icon.url}`
-                  : '/icons/erp.svg'
+                  : '/icons/default-icon.svg'
               "
               class="h-[50px] w-auto"
             />

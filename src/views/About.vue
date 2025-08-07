@@ -123,7 +123,7 @@
               class="w-[60%] flex justify-center overflow-hidden h-full rounded-2xl to-full"
             >
               <img
-                src="/static/values.png"
+                src="/static/values.avif"
                 class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
               />
             </div>
