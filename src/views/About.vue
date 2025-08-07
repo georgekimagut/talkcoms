@@ -227,8 +227,10 @@
       </div>
     </div>
     <!-- CTA -->
-
-    <Cta />
+    <Cta
+      :service_cta="about_page[0]?.footer"
+      :service_cta_description="about_page[0]?.footer_description"
+    />
     <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>

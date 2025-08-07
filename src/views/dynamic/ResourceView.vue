@@ -232,7 +232,13 @@
     </div>
     <!-- end -->
     <!-- footer  -->
-    <Cta class="mt-32 bg-fourth border border-[#9ecce4] rounded-lg" />
+    <Cta
+      v-if="success_story"
+      :service_cta="success_story?.footer"
+      :service_cta_description="success_story?.footer_description"
+      class="mt-32 bg-fourth border border-[#9ecce4] rounded-lg"
+    />
+    <Cta v-else class="mt-32 bg-fourth border border-[#9ecce4] rounded-lg" />
     <Footer :services="universal_services" :products="universal_products" />
   </div>
 </template>

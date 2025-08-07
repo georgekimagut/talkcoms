@@ -261,10 +261,7 @@
             </h1>
 
             <p class="mt-10">
-              Talkcoms solutions are designed to integrate smoothly with your
-              existing business tools—so you can boost efficiency, reduce silos,
-              and enable smarter workflows without overhauling your entire tech
-              stack.
+              {{ single_service.intergration[0]?.short_description }}
             </p>
           </div>
 

@@ -396,7 +396,10 @@
       </div>
     </div>
     <!-- cta -->
-    <Cta />
+    <Cta
+      :service_cta="landing_page_content[0]?.footer"
+      :service_cta_description="landing_page_content[0]?.footer_description"
+    />
     <!-- footer -->
     <Footer :services="universal_services" :products="universal_products" />
     <!-- end of classes -->
