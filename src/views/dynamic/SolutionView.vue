@@ -53,9 +53,7 @@
           <div
             class="w-[80%] overflow-hidden transition-all duration-500 relative flex flex-col justify-center to-full"
           >
-            <h1 class="text-secondary uppercase text-3xl font-bold">
-              Who we serve
-            </h1>
+            <h1 class="text-secondary uppercase text-xl">Who we serve</h1>
             <!-- <h1 class="text-5xl font-extrabold text-default sticky top-0 py-4">
               
             </h1> -->
@@ -78,8 +76,8 @@
       <div
         class="w-[90%] flex justify-center flex-wrap gap-2 hero-cards to-full"
       >
-        <div class="w-full mb-10">
-          <h1 class="text-secondary text-3xl font-bold">
+        <div class="w-full flex justify-center mb-10">
+          <h1 class="text-secondary text-xl text-center">
             {{ industry_solution[0]?.title1 }}
           </h1>
         </div>
@@ -94,7 +92,7 @@
               :src="
                 who_is_served?.icon?.url
                   ? `${image_url}/${who_is_served.icon.url}`
-                  : '/icons/default-icon.svg'
+                  : '/icons/erp.svg'
               "
               class="h-[50px] w-auto"
             />
@@ -153,7 +151,7 @@
     >
       <div class="w-[90%] h-fit flex justify-center flex-wrap hero-holder">
         <div class="w-[86%] mb-10">
-          <h1 class="text-secondary text-3xl font-bold">
+          <h1 class="text-secondary text-xl">
             {{ industry_solution[0]?.title_under_stories }}
           </h1>
         </div>
