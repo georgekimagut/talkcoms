@@ -211,7 +211,7 @@
             </div>
             <!-- call to action -->
             <div class="w-full flex mt-8 full-hero">
-              <router-link :to="`contact/${this.id}`">
+              <router-link :to="`/contact/${this.id}`">
                 <Button
                   class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
                 >
