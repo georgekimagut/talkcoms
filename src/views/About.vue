@@ -90,7 +90,7 @@
             class="w-[80%] to-full flex justify-center overflow-hidden h-full rounded-2xl"
           >
             <img
-              src="/static/why.png"
+              src="/static/why.avif"
               class="h-full max-w-none min-w-full min-h-full max-h-none object-cover"
             />
           </div>
