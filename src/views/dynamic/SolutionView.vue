@@ -76,6 +76,11 @@
       <div
         class="w-[90%] flex justify-center flex-wrap gap-2 hero-cards to-full"
       >
+        <div class="w-full flex justify-center mb-10">
+          <h1 class="text-secondary text-3xl font-bold">
+            {{ industry_solution[0]?.title1 }}
+          </h1>
+        </div>
         <!-- solutions related -->
         <div
           v-for="(who_is_served, index) in industry_solution[0]?.cardbyindustry"
@@ -98,16 +103,6 @@
             <p class="mt-8">{{ who_is_served?.description }}</p>
           </router-link>
         </div>
-        <!-- end of new -->
-        <IconCard
-          v-if="related_solutions.length >= 1"
-          v-for="(related_solution, index) in related_solutions"
-          :key="index"
-          card_class="w-[24%] flex-shrink-0 to-full hover:shadow-md"
-          :icon_class="related_solution.icon"
-          :card_title="related_solution.name"
-          :card_text="related_solution.title_description"
-        />
       </div>
     </div>
     <!-- call to action -->
@@ -152,9 +147,14 @@
     <!-- case study -->
     <div
       v-if="related_story"
-      class="w-full flex justify-center mt-16 bg-white py-16 hero-component"
+      class="w-full flex justify-center py-16 hero-component"
     >
-      <div class="w-[90%] h-fit flex hero-holder">
+      <div class="w-[90%] h-fit flex flex-wrap hero-holder">
+        <div class="w-full flex justify-center mb-10">
+          <h1 class="text-secondary text-3xl font-bold">
+            {{ industry_solution[0]?.title_under_stories }}
+          </h1>
+        </div>
         <div class="w-1/2 flex h-full justify-center to-full">
           <div class="w-[90%] flex flex-wrap justify-center">
             <div
