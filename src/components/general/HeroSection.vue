@@ -23,7 +23,9 @@
           </div>
         </div>
 
-        <h1 class="text-4xl font-extrabold mt-4 w-[88%] fade-in-up">
+        <h1
+          class="text-4xl font-extrabold mt-4 w-[88%] fade-in-up text-default"
+        >
           {{ big_title }}
         </h1>
         <p class="w-3/4 mt-6" :class="has_pattern ? 'text-secondary' : ''">

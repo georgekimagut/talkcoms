@@ -92,7 +92,7 @@
               <div class="carousel-holder flex flex-nowrap w-full h-[60vh]">
                 <div class="w-full flex-shrink-0 h-full flex">
                   <div class="w-1/2 h-full flex flex-col justify-center c-half">
-                    <p class="text-lg w-3/4 uppercase font-bold">
+                    <p class="text-lg w-3/4 uppercase font-bold text-default">
                       {{ slide.product_name }}
                     </p>
                     <h1

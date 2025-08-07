@@ -53,7 +53,9 @@
           <div
             class="w-[80%] overflow-hidden transition-all duration-500 relative flex flex-col justify-center to-full"
           >
-            <p class="text-secondary text-xl uppercase">Who we serve</p>
+            <h1 class="text-secondary uppercase text-3xl font-bold">
+              Who we serve
+            </h1>
             <!-- <h1 class="text-5xl font-extrabold text-default sticky top-0 py-4">
               
             </h1> -->
@@ -76,7 +78,7 @@
       <div
         class="w-[90%] flex justify-center flex-wrap gap-2 hero-cards to-full"
       >
-        <div class="w-full flex justify-center mb-10">
+        <div class="w-full mb-10">
           <h1 class="text-secondary text-3xl font-bold">
             {{ industry_solution[0]?.title1 }}
           </h1>
@@ -149,8 +151,8 @@
       v-if="related_story"
       class="w-full flex justify-center py-16 hero-component"
     >
-      <div class="w-[90%] h-fit flex flex-wrap hero-holder">
-        <div class="w-full flex justify-center mb-10">
+      <div class="w-[90%] h-fit flex justify-center flex-wrap hero-holder">
+        <div class="w-[86%] mb-10">
           <h1 class="text-secondary text-3xl font-bold">
             {{ industry_solution[0]?.title_under_stories }}
           </h1>
