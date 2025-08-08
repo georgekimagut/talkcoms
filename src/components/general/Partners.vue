@@ -18,10 +18,10 @@
             <div
               v-for="(card, index) in client_images.concat(client_images)"
               :key="index"
-              class="w-[10%] min-w-[200px] flex-shrink-0 p-4"
+              class="w-[10%] max-w-[300px] min-w-[200px] flex-shrink-0 p-4"
             >
-              <div class="h-[15vh] flex items-center justify-center">
-                <img :src="card.client_pic" class="h-3/4 w-auto" />
+              <div class="h-auto w-full flex items-center justify-center">
+                <img :src="card.client_pic" class="h-auto w-full" />
               </div>
             </div>
           </div>
@@ -79,7 +79,7 @@ export default {
         { client_pic: "/icons/partners/3.png" },
         { client_pic: "/icons/partners/4.png" },
         { client_pic: "/icons/partners/5.png" },
-        { client_pic: "/icons/partners/6.png" },
+        { client_pic: "/icons/partners/6.svg" },
         { client_pic: "/icons/partners/7.png" },
         { client_pic: "/icons/partners/8.svg" },
         { client_pic: "/icons/partners/kipkenda.svg" },
