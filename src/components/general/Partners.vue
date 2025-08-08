@@ -83,6 +83,7 @@ export default {
         { client_pic: "/icons/partners/7.png" },
         { client_pic: "/icons/partners/8.svg" },
         { client_pic: "/icons/partners/kipkenda.png" },
+        { client_pic: "/icons/partners/valley_hospital.svg" },
       ],
       stats: [],
       animatedStats: [],
