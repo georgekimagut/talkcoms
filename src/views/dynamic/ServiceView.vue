@@ -779,8 +779,11 @@ export default {
           : [response_data.data];
 
         // Just take the first result
-        this.single_service = dataArray[0];
+        // console.log("Fetched data: ", dataArray);
+        const fetched_data = dataArray[0];
+        this.single_service = fetched_data;
 
+        // console.log("Single service: ", this.single_service);
         if (!this.single_service) {
           this.unaivailable_service = true;
           return;
