@@ -866,9 +866,9 @@ a {
     position: initial;
     @apply h-[40vh];
   }
-  .hero-component .hero-holder .self-start.to-full.tbc {
+  /* .hero-component .hero-holder .self-start.to-full.tbc {
     @apply !sticky !top-[5vh];
-  }
+  } */
   .hero-component .hero-holder .self-start.to-full .to-h-fit {
     @apply h-[40vh];
   }
