@@ -35,9 +35,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+/* SEO */
+import { createHead } from "@vueuse/head";
+const head = createHead();
 createApp(App)
   .use(pinia)
   .use(router)
+  .use(head)
   .use(
     VueGtag,
     {

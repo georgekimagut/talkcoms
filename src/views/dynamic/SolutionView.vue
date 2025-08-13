@@ -221,6 +221,8 @@ import IconCard from "@/components/ui/card/IconCard.vue";
 import HeroSection from "@/components/general/HeroSection.vue";
 import { universal_content } from "@/store/contentStore";
 import { baseUrl } from "@/store/store";
+//seo
+import { useHead } from "@vueuse/head";
 
 export default {
   name: "SolutionView",
@@ -235,6 +237,112 @@ export default {
     IconCard,
     HeroSection,
   },
+  computed: {
+    pageTitle() {
+      if (
+        !this.single_solution ||
+        Object.keys(this.single_solution).length === 0
+      ) {
+        return `Talkcoms | ${this.id}`;
+      }
+      return `Talkcoms | ${
+        this.single_solution.main_title ||
+        this.single_solution.secondary_title ||
+        "Service"
+      } | Talkcoms IT Solutions`;
+    },
+
+    pageDescription() {
+      if (
+        !this.single_solution ||
+        Object.keys(this.single_solution).length === 0
+      ) {
+        return this.id;
+      }
+      return (
+        this.single_solution.secondary_title ||
+        this.single_solution.main_title ||
+        this.single_solution.description_title ||
+        "Professional IT solutions and services"
+      );
+    },
+
+    pageKeywords() {
+      if (
+        !this.single_solution ||
+        Object.keys(this.single_solution).length === 0
+      ) {
+        return "IT services, technology solutions";
+      }
+      if (!this.single_solution.keywords)
+        return "IT services, technology solutions";
+
+      return Array.isArray(this.single_solution.keywords)
+        ? this.single_solution.keywords.join(", ")
+        : this.single_solution.keywords;
+    },
+
+    pageImage() {
+      if (
+        !this.single_solution ||
+        Object.keys(this.single_solution).length === 0
+      ) {
+        return `${this.baseUrl}/${this.single_solution?.hero_image?.url}`;
+      }
+      return (
+        `${this.baseUrl}/${this.single_solution.hero_image?.formats?.large?.url}` ||
+        `${this.baseUrl}/${this.single_solution.hero_image?.url}` ||
+        `${this.baseUrl}/static/hero-pic.avif`
+      );
+    },
+
+    canonicalUrl() {
+      if (
+        !this.single_solution ||
+        Object.keys(this.single_solution).length === 0
+      ) {
+        return this.baseUrl;
+      }
+      return `${this.baseUrl}/solution/${this.single_solution.main_title}`;
+    },
+
+    structuredData() {
+      if (
+        !this.single_solution ||
+        Object.keys(this.single_solution).length === 0
+      ) {
+        return {};
+      }
+      return {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name:
+          this.single_solution.main_title ||
+          this.single_solution.secondary_title,
+        description:
+          this.single_solution.secondary_title ||
+          this.single_solution.description_title,
+        provider: {
+          "@type": "Organization",
+          name: "Talkcoms Limited",
+          url: this.baseUrl,
+        },
+        url: this.canonicalUrl,
+        image: this.single_solution.hero_image?.url,
+      };
+    },
+  },
+
+  watch: {
+    // Update head whenever single_solution changes
+    single_solution: {
+      handler() {
+        this.updateHead();
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
   data() {
     return {
       page_is_loading: true,
@@ -248,6 +356,8 @@ export default {
       image_url: baseUrl,
       encoded_success_title: "",
       imageLoaded: false,
+      baseUrl: baseUrl,
+      single_solution: [],
     };
   },
   async created() {
@@ -319,6 +429,7 @@ export default {
           this.industry_solution = dataArray;
           // Get the first success_stories title
           const stories = this.industry_solution[0].success_stories;
+          this.single_solution = this.industry_solution[0];
           if (Array.isArray(stories) && stories.length > 0) {
             this.encoded_success_title = encodeURIComponent(
               stories[0]?.title || ""
@@ -386,6 +497,83 @@ export default {
     // load image animation
     onImageLoad() {
       this.imageLoaded = true;
+    },
+    //seo header update
+    updateHead() {
+      useHead({
+        title: this.pageTitle,
+
+        meta: [
+          {
+            name: "description",
+            content: this.pageDescription,
+          },
+          {
+            name: "keywords",
+            content: this.pageKeywords,
+          },
+          // Open Graph tags
+          {
+            property: "og:title",
+            content:
+              this.single_service?.main_title ||
+              this.single_service?.secondary_title ||
+              "Talkcoms IT Solutions",
+          },
+          {
+            property: "og:description",
+            content: this.pageDescription,
+          },
+          {
+            property: "og:image",
+            content: this.pageImage,
+          },
+          {
+            property: "og:url",
+            content: this.canonicalUrl,
+          },
+          {
+            property: "og:type",
+            content: "article",
+          },
+          // Twitter Card
+          {
+            name: "twitter:card",
+            content: "summary_large_image",
+          },
+          {
+            name: "twitter:title",
+            content:
+              this.single_service?.main_title ||
+              this.single_service?.secondary_title ||
+              "Talkcoms IT Solutions",
+          },
+          {
+            name: "twitter:description",
+            content: this.pageDescription,
+          },
+          {
+            name: "twitter:image",
+            content: this.pageImage,
+          },
+        ],
+
+        // Canonical URL
+        link: [
+          {
+            rel: "canonical",
+            href: this.canonicalUrl,
+          },
+        ],
+
+        // Structured Data
+        script: [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify(this.structuredData),
+          },
+        ],
+      });
     },
   },
 };

@@ -630,6 +630,8 @@ import Spinner from "@/components/general/Spinner.vue";
 import { text_colors, baseUrl } from "@/store/store";
 import { universal_content } from "@/store/contentStore";
 import HeroPattern from "@/components/patterns/HeroPattern.vue";
+//seo
+import { useHead } from "@vueuse/head";
 
 export default {
   name: "SingleService",
@@ -641,6 +643,111 @@ export default {
     HeroPattern,
     Cta,
     HeroSection,
+  },
+  computed: {
+    pageTitle() {
+      if (
+        !this.single_service ||
+        Object.keys(this.single_service).length === 0
+      ) {
+        return `Talkcoms | ${this.id}`;
+      }
+      return `Talkcoms | ${
+        this.single_service.product_name ||
+        this.single_service.secondary_title ||
+        "Service"
+      } | Talkcoms IT Solutions`;
+    },
+
+    pageDescription() {
+      if (
+        !this.single_service ||
+        Object.keys(this.single_service).length === 0
+      ) {
+        return this.id;
+      }
+      return (
+        this.single_service.secondary_title ||
+        this.single_service.main_title ||
+        this.single_service.secondary_title ||
+        "Professional IT solutions and services"
+      );
+    },
+
+    pageKeywords() {
+      if (
+        !this.single_service ||
+        Object.keys(this.single_service).length === 0
+      ) {
+        return "IT services, technology solutions";
+      }
+      if (!this.single_service.keywords)
+        return "IT services, technology solutions";
+
+      return Array.isArray(this.single_service.keywords)
+        ? this.single_service.keywords.join(", ")
+        : this.single_service.keywords;
+    },
+
+    pageImage() {
+      if (
+        !this.single_service ||
+        Object.keys(this.single_service).length === 0
+      ) {
+        return `${this.baseUrl}/${this.single_service.hero_media?.url}`;
+      }
+      return (
+        `${this.baseUrl}/${this.single_service.hero_media?.formats?.large?.url}` ||
+        `${this.baseUrl}/${this.single_service.hero_media?.url}` ||
+        `${this.baseUrl}/static/hero-pic.avif`
+      );
+    },
+
+    canonicalUrl() {
+      if (
+        !this.single_service ||
+        Object.keys(this.single_service).length === 0
+      ) {
+        return this.baseUrl;
+      }
+      return `${this.baseUrl}/service/${this.single_service.product_name}`;
+    },
+
+    structuredData() {
+      if (
+        !this.single_service ||
+        Object.keys(this.single_service).length === 0
+      ) {
+        return {};
+      }
+      return {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name:
+          this.single_service.main_title || this.single_service.secondary_title,
+        description:
+          this.single_service.secondary_title ||
+          this.single_service.secondary_title,
+        provider: {
+          "@type": "Organization",
+          name: "Talkcoms Limited",
+          url: this.baseUrl,
+        },
+        url: this.canonicalUrl,
+        image: this.single_service.hero_media?.url,
+      };
+    },
+  },
+
+  watch: {
+    // Update head whenever single_service changes
+    single_service: {
+      handler() {
+        this.updateHead();
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   data() {
     return {
@@ -659,10 +766,10 @@ export default {
       encoded_success_title: "",
       imageLoaded: false,
       image_url: baseUrl,
+      baseUrl: baseUrl,
     };
   },
   async created() {
-    document.title = `Talkcoms | ${this.id}`;
     this.page_is_loading = true;
     this.randomize_color();
     /* set universal color */
@@ -831,6 +938,83 @@ export default {
     // load image animation
     onImageLoad() {
       this.imageLoaded = true;
+    },
+    //seo header update
+    updateHead() {
+      useHead({
+        title: this.pageTitle,
+
+        meta: [
+          {
+            name: "description",
+            content: this.pageDescription,
+          },
+          {
+            name: "keywords",
+            content: this.pageKeywords,
+          },
+          // Open Graph tags
+          {
+            property: "og:title",
+            content:
+              this.single_service?.main_title ||
+              this.single_service?.secondary_title ||
+              "Talkcoms IT Solutions",
+          },
+          {
+            property: "og:description",
+            content: this.pageDescription,
+          },
+          {
+            property: "og:image",
+            content: this.pageImage,
+          },
+          {
+            property: "og:url",
+            content: this.canonicalUrl,
+          },
+          {
+            property: "og:type",
+            content: "article",
+          },
+          // Twitter Card
+          {
+            name: "twitter:card",
+            content: "summary_large_image",
+          },
+          {
+            name: "twitter:title",
+            content:
+              this.single_service?.main_title ||
+              this.single_service?.secondary_title ||
+              "Talkcoms IT Solutions",
+          },
+          {
+            name: "twitter:description",
+            content: this.pageDescription,
+          },
+          {
+            name: "twitter:image",
+            content: this.pageImage,
+          },
+        ],
+
+        // Canonical URL
+        link: [
+          {
+            rel: "canonical",
+            href: this.canonicalUrl,
+          },
+        ],
+
+        // Structured Data
+        script: [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify(this.structuredData),
+          },
+        ],
+      });
     },
   },
 };

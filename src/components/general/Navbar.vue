@@ -3,11 +3,13 @@
     class="nav-bar w-full flex justify-center flex-wrap sticky top-0 bg-white z-[1000] border-b-1 border-[#e3e3e3]"
   >
     <div class="w-[90%] h-[12vh] flex justify-center">
-      <div class="w-full flex">
-        <div class="w-fit flex justify-start p-4">
-          <router-link to="/"
-            ><img :src="site_logo" class="custom-logo min-w-[50px]"
-          /></router-link>
+      <div class="w-full h-full flex">
+        <div class="w-fit h-full flex justify-start p-4">
+          <div class="h-full flex flex-col justify-center">
+            <router-link to="/"
+              ><img :src="site_logo" class="custom-logo min-w-[50px]"
+            /></router-link>
+          </div>
         </div>
         <div
           class="nav-bar-innner w-3/4 flex flex-nowrap h-full justify-center"
@@ -113,28 +115,7 @@
               </li>
             </div>
           </div>
-          <!-- <router-link
-            to="#"
-            class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4"
-            @mouseenter="show_service_dropdown('solution')"
-            @mouseleave="hide_service_dropdown('solution')"
-          >
-            <div class="w-full h-full flex flex-row">
-              <div class="h-full flex flex-col justify-center">
-                Solutions By Industry
-              </div>
-              <div class="h-full flex flex-col justify-center ml-1 mt-1">
-                <i
-                  class="fa-solid fa-angle-down transition-all duration-300 ease-in-out"
-                  :style="{
-                    transform: solutions_dropdown
-                      ? 'rotate(180deg) translateY(2px)'
-                      : 'rotate(0deg) translateY(0)',
-                  }"
-                ></i>
-              </div>
-            </div>
-          </router-link> -->
+
           <div
             class="pl-4 pr-4 h-full flex flex-col justify-center transition duration-500 ease-in-out p-4 relative group"
             active-class="text-secondary font-medium"
@@ -181,28 +162,32 @@
             >About us</router-link
           >
         </div>
-        <div class="w-1/6 flex justify-end p-4 btn-side">
+        <div class="w-1/6 h-full flex justify-end p-4 btn-side">
           <!-- <Button button_link="/contact-us" button_text="Contact Us" /> -->
-          <router-link to="/contact/book-a-demo">
-            <Button
-              class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
-            >
-              <span class="relative z-10">Book A Demo </span>
-              <span
-                class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-              ></span>
-            </Button>
-          </router-link>
-          <router-link to="/contact/contact-us" class="ml-4">
-            <Button
-              class="relative bg-secondary overflow-hidden p-6 px-8 text-white cursor-pointer group"
-            >
-              <span class="relative z-10">Contact Us </span>
-              <span
-                class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
-              ></span>
-            </Button>
-          </router-link>
+          <div class="h-full flex flex-col justify-center">
+            <router-link to="/contact/book-a-demo">
+              <Button
+                class="relative overflow-hidden p-6 px-8 bg-default text-white cursor-pointer group"
+              >
+                <span class="relative z-10">Book A Demo </span>
+                <span
+                  class="absolute inset-0 bg-secondary transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                ></span>
+              </Button>
+            </router-link>
+          </div>
+          <div class="h-full flex flex-col justify-center">
+            <router-link to="/contact/contact-us" class="ml-4">
+              <Button
+                class="relative bg-secondary overflow-hidden p-6 px-8 text-white cursor-pointer group"
+              >
+                <span class="relative z-10">Contact Us </span>
+                <span
+                  class="absolute inset-0 bg-default transform scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100 z-0"
+                ></span>
+              </Button>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -223,12 +208,12 @@
         <div class="h-full flex flex-col justify-center">
           <div
             @click="phone_navigation = !phone_navigation"
-            class="p-2 rounded-sm border-2 border-[#82bc00] group cursor-pointer w-fit"
+            class="p-2 py-[10px] rounded-sm border-2 border-[#82bc00] group cursor-pointer w-fit"
           >
             <!-- Top bar -->
             <div
               class="w-[30px] h-[3px] bg-secondary transition-transform duration-300 origin-center"
-              :class="phone_navigation ? 'rotate-45 translate-y-[11px]' : ''"
+              :class="phone_navigation ? 'rotate-45 translate-y-[10px]' : ''"
             ></div>
 
             <!-- Middle bar -->
@@ -240,7 +225,7 @@
             <!-- Bottom bar -->
             <div
               class="w-[30px] h-[3px] bg-secondary transition-transform duration-300 origin-center"
-              :class="phone_navigation ? '-rotate-45 -translate-y-[11px]' : ''"
+              :class="phone_navigation ? '-rotate-45 -translate-y-[9px] ' : ''"
             ></div>
           </div>
 
@@ -469,8 +454,6 @@
   </div>
 </template>
 <script>
-import { RotateCcwIcon } from "lucide-vue-next";
-
 export default {
   name: "Navbar",
   props: {
@@ -490,37 +473,24 @@ export default {
       service_is_visible: false,
       industry_is_visible: false,
       site_logo: "/logo.svg",
-      // products: [],
-      socials: [
-        {
-          link: "#",
-          icon: "fa-solid fa-phone",
-          name: "phone",
-          phone: "0759200998",
-        },
-        {
-          link: "https://www.facebook.com/TalkcomsLimited",
-          icon: "fa-brands fa-facebook-f",
-          name: "facebook",
-        },
-        {
-          link: "https://x.com/TALKCOMS1",
-          icon: "fa-brands fa-x-twitter",
-          name: "twitter",
-        },
-        {
-          link: "https://www.linkedin.com/company/talkcoms-ltd/mycompany",
-          icon: "fa-brands fa-linkedin-in",
-          name: "linkedin",
-        },
-        {
-          link: "https://www.instagram.com/talkcoms",
-          icon: "fa-brands fa-instagram",
-          name: "linkedin",
-        },
-      ],
-      // services: [],
+      observer: null,
     };
+  },
+  // check width
+  methods: {
+    checkWidth() {
+      if (window.innerWidth >= 1300) {
+        this.phone_navigation = false;
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener("resize", this.checkWidth);
+    // Also check on page load
+    this.checkWidth();
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.checkWidth);
   },
 };
 </script>

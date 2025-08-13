@@ -209,7 +209,10 @@ export default {
         },
         { title: "Sitemap", link: "/sitemap", new_tab: false },
       ],
-      footer_contacts: [{ title: "+254747039334" }, { title: "+441572376000" }],
+      footer_contacts: [
+        { title: "+254 747 039 334" },
+        { title: "+447 572 376 000" },
+      ],
       footer_emails: [{ title: "solutions@talkcoms.io" }],
       footer_locations: [
         {

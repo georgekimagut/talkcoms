@@ -249,6 +249,9 @@ import Spinner from "@/components/general/Spinner.vue";
 import Cta from "@/components/general/Cta.vue";
 import { baseUrl } from "@/store/store";
 import { universal_content } from "@/store/contentStore";
+//seo
+import { useHead } from "@vueuse/head";
+import { computed } from "vue";
 
 //markup content
 import DOMPurify from "dompurify";
@@ -263,7 +266,30 @@ export default {
     Footer,
     Cta,
   },
-
+  setup(props) {
+    useHead({
+      title: computed(() => {
+        // Wait for the prop to be available
+        return props.id ? `Talkcoms | ${props.id}` : "Talkcoms | Loading...";
+      }),
+      meta: [
+        {
+          name: "description",
+          content: computed(() =>
+            props.id
+              ? `Details for ${props.id} | Talkcoms IT Solutions`
+              : "Loading content..."
+          ),
+        },
+        {
+          property: "og:title",
+          content: computed(() =>
+            props.id ? `Talkcoms - ${props.id}` : "Talkcoms"
+          ),
+        },
+      ],
+    });
+  },
   data() {
     return {
       page_is_loading: true,
@@ -289,7 +315,7 @@ export default {
     };
   },
   async created() {
-    document.title = `Talkcoms | ${this.id}`;
+    // document.title = `Talkcoms | ${this.id}`;
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
@@ -319,7 +345,7 @@ export default {
       () => this.$route.params.id,
       async (newId, oldId) => {
         if (newId !== oldId) {
-          document.title = `Talkcoms | ${newId}`;
+          // document.title = `Talkcoms | ${newId}`;
           this.page_is_loading = true;
           this.universal_services = universal_content().services;
           this.universal_products = universal_content().products;

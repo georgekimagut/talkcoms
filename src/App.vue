@@ -5,3 +5,9 @@
     </div>
   </div>
 </template>
+<script>
+import { Head } from "@vueuse/head";
+export default {
+  components: { Head },
+};
+</script>

@@ -5,8 +5,7 @@
       <h1
         class="text-5xl font-extrabold mt-4 p-2 text-center flex-wrap text-default"
       >
-        Trusted by <span class="mx-2 text-secondary w-fit">10+</span> Companies
-        since 2016
+        Our Trusted Partners
       </h1>
     </div>
 

@@ -49,6 +49,7 @@ import Navbar from "@/components/general/Navbar.vue";
 import Spinner from "@/components/general/Spinner.vue";
 import { universal_content } from "@/store/contentStore";
 import { faqs_end_point } from "@/store/store";
+import { useHead } from "@vueuse/head";
 
 export default {
   name: "Faqs",
@@ -60,6 +61,76 @@ export default {
     Footer,
     Cta,
     Accordion,
+  },
+  setup() {
+    useHead({
+      title: "Talkcoms | Frequently asked questions",
+      meta: [
+        // Basic SEO
+        {
+          name: "description",
+          content:
+            "Powering Digital Transformation Across Finance, Healthcare, Legal Sectors & Other Industries. Leading IT Solutions Provider.",
+        },
+        {
+          name: "keywords",
+          content:
+            "Have a question in mind? You're not alone. Browse through the most common questions our users ask — and find the answers you need in seconds",
+        },
+        { name: "robots", content: "index, follow" },
+        { name: "author", content: "Talkcoms" },
+        { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+        { "http-equiv": "Content-Type", content: "text/html; charset=utf-8" },
+        { name: "language", content: "English" },
+
+        // Open Graph (Facebook, LinkedIn, etc.)
+        {
+          property: "og:title",
+          content: "Talkcoms | Trusted IT Partner for Businesses",
+        },
+        {
+          property: "og:description",
+          content:
+            "Powering Digital Transformation Across Finance, Healthcare, Legal Sectors & Other Industries. Leading IT Solutions Provider.",
+        },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: "https://www.talkcoms.co.uk/faqs" },
+        {
+          property: "og:image",
+          content: "https://www.talkcoms.co.uk/static/hero-pic.avif",
+        },
+        { property: "og:site_name", content: "Talkcoms" },
+        { property: "og:locale", content: "en_US" },
+
+        // Twitter Card
+        { name: "twitter:card", content: "summary_large_image" },
+        {
+          name: "twitter:title",
+          content: "Talkcoms | Trusted IT Partner for Businesses",
+        },
+        {
+          name: "twitter:description",
+          content:
+            "Powering Digital Transformation Across Finance, Healthcare, Legal Sectors & Other Industries. Leading IT Solutions Provider.",
+        },
+        {
+          name: "twitter:image",
+          content: "https://www.talkcoms.co.uk/static/hero-pic.avif",
+        },
+        { name: "twitter:site", content: "@talkcoms" },
+        { name: "twitter:creator", content: "@talkcoms" },
+
+        // Additional SEO
+        { name: "theme-color", content: "#0082C6" },
+        { name: "mobile-web-app-capable", content: "yes" },
+        { name: "apple-mobile-web-app-capable", content: "yes" },
+      ],
+      link: [
+        { rel: "canonical", href: "https://www.talkcoms.co.uk/faqs" },
+        { rel: "icon", type: "image/png", href: "/favicon.png" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      ],
+    });
   },
   data() {
     return {
@@ -75,7 +146,6 @@ export default {
     };
   },
   async created() {
-    document.title = "Talkcoms | Frequently asked questions";
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;

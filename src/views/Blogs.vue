@@ -152,6 +152,7 @@ import Link from "@/components/text/Link.vue";
 import SmallTitle from "@/components/text/SmallTitle.vue";
 import { apiEndpoint, baseUrl } from "@/store/store";
 import { universal_content } from "@/store/contentStore";
+import { useHead } from "@vueuse/head";
 
 export default {
   name: "Blogs",
@@ -165,6 +166,79 @@ export default {
     BigTitle,
     CustomCard,
     SmallTitle,
+  },
+  setup() {
+    useHead({
+      title: "Talkcoms | Blogs",
+      meta: [
+        // Basic SEO
+        {
+          name: "description",
+          content:
+            "Powering Digital Transformation Across Finance, Healthcare, Legal Sectors & Other Industries. Leading IT Solutions Provider.",
+        },
+        {
+          name: "keywords",
+          content:
+            "IT solutions, digital transformation, finance IT, healthcare IT, legal IT, technology partner, Talkcoms",
+        },
+        { name: "robots", content: "index, follow" },
+        { name: "author", content: "Talkcoms" },
+        { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+        { "http-equiv": "Content-Type", content: "text/html; charset=utf-8" },
+        { name: "language", content: "English" },
+
+        // Open Graph (Facebook, LinkedIn, etc.)
+        {
+          property: "og:title",
+          content: "Talkcoms | Trusted IT Partner for Businesses",
+        },
+        {
+          property: "og:description",
+          content:
+            "Powering Digital Transformation Across Finance, Healthcare, Legal Sectors & Other Industries. Leading IT Solutions Provider.",
+        },
+        { property: "og:type", content: "website" },
+        {
+          property: "og:url",
+          content: "https://www.talkcoms.co.uk/blogs",
+        },
+        {
+          property: "og:image",
+          content: "https://www.talkcoms.co.uk/static/hero-pic.avif",
+        },
+        { property: "og:site_name", content: "Talkcoms" },
+        { property: "og:locale", content: "en_US" },
+
+        // Twitter Card
+        { name: "twitter:card", content: "summary_large_image" },
+        {
+          name: "twitter:title",
+          content: "Talkcoms | Trusted IT Partner for Businesses",
+        },
+        {
+          name: "twitter:description",
+          content:
+            "Powering Digital Transformation Across Finance, Healthcare, Legal Sectors & Other Industries. Leading IT Solutions Provider.",
+        },
+        {
+          name: "twitter:image",
+          content: "https://www.talkcoms.co.uk/static/hero-pic.avif",
+        },
+        { name: "twitter:site", content: "@talkcoms" },
+        { name: "twitter:creator", content: "@talkcoms" },
+
+        // Additional SEO
+        { name: "theme-color", content: "#0082C6" },
+        { name: "mobile-web-app-capable", content: "yes" },
+        { name: "apple-mobile-web-app-capable", content: "yes" },
+      ],
+      link: [
+        { rel: "canonical", href: "https://www.talkcoms.co.uk/blogs" },
+        { rel: "icon", type: "image/png", href: "/favicon.png" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      ],
+    });
   },
   data() {
     return {
@@ -183,7 +257,6 @@ export default {
     };
   },
   async created() {
-    document.title = "Talkcoms | Blog";
     this.page_is_loading = true;
     this.universal_services = universal_content().services;
     this.universal_products = universal_content().products;
