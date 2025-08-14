@@ -302,8 +302,7 @@
                 class="w-[50px] h-[50px] min-w-[50px] min-h-[50px] flex justify-center rounded-sm mt-6 relative overflow-hidden"
               >
                 <div
-                  class="w-full h-full absolute z-5 opacity-30"
-                  :style="{ backgroundColor: random_bg }"
+                  class="w-full h-full absolute z-5 opacity-30 bg-secondary"
                 ></div>
                 <div class="h-full w-full absolute flex justify-center z-10">
                   <div class="h-full flex flex-col justify-center">

@@ -295,7 +295,6 @@ export default {
         `${this.baseUrl}/static/hero-pic.avif`
       );
     },
-
     canonicalUrl() {
       if (
         !this.single_solution ||
